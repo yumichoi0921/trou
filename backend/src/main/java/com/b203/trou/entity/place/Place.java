@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Place extends BaseEntity {
     @Column(name = "placeId")
     private Long id;
     private String addr1;
-    private String adde2;
+    private String addr2;
     private String areaCode;
     private String cat3;
     private String contentTypeId;
@@ -26,14 +27,12 @@ public class Place extends BaseEntity {
     private String firstImage2;
     private BigDecimal mapX;
     private BigDecimal mapY;
-
-    private int mLevel;
     private int readCount;
     private String sigunguCode;
     private String tel;
     private String placeName;
-    private String eventStartDate;
-    private String eventEndDate;
+    private LocalDate eventStartDate;
+    private LocalDate eventEndDate;
     private String overview;
 
     @OneToMany(mappedBy = "place")
