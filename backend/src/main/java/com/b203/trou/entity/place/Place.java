@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,22 @@ public class Place extends BaseEntity {
     @GeneratedValue
     @Column(name = "placeId")
     private Long id;
-
+    private String addr1;
+    private String addr2;
+    private String areaCode;
+    private String cat3;
+    private String contentTypeId;
+    private String firstImage;
+    private String firstImage2;
+    private BigDecimal mapX;
+    private BigDecimal mapY;
+    private int readCount;
+    private String sigunguCode;
+    private String tel;
     private String placeName;
-
-    private String placeInfo;
-
-    private BigDecimal longitude;
-
-    private BigDecimal latitude;
+    private LocalDate eventStartDate;
+    private LocalDate eventEndDate;
+    private String overview;
 
     @OneToMany(mappedBy = "place")
     private List<Review> reviews = new ArrayList<>();
