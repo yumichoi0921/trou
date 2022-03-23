@@ -4,6 +4,7 @@ import pymysql
 import pandas as pd
 from sqlalchemy import create_engine
 import datetime
+import json
 
 url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/'
 params = {'serviceKey': 'nHw+HAZ9yyTxxIa0NG07PR1zj5LRoTRnuYstPZ0jFIX1ZX1jFIIHlWfrLj6jW3uw6YmVEA+QBi5NvcXB+CC0FA==',
@@ -17,6 +18,15 @@ columns = ['place_id', 'place_name', 'content_type_id',
            'read_count', 'sigungu_code', 'tel',
            'created_date', 'modified_date', 'event_start_date', 'event_end_date', 'overview']
 places = []
+
+
+def toDataframe():
+    df = pd.read_json(r'.\placedata.json')
+    print(df)
+
+
+def toJsonFile(df):
+    df.to_json(r'.\placedata.json', orient='records')
 
 
 def insertPlace(df):
@@ -66,8 +76,8 @@ def getPlace():
         if element.find("tel") != None:
             place['tel'] = element.find("tel").text
         places.append(place)
+    global df
     df = pd.DataFrame(places)
-    getEvent(df)
 
 
 def getEvent(df):
@@ -82,7 +92,10 @@ def getEvent(df):
         condition = df['place_id'] == place_id
         df.loc[condition, 'event_start_date'] = event_start_date
         df.loc[condition, 'event_end_date'] = event_end_date
-    insertPlace(df)
 
 
 getPlace()
+getEvent(df)
+# toJsonFile(df)
+# toDataframe()
+# print(df)
