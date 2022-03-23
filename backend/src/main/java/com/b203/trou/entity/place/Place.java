@@ -25,8 +25,8 @@ public class Place extends BaseEntity {
     private String contentTypeId;
     private String firstImage;
     private String firstImage2;
-    private BigDecimal mapX;
-    private BigDecimal mapY;
+    private double mapX;
+    private double mapY;
     private int readCount;
     private String sigunguCode;
     private String tel;
