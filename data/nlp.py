@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from concurrent.futures import process
-from ntpath import join
 from konlpy.tag import Okt
 from krwordrank.word import KRWordRank
 from krwordrank.word import summarize_with_keywords
-from krwordrank.sentence import summarize_with_sentences
 import re
 # - okt.morphs(문장): 텍스트를 형태소 단위로 나눠준다. norm은 문장을 정규화. stem은 각 단어에서 어간을 추출
 # - okt.nouns(text): 명사만 추출
