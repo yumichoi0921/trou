@@ -60,7 +60,7 @@ def preprocessing():
 def crawling():
     driver = webdriver.Chrome("./driver/chromedriver")
     reviews = []    # review 담을 리스트
-    for idx, row in place.iterrows():    # place -> df 로 변경하기
+    for idx, row in place.iterrows():
         review_text = ''
         # 테스트로 4개까지만 해봄
         # if(idx == 4):
