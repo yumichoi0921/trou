@@ -16,6 +16,10 @@ spring:
         max-page-size: 2000
         one-indexed-parameters: true
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace

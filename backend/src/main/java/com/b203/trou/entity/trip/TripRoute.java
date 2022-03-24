@@ -1,5 +1,6 @@
-package com.b203.trou.entity;
+package com.b203.trou.entity.trip;
 
+import com.b203.trou.entity.BaseEntity;
 import lombok.Getter;
 
 import javax.persistence.*;
