@@ -1,10 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Hello from "./component/Hello";
-import Welcome from "./component/Welcome";
 import Styles from "./App.module.css";
 import Main from "./component/Main";
 import Ip from "./component/Ip";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //import CustomAxios from './CustomAxios';
 
@@ -14,8 +15,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/ip" element={<Ip />}></Route>
-        <Route path="/" element={<Hello age={10} />} />
-        <Route path="/welcome" element={<Welcome />} />
         <Route path="/main" element={<Main />} />
       </Routes>
     </BrowserRouter>
