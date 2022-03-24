@@ -1,4 +1,6 @@
-package com.b203.trou.entity;
+package com.b203.trou.entity.tag;
+
+import com.b203.trou.entity.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

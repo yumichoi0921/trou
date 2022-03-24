@@ -1,7 +1,7 @@
-package com.b203.trou.entity.place;
+package com.b203.trou.entity.tag;
 
 import com.b203.trou.entity.BaseEntity;
-import com.b203.trou.entity.Tag;
+import com.b203.trou.entity.place.Place;
 import lombok.Getter;
 
 import javax.persistence.*;
