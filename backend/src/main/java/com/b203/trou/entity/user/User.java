@@ -1,6 +1,7 @@
 package com.b203.trou.entity.user;
 
 import com.b203.trou.entity.review.Review;
+import com.b203.trou.entity.tag.UserTag;
 import lombok.Getter;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.b203.trou.entity;
+package com.b203.trou.entity.trip;
 
 import com.b203.trou.entity.place.Place;
 
@@ -21,7 +21,7 @@ public class TripOrder {
     @JoinColumn(name = "placeId")
     private Place place;
 
-    private int order;
+    private int tripOrder;
 
     private Timestamp startTime;
 

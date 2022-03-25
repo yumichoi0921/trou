@@ -1,27 +1,25 @@
 package com.b203.trou.entity.user;
 
 import com.b203.trou.entity.BaseEntity;
-import com.b203.trou.entity.Tag;
+import com.b203.trou.entity.trip.TripPlan;
+import com.b203.trou.entity.user.User;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class UserTag extends BaseEntity {
-
+public class Share extends BaseEntity {
     @Id
     @GeneratedValue
-    @Column(name = "userTagId")
+    @Column(name = "shareId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "tagId")
-    private Tag tag;
-
-    private int count;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "planId")
+    private TripPlan tripPlan;
 }
