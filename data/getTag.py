@@ -30,8 +30,8 @@ def toDataframe():
 def preprocessing():
     list = []
     content_type_id = [12, 14, 15, 28]
-    for idx in range(0, len(df)):
-        # for idx in range(0, 500):
+    # for idx in range(0, len(df)):
+    for idx in range(0, 500):
         if(df.loc[idx, 'area_code'] == 39 and df.loc[idx, 'content_type_id'] in content_type_id):
             place_name = df.loc[idx, 'place_name']
             if ('㈜' in place_name):
