@@ -40,10 +40,12 @@ def toDataframe():
 
 
 ### 테스트용 place 생성 ###
+
 def preprocessing():
     list = []
-    for idx in range(0, 100):
-        if(df.loc[idx, 'content_type_id'] == 12):
+    content_type_id = [12, 14, 15, 28]
+    for idx in range(0, len(df)):
+        if(df.loc[idx, 'area_code'] == 39 and df.loc[idx, 'content_type_id'] in content_type_id):
             place_name = df.loc[idx, 'place_name']
             if ('㈜' in place_name):
                 continue
@@ -53,7 +55,7 @@ def preprocessing():
             list.append(data)
     global place
     place = pd.DataFrame(list, columns=['place_id', 'place_name'])
-    # print(place)
+    print(place)
 
 
 ### 크롤링 시작 ###
@@ -71,7 +73,7 @@ def crawling():
             kakao_map_url = 'https://map.kakao.com/?q=' + keyword
             # print(kakao_map_url)
             driver.get(kakao_map_url)
-            time.sleep(0.5)
+            time.sleep(1)
 
             url = driver.find_element_by_xpath(
                 '//*[@id="info.search.place.list"]/li[1]/div[5]/div[4]/a[1]').get_attribute('href')
@@ -116,4 +118,4 @@ toDataframe()
 preprocessing()
 crawling()
 toJsonFile()
-print(place)
+# print(place)

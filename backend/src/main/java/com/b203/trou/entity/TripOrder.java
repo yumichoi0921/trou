@@ -21,7 +21,7 @@ public class TripOrder {
     @JoinColumn(name = "placeId")
     private Place place;
 
-    private int order;
+    private int tripOrder;
 
     private Timestamp startTime;
 
