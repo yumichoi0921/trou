@@ -92,7 +92,7 @@ def getEvent(df):
         condition = df['place_id'] == place_id
         df.loc[condition, 'event_start_date'] = event_start_date
         df.loc[condition, 'event_end_date'] = event_end_date
-    insertPlace(df)
+    # insertPlace(df)
 
 
 getPlace()
