@@ -1,4 +1,4 @@
-import styles from "./Main.module.css";
+import styles from "./Main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Row, Col, Container } from "react-bootstrap";
 export default function Main() {
