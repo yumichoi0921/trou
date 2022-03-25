@@ -1,4 +1,4 @@
-import styles from "./Main.module.css";
+import styles from "./Main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Container, Modal, Button } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
