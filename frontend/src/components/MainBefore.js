@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Container, Modal, Button } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
-export default function Main() {
+export default function MainBefore() {
   const [show, setShow] = useState(false);
   const [src, setSrc] = useState("");
   const [imgName, setImgName] = useState("");

@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import About from './components/About'
-
+import Main from './components/Main'
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
@@ -113,6 +113,7 @@ const App = () => {
             }
           />
           <Route path='/about' element={<About />} />
+           <Route path='/main' element={<Main />} />
         </Routes>
         <Footer />
       </div>
