@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -17,7 +18,7 @@ public class TripRoute extends BaseEntity {
     @JoinColumn(name = "planId")
     private TripPlan tripPlan;
 
-    private Timestamp routeDate;
+    private LocalDate routeDate;
 
     private String memo;
 }
