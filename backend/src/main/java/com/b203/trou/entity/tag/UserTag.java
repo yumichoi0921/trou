@@ -1,26 +1,27 @@
-package com.b203.trou.entity;
+package com.b203.trou.entity.tag;
 
+import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.user.User;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
-public class TripPlan extends BaseEntity {
+public class UserTag extends BaseEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "planId")
+    @Column(name = "userTagId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
-    private LocalDate startDate;
+    @ManyToOne
+    @JoinColumn(name = "tagId")
+    private Tag tag;
 
-    private LocalDate endDate;
-
+    private int count;
 }

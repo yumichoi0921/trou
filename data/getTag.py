@@ -1,16 +1,6 @@
 import time
-from traceback import print_tb
-from xml.dom.minidom import Element
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from bs4 import BeautifulSoup
-
 import pandas as pd
-from multiprocessing import connection
-from unittest import result
-from matplotlib.pyplot import connect
-import pymysql.cursors
-import re
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -18,15 +8,11 @@ pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', -1)
 
 # placedata json file -> dataframe
-
-
 def toDataframe():
     global df
     df = pd.read_json(r'.\placedata.json')
 
 ### 테스트용 place 생성 ###
-
-
 def preprocessing():
     list = []
     content_type_id = [12, 14, 15, 28]
@@ -43,25 +29,28 @@ def preprocessing():
     # print(place)
 
 ### 크롤링 시작 ###
-
-
 def crawling():
     driver = webdriver.Chrome("./driver/chromedriver")
     tags = []
     for idx, row in place.iterrows():
         tag = ""
         place_name = row['place_name']
-
+        
         detail_url_before = ''
         try:  # 자세히 보기 있는 경우
             url = 'https://korean.visitkorea.or.kr/search/search_list.do?keyword=' + place_name
             driver.get(url)
             time.sleep(0.5)
+            
+            driver.find_element_by_xpath('//*[@id="tabView1"]/a').click()
+            time.sleep(0.5)
+            
             detail_url_before = driver.find_element_by_xpath(
                 '//*[@id="contents"]/div/div[1]/div[6]/div[2]/div[1]/span/a').get_attribute('href')
         except:  # 자세히 보기 없고 리스트 형식으로 검색결과 나오는 경우
             # list -> 검색어랑 list의 text 비교 -> 같은거 들어가면될꺼같다는 생각
             idx = 1
+            # //*[@id="listBody"]/ul/li/div[2]/div[1]/a
             root = driver.find_elements_by_xpath('//*[@id="listBody"]/ul/li')
             for el in root:
                 try:
@@ -102,7 +91,7 @@ def crawling():
 
 
 def toJsonFile():
-    place.to_json(r'.\tags.json', orient='records')
+    place.to_json(r'.\Jeju_tags.json', orient='records')
 
 
 toDataframe()
