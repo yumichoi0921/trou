@@ -1,5 +1,6 @@
 from math import fabs
 import pandas as pd
+from sqlalchemy import create_engine
 tagGroup = {'가족': ['가족', '남녀노소'],
             '효도': ['부모'],
             '아이': ['아이'],
@@ -26,11 +27,42 @@ tagGroup = {'가족': ['가족', '남녀노소'],
             '드라이브': ['드라이브'],
             '관광지': ['관광지']
             }
+tagKey = {
+    '가족': 1,
+    '효도': 2,
+    '아이': 3,
+    '친구': 4,
+    '연인': 5,
+    '문화': 6,
+    '액티비티': 7,
+    '자연': 8,
+    '역사': 9,
+    '공연/행사': 10,
+    '휴양지': 11,
+    '체험': 12,
+    '축제': 13,
+    '경치': 14,
+    '계절여행': 15,
+    '힐링': 16,
+    '캠핑': 17,
+    '실내': 18,
+    '감성': 19,
+    '반려동물': 20,
+    '드라이브': 21,
+    '관광지': 22
+}
 
 
 def toDataframe():
     global df
     df = pd.read_json(r'.\tags.json')
+
+
+def insertTag():
+    db_connection_str = 'mysql+pymysql://root:b203@j6b203.p.ssafy.io:33306/trou'
+    db_connection = create_engine(db_connection_str)
+    conn = db_connection.connect()
+    tagDataFrame.to_sql(name="tag", con=conn, if_exists='append', index=False)
 
 
 def processing():
@@ -44,10 +76,13 @@ def processing():
             tmpTag = checkTag(real_tag)
             if tmpTag != None and tmpTag not in tag:
                 tag.append(tmpTag)
-                # tags.append({'place_id': row['place_id'], 'tag_id': tmpTag})
-        tags.append(tag)
-    df['tag'] = tags
-    # print(tags)
+                tags.append(
+                    {'place_id': row['place_id'], 'tag_id': tagKey[tmpTag]})
+        # tags.append(tag)
+    # df['tag'] = tags
+    global tagDataFrame
+    tagDataFrame = pd.DataFrame(tags)
+    print(tagDataFrame)
 
 
 def checkTag(real_tag):
@@ -57,9 +92,5 @@ def checkTag(real_tag):
                 return key
 
 
-global placeTag
-placeTag = pd.DataFrame()
-
 toDataframe()
 processing()
-print(df)

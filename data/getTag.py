@@ -1,16 +1,6 @@
 import time
-from traceback import print_tb
-from xml.dom.minidom import Element
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from bs4 import BeautifulSoup
-
 import pandas as pd
-from multiprocessing import connection
-from unittest import result
-from matplotlib.pyplot import connect
-import pymysql.cursors
-import re
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -57,12 +47,19 @@ def crawling():
             url = 'https://korean.visitkorea.or.kr/search/search_list.do?keyword=' + place_name
             driver.get(url)
             time.sleep(0.5)
+
+            driver.find_element_by_xpath('//*[@id="tabView1"]/a').click()
+            time.sleep(0.5)
+
             detail_url_before = driver.find_element_by_xpath(
                 '//*[@id="contents"]/div/div[1]/div[6]/div[2]/div[1]/span/a').get_attribute('href')
         except:  # 자세히 보기 없고 리스트 형식으로 검색결과 나오는 경우
             # list -> 검색어랑 list의 text 비교 -> 같은거 들어가면될꺼같다는 생각
             idx = 1
+            # //*[@id="listBody"]/ul/li/div[2]/div[1]/a
             root = driver.find_elements_by_xpath('//*[@id="listBody"]/ul/li')
+            if(len(root) == 0):
+                pass
             for el in root:
                 try:
                     el_text = el.find_element_by_xpath('div[2]/div[1]/a').text
@@ -102,7 +99,7 @@ def crawling():
 
 
 def toJsonFile():
-    place.to_json(r'.\tags.json', orient='records')
+    place.to_json(r'.\Jeju_tags.json', orient='records')
 
 
 toDataframe()
@@ -110,3 +107,6 @@ preprocessing()
 crawling()
 toJsonFile()
 # print(place)
+
+# 개오름
+# 국제전기자동차엑스포
