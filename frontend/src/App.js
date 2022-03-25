@@ -8,16 +8,19 @@ import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //import CustomAxios from './CustomAxios';
+import Hello from "./component/Hello.js";
+import { Fragment } from "react";
 
 function App() {
   return (
     // <p> 이 기기의 ip 주소는 {ip}입니다.</p>
-    <BrowserRouter>
+    <Fragment>
+      <Hello />
       <Routes>
         <Route path="/ip" element={<Ip />}></Route>
         <Route path="/main" element={<Main />} />
       </Routes>
-    </BrowserRouter>
+    </Fragment>
   );
 }
 
