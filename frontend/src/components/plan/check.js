@@ -1,8 +1,8 @@
 /* global kakao */
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { styled, Grid, Box, Button, Stack, Collapse } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
-
+import Place from "./Place";
 const Area = styled(Box)({
   minHeight: 600,
   backgroundColor: "#90caf9",
@@ -14,16 +14,37 @@ const Area = styled(Box)({
 });
 
 const Route = () => {
-  const placeItems = ["여행지1", "여행지2", "여행지3", "여행지4"];
-  const placeItemList = placeItems.map((placeItem) => (
-    <PlaceItem>{placeItem}</PlaceItem>
-  ));
-
+  const [places, setPlaces] = useState([
+    { id: 1, name: "여행지1" },
+    { id: 2, name: "여행지2" },
+    { id: 3, name: "여행지3" },
+    { id: 4, name: "여행지4" },
+  ]);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = () => {
     setOpen((prev) => !prev);
   };
+  const movePlace = useCallback(
+    (dragIndex, hoverIndex) => {
+      const newCards = [...places];
+      newCards.splice(dragIndex, 1);
+      newCards.splice(hoverIndex, 0, places[dragIndex]);
+      setPlaces(newCards);
+    },
+    [places]
+  );
+
+  const placeList = places.map((item, index) => (
+    <Place
+      index={index}
+      id={item.id}
+      name={item.name}
+      movePlace={movePlace}
+      key={item.id}
+    />
+  ));
+
   return (
     <Fragment>
       <div>
@@ -36,21 +57,10 @@ const Route = () => {
           )}
         </span>
       </div>
-      <Collapse in={open}>{placeItemList}</Collapse>
+      <Collapse in={open}>{placeList}</Collapse>
     </Fragment>
   );
 };
-
-const PlaceItem = styled(Box)({
-  backgroundColor: "#e0e0e0",
-  borderRadius: 16,
-  padding: 15,
-  margin: 15,
-  "&:hover": {
-    backgroundColor: "#bdbdbd",
-    opacity: [0.9, 0.8, 0.7],
-  },
-});
 
 const KakaoMap = () => {
   useEffect(() => {
@@ -69,7 +79,7 @@ const KakaoMap = () => {
   );
 };
 
-const check = () => {
+const Check = () => {
   return (
     <Fragment>
       <Grid container spacing={1}>
@@ -107,4 +117,4 @@ const check = () => {
   );
 };
 
-export default check;
+export default Check;
