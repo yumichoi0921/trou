@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class PlaceTag extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "placeTagId")
     private Long id;
 

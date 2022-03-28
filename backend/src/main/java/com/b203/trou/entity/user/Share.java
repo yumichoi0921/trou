@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 public class Share extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shareId")
     private Long id;
 
