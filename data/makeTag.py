@@ -1,6 +1,8 @@
 from math import fabs
 import pandas as pd
 from sqlalchemy import create_engine
+import datetime
+
 tagGroup = {'가족': ['가족', '남녀노소'],
             '효도': ['부모'],
             '아이': ['아이'],
@@ -52,17 +54,25 @@ tagKey = {
     '관광지': 22
 }
 
+dt_now = datetime.datetime.now().date()
+
 
 def toDataframe():
     global df
     df = pd.read_json(r'.\tags.json')
+    # print(df)
 
 
-def insertTag():
+def toJsonFile():
+    tagDataFrame.to_json(r'.\jeju_tags.json', orient='records')
+
+
+def insertJejuTags():
     db_connection_str = 'mysql+pymysql://root:b203@j6b203.p.ssafy.io:33306/trou'
     db_connection = create_engine(db_connection_str)
     conn = db_connection.connect()
-    tagDataFrame.to_sql(name="tag", con=conn, if_exists='append', index=False)
+    tagDataFrame.to_sql(name="place_tag", con=conn,
+                        if_exists='append', index=False)
 
 
 def processing():
@@ -77,7 +87,7 @@ def processing():
             if tmpTag != None and tmpTag not in tag:
                 tag.append(tmpTag)
                 tags.append(
-                    {'place_id': row['place_id'], 'tag_id': tagKey[tmpTag]})
+                    {'tag_id': tagKey[tmpTag], 'place_id': row['place_id'], 'created_date': dt_now, 'modified_date': dt_now, 'count': 1})
         # tags.append(tag)
     # df['tag'] = tags
     global tagDataFrame
@@ -94,3 +104,5 @@ def checkTag(real_tag):
 
 toDataframe()
 processing()
+toJsonFile()
+# insertJejuTags()
