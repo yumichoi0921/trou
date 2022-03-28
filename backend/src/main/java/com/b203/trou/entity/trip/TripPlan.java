@@ -24,4 +24,9 @@ public class TripPlan extends BaseEntity {
 
     private LocalDate endDate;
 
+    public TripPlan(User user, LocalDate startDate, LocalDate endDate) {
+        this.user = user;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }
