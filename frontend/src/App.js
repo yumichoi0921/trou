@@ -5,10 +5,145 @@ import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
+import MyPage from "./components/myPage/MyPage";
+import TripDetail from "./components/myPage/TripDetail";
+
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const plans = [
+    {
+      id: 1,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 2,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 3,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 4,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 5,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 6,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 7,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    },
+    {
+      id: 8,
+      text: '서울',
+      startDate: '2021-03-28',
+      endDate: '2021-04-01'
+    }
+];
+const orders = [
+  {
+    id: 1,
+    routeId: 1,
+    planId: '부산여행',
+    place: '부산역',
+    order: 1
+  },
+  {
+    id: 2,
+    routeId: 1,
+    planId: '부산여행',
+    place: '수변공원',
+    order: 2
+  },
+  {
+    id: 3,
+    routeId: 1,
+    planId: '부산여행',
+    place: '자갈치시장',
+    order: 3
+  },
+  {
+    id: 4,
+    routeId: 1,
+    planId: '부산여행',
+    place: '해운대',
+    order: 4
+  },
+  {
+    id: 5,
+    routeId: 1,
+    planId: '부산여행',
+    place: '숙소',
+    order: 5
+  },
+  {
+    id: 6,
+    routeId: 2,
+    planId: '부산여행',
+    place: '남천동',
+    order: 1
+  },
+  {
+    id: 7,
+    routeId: 2,
+    planId: '부산여행',
+    place: '남천동',
+    order: 2
+  },
+  {
+    id: 8,
+    routeId: 2,
+    planId: '부산여행',
+    place: '남천동',
+    order: 3
+  },
+  {
+    id: 9,
+    routeId: 2,
+    planId: '부산여행',
+    place: '남천동',
+    order: 4
+  },
+  {
+    id: 10,
+    routeId: 2,
+    planId: '부산여행',
+    place: '남천동',
+    order: 5
+  },
+];
+  const routes = [
+    {
+      id: 1,
+      planId: 1
+    },
+    {
+      id: 2,
+      planId: 1
+    }
+  ]
 
   useEffect(() => {
     const getTasks = async () => {
@@ -87,6 +222,14 @@ const App = () => {
     );
   };
 
+  const getPlanDetail = async (id) => {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const data = await res.json();
+
+    return data;
+  };
+
+
   return (
     <Router>
       <div className="container">
@@ -113,6 +256,9 @@ const App = () => {
             }
           />
           <Route path="/about" element={<About />} />
+          <Route path="/myPage/" element={<MyPage plans={plans}/>} />
+          <Route path="/tripDetail" element={<TripDetail plan={plans[0]} routes={routes} orders={orders}/>} />
+
         </Routes>
         <Footer />
       </div>

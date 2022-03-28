@@ -1,0 +1,32 @@
+.image {
+  width: 171px;
+  height: 171px;
+  left: 459px;
+  top: 303px;
+  border-radius: 100px;
+  background-color: aquamarine;
+}
+
+.planInfo {
+  width: 804px;
+  height: 134px;
+  left: 663px;
+  top: 571px;
+  background: #bceaed;
+  border-radius: 31px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.button {
+  position: absolute;
+  width: 153px;
+  height: 89px;
+  left: 1642px;
+  top: 214px;
+  background: #bceaed;
+  border-radius: 31px;
+}
