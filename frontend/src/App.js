@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
-import Check from "./components/plan/check";
+import Check from "./components/plan/Check";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -114,6 +115,7 @@ const App = () => {
             }
           />
           <Route path="/about" element={<About />} />
+
           <Route path="/check" element={<Check />} />
         </Routes>
         <Footer />
