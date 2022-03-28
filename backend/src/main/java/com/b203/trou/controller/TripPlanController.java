@@ -26,10 +26,10 @@ public class TripPlanController {
         }
     }
 
-    @PostMapping(value = "/user/{userId]")
-    public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlan, @PathVariable("userId") String userId) {
+    @PostMapping(path = "/{userId}")
+    public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("userId") String userId) {
         try {
-            TripPlanDto result = tripPlanService.createTripPlan(tripPlan, userId);
+            TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
