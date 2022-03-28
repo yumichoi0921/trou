@@ -6,6 +6,7 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
 import Check from "./components/plan/check";
+// import MainBefore from "./components/MainBefore";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -115,6 +116,7 @@ const App = () => {
           />
           <Route path="/about" element={<About />} />
           <Route path="/check" element={<Check />} />
+          {/* <Route path='/mainbefore' element={<MainBefore />} /> */}
         </Routes>
         <Footer />
       </div>
