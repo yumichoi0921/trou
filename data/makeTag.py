@@ -59,12 +59,12 @@ dt_now = datetime.datetime.now().date()
 
 def toDataframe():
     global df
-    df = pd.read_json(r'.\tags.json')
+    df = pd.read_json(r'.\Jeju_tags.json')
     # print(df)
 
 
 def toJsonFile():
-    tagDataFrame.to_json(r'.\jeju_tags.json', orient='records')
+    tagDataFrame.to_json(r'.\Jeju__place_tags.json', orient='records')
 
 
 def insertJejuTags():
