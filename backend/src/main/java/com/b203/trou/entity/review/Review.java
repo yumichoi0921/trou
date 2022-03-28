@@ -3,10 +3,12 @@ package com.b203.trou.entity.review;
 import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.place.Place;
 import com.b203.trou.entity.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
 public class Review extends BaseEntity {

@@ -1,10 +1,12 @@
 package com.b203.trou.entity.trip;
 
 import com.b203.trou.entity.place.Place;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class TripOrder {
 
