@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 public class TripOrder {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderId")
     private Long id;
 
