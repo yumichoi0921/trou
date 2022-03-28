@@ -2,11 +2,14 @@ package com.b203.trou.entity.trip;
 
 import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
 public class TripPlan extends BaseEntity {
