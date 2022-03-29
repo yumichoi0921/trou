@@ -2,17 +2,22 @@ package com.b203.trou.entity.trip;
 
 import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+@Setter
 public class TripPlan extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "planId")
     private Long id;
 
@@ -24,4 +29,9 @@ public class TripPlan extends BaseEntity {
 
     private LocalDate endDate;
 
+    public TripPlan(User user, LocalDate startDate, LocalDate endDate) {
+        this.user = user;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }
