@@ -20,15 +20,15 @@ public class TripPlanService {
     private final TripPlanRepository tripPlanRepository;
     private final UserRepository userRepository;
 
-    public List<TripPlanDto> getTripPlans() {
-        return tripPlanRepository.findAll().stream().map(TripPlanDto::new).collect(Collectors.toList());
+    public List<TripPlanDto> getTripPlans(long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
+        return tripPlanRepository.findByUser(user).stream().map(TripPlanDto::new).collect(Collectors.toList());
     }
 
     @Transactional
     public TripPlanDto createTripPlan(TripPlanDto tripPlanDto, String userId) {
-        Optional<User> user = userRepository.findById(Long.parseLong(userId));
-        if (user.isEmpty()) throw new IllegalArgumentException("해당 유저가 없습니다.");
-        TripPlan tripPlan = new TripPlan(user.get(), tripPlanDto.getStartDate(), tripPlanDto.getEndDate());
+        User user = userRepository.findById(Long.parseLong(userId)).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
+        TripPlan tripPlan = new TripPlan(user, tripPlanDto.getStartDate(), tripPlanDto.getEndDate());
         tripPlanRepository.save(tripPlan);
         return new TripPlanDto(tripPlan);
     }

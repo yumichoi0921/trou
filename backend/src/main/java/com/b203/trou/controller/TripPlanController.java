@@ -17,9 +17,9 @@ public class TripPlanController {
     private final TripPlanService tripPlanService;
 
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<?> getAllTripPlans() {
+    public ResponseEntity<?> getAllTripPlans(@PathVariable("userId") long userId) {
         try {
-            List<TripPlanDto> tripPlans = tripPlanService.getTripPlans();
+            List<TripPlanDto> tripPlans = tripPlanService.getTripPlans(userId);
             return ResponseEntity.ok(tripPlans);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
@@ -31,8 +31,6 @@ public class TripPlanController {
         try {
             TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
             return ResponseEntity.ok(result);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
