@@ -26,14 +26,33 @@ public class TripPlanController {
         }
     }
 
-    @PostMapping(path = "/{userId}")
-    public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("userId") String userId) {
+    @PostMapping(value = "/{userId}")
+    public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("userId") long userId) {
         try {
             TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
 
+    @PatchMapping(value = "/{planId}")
+    public ResponseEntity<?> modifyTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("planId") long planId) {
+        try {
+            TripPlanDto result = tripPlanService.modifyTripPlan(tripPlanDto, planId);
+            return ResponseEntity.ok(result);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @DeleteMapping(value = "/{planId}")
+    public ResponseEntity<?> deleteTripPlan(@PathVariable("planId") long planId) {
+        try {
+            TripPlanDto result = tripPlanService.deleteTripPlan(planId);
+            return ResponseEntity.ok("계획이 삭제되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

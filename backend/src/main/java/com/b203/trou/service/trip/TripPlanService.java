@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -26,10 +25,26 @@ public class TripPlanService {
     }
 
     @Transactional
-    public TripPlanDto createTripPlan(TripPlanDto tripPlanDto, String userId) {
-        User user = userRepository.findById(Long.parseLong(userId)).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
+    public TripPlanDto createTripPlan(TripPlanDto tripPlanDto, long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
         TripPlan tripPlan = new TripPlan(user, tripPlanDto.getStartDate(), tripPlanDto.getEndDate());
         tripPlanRepository.save(tripPlan);
         return new TripPlanDto(tripPlan);
+    }
+
+    @Transactional
+    public TripPlanDto modifyTripPlan(TripPlanDto tripPlanDto, long planId) {
+        TripPlan tripPlan = tripPlanRepository.getById(planId);
+        tripPlan.setStartDate(tripPlanDto.getStartDate());
+        tripPlan.setEndDate(tripPlanDto.getEndDate());
+        tripPlanRepository.save(tripPlan);
+        return new TripPlanDto(tripPlan);
+    }
+
+    public TripPlanDto deleteTripPlan(long planId) {
+        TripPlan tripPlan = tripPlanRepository.getById(planId);
+        tripPlanRepository.delete(tripPlan);
+        return new TripPlanDto(tripPlan);
+
     }
 }
