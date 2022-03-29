@@ -1,0 +1,95 @@
+.backgound {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin: 0px auto;
+  position: relative;
+}
+
+.log {
+  position: absolute;
+  width: 50%;
+  top: 30%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  width: 50%;
+  transform: translate(10%, -50%);
+}
+
+/* login 페이지 */
+.login {
+  position: absolute;
+  width: 50%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input_text {
+  width: 90%;
+  left: 5%;
+}
+.input_title {
+  padding: 2%;
+  padding-left: 5%;
+}
+
+.form_link {
+  padding: 2%;
+  text-align: right;
+}
+
+.login_btn {
+  text-align: center;
+}
+
+.goole_login_btn {
+  text-align: center;
+  padding: 2%;
+}
+
+.right_line {
+  width: 18%;
+  display: inline-block;
+}
+
+.left_line {
+  width: 18%;
+  display: inline-block;
+}
+
+.or {
+  text-align: center;
+  padding: 3%;
+}
+.logi_title {
+  font-size: 35px;
+  padding-top: 5%;
+  padding-left: 7%;
+}
+
+/* join 페이지 */
+.join_btn {
+  padding-right: 3%;
+}
+
+.findpw_btn {
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.Join_form_btn {
+  margin: 5%;
+  text-align: center;
+}
+
+.Join_btn {
+  margin-right: 5%;
+}
+
+.Back_btn {
+  margin-left: 5%;
+}
