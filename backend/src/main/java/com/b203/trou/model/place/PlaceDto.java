@@ -4,6 +4,8 @@ import com.b203.trou.entity.place.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 public class PlaceDto {
     public PlaceDto(Place place){
