@@ -21,7 +21,7 @@ public class UserService {
 
     @Transactional
     public User createUser(UserDto userdto) {
-        User build = User.builder().email(userdto.getEmail()).userName(userdto.getUserName()).password(userdto.getPassWord()).build();
+        User build = new User(userdto.getEmail(), userdto.getUserName(), userdto.getPassword());
         return userRepository.save(build);
     }
 
@@ -31,7 +31,7 @@ public class UserService {
 
 
         // usrDto 의 비밀번와비교
-        if(!user.getPassword().equals(userDto.getPassWord())){
+        if(!user.getPassword().equals(userDto.getPassword())){
             throw new AuthenticationException("해당하는 유저가 없습니다.");
         }
 

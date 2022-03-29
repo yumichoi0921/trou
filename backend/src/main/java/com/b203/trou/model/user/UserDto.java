@@ -1,21 +1,35 @@
 package com.b203.trou.model.user;
 
+import com.b203.trou.entity.tag.Tag;
+import com.b203.trou.entity.tag.UserTag;
 import com.b203.trou.entity.user.User;
-import lombok.*;
+import com.b203.trou.model.review.ReviewDto;
+import com.b203.trou.model.tag.TagDto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Data
 public class UserDto {
-    private long userId;
-    private String email;
-    private  String userName;
-    private  String passWord;
+    long userId;
+    String email;
+    String password;
+    String userName;
+    List<TagDto> tags;
+    List<ReviewDto> reviews;
 
     public UserDto(User user) {
+
         this.userId = user.getId();
         this.email = user.getEmail();
+        this.password = user.getPassword();
         this.userName = user.getUserName();
+        this.tags = user.getTags().stream().map(t -> new TagDto(t.getTag())).collect(Collectors.toList());
+        this.reviews = user.getReviews().stream().map(ReviewDto::new).collect(Collectors.toList());
     }
 }
