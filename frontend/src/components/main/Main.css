@@ -1,0 +1,22 @@
+.searchDiv {
+  margin-top: 50px;
+  padding-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+
+  padding-bottom: 80px;
+}
+
+.searchBar {
+  height: 60px;
+  margin-top: 20px;
+  margin-left: 10px;
+  background-color: rgb(241, 237, 237);
+  width: 650px;
+}
+input::placeholder {
+  color: #08c;
+  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+  text-align: center;
+  font-size: x-large;
+}

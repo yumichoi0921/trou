@@ -2,6 +2,7 @@ package com.b203.trou.entity.place;
 
 import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.review.Review;
+import com.b203.trou.entity.tag.PlaceTag;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,4 +40,7 @@ public class Place extends BaseEntity {
 
     @OneToMany(mappedBy = "place")
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place")
+    private List<PlaceTag> tags = new ArrayList<>();
 }
