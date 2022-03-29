@@ -7,6 +7,7 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
 import Check from "./components/plan/Check";
+import Detail from "./components/plan/Detail"
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -117,6 +118,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
 
           <Route path="/check" element={<Check />} />
+          <Route path="/planDetail" element={<Detail />} />
         </Routes>
         <Footer />
       </div>
