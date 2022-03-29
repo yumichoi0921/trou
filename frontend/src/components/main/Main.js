@@ -33,7 +33,7 @@ export default function Main() {
       console.log(keyword);
       const response = await axios({
         method: "get",
-        url: `/place?${keyword}`,
+        url: `/place/${keyword}`,
         baseURL: "http://localhost:8080",
         timeout: 2000,
       });

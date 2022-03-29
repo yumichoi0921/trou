@@ -1,16 +1,11 @@
 package com.b203.trou.controller;
 
-import com.b203.trou.entity.place.Place;
-import com.b203.trou.entity.review.Review;
-import com.b203.trou.entity.review.Score;
 import com.b203.trou.model.place.PlaceDto;
-import com.b203.trou.model.place.ReviewDto;
 import com.b203.trou.service.place.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 @RequiredArgsConstructor
 @RestController

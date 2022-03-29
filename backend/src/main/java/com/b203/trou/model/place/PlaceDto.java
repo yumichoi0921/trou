@@ -1,6 +1,7 @@
 package com.b203.trou.model.place;
 
 import com.b203.trou.entity.place.Place;
+import com.b203.trou.model.review.ReviewDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.util.List;
