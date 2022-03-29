@@ -14,12 +14,6 @@ public class TripPlanDto {
     LocalDate startDate;
     LocalDate endDate;
 
-
-//    public TripPlanDto(LocalDate startDate, LocalDate endDate) {
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//    }
-
     public TripPlanDto(TripPlan tripPlan) {
         this.planId = tripPlan.getId();
         this.startDate = tripPlan.getStartDate();
