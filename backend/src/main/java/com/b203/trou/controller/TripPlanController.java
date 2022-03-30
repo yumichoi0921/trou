@@ -22,7 +22,7 @@ public class TripPlanController {
             List<TripPlanDto> tripPlans = tripPlanService.getTripPlans(userId);
             return ResponseEntity.ok(tripPlans);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class TripPlanController {
             TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -42,7 +42,7 @@ public class TripPlanController {
             TripPlanDto result = tripPlanService.modifyTripPlan(tripPlanDto, planId);
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ public class TripPlanController {
             TripPlanDto result = tripPlanService.deleteTripPlan(planId);
             return ResponseEntity.ok("계획이 삭제되었습니다.");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
