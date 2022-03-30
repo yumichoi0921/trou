@@ -23,6 +23,8 @@ public class UserDto {
     List<TagDto> tags;
     List<ReviewDto> reviews;
 
+
+
     public UserDto(User user) {
 
         this.userId = user.getId();

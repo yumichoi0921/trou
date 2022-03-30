@@ -1,9 +1,15 @@
 package com.b203.trou.model.trip;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
+@Builder
 public class TripRouteDto {
+    long routeId;
+    LocalDate routeDate;
+    String memo;
 }
