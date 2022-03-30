@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Tasks from "./components/Tasks";
-import AddTask from "./components/AddTask";
+
 import About from "./components/About";
 import Check from "./components/plan/Check";
-
+import FirstMain from "./components/FirstMain/FirstMain";
+import Login from "./components/FirstMain/Login";
+import Join from "./components/FirstMain/Join";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -91,31 +92,18 @@ const App = () => {
 
   return (
     <Router>
+      <Routes>
+        <Route path="/firstmain" element={<FirstMain />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+      </Routes>
       <div className="container">
         <Header
           onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask}
         />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                {showAddTask && <AddTask onAdd={addTask} />}
-                {tasks.length > 0 ? (
-                  <Tasks
-                    tasks={tasks}
-                    onDelete={deleteTask}
-                    onToggle={toggleReminder}
-                  />
-                ) : (
-                  "No Tasks To Show"
-                )}
-              </>
-            }
-          />
           <Route path="/about" element={<About />} />
-
           <Route path="/check" element={<Check />} />
         </Routes>
         <Footer />

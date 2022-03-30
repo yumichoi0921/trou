@@ -20,13 +20,13 @@ public class TagController {
 
     private final TagService tagService;
 
-    @GetMapping
-    public ResponseEntity<?> getAllTags() {
-        try {
-            List<TagDto> tags = tagService.getTags();
-            return ResponseEntity.status(200).body(tags);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
-        }
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllTags() {
+//        try {
+//            List<TagDto> tags = tagService.getTags();
+//            return ResponseEntity.status(200).body(tags);
+//        } catch (IllegalStateException e) {
+//            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+//        }
+//    }
 }
