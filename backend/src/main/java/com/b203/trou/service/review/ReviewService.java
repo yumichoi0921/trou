@@ -44,4 +44,18 @@ public class ReviewService {
         review.setUser(user);
         return new ReviewDto(review);
     }
+
+    @Transactional
+    public ReviewDto modifyReview(ReviewDto reviewDto, long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new IllegalArgumentException("해당하는 리뷰가 없습니다."));
+        review.setContent(reviewDto.getContent());
+        review.setScore(reviewDto.getScore());
+        return new ReviewDto(review);
+    }
+
+    public ReviewDto deleteReview(long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new IllegalArgumentException("해당하는 리뷰가 없습니다."));
+        reviewRepository.delete(review);
+        return new ReviewDto(review);
+    }
 }
