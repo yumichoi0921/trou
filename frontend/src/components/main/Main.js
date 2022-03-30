@@ -2,7 +2,12 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import react, { useState, useEffect } from "react";
 import backImg from "../../imgs/back.png";
-import { LineAxisOutlined, PlayCircleSharp, Search } from "@mui/icons-material";
+import {
+  CommitSharp,
+  LineAxisOutlined,
+  PlayCircleSharp,
+  Search,
+} from "@mui/icons-material";
 import styles from "./Main.css";
 
 import axios from "axios";
@@ -14,27 +19,35 @@ export default function Main() {
   const [src, setSrc] = useState("");
   const [places, setPlaces] = useState("");
   const [imgName, setImgName] = useState("");
+  const [reviews, setReviews] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const classes = styles;
   function clickSite(e) {
-    e.preventDefault();
-    console.log(e.target);
-    // console.log(e.target.image.src);
-    // console.log(e.target.image.name);
-    //  console.log(e.target.placeName);
+    //e.preventDefault();
+    console.log(e);
+    setImgName(e.placeName);
+    setSrc(e.placeImage);
+    console.log(e.reviews);
+    setReviews(e.reviews);
 
-    setImgName(e.target.name);
-    setSrc(e.target.src);
     handleShow();
   }
 
+  function Reivew(props) {
+    return (
+      <Box>
+        <h1>{props.user}</h1> <p>{props.content}</p>
+      </Box>
+    );
+  }
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       SearchPlace(e.target.value);
     }
   };
+
   const SearchPlace = async (e) => {
     try {
       let keyword = e;
@@ -48,7 +61,7 @@ export default function Main() {
       console.log(response.data);
       let array = [];
       array = response.data.map((place, i) => {
-        // console.log(place.image);
+        console.log(place);
         if (place.image == null) {
           place.image = backImg;
         }
@@ -56,13 +69,15 @@ export default function Main() {
           <div
             style={{ float: "left", marginLeft: 20, height: 400, width: 400 }}
             key={i}
-            onClick={clickSite}
           >
             <h2> {place.placeName}</h2>
 
             <img
+              onClick={() => {
+                clickSite(place);
+              }}
               src={place.image}
-              alt={i}
+              alt={place.placeId}
               name={place.placeName}
               style={{
                 height: "300px",
@@ -152,48 +167,13 @@ export default function Main() {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <img src={src} alt="" style={{ width: "500px" }}></img>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+
+            {reviews.map((r, i) => (
+              <Reivew key={i} user={r.userName} content={r.content}></Reivew>
+            ))}
           </Typography>
         </Box>
       </Modal>
     </Grid>
-
-    /* <Modal size="xl" show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Woohoo, you're reading this text in a modal!
-          <Row>
-            <h2>{imgName}</h2>
-            <Col>
-              {" "}
-              <img src={src} alt="" style={{ width: "500px" }}></img>
-            </Col>
-            <Col>
-              {" "}
-              <div style={{ width: "500px" }}>
-                <Row>
-                  <h3>한라산 리뷰</h3>
-                </Row>
-                <Row> 여기 정말 좋아요!</Row>
-                <Row>
-                  {" "}
-                  #바다 #힐링 #액티비티 #아이들과 아이들이 너무 좋아했어요~
-                  다음에 또 방문 예정입니다
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */
   );
 }
