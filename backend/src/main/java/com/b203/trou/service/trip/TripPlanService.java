@@ -34,7 +34,7 @@ public class TripPlanService {
 
     @Transactional
     public TripPlanDto modifyTripPlan(TripPlanDto tripPlanDto, long planId) {
-        TripPlan tripPlan = tripPlanRepository.getById(planId);
+        TripPlan tripPlan = tripPlanRepository.findById(planId).orElseThrow(()->new IllegalArgumentException("해당하는 계획이 없습니다."));
         tripPlan.setStartDate(tripPlanDto.getStartDate());
         tripPlan.setEndDate(tripPlanDto.getEndDate());
         tripPlanRepository.save(tripPlan);
@@ -42,7 +42,7 @@ public class TripPlanService {
     }
 
     public TripPlanDto deleteTripPlan(long planId) {
-        TripPlan tripPlan = tripPlanRepository.getById(planId);
+        TripPlan tripPlan = tripPlanRepository.findById(planId).orElseThrow(()->new IllegalArgumentException("해당하는 계획이 없습니다."));
         tripPlanRepository.delete(tripPlan);
         return new TripPlanDto(tripPlan);
 

@@ -21,7 +21,7 @@ public class ReviewController {
             List<ReviewDto> reviews = reviewService.getPlaceReviews(placeId);
             return ResponseEntity.ok(reviews);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class ReviewController {
             List<ReviewDto> reviews = reviewService.getUserReviews(userId);
             return ResponseEntity.ok(reviews);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ public class ReviewController {
             ReviewDto result = reviewService.createReview(reviewDto, placeId, userId);
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -51,7 +51,17 @@ public class ReviewController {
             ReviewDto result = reviewService.modifyReview(reviewDto, reviewId);
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping(value = "/{reviewId}")
+    public ResponseEntity<?> deleteReview(@PathVariable("reviewId") long reviewId) {
+        try {
+            ReviewDto result = reviewService.deleteReview(reviewId);
+            return ResponseEntity.ok("리뷰가 삭제되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
