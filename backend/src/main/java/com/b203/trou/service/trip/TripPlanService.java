@@ -29,6 +29,7 @@ public class TripPlanService {
         User user = userRepository.findById(userId).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
         TripPlan tripPlan = new TripPlan(user, tripPlanDto.getStartDate(), tripPlanDto.getEndDate());
         tripPlanRepository.save(tripPlan);
+        tripPlan.setUser(user);
         return new TripPlanDto(tripPlan);
     }
 
