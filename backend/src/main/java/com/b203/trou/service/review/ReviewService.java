@@ -44,4 +44,15 @@ public class ReviewService {
         review.setUser(user);
         return new ReviewDto(review);
     }
+
+    @Transactional
+    public ReviewDto modifyReview(ReviewDto reviewDto, long reviewId) {
+        Review review = reviewRepository.getById(reviewId);
+        review.setContent(reviewDto.getContent());
+        review.setScore(reviewDto.getScore());
+        User user = userRepository.findById(review.getUser().getId()).orElseThrow(() -> new IllegalArgumentException("해당하는 유저가 없습니다."));
+        int idx = user.getReviews().indexOf(review);
+        user.getReviews().set(idx, review);
+        return new ReviewDto(review);
+    }
 }

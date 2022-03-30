@@ -15,7 +15,7 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
 
-    @GetMapping(value = "place/{placeId}")
+    @GetMapping(value = "/place/{placeId}")
     public ResponseEntity<?> getAllPlaceReviews(@PathVariable("placeId") long placeId) {
         try {
             List<ReviewDto> reviews = reviewService.getPlaceReviews(placeId);
@@ -25,7 +25,7 @@ public class ReviewController {
         }
     }
 
-    @GetMapping(value = "user/{userId}")
+    @GetMapping(value = "/user/{userId}")
     public ResponseEntity<?> getAllUserReviews(@PathVariable("userId") long userId) {
         try {
             List<ReviewDto> reviews = reviewService.getUserReviews(userId);
@@ -45,4 +45,14 @@ public class ReviewController {
         }
     }
 
-}
+    @PatchMapping(value = "/{reviewId}")
+    public ResponseEntity<?> modifyReview(@RequestBody ReviewDto reviewDto, @PathVariable("reviewId") long reviewId) {
+        try {
+            ReviewDto result = reviewService.modifyReview(reviewDto, reviewId);
+            return ResponseEntity.ok(result);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+};
