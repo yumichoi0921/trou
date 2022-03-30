@@ -1,9 +1,7 @@
 package com.b203.trou.entity.trip;
 
 import com.b203.trou.entity.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

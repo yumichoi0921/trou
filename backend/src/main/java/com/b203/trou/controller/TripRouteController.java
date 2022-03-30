@@ -1,6 +1,7 @@
 package com.b203.trou.controller;
 
 import com.b203.trou.model.trip.TripPlanDto;
+import com.b203.trou.model.trip.TripRouteDto;
 import com.b203.trou.service.trip.TripRouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,17 +18,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/route")
 public class TripRouteController {
+
     private final TripRouteService tripRouteService;
 
-//    @GetMapping(value = "/{tripPlanId}")
-//    public ResponseEntity<?> getAllTripRoutes(@PathVariable("tripPlanId") long tripPlanId) {
-//        try {
-////            List<TripPlanDto> tripPlans = tripPlanService.getTripPlans(userId);
-////            return ResponseEntity.ok(tripPlans);
-//        } catch (IllegalStateException e) {
-////            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//        }
-//    }
+    @GetMapping(value = "/{tripPlanId}")
+    public ResponseEntity<?> getAllTripRoutes(@PathVariable long tripPlanId) {
+        try {
+            List<TripRouteDto> tripRoutes = tripRouteService.getTripRoutes(tripPlanId);
+            return ResponseEntity.ok(tripRoutes);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
     // 생성(planId, routeDate, memo)
 
     // 수정(routeId, memo,
