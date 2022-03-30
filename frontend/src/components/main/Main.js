@@ -7,26 +7,34 @@ import styles from "./Main.css";
 
 import axios from "axios";
 //import  Button  from "@mui/material/Button";
-import { Grid, styled, Box, TextField } from "@mui/material";
+import { Grid, styled, Box, TextField, Modal, Typography } from "@mui/material";
+import { height } from "@mui/system";
 export default function Main() {
   const [show, setShow] = useState(false);
-  // const [src, setSrc] = useState("");
+  const [src, setSrc] = useState("");
   const [places, setPlaces] = useState("");
-  // const [imgName, setImgName] = useState("");
+  const [imgName, setImgName] = useState("");
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const classes = styles;
-  // function clickSite(e) {
-  //   e.preventDefault();
-  //   console.log(e.target.src);
-  //   console.log(e.target.name);
-  //   setImgName(e.target.name);
-  //   setSrc(e.target.src);
-  //   handleShow();
-  // }
+  function clickSite(e) {
+    e.preventDefault();
+    console.log(e.target);
+    // console.log(e.target.image.src);
+    // console.log(e.target.image.name);
+    //  console.log(e.target.placeName);
 
-  // e.preventDefault();
+    setImgName(e.target.name);
+    setSrc(e.target.src);
+    handleShow();
+  }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      SearchPlace(e.target.value);
+    }
+  };
   const SearchPlace = async (e) => {
     try {
       let keyword = e;
@@ -40,16 +48,26 @@ export default function Main() {
       console.log(response.data);
       let array = [];
       array = response.data.map((place, i) => {
+        // console.log(place.image);
+        if (place.image == null) {
+          place.image = backImg;
+        }
         return (
-          <div style={{ float: "left" }} key={i}>
+          <div
+            style={{ float: "left", marginLeft: 20, height: 400, width: 400 }}
+            key={i}
+            onClick={clickSite}
+          >
             <h2> {place.placeName}</h2>
 
             <img
-              // onClick={clickSite}
               src={place.image}
               alt={i}
               name={place.placeName}
-              style={{ maxWidth: "20rem", margin: "1rem" }}
+              style={{
+                height: "300px",
+                width: "400px",
+              }}
             />
           </div>
         );
@@ -66,28 +84,36 @@ export default function Main() {
     marginRight: 100,
     paddingBottom: 80,
     backgroundImage: `url(${backImg})`,
-    width: 1500,
+    // width: "100%",
   });
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 1000,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+  };
   return (
     <Grid container>
-      <SearchDiv>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}>
-          <Grid sx={{ justifyContent: "center", my: 3 }}>
-            <Box style={{ textAlign: "center" }}>
-              {" "}
-              <h2>어디로 여행을 떠나시나요?</h2>{" "}
-            </Box>
-          </Grid>
-          <Grid item></Grid>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Grid item xs={8}>
+      <Grid item xs={12}>
+        <SearchDiv sx={{ justifyContent: "center", my: 3 }}>
+          <Box style={{ textAlign: "center", marginBottom: 20 }}>
+            <h2>어디로 여행을 떠나시나요?</h2>
+          </Box>
+          <Box style={{ textAlign: "center", marginTop: 10 }} sx={{ mt: 10 }}>
             <Search
               sx={{
                 color: "action.active",
                 fontSize: 40,
+                justifyContent: "center",
+                my: 3,
               }}
             />
             <TextField
@@ -98,21 +124,40 @@ export default function Main() {
               variant="filled"
               id="outlined-required"
               label="도시 또는 태그 입력"
-              onChange={(e) => SearchPlace(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e)}
+
+              // onChange={(e) => SearchPlace(e.target.value)}
             />
-          </Grid>
-        </Grid>
-      </SearchDiv>
-      <Grid item xs={12}>
-        <Grid item xs={4}>
-          <div style={{ marginTop: "50px" }}>
+          </Box>
+        </SearchDiv>
+      </Grid>
+      <Grid>
+        <Box style={{ marginLeft: 100 }}>
+          <div style={{ marginTop: 50, marginBottom: 20 }}>
             <h1>이 여행은 어떠신가요??</h1>
           </div>
-        </Grid>
+        </Box>
       </Grid>
 
-      <Grid>{places}</Grid>
+      <Box style={{ marginLeft: 200 }}>{places}</Box>
+      <Modal
+        open={show}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {imgName}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <img src={src} alt="" style={{ width: "500px" }}></img>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </Grid>
+
     /* <Modal size="xl" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
