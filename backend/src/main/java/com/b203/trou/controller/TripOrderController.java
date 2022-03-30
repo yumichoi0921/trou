@@ -1,23 +1,21 @@
 package com.b203.trou.controller;
 
-import com.b203.trou.model.trip.TripPlanDto;
 import com.b203.trou.model.trip.TripRouteDto;
 import com.b203.trou.service.trip.TripRouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/route")
-public class TripRouteController {
+@RequestMapping("/order")
+public class TripOrderController {
     private final TripRouteService tripRouteService;
 
-    @GetMapping(value = "/{tripPlanId}")
+    @GetMapping(value = "/{routeId}")
     public ResponseEntity<?> getAllTripRoutes(@PathVariable("tripPlanId") long tripPlanId) {
         try {
             List<TripRouteDto> tripRoutes = tripRouteService.getAllTripRoute(tripPlanId);
