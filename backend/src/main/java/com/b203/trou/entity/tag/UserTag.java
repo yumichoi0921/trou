@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+
 public class UserTag extends BaseEntity {
 
     @Id
@@ -26,4 +27,10 @@ public class UserTag extends BaseEntity {
     private Tag tag;
 
     private int count;
+
+    public UserTag(User user, Tag tag, int count) {
+        this.user = user;
+        this.tag = tag;
+        this.count = count;
+    }
 }
