@@ -33,9 +33,6 @@ public class User {
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<UserTag> tags = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
     private List<TripPlan> tripPlans = new ArrayList<>();
 
     public User(String email, String password, String userName) {

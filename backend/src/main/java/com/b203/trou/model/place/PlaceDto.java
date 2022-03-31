@@ -23,5 +23,6 @@ public class PlaceDto {
     List<ReviewDto> reviews;
     String placeName;
     String image;
+    long placeId;
 
 }
