@@ -9,6 +9,7 @@ import Check from "./components/plan/Check";
 import FirstMain from "./components/FirstMain/FirstMain";
 import Login from "./components/FirstMain/Login";
 import Join from "./components/FirstMain/Join";
+import Plan from "./components/plan/Plan";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -105,6 +106,7 @@ const App = () => {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/check" element={<Check />} />
+          <Route path="/plan" element={<Plan />} />
         </Routes>
         <Footer />
       </div>
