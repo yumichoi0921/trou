@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import About from "./components/About";
-import Check from "./components/plan/check";
+import Check from "./components/plan/Check";
 import Main from "./components/main/Main";
 import Login from "./components/FirstMain/Login";
 import Join from "./components/FirstMain/Join";

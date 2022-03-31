@@ -18,15 +18,15 @@ public class TripRouteService {
     private final TripRouteRepository tripRouteRepository;
     private final TripPlanRepository tripPlanRepository;
 
-    public List<TripRouteDto> getAllTripRoute(long tripPlanId) {
-        TripPlan tripPlan = tripPlanRepository.findById(tripPlanId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 플랜이 없습니다."));
+    public List<TripRouteDto> getAllTripRoute(long planId) {
+        TripPlan tripPlan = tripPlanRepository.findById(planId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 플랜이 없습니다."));
         List<TripRouteDto> tripRoutes = tripRouteRepository.findByTripPlan(tripPlan).stream().map(TripRouteDto::new).collect(Collectors.toList());
         return tripRoutes;
     }
 
     @Transactional
-    public TripRouteDto createTripRoute(TripRouteDto tripRouteDto, long tripPlanId) {
-        TripPlan tripPlan = tripPlanRepository.findById(tripPlanId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 플랜이 없습니다."));
+    public TripRouteDto createTripRoute(TripRouteDto tripRouteDto, long planId) {
+        TripPlan tripPlan = tripPlanRepository.findById(planId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 플랜이 없습니다."));
         TripRoute tripRoute = new TripRoute(tripPlan, tripRouteDto.getRouteDate(), tripRouteDto.getMemo(), tripRouteDto.getDay());
         tripRouteRepository.save(tripRoute);
         return new TripRouteDto(tripRoute);
