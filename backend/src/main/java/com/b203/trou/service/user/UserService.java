@@ -22,6 +22,7 @@ public class UserService {
     @Transactional
     public User createUser(UserDto userdto) {
         User build = new User(userdto.getEmail(), userdto.getUserName(), userdto.getPassword());
+
         return userRepository.save(build);
     }
 
