@@ -5,8 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import About from "./components/About";
-import Check from "./components/plan/Check";
-import FirstMain from "./components/FirstMain/FirstMain";
+import Check from "./components/plan/check";
+import Main from "./components/main/Main";
 import Login from "./components/FirstMain/Login";
 import Join from "./components/FirstMain/Join";
 import Plan from "./components/plan/Plan";
@@ -94,7 +94,6 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/firstmain" element={<FirstMain />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
       </Routes>
@@ -104,6 +103,7 @@ const App = () => {
           showAdd={showAddTask}
         />
         <Routes>
+          <Route path="/main" element={<Main />} />
           <Route path="/about" element={<About />} />
           <Route path="/check" element={<Check />} />
           <Route path="/plan" element={<Plan />} />
