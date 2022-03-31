@@ -4,10 +4,7 @@ import com.b203.trou.entity.place.Place;
 import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.tag.UserTag;
 import com.b203.trou.entity.trip.TripPlan;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
