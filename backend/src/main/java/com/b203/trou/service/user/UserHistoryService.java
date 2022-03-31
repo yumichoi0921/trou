@@ -21,23 +21,6 @@ public class UserHistoryService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private UserHistoryRepository usertagrepository;
-//    public boolean setUserTags(List<TagDto> TagList,long userId){
-//
-//        User user = userRepository.findById(userId).get();
-//        List<UserTag> tags = new ArrayList<>();
-//        TagList.forEach(tagDto -> {
-////            Tag tag = new Tag(tagDto.getTagId(),tagDto.getTagName());
-//            UserTag userTag = new UserTag(user, new Tag(tagDto.getTagId(), tagDto.getTagName()));
-//            tags.add(userTag);
-//
-//        });
-//
-//        return usertagrepository.saveAll(tags)!=null ? true : false;
-//
-//    }
-
     @Autowired
     private UserHistoryRepository userHistoryRepository;
 
