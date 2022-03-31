@@ -5,7 +5,7 @@ import { styled, Grid, Box, Button, Stack, Collapse } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import Place from "./Place";
 const Area = styled(Box)({
-  minHeight: 600,
+  height: 600,
   backgroundColor: "#90caf9",
   padding: 25,
   "&:hover": {
@@ -137,9 +137,9 @@ const Check = () => {
           data = { tripOrder: Number(index) + 1, placeId: place.placeId };
           orderList.push(data);
         }
-        const order = await axios.post("/order/" + item.routeId, orderList);
-        console.log(order.data);
+        await axios.post("/order/" + item.routeId, orderList);
       }
+      alert("저장되었습니다.");
     } catch (err) {
       console.log("Error >>", err);
     }
@@ -149,7 +149,7 @@ const Check = () => {
     <Fragment>
       <Grid container spacing={1}>
         <Grid item md={3} sx={{ textAlign: "center" }}>
-          <Area>
+          <Area sx={{ overflow: "auto" }}>
             <Stack spacing={2}>
               {routeList}
               <Stack
@@ -157,7 +157,9 @@ const Check = () => {
                 direction="row"
                 sx={{ justifyContent: "center", my: 3 }}
               >
-                <Button variant="outlined">더 담으러 가기</Button>
+                <Button variant="contained" color="warning">
+                  더 담으러 가기
+                </Button>
                 <Button variant="contained" onClick={save}>
                   다음으로
                 </Button>
