@@ -34,7 +34,7 @@ export default function FirstMain() {
               Please enter something. <br />
             </Typography> */}
             <form>
-              <p class={styles.input_title}>ID</p>
+              <p className={styles.input_title}>ID</p>
               <TextField
                 className={styles.input_text}
                 required
@@ -43,7 +43,7 @@ export default function FirstMain() {
                 type="text"
                 name="userLoginId"
               />
-              <p class={styles.input_title}>PW</p>
+              <p className={styles.input_title}>PW</p>
               <TextField
                 className={styles.input_text}
                 id="outlined-password-input"

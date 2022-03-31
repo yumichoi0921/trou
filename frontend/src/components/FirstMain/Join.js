@@ -2,9 +2,16 @@ import backgroundVideo from "../img/background.mp4";
 import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, CardContent, TextField } from "@mui/material";
+import { Button, Card, CardContent, TextField, Stack } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function FirstMain() {
+  const emailList = [
+    { label: "@naver.com", year: 1994 },
+    { label: "@hanmail.net", year: 1972 },
+    { label: "@gamil.com", year: 1974 },
+    { label: "@ssafy.com", year: 2008 },
+  ];
   return (
     <div className={styles.backgound}>
       <video autoPlay loop muted>
@@ -18,15 +25,32 @@ export default function FirstMain() {
               Please enter something. <br />
             </Typography> */}
             <form>
-              <p class={styles.input_title}>ID</p>
-              <TextField
-                className={styles.input_text}
-                required
-                id="outlined-required"
-                label="아이디를 입력하세요(5~12자)"
-                type="text"
-                name="userLoginId"
-              />
+              <p class={styles.input_title}>Email</p>
+              <Stack spacing={9} direction="row">
+                <TextField
+                  className={styles.input_text}
+                  required
+                  id="outlined-required"
+                  label="이메일을 입력하세요"
+                  type="text"
+                  name="userLoginId"
+                  sx={{ width: 300 }}
+                />
+
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={emailList}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="email 선택" />
+                  )}
+                />
+
+                <Button variant="contained" sx={{ width: 100 }}>
+                  중복확인
+                </Button>
+              </Stack>
               <p class={styles.input_title}>Name</p>
               <TextField
                 className={styles.input_text}
@@ -44,7 +68,6 @@ export default function FirstMain() {
                 type="password"
                 autoComplete="current-password"
               />
-
               <div className={styles.Join_form_btn}>
                 <Button
                   className={styles.Join_btn}

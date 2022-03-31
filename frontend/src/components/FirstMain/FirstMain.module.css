@@ -73,7 +73,7 @@
 
 /* join 페이지 */
 .join_btn {
-  padding-right: 3%;
+  margin-right: 10%;
 }
 
 .findpw_btn {
@@ -86,10 +86,9 @@
   text-align: center;
 }
 
-.Join_btn {
-  margin-right: 5%;
-}
-
 .Back_btn {
   margin-left: 5%;
+}
+.input_text {
+  margin-right: 20;
 }
