@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
     List<Tag> findByTagNameLike(String keyword);
+
 }
