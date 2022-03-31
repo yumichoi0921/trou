@@ -8,6 +8,7 @@ import About from "./components/About";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
 
+import Check from "./components/plan/check";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -62,88 +63,6 @@ const App = () => {
       endDate: '2021-04-01'
     }
 ];
-const orders = [
-  {
-    id: 1,
-    routeId: 1,
-    planId: '부산여행',
-    place: '부산역',
-    order: 1
-  },
-  {
-    id: 2,
-    routeId: 1,
-    planId: '부산여행',
-    place: '수변공원',
-    order: 2
-  },
-  {
-    id: 3,
-    routeId: 1,
-    planId: '부산여행',
-    place: '자갈치시장',
-    order: 3
-  },
-  {
-    id: 4,
-    routeId: 1,
-    planId: '부산여행',
-    place: '해운대',
-    order: 4
-  },
-  {
-    id: 5,
-    routeId: 1,
-    planId: '부산여행',
-    place: '숙소',
-    order: 5
-  },
-  {
-    id: 6,
-    routeId: 2,
-    planId: '부산여행',
-    place: '남천동',
-    order: 1
-  },
-  {
-    id: 7,
-    routeId: 2,
-    planId: '부산여행',
-    place: '남천동',
-    order: 2
-  },
-  {
-    id: 8,
-    routeId: 2,
-    planId: '부산여행',
-    place: '남천동',
-    order: 3
-  },
-  {
-    id: 9,
-    routeId: 2,
-    planId: '부산여행',
-    place: '남천동',
-    order: 4
-  },
-  {
-    id: 10,
-    routeId: 2,
-    planId: '부산여행',
-    place: '남천동',
-    order: 5
-  },
-];
-  const routes = [
-    {
-      id: 1,
-      planId: 1
-    },
-    {
-      id: 2,
-      planId: 1
-    }
-  ]
 
   useEffect(() => {
     const getTasks = async () => {
@@ -257,8 +176,8 @@ const orders = [
           />
           <Route path="/about" element={<About />} />
           <Route path="/myPage/" element={<MyPage plans={plans}/>} />
-          <Route path="/tripDetail" element={<TripDetail plan={plans[0]} routes={routes} orders={orders}/>} />
-
+          <Route path="/tripDetail" element={<TripDetail />} />
+          <Route path="/check" element={<Check />} />
         </Routes>
         <Footer />
       </div>

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 public class TripRoute extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "routeId")
     private Long id;
 

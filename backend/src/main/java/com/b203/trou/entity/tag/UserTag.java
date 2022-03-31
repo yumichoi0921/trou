@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class UserTag extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userTagId")
     private Long id;
 

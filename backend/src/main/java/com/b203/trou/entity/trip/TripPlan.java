@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class TripPlan extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "planId")
     private Long id;
 
