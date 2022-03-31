@@ -13,14 +13,14 @@ const Area = styled(Box)({
   },
 });
 
-const Route = () => {
-  const [places, setPlaces] = useState([
-    { id: 1, name: "여행지1" },
-    { id: 2, name: "여행지2" },
-    { id: 3, name: "여행지3" },
-    { id: 4, name: "여행지4" },
-  ]);
+const Route = ({ route }) => {
+  const [date, setDate] = useState(route["routeDate"]);
+  const [places, setPlaces] = useState(route["routePlaces"]);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    console.log("useEffect!!", places);
+  });
 
   const handleChange = () => {
     setOpen((prev) => !prev);
@@ -38,17 +38,17 @@ const Route = () => {
   const placeList = places.map((item, index) => (
     <Place
       index={index}
-      id={item.id}
-      name={item.name}
+      id={item.placeId}
+      name={item.placeName}
       movePlace={movePlace}
-      key={item.id}
+      key={item.placeId}
     />
   ));
 
   return (
     <Fragment>
       <div>
-        <span>날짜</span>
+        <span>{date}</span>
         <span>
           {open ? (
             <ExpandLess onClick={handleChange} />
@@ -80,21 +80,49 @@ const KakaoMap = () => {
 };
 
 const Check = () => {
+  const routeArray = [
+    {
+      routeDate: "2022-03-01",
+      routePlaces: [
+        { placeId: 1, placeName: "여행지1" },
+        { placeId: 2, placeName: "여행지2" },
+        { placeId: 3, placeName: "여행지3" },
+        { placeId: 4, placeName: "여행지4" },
+      ],
+    },
+    {
+      routeDate: "2022-03-02",
+      routePlaces: [
+        { placeId: 1, placeName: "여행지1" },
+        { placeId: 2, placeName: "여행지2" },
+        { placeId: 3, placeName: "여행지3" },
+        { placeId: 4, placeName: "여행지4" },
+      ],
+    },
+  ];
+  const [routes, setRoutes] = useState(routeArray);
+  const routeList = routes.map((item, index) => (
+    <Route day={index} route={item} setRouteOrder={setRoutes} />
+  ));
+
+  function saveOrder() {}
+
   return (
     <Fragment>
       <Grid container spacing={1}>
         <Grid item md={3} sx={{ textAlign: "center" }}>
           <Area>
             <Stack spacing={2}>
-              <Route />
-              <Route />
+              {routeList}
               <Stack
                 spacing={2}
                 direction="row"
                 sx={{ justifyContent: "center", my: 3 }}
               >
-                <Button variant="contained">Contained</Button>
-                <Button variant="outlined">Outlined</Button>
+                <Button variant="outlined">더 담으러 가기</Button>
+                <Button variant="contained" onClick={saveOrder}>
+                  다음으로
+                </Button>
               </Stack>
             </Stack>
           </Area>
