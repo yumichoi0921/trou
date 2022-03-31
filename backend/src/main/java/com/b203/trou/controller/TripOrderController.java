@@ -1,6 +1,10 @@
 package com.b203.trou.controller;
 
+import com.b203.trou.entity.trip.TripOrder;
+import com.b203.trou.entity.trip.TripRoute;
+import com.b203.trou.model.trip.TripOrderDto;
 import com.b203.trou.model.trip.TripRouteDto;
+import com.b203.trou.service.trip.TripOrderService;
 import com.b203.trou.service.trip.TripRouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,12 +18,13 @@ import java.util.List;
 @RequestMapping("/order")
 public class TripOrderController {
     private final TripRouteService tripRouteService;
+    private final TripOrderService tripOrderService;
 
     @GetMapping(value = "/{routeId}")
-    public ResponseEntity<?> getAllTripRoutes(@PathVariable("tripPlanId") long tripPlanId) {
+    public ResponseEntity<?> getAllTripRoutes(@PathVariable long routeId) {
         try {
-            List<TripRouteDto> tripRoutes = tripRouteService.getAllTripRoute(tripPlanId);
-            return ResponseEntity.ok(tripRoutes);
+            List<TripOrderDto> tripOrders = tripOrderService.getAllTripOrder(routeId);
+            return ResponseEntity.ok(tripOrders);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
