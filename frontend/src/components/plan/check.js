@@ -1,8 +1,8 @@
 /* global kakao */
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { styled, Grid, Box, Button, Stack, Collapse } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
-
+import Place from "./Place";
 const Area = styled(Box)({
   minHeight: 600,
   backgroundColor: "#90caf9",
@@ -13,21 +13,42 @@ const Area = styled(Box)({
   },
 });
 
-const Route = () => {
-  const placeItems = ["여행지1", "여행지2", "여행지3", "여행지4"];
-  const placeItemList = placeItems.map((placeItem) => (
-    <PlaceItem>{placeItem}</PlaceItem>
-  ));
-
+const Route = ({ route }) => {
+  const [date, setDate] = useState(route["routeDate"]);
+  const [places, setPlaces] = useState(route["routePlaces"]);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    console.log("useEffect!!", places);
+  });
 
   const handleChange = () => {
     setOpen((prev) => !prev);
   };
+  const movePlace = useCallback(
+    (dragIndex, hoverIndex) => {
+      const newCards = [...places];
+      newCards.splice(dragIndex, 1);
+      newCards.splice(hoverIndex, 0, places[dragIndex]);
+      setPlaces(newCards);
+    },
+    [places]
+  );
+
+  const placeList = places.map((item, index) => (
+    <Place
+      index={index}
+      id={item.placeId}
+      name={item.placeName}
+      movePlace={movePlace}
+      key={item.placeId}
+    />
+  ));
+
   return (
     <Fragment>
       <div>
-        <span>날짜</span>
+        <span>{date}</span>
         <span>
           {open ? (
             <ExpandLess onClick={handleChange} />
@@ -36,21 +57,10 @@ const Route = () => {
           )}
         </span>
       </div>
-      <Collapse in={open}>{placeItemList}</Collapse>
+      <Collapse in={open}>{placeList}</Collapse>
     </Fragment>
   );
 };
-
-const PlaceItem = styled(Box)({
-  backgroundColor: "#e0e0e0",
-  borderRadius: 16,
-  padding: 15,
-  margin: 15,
-  "&:hover": {
-    backgroundColor: "#bdbdbd",
-    opacity: [0.9, 0.8, 0.7],
-  },
-});
 
 const KakaoMap = () => {
   useEffect(() => {
@@ -69,22 +79,50 @@ const KakaoMap = () => {
   );
 };
 
-const check = () => {
+const Check = () => {
+  const routeArray = [
+    {
+      routeDate: "2022-03-01",
+      routePlaces: [
+        { placeId: 1, placeName: "여행지1" },
+        { placeId: 2, placeName: "여행지2" },
+        { placeId: 3, placeName: "여행지3" },
+        { placeId: 4, placeName: "여행지4" },
+      ],
+    },
+    {
+      routeDate: "2022-03-02",
+      routePlaces: [
+        { placeId: 1, placeName: "여행지1" },
+        { placeId: 2, placeName: "여행지2" },
+        { placeId: 3, placeName: "여행지3" },
+        { placeId: 4, placeName: "여행지4" },
+      ],
+    },
+  ];
+  const [routes, setRoutes] = useState(routeArray);
+  const routeList = routes.map((item, index) => (
+    <Route day={index} route={item} setRouteOrder={setRoutes} />
+  ));
+
+  function saveOrder() {}
+
   return (
     <Fragment>
       <Grid container spacing={1}>
         <Grid item md={3} sx={{ textAlign: "center" }}>
           <Area>
             <Stack spacing={2}>
-              <Route />
-              <Route />
+              {routeList}
               <Stack
                 spacing={2}
                 direction="row"
                 sx={{ justifyContent: "center", my: 3 }}
               >
-                <Button variant="contained">Contained</Button>
-                <Button variant="outlined">Outlined</Button>
+                <Button variant="outlined">더 담으러 가기</Button>
+                <Button variant="contained" onClick={saveOrder}>
+                  다음으로
+                </Button>
               </Stack>
             </Stack>
           </Area>
@@ -107,4 +145,4 @@ const check = () => {
   );
 };
 
-export default check;
+export default Check;

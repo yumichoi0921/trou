@@ -2,7 +2,11 @@ package com.b203.trou.entity.user;
 
 import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.tag.UserTag;
+import com.b203.trou.entity.trip.TripPlan;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
@@ -29,4 +34,16 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserTag> tags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<TripPlan> tripPlans = new ArrayList<>();
+
+    public User(String email, String password, String userName) {
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
+    }
+
+
+
 }
