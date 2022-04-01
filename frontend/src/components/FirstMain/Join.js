@@ -28,7 +28,7 @@ export default function FirstMain() {
     const UserEmail = email1 + email2;
 
     console.log(UserEmail);
-    axios.get("http://localhost:8080/users/" + UserEmail).then((res) => {
+    axios.get("/users/" + UserEmail).then((res) => {
       console.log(res);
     });
   };
@@ -49,7 +49,7 @@ export default function FirstMain() {
               Please enter something. <br />
             </Typography> */}
             <form>
-              <p class={styles.input_title}>Email</p>
+              <p className={styles.input_title}>Email</p>
               <Stack spacing={9} direction="row">
                 <TextField
                   className={styles.input_text}
@@ -83,7 +83,7 @@ export default function FirstMain() {
                   중복확인
                 </Button>
               </Stack>
-              <p class={styles.input_title}>Name</p>
+              <p className={styles.input_title}>Name</p>
               <TextField
                 className={styles.input_text}
                 required
@@ -92,7 +92,7 @@ export default function FirstMain() {
                 type="text"
                 name="userNameId"
               />
-              <p class={styles.input_title}>PW</p>
+              <p className={styles.input_title}>PW</p>
               <TextField
                 className={styles.input_text}
                 id="outlined-password-input"
