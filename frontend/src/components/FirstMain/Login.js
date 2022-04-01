@@ -41,7 +41,6 @@ export default function FirstMain() {
                 id="outlined-required"
                 label="아이디를 입력하세요(5~12자)"
                 type="text"
-                name="userLoginId"
               />
               <p className={styles.input_title}>PW</p>
               <TextField

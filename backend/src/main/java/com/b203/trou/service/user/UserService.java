@@ -5,12 +5,10 @@ import com.b203.trou.entity.user.User;
 import com.b203.trou.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 
 @Service
@@ -19,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // 회원 가입
     @Transactional
     public User createUser(UserDto userdto) {
         User build = new User(userdto.getEmail(), userdto.getUserName(), userdto.getPassword());
@@ -26,6 +25,7 @@ public class UserService {
         return userRepository.save(build);
     }
 
+    // 로그인
     public UserDto signInUser(UserDto userDto) throws AuthenticationException {
         // 유저 찾아오고
         User user = userRepository.findByEmail(userDto.getEmail()).orElseThrow(() -> new AuthenticationException("해당하는 유저가 없습니다."));
@@ -38,5 +38,15 @@ public class UserService {
 
         return new UserDto(user);
 
+    }
+    //이메일 중복 확인
+    public User CheckUserEmail(String userEmail) throws AuthenticationException {
+//        if(userRepository.findByEmail(userEmail)==null){
+//            return true;
+//        }else{
+//            return false;
+//        }
+
+        return userRepository.findByEmail(userEmail).orElseThrow(()-> new AuthenticationException("해당하는 유저가 없습니다."));
     }
 }

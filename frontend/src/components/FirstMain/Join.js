@@ -2,16 +2,40 @@ import backgroundVideo from "../img/background.mp4";
 import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, CardContent, TextField, Stack } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-
+import {
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  Stack,
+  Autocomplete,
+} from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 export default function FirstMain() {
   const emailList = [
-    { label: "@naver.com", year: 1994 },
-    { label: "@hanmail.net", year: 1972 },
-    { label: "@gamil.com", year: 1974 },
-    { label: "@ssafy.com", year: 2008 },
+    { label: "@naver.com" },
+    { label: "@hanmail.net" },
+    { label: "@gamil.com" },
+    { label: "@ssafy.com" },
   ];
+
+  // const [userEmail, setUserEmail] = useState("");
+  const [email1, setEmail1] = useState("");
+  const [email2, setEmail2] = useState("");
+  // 이메일 중복 확인
+  const checkUserEmail = () => {
+    const UserEmail = email1 + email2;
+
+    console.log(UserEmail);
+    axios.get("http://localhost:8080/users/" + UserEmail).then((res) => {
+      console.log(res);
+    });
+  };
+
+  // const onChangeEmail = (e) => {
+  //   setEmail1(e.target.value);
+  // };
   return (
     <div className={styles.backgound}>
       <video autoPlay loop muted>
@@ -33,8 +57,10 @@ export default function FirstMain() {
                   id="outlined-required"
                   label="이메일을 입력하세요"
                   type="text"
+                  onChange={(e) => setEmail1(e.target.value)}
                   name="userLoginId"
                   sx={{ width: 300 }}
+                  value={email1}
                 />
 
                 <Autocomplete
@@ -42,12 +68,18 @@ export default function FirstMain() {
                   id="combo-box-demo"
                   options={emailList}
                   sx={{ width: 300 }}
+                  onChange={(event, option) => setEmail2(option.label)}
                   renderInput={(params) => (
                     <TextField {...params} label="email 선택" />
                   )}
+                  value={email2}
                 />
 
-                <Button variant="contained" sx={{ width: 100 }}>
+                <Button
+                  variant="contained"
+                  sx={{ width: 100 }}
+                  onClick={checkUserEmail}
+                >
                   중복확인
                 </Button>
               </Stack>
@@ -70,7 +102,7 @@ export default function FirstMain() {
               />
               <div className={styles.Join_form_btn}>
                 <Button
-                  className={styles.Join_btn}
+                  className={styles.signup_btn}
                   variant="contained"
                   size="large"
                 >

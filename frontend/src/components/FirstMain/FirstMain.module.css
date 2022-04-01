@@ -73,7 +73,11 @@
 
 /* join 페이지 */
 .join_btn {
-  margin-right: 10%;
+  margin-right: 3%;
+}
+
+.signup_btn {
+  margin-right: 6%;
 }
 
 .findpw_btn {
