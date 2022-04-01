@@ -1,7 +1,7 @@
 package com.b203.trou.controller;
 
-import com.b203.trou.model.trip.TripRouteDto;
-import com.b203.trou.service.trip.TripRouteService;
+import com.b203.trou.model.trip.TripOrderDto;
+import com.b203.trou.service.trip.TripOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,43 +13,44 @@ import java.util.List;
 @RestController
 @RequestMapping("/order")
 public class TripOrderController {
-    private final TripRouteService tripRouteService;
+
+    private final TripOrderService tripOrderService;
 
     @GetMapping(value = "/{routeId}")
-    public ResponseEntity<?> getAllTripRoutes(@PathVariable("tripPlanId") long tripPlanId) {
+    public ResponseEntity<?> getTripOrder(@PathVariable("routeId") long routeId) {
         try {
-            List<TripRouteDto> tripRoutes = tripRouteService.getAllTripRoute(tripPlanId);
-            return ResponseEntity.ok(tripRoutes);
+            List<TripOrderDto> tripOrders = tripOrderService.getTripOrder(routeId);
+            return ResponseEntity.ok(tripOrders);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PostMapping(value = "/{tripPlanId}")
-    public ResponseEntity<?> createTripRoute(@RequestBody TripRouteDto tripRouteDto, @PathVariable("tripPlanId") long tripPlanId) {
+    @PostMapping(value = "/{routeId}")
+    public ResponseEntity<?> createTripOrder(@RequestBody List<TripOrderDto> tripOrderDtos, @PathVariable("routeId") long routeId) {
         try {
-            TripRouteDto result = tripRouteService.createTripRoute(tripRouteDto, tripPlanId);
+            List<TripOrderDto> result = tripOrderService.createTripOrder(tripOrderDtos, routeId);
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PatchMapping(value = "/{routeId}")
-    public ResponseEntity<?> modifyTripRoute(@RequestBody TripRouteDto tripRouteDto, @PathVariable("routeId") long routeId) {
+    @PatchMapping(value = "/{orderId}")
+    public ResponseEntity<?> modifyTripOrder(@RequestBody TripOrderDto tripOrderDto, @PathVariable("orderId") long orderId) {
         try {
-            TripRouteDto result = tripRouteService.modifyTripRoute(tripRouteDto, routeId);
+            TripOrderDto result = tripOrderService.modifyTripOrder(tripOrderDto, orderId);
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @DeleteMapping(value = "/{routeId}")
-    public ResponseEntity<?> deleteTripRoute(@PathVariable("routeId") long routeId) {
+    @DeleteMapping(value = "/{orderId}")
+    public ResponseEntity<?> deleteTripOrder(@PathVariable("orderId") long orderId) {
         try {
-            TripRouteDto result = tripRouteService.deleteTripRoute(routeId);
-            return ResponseEntity.ok("트립 루트가 삭제되었습니다.");
+            TripOrderDto result = tripOrderService.deleteTripOrder(orderId);
+            return ResponseEntity.ok("트립 오더가 삭제되었습니다.");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
