@@ -23,7 +23,7 @@ const TripPlan = ({plan, getTripDetail}) => {
                         </div>
                     </ListItem>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={8}>                                      
                     <ListItem>
                         <div className={styles.planInfo}
                             onClick={() => 
