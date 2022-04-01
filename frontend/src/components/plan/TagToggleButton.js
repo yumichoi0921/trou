@@ -4,9 +4,9 @@ import axios from "axios";
 import { Box } from "@mui/system";
 
 function TagList({ tags, setTags }) {
-  function reverseButton(index) {
+  async function reverseButton(index) {
     tags[index].isSelected = !tags[index].isSelected;
-    console.log(tags[index].isSelected);
+    console.log(tags[index].tagName + " " + tags[index].isSelected);
   }
   useEffect(() => {
     async function getTags() {
@@ -36,6 +36,7 @@ function TagList({ tags, setTags }) {
             id={tag.tagId}
             key={tag.tagId}
             color="info"
+            variant="contained"
           >
             {tag.tagName}
           </Button>
