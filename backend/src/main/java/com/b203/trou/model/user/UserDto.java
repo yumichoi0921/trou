@@ -3,6 +3,7 @@ package com.b203.trou.model.user;
 import com.b203.trou.entity.tag.Tag;
 import com.b203.trou.entity.tag.UserTag;
 import com.b203.trou.entity.user.User;
+import com.b203.trou.model.place.PlaceDto;
 import com.b203.trou.model.review.ReviewDto;
 import com.b203.trou.model.tag.TagDto;
 import lombok.AllArgsConstructor;
@@ -20,18 +21,16 @@ public class UserDto {
     String email;
     String password;
     String userName;
-    List<TagDto> tags;
+
     List<ReviewDto> reviews;
 
 
 
     public UserDto(User user) {
-
         this.userId = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.userName = user.getUserName();
-        this.tags = user.getTags().stream().map(t -> new TagDto(t.getTag())).collect(Collectors.toList());
         this.reviews = user.getReviews().stream().map(ReviewDto::new).collect(Collectors.toList());
     }
 }

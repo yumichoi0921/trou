@@ -1,21 +1,26 @@
-package com.b203.trou.entity.tag;
+package com.b203.trou.entity.user;
 
 import com.b203.trou.entity.BaseEntity;
+import com.b203.trou.entity.place.Place;
 import com.b203.trou.entity.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-
-public class UserTag extends BaseEntity {
+@Setter
+public class UserHistory extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userTagId")
+    @Column(name = "userHistoryId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,13 +28,11 @@ public class UserTag extends BaseEntity {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "tagId")
-    private Tag tag;
+    @JoinColumn(name = "placeId")
+    private Place history;
 
-    private int count;
-
-    public UserTag(User user, Tag tag){
+    public UserHistory(User user, Place history) {
         this.user = user;
-        this.tag = tag;
+        this.history = history;
     }
 }

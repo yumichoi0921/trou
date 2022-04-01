@@ -17,4 +17,9 @@ public class Tag extends BaseEntity {
     private Long id;
 
     private String tagName;
+
+    public Tag(Long id, String tagName){
+        this.id = id;
+        this.tagName = tagName;
+    }
 }
