@@ -1,19 +1,27 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
+import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Date from "./Date";
 import TagToggleButton from "./TagToggleButton";
-import { Button, Stack } from "@mui/material";
+import KakaoMap from "./KakaoMap";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+const Area = styled(Box)({
+  height: 600,
+  backgroundColor: "#b3e5fc",
+  padding: 25,
+  "&:hover": {
+    backgroundColor: "#81d4fa",
+    opacity: [0.9, 0.8, 0.7],
+  },
+});
+const Item = styled(Box)({
+  backgroundColor: "#e1f5fe",
+  borderRadius: 16,
+  padding: 5,
+  "&:hover": {
+    backgroundColor: "#e1f5fe",
+    opacity: [0.9, 0.8, 0.7],
+  },
+});
 
 export default function FullWidthGrid() {
   const [tags, setTags] = useState([]);
@@ -29,59 +37,86 @@ export default function FullWidthGrid() {
   }
   return (
     <Fragment>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {/* Grid 오른쪽 부분 */}
-          <Grid item xs={6} md={4}>
-            <Grid container spacing={2}>
-              <Grid item xs={6} md={5}>
-                여행지
-              </Grid>
-              <Grid item xs={6} md={7}>
-                <Button>부산</Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={6} md={5}>
-                가는 날
-              </Grid>
-              <Grid item xs={6} md={7}>
-                <Date />
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={6} md={5}>
-                돌아오는 날
-              </Grid>
-              <Grid item xs={6} md={7}>
-                <Date />
-              </Grid>
-            </Grid>
-            <Item>태그 선택</Item>
-            <TagToggleButton tags={tags} setTags={setTags}></TagToggleButton>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
+      <Grid container spacing={1}>
+        {/* Grid 오른쪽 부분 */}
+        <Grid item md={3} sx={{ textAlign: "center" }}>
+          <Area sx={{ overflow: "auto" }} spacing={3}>
+            <Grid
+              container
               spacing={2}
-              mt={3}
-              mr={3}
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mb: 3 }}
             >
-              {curPage !== 1 ? (
-                <Button onClick={prevPage}>이전</Button>
-              ) : (
-                <Box></Box>
-              )}
-              <Button onClick={nextPage}>다음</Button>
-            </Stack>
-          </Grid>
+              <Grid item md={5}>
+                <Item>여행지</Item>
+              </Grid>
+              <Grid item md={7}>
+                <Item>부산</Item>
+              </Grid>
+              <Grid item md={5}>
+                <Item>가는 날</Item>
+              </Grid>
+              <Grid item md={7}>
+                <Date />
+              </Grid>
+              <Grid item md={5}>
+                <Item>돌아오는 날</Item>
+              </Grid>
+              <Grid item md={7}>
+                <Date />
+              </Grid>
+            </Grid>
 
-          {/* Grid 왼쪽 시작 */}
-          <Grid item xs={6} md={8}>
-            <Item>카카오지도</Item>
-          </Grid>
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item md={6}>
+                <Item>태그 선택</Item>
+              </Grid>
+              <Grid item>
+                <Grid item>
+                  <TagToggleButton
+                    tags={tags}
+                    setTags={setTags}
+                  ></TagToggleButton>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={2}
+                  mt={3}
+                  mr={3}
+                >
+                  {curPage !== 1 ? (
+                    <Button variant="outlined" onClick={prevPage}>
+                      이전
+                    </Button>
+                  ) : (
+                    <Box></Box>
+                  )}
+                  <Button variant="contained" onClick={nextPage}>
+                    다음
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Area>
         </Grid>
-      </Box>
+
+        {/* Grid 왼쪽 */}
+        <Grid item md={9}>
+          <Area sx={{ overflow: "auto" }}>
+            <KakaoMap></KakaoMap>
+          </Area>
+        </Grid>
+      </Grid>
     </Fragment>
   );
 }
