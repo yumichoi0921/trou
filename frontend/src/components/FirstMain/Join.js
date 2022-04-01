@@ -20,18 +20,60 @@ export default function FirstMain() {
     { label: "@ssafy.com" },
   ];
 
-  // const [userEmail, setUserEmail] = useState("");
   const [email1, setEmail1] = useState("");
   const [email2, setEmail2] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  //중복 체크를 했는지 확인   변수
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkPassword, setCheckPassword] = useState(false);
+
+
+  const onCheckPassword = (e) => { 
+    setPassword(e.target.value);
+    if (e.target.value.length >= 6 && e.target.value.length <= 15) { 
+      setCheckPassword(true);
+    } 
+  }
   // 이메일 중복 확인
   const checkUserEmail = () => {
     const UserEmail = email1 + email2;
 
     console.log(UserEmail);
     axios.get("/users/" + UserEmail).then((res) => {
-      console.log(res);
-    });
+      if (res.status == 200) { 
+        alert("사용 가능한 아이디 입니다.");
+        setCheckEmail(true);
+      } 
+    }).catch(error => {
+      alert("이미 사용중인 아이디 입니다.");
+    setEmail1("")
+    setEmail2 ("") })
   };
+
+// 가입 하기
+  const SignUp = () => { 
+    
+    if (!checkEmail) {
+      alert("이메일 중복 확인을 해주세요.")
+    } else if (!checkPassword) {
+      alert("비밀번호를 확인해주세요");
+      setPassword("");
+    } else { 
+      axios.post("http://localhost:8080/users/signup").then((res) => {
+        
+        alert("회원 가입 완료!");
+
+      }).catch(error => {
+        alert("가입 실패!");
+        })
+    }
+   
+  
+  }
+
+
 
   // const onChangeEmail = (e) => {
   //   setEmail1(e.target.value);
@@ -86,6 +128,7 @@ export default function FirstMain() {
               <p className={styles.input_title}>Name</p>
               <TextField
                 className={styles.input_text}
+                onChange={(e) => setName(e.target.value)}
                 required
                 id="outlined-required"
                 label="이름을 입력하세요"
@@ -96,6 +139,7 @@ export default function FirstMain() {
               <TextField
                 className={styles.input_text}
                 id="outlined-password-input"
+                onChange={onCheckPassword}
                 label="비밀번호를 입력하세요(6~15자)"
                 type="password"
                 autoComplete="current-password"
@@ -105,6 +149,7 @@ export default function FirstMain() {
                   className={styles.signup_btn}
                   variant="contained"
                   size="large"
+                  onClick={SignUp}
                 >
                   가입하기
                 </Button>

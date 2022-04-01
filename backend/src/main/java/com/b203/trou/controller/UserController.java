@@ -41,9 +41,12 @@ public class UserController {
     public ResponseEntity<?> checkEmail(@PathVariable("userEmail") String useremail) throws AuthenticationException {
        try{
            userService.CheckUserEmail(useremail);
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+           System.out.println("중복됨");
+           return ResponseEntity.status(400).build();
+
        }catch (AuthenticationException e){
-           return ResponseEntity.ok().build();
+           System.out.println("사용 가능");
+         return ResponseEntity.status(200).build();
 
        }
 
