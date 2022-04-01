@@ -1,9 +1,9 @@
-/* global kakao */
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { styled, Grid, Box, Button, Stack, Collapse } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import Place from "./Place";
+import KakaoMap from "./KakaoMap";
 const Area = styled(Box)({
   height: 600,
   backgroundColor: "#90caf9",
@@ -63,23 +63,6 @@ const Route = ({ index, route, routes, orderSetter }) => {
       </div>
       <Collapse in={open}>{placeList}</Collapse>
     </Fragment>
-  );
-};
-
-const KakaoMap = () => {
-  useEffect(() => {
-    var container = document.getElementById("map");
-    var options = {
-      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-      level: 3,
-    };
-    var map = new kakao.maps.Map(container, options);
-  }, []);
-
-  return (
-    <div>
-      <div id="map" style={{ width: "100%", height: "500px" }}></div>
-    </div>
   );
 };
 

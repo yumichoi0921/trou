@@ -11,8 +11,9 @@ body {
 }
 
 .container {
-  max-width: 100%;
-  margin: 30px auto;
+  max-width: 95%;
+  height: 650px;
+  margin: 10px auto;
   overflow: auto;
   min-height: 600px;
   border: 1px solid steelblue;
@@ -24,7 +25,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 40px;
 }
 
 .btn {
