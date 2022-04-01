@@ -5,13 +5,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import About from "./components/About";
+import Check from "./components/plan/Check";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
-
-import Check from "./components/plan/check";
 import Main from "./components/main/Main";
 import Login from "./components/FirstMain/Login";
 import Join from "./components/FirstMain/Join";
+import Plan from "./components/plan/Plan";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -168,6 +168,7 @@ const App = () => {
           <Route path="/myPage/" element={<MyPage plans={plans}/>} />
           <Route path="/tripDetail" element={<TripDetail />} />
           <Route path="/check" element={<Check />} />
+          <Route path="/plan" element={<Plan />} />
         </Routes>
         <Footer />
       </div>
