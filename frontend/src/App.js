@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import About from "./components/About";
-import Check from "./components/plan/Check";
+import Check from "./components/plan/step3/Check";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
 import Main from "./components/main/Main";
