@@ -3,25 +3,8 @@ import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Date from "./Date";
 import TagToggleButton from "./TagToggleButton";
 import KakaoMap from "./KakaoMap";
-
-const Area = styled(Box)({
-  height: 600,
-  backgroundColor: "#b3e5fc",
-  padding: 25,
-  "&:hover": {
-    backgroundColor: "#81d4fa",
-    opacity: [0.9, 0.8, 0.7],
-  },
-});
-const Item = styled(Box)({
-  backgroundColor: "#e1f5fe",
-  borderRadius: 16,
-  padding: 5,
-  "&:hover": {
-    backgroundColor: "#e1f5fe",
-    opacity: [0.9, 0.8, 0.7],
-  },
-});
+import Area from "./child/Area";
+import Item from "./child/Item";
 
 export default function FullWidthGrid() {
   const [tags, setTags] = useState([]);
@@ -38,7 +21,7 @@ export default function FullWidthGrid() {
   return (
     <Fragment>
       <Grid container spacing={1}>
-        {/* Grid 오른쪽 부분 */}
+        {/* Grid 왼쪽 부분 */}
         <Grid item md={3} sx={{ textAlign: "center" }}>
           <Area sx={{ overflow: "auto" }} spacing={3}>
             <Grid
@@ -110,7 +93,7 @@ export default function FullWidthGrid() {
           </Area>
         </Grid>
 
-        {/* Grid 왼쪽 */}
+        {/* Grid 오른쪽 */}
         <Grid item md={9}>
           <Area sx={{ overflow: "auto" }}>
             <KakaoMap></KakaoMap>
