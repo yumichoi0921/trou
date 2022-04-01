@@ -14,15 +14,15 @@ import axios from "axios";
 import { useState } from "react";
 export default function FirstMain() {
   const emailList = [
-    { label: "@naver.com" },
-    { label: "@hanmail.net" },
-    { label: "@gamil.com" },
-    { label: "@ssafy.com" },
+    { label: "naver.com" },
+    { label: "hanmail.net" },
+    { label: "gamil.com" },
+    { label: "ssafy.com" },
   ];
 
   const [email1, setEmail1] = useState("");
   const [email2, setEmail2] = useState("");
-  const [name, setName] = useState("");
+  const [userName, setName] = useState("");
   const [password, setPassword] = useState("");
 
   //중복 체크를 했는지 확인   변수
@@ -37,11 +37,12 @@ export default function FirstMain() {
     } 
   }
   // 이메일 중복 확인
+  const email = email1 + '@'+ email2;
   const checkUserEmail = () => {
-    const UserEmail = email1 + email2;
 
-    console.log(UserEmail);
-    axios.get("/users/" + UserEmail).then((res) => {
+  
+    axios.get("/users/" + email).then((res) => {
+      console.log(email);
       if (res.status == 200) { 
         alert("사용 가능한 아이디 입니다.");
         setCheckEmail(true);
@@ -61,13 +62,21 @@ export default function FirstMain() {
       alert("비밀번호를 확인해주세요");
       setPassword("");
     } else { 
-      axios.post("http://localhost:8080/users/signup").then((res) => {
+
+      let body = {
+        email: email,
+        password: password,
+        userName: userName
+      }
+      axios.post("/users/signup", { body }).then((res) => {
         
         alert("회원 가입 완료!");
-
+        document.location.href = '/login'
       }).catch(error => {
         alert("가입 실패!");
         })
+
+      
     }
    
   
@@ -92,7 +101,7 @@ export default function FirstMain() {
             </Typography> */}
             <form>
               <p className={styles.input_title}>Email</p>
-              <Stack spacing={9} direction="row">
+              <Stack spacing={4} direction="row">
                 <TextField
                   className={styles.input_text}
                   required
@@ -104,12 +113,12 @@ export default function FirstMain() {
                   sx={{ width: 300 }}
                   value={email1}
                 />
-
+               <h3 className={styles.email_text_h}>@</h3>
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
                   options={emailList}
-                  sx={{ width: 300 }}
+                  sx={{ width: 200 }}
                   onChange={(event, option) => setEmail2(option.label)}
                   renderInput={(params) => (
                     <TextField {...params} label="email 선택" />
@@ -118,8 +127,8 @@ export default function FirstMain() {
                 />
 
                 <Button
+               
                   variant="contained"
-                  sx={{ width: 100 }}
                   onClick={checkUserEmail}
                 >
                   중복확인
@@ -153,7 +162,7 @@ export default function FirstMain() {
                 >
                   가입하기
                 </Button>
-                <Button
+                {/* <Button
                   className={styles.Back_btn}
                   component={Link}
                   to={"/login"}
@@ -161,7 +170,7 @@ export default function FirstMain() {
                   size="large"
                 >
                   뒤로가기
-                </Button>
+                </Button> */}
               </div>
             </form>
           </CardContent>

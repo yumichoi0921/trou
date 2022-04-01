@@ -2,6 +2,7 @@ package com.b203.trou.controller;
 
 
 import com.b203.trou.model.user.UserDto;
+import com.b203.trou.model.user.UserJoinDto;
 import com.b203.trou.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,14 +23,15 @@ public class UserController {
 
     @ApiOperation(value = "registerInfo", notes = "회원가입")
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody UserDto userdto) {
-        userService.createUser(userdto);
+    public ResponseEntity<?> register(@RequestBody UserJoinDto userjoindto) {
+        userService.createUser(userjoindto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody UserDto userdto){
         try {
+            System.out.println(userdto);
             UserDto userDto = userService.signInUser(userdto);
             return ResponseEntity.ok(userDto);
         } catch (AuthenticationException e) {

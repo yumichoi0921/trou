@@ -2,6 +2,7 @@ package com.b203.trou.service.user;
 
 import com.b203.trou.model.user.UserDto;
 import com.b203.trou.entity.user.User;
+import com.b203.trou.model.user.UserJoinDto;
 import com.b203.trou.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class UserService {
 
     // 회원 가입
     @Transactional
-    public User createUser(UserDto userdto) {
-        User build = new User(userdto.getEmail(), userdto.getUserName(), userdto.getPassword());
+    public User createUser(UserJoinDto userjoindto) {
+        User build = new User(userjoindto.getEmail(), userjoindto.getUserName(), userjoindto.getPassword());
 
         return userRepository.save(build);
     }
