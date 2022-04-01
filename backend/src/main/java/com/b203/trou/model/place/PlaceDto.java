@@ -10,18 +10,31 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
 @NoArgsConstructor
+@Data
 public class PlaceDto {
     public PlaceDto(Place place){
         this.reviews= place.getReviews().stream().map(ReviewDto::new).collect(Collectors.toList());
         this.placeName=place.getPlaceName();
         this.image=place.getFirstImage();
+        this.placeId=place.getId();
+        this.mapX=place.getMapX();
+        this.mapY=place.getMapY();
+        this.readCount=place.getReadCount();
+
+    }
+    public PlaceDto(List<ReviewDto> reviews, String placeName, String image) {
+        this.reviews = reviews;
+        this.placeName = placeName;
+        this.image = image;
     }
 
     List<ReviewDto> reviews;
     String placeName;
     String image;
     long placeId;
+    double mapX;
+    double mapY;
+    int readCount;
 
 }
