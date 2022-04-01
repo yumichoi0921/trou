@@ -2,15 +2,14 @@ package com.b203.trou.model.place;
 
 import com.b203.trou.entity.place.Place;
 import com.b203.trou.model.review.ReviewDto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class PlaceDto {
     public PlaceDto(Place place){
