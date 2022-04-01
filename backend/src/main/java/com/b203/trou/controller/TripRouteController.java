@@ -17,20 +17,20 @@ import java.util.List;
 public class TripRouteController {
     private final TripRouteService tripRouteService;
 
-    @GetMapping(value = "/{tripPlanId}")
-    public ResponseEntity<?> getAllTripRoutes(@PathVariable("tripPlanId") long tripPlanId) {
+    @GetMapping(value = "/{planId}")
+    public ResponseEntity<?> getAllTripRoutes(@PathVariable("planId") long planId) {
         try {
-            List<TripRouteDto> tripRoutes = tripRouteService.getAllTripRoute(tripPlanId);
+            List<TripRouteDto> tripRoutes = tripRouteService.getAllTripRoute(planId);
             return ResponseEntity.ok(tripRoutes);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PostMapping(value = "/{tripPlanId}")
-    public ResponseEntity<?> createTripRoute(@RequestBody TripRouteDto tripRouteDto, @PathVariable("tripPlanId") long tripPlanId) {
+    @PostMapping(value = "/{planId}")
+    public ResponseEntity<?> createTripRoute(@RequestBody TripRouteDto tripRouteDto, @PathVariable("planId") long planId) {
         try {
-            TripRouteDto result = tripRouteService.createTripRoute(tripRouteDto, tripPlanId);
+            TripRouteDto result = tripRouteService.createTripRoute(tripRouteDto, planId);
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
