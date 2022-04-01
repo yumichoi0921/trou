@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import BackImg from "../../../imgs/sun.png"
 import SelectDay from "./SelectDay"
 import ShareModal from "./ShareModal"
+import axios from "axios";
+import OrderListBar from "./OrderListBar";
 
 
 function stringToColor(string) {
@@ -105,24 +107,30 @@ const ShareFriends = () => {
     );
 };
 
-const ModifyMemo = ({setMemoState}) => {
+const handleChange = (event) => {
+    setMemo(event.target.value);
+};
+
+const ModifyMemo = ({memo, setMemoState, setMemo}) => {
     return (
-        <Stack direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={1} >
-            <p>메모장</p>
-            <TextareaAutosize
-                aria-label="minimum height"
-                minRows={10}
-                placeholder="Minimum 3 rows"
-                style={{ width: '90%' }}
-            />
-            <Button variant="contained" onClick={event => {
-                event.preventDefault();
-                setMemoState(true);
-            }}>완료</Button>
-        </Stack>
+        <form>
+            <Stack direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1} >
+                <p>메모장</p>
+                <textarea value={memo} onChange={(e) => handleChange(e)}></textarea>
+                {/* <TextareaAutosize
+                    aria-label="minimum height"
+                    minRows={10}
+                    style={{ width: '90%' }}
+                /> */}
+                <Button variant="contained" onClick={event => {
+                    event.preventDefault();
+                    setMemoState(true);
+                }}>완료</Button>
+            </Stack>
+        </form>
     );
 };
 
@@ -156,21 +164,79 @@ const Weather = () => {
 };
 
 const Detail = () => {
-    const [day, setAge] = React.useState(1);
+    const [day, setDay] = React.useState(0);
     const [memoState, setMemoState] = useState(true);
     const [memo, setMemo] = useState('1. 룰루 2. 랄라 3. 히히');    // 서버에서 받아온 값으로 변경됨
-    const [dList, setDList] = useState([    // props로 받은거 넣기?
-        {value:1, title:'1일차'},
-        {value:2, title:'2일차'},
-        {value:3, title:'3일차'}
-    ]);
+    const [dList, setDList] = useState([]);    // props로 받은거 넣기?
+    const [routeId, setRouteId] = useState(0);
+    const [orderList, setOrderList] = useState([]);
+
+    const initRoute = async () => {  // async ? 
+        try{
+            console.log('init!!');
+            const response = await axios({
+                method: "get",
+                url: `/route/19`,    // 2 -> props로 받아온 planId로 변경하기.
+                baseURL: "http://localhost:8080",
+                timeout: 2000,
+            });
+            // let routeIdList = response.data.map(route => route.routeId);
+            // let routes = Array.from(response.data);
+            
+            setDList(response.data);
+            setMemo(response.data[0].memo);
+            setRouteId(response.data[0].routeId);
+
+            let rId = response.data[0].routeId;
+            console.log('id : ', rId);
+            try{
+                // console.log(routeId);
+                const res = await axios({
+                    method: "get",
+                    url: `/order/${rId}`,    
+                    baseURL: "http://localhost:8080",
+                    timeout: 2000,
+                });
+                console.log('orderList : ', res.data);
+                setOrderList(res.data);
+            } catch{
+                console.log('에러발생');
+            }
+        } catch{
+            console.log('에러발생');
+        }
+    }
+    
+    useEffect(() => {
+        initRoute();
+    }, []);
+
+    const ChangeOrderList = async () => {
+        try{
+            // console.log(routeId);
+            const res = await axios({
+                method: "get",
+                url: `/order/${routeId}`,    
+                baseURL: "http://localhost:8080",
+                timeout: 2000,
+            });
+            console.log('orderList : ', res.data);
+            setOrderList(res.data);
+        } catch{
+            console.log('에러발생');
+        }
+    };
 
     const handleChange = (event) => {
-        setAge(event.target.value);
+        let idx = event.target.value; 
+        setDay(idx);
+        setMemo(dList[idx].memo);
+        setRouteId(dList[idx].routeId);
+        ChangeOrderList();
     };
 
     const lis = dList.map((item,index) =>(
-            <MenuItem value={index} key={index}>{item.title}</MenuItem>
+            <MenuItem value={index} key={index}>{item.day}일차 ({item.routeDate})</MenuItem>
     ));
     // setDayLists(lis);
 
@@ -178,7 +244,7 @@ const Detail = () => {
     if (memoState) {  // 수정버튼 누르기 전 true
         memoContent = <Memo memo={memo} setMemoState={setMemoState}></Memo>
     } else {  // 수정버튼 누르고 난 후 false
-        memoContent = <ModifyMemo setMemoState={setMemoState}></ModifyMemo>
+        memoContent = <ModifyMemo memo={memo} setMemoState={setMemoState} setMemo={setMemo}></ModifyMemo>
     }
 
     return (
@@ -215,9 +281,12 @@ const Detail = () => {
                                     <Weather></Weather>
                                 </Grid>
                             </Grid>
-                            <Item>
+                            {orderList.map((order,index) => (
+                                <OrderListBar key={index} order={order}></OrderListBar>
+                            ))}
+                            {/* <Item>
                                 <p>상태바 자리</p>
-                            </Item>
+                            </Item> */}
                             <Item>
                                 <KakaoMap></KakaoMap>
                             </Item>
