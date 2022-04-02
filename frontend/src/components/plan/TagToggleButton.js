@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
+import { Button, styled } from "@mui/material";
 import axios from "axios";
-import { Box } from "@mui/system";
 
+const TagButton = styled(Button)((props) => ({
+  backgroundColor: props.colored,
+  color: "#0d47a1",
+  "&:hover": {
+    backgroundColor: "#90caf9",
+    borderColor: "#0062cc",
+  },
+}));
 function TagList({ tags, setTags }) {
   async function reverseButton(index) {
-    tags[index].isSelected = !tags[index].isSelected;
-    console.log(tags[index].tagName + " " + tags[index].isSelected);
+    const newTags = [...tags];
+    newTags[index].isSelected = !newTags[index].isSelected;
+    newTags[index].color = newTags[index].isSelected ? "#64b5f6" : "#e3f2fd";
+    setTags(newTags);
+    console.log(newTags[index].tagName + " " + newTags[index].isSelected);
+    console.log(newTags[index].tagName + " " + newTags[index].color);
   }
   useEffect(() => {
     async function getTags() {
@@ -19,6 +30,7 @@ function TagList({ tags, setTags }) {
             tagId: resTag.tagId,
             tagName: resTag.tagName,
             isSelected: false,
+            color: "#e3f2fd",
           };
           return tag;
         })
@@ -27,23 +39,20 @@ function TagList({ tags, setTags }) {
     getTags();
   }, []);
 
-  return (
-    <React.Fragment>
-      <Box sx={{ "& button": { m: 2 } }}>
-        {tags.map((tag, index) => (
-          <Button
-            onClick={() => reverseButton(index)}
-            id={tag.tagId}
-            key={tag.tagId}
-            color="info"
-            variant="contained"
-          >
-            {tag.tagName}
-          </Button>
-        ))}
-      </Box>
-    </React.Fragment>
-  );
+  const tagList = tags.map((tag, index) => (
+    <TagButton
+      onClick={() => reverseButton(index)}
+      id={tag.tagId}
+      key={tag.tagId}
+      colored={tag.color}
+      variant="contained"
+      sx={{ m: 1 }}
+    >
+      {tag.tagName}
+    </TagButton>
+  ));
+
+  return <React.Fragment>{tagList}</React.Fragment>;
 }
 
 export default TagList;

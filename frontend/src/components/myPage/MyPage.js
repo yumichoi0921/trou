@@ -1,16 +1,33 @@
-import Plan from './Plan';
-import Button from "@mui/material/Button";
-import styles from './MyPage.module.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Button } from "@mui/material";
 
-const MyPage = ({plans}) => {
-    console.log("hello");
-    return(
-        <div>
-            <Button className={styles.button} variant="text">삭제</Button>
-            {plans.map((plan)=>(
-                <Plan key={plan.id} plan={plan} />
-            ))}
-        </div>
-    )
+function Users() {
+  const [plans, setPlans] = useState();
+  const userId = 1;
+
+  useEffect(() => {
+    const getPlans = async () => {
+      try {
+        const response = await axios.get("/plan/" + userId);
+        setPlans(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getPlans();
+  }, []);
+
+  if (!plans) return null;
+
+  return (
+    <ul>
+      {plans.map((plan) => (
+        <li key={plan.planId}>{plan.planId}</li>
+      ))}
+      <Button></Button>
+    </ul>
+  );
 }
-export default MyPage
+
+export default Users;

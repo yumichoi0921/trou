@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/route")
+@CrossOrigin(origins = "*")
 public class TripRouteController {
     private final TripRouteService tripRouteService;
 
