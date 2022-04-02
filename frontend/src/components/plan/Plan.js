@@ -5,6 +5,7 @@ import TagToggleButton from "./TagToggleButton";
 import KakaoMap from "./KakaoMap";
 import Area from "./child/Area";
 import Item from "./child/Item";
+import Check from "./step3/Check";
 
 export default function FullWidthGrid() {
   const [tags, setTags] = useState([]);
@@ -22,7 +23,7 @@ export default function FullWidthGrid() {
     <Fragment>
       <Grid container spacing={1}>
         {/* Grid 왼쪽 부분 */}
-        <Grid item md={3} sx={{ textAlign: "center" }}>
+        {/* <Grid item md={3} sx={{ textAlign: "center" }}>
           <Area sx={{ overflow: "auto" }} spacing={3}>
             <Grid
               container
@@ -91,8 +92,8 @@ export default function FullWidthGrid() {
               </Grid>
             </Grid>
           </Area>
-        </Grid>
-
+        </Grid> */}
+        <Check></Check>
         {/* Grid 오른쪽 */}
         <Grid item md={9}>
           <Area sx={{ overflow: "auto" }}>
