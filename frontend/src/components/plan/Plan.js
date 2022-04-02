@@ -21,7 +21,7 @@ export default function FullWidthGrid() {
   }
   return (
     <Fragment>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} sx={{ height: "100%" }}>
         {/* Grid 왼쪽 부분 */}
         {/* <Grid item md={3} sx={{ textAlign: "center" }}>
           <Area sx={{ overflow: "auto" }} spacing={3}>
@@ -96,7 +96,7 @@ export default function FullWidthGrid() {
         <Check></Check>
         {/* Grid 오른쪽 */}
         <Grid item md={9}>
-          <Area sx={{ overflow: "auto" }}>
+          <Area>
             <KakaoMap></KakaoMap>
           </Area>
         </Grid>

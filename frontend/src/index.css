@@ -5,6 +5,11 @@
   margin: 0;
   padding: 0;
 }
+html,
+body,
+#root {
+  height: 100vh;
+}
 
 body {
   font-family: "Poppins", sans-serif;
@@ -12,12 +17,12 @@ body {
 
 .container {
   max-width: 95%;
-  height: 650px;
+  height: 90%;
   margin: 10px auto;
   overflow: auto;
-  min-height: 600px;
+  min-height: 650px;
   border: 1px solid steelblue;
-  padding: 30px;
+  padding: 15px;
   border-radius: 5px;
 }
 
@@ -25,7 +30,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  padding-top: 10px;
   margin-left: 40px;
 }
 
