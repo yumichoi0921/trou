@@ -6,10 +6,13 @@ import Area from "./child/Area";
 import Item from "./child/Item";
 import Check from "./step3/Check";
 import PlanStep1 from "./step1/PlanStep1";
+import NextPreviousButton from "./NextPreviousButton";
 
 export default function FullWidthGrid() {
   const [tags, setTags] = useState([]);
   const [curPage, setPage] = useState(1);
+  const [beginDate, setBeginDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   return (
     <Fragment>
@@ -20,8 +23,12 @@ export default function FullWidthGrid() {
           setTags={setTags}
           curPage={curPage}
           setPage={setPage}
+          beginDate={beginDate}
+          setBeginDate={setBeginDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
         ></PlanStep1>
-        <Check></Check>
+        {/* <Check></Check> */}
         {/* Grid 오른쪽 */}
         <Grid item md={9}>
           <Area sx={{ overflow: "auto" }}>

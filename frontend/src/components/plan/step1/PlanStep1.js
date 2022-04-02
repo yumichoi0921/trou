@@ -7,7 +7,6 @@ import React from "react";
 
 const PlanStep1 = (props) => {
   function nextPage() {
-    console.log(props.curPage);
     if (props.curPage === 3) return;
     props.setPage(props.curPage + 1);
   }
@@ -36,13 +35,13 @@ const PlanStep1 = (props) => {
             <Item>가는 날</Item>
           </Grid>
           <Grid item md={7}>
-            <Date />
+            <Date date={props.beginDate} setDate={props.setBeginDate} />
           </Grid>
           <Grid item md={5}>
             <Item>돌아오는 날</Item>
           </Grid>
           <Grid item md={7}>
-            <Date />
+            <Date date={props.endDate} setDate={props.setEndDate} />
           </Grid>
         </Grid>
 
