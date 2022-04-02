@@ -1,15 +1,17 @@
 import backgroundVideo from "../img/background.mp4";
 import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
-
+import { useState } from "react";
 import { Button, Card, CardContent, TextField } from "@mui/material";
 import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const clientId =
   "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
 
 export default function FirstMain() {
+
   const onSuccess = async (response) => {
     // const { googleId, profileObj : { email, name } } = response;
     // await onGoogleLogin (
@@ -20,6 +22,27 @@ export default function FirstMain() {
   const onFailure = (error) => {
     console.log(error);
   };
+
+  const [userEmail, setUserEmaill] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
+  const Login = () => { 
+    if (userEmail == "" && userPassword == "") {
+      alert("아이디 또는 비밀번호를 입력해주세요.");
+    } else {
+      let body = {
+        email: userEmail,
+        password: userPassword
+      }
+      axios.post("/users/signin", body).then((res) => {
+        document.location.href = '/main'
+      }).catch(error => {
+        alert("아이디 또는 비밀번호를 확인해주세요.");
+        setUserEmaill("");
+        setUserPassword("");
+      })
+    }
+  }
 
   return (
     <div className={styles.backgound}>
@@ -39,8 +62,11 @@ export default function FirstMain() {
                 className={styles.input_text}
                 required
                 id="outlined-required"
-                label="아이디를 입력하세요(5~12자)"
+                label="이메일를 입력하세요."
                 type="text"
+                value={userEmail}
+                onKeyPress={ Login }
+                onChange={ (e)=>setUserEmaill(e.target.value)}
               />
               <p className={styles.input_title}>PW</p>
               <TextField
@@ -49,6 +75,9 @@ export default function FirstMain() {
                 label="비밀번호를 입력하세요(6~15자)"
                 type="password"
                 autoComplete="current-password"
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                onKeyPress={ Login }
               />
               <div className={styles.form_link}>
                 <span className={styles.join_btn}>
@@ -61,7 +90,7 @@ export default function FirstMain() {
               </div>
 
               <div className={styles.login_btn}>
-                <Button variant="contained" size="large">
+                <Button variant="contained" size="large" onClick={Login}>
                   Login
                 </Button>
               </div>
