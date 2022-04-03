@@ -1,6 +1,6 @@
 ## 파이썬 파일 설치
 
-- pip install
+- pip install pandas sqlalchemy sklearn typing pydantic fastapi cmath
 
 ## 파이썬 실행하기 명령어
 
