@@ -6,13 +6,14 @@ import Area from "./child/Area";
 import Item from "./child/Item";
 import Check from "./step3/Check";
 import PlanStep1 from "./step1/PlanStep1";
-import NextPreviousButton from "./NextPreviousButton";
+import PlanStep2 from "./step2/PlanStep2";
 
-export default function FullWidthGrid() {
+export default function Plan() {
   const [tags, setTags] = useState([]);
   const [curPage, setPage] = useState(1);
   const [beginDate, setBeginDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [plans, setPlans] = useState([]);
 
   return (
     <Fragment>
@@ -28,6 +29,7 @@ export default function FullWidthGrid() {
           endDate={endDate}
           setEndDate={setEndDate}
         ></PlanStep1>
+        <PlanStep2></PlanStep2>
         {/* <Check></Check> */}
         {/* Grid 오른쪽 */}
         <Grid item md={9}>
