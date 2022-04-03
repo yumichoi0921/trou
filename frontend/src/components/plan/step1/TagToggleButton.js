@@ -38,7 +38,7 @@ function TagList({ tags, setTags }) {
     }
     getTags();
   }, []);
-  // const classes = tagStyles();
+
   const tagList = tags.map((tag, index) => (
     <TagButton
       onClick={() => reverseButton(index)}

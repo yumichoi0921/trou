@@ -9,7 +9,7 @@ const Check = () => {
 
   const routeArray = [
     {
-      routeId: -1,
+      routeId: 0,
       routeDate: "2022-03-01",
       day: 1,
       routePlaces: [
@@ -20,7 +20,7 @@ const Check = () => {
       ],
     },
     {
-      routeId: -1,
+      routeId: 1,
       routeDate: "2022-03-02",
       day: 2,
       routePlaces: [
@@ -33,7 +33,13 @@ const Check = () => {
   ];
   const [routes, setRoutes] = useState(routeArray);
   const routeList = routes.map((item, index) => (
-    <Route index={index} route={item} routes={routes} orderSetter={setRoutes} />
+    <Route
+      key={item.routeId}
+      index={index}
+      route={item}
+      routes={routes}
+      orderSetter={setRoutes}
+    />
   ));
 
   const save = async () => {

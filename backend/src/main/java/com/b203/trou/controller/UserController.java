@@ -2,6 +2,7 @@ package com.b203.trou.controller;
 
 
 import com.b203.trou.model.user.UserDto;
+import com.b203.trou.model.user.UserJoinDto;
 import com.b203.trou.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +15,7 @@ import javax.security.sasl.AuthenticationException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 @Api(value = "User 컨트롤러 API")
 public class UserController {
 
@@ -23,8 +24,8 @@ public class UserController {
 
     @ApiOperation(value = "registerInfo", notes = "회원가입")
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody UserDto userdto) {
-        userService.createUser(userdto);
+    public ResponseEntity<?> register(@RequestBody UserJoinDto userjoindto) {
+        userService.createUser(userjoindto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -36,6 +37,26 @@ public class UserController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @GetMapping("/{userEmail}")
+    public ResponseEntity<?> checkEmail(@PathVariable("userEmail") String useremail) throws AuthenticationException {
+       try{
+           userService.CheckUserEmail(useremail);
+           System.out.println("중복됨");
+           return ResponseEntity.status(400).build();
+
+       }catch (AuthenticationException e){
+           System.out.println("사용 가능");
+         return ResponseEntity.status(200).build();
+
+       }
+
+//        if(userService.CheckUserEmail(useremail)!=null){
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//        }else{
+//            return ResponseEntity.ok().build();
+//        }
     }
 
     @ApiOperation(value = "getEmails", notes = "회원 이메일 가져오기")

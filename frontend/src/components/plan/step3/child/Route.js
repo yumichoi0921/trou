@@ -39,7 +39,7 @@ const Route = ({ index, route, routes, orderSetter }) => {
     <Fragment>
       <div>
         <span>
-          {route["day"]}일차: {route["date"]}
+          {route["day"]}일차: {route["routeDate"]}
         </span>
         <span>
           {open ? (

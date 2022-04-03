@@ -141,13 +141,13 @@ const App = () => {
   //     body: JSON.stringify(updTask),
   //   });
 
-    // const data = await res.json();
+  // const data = await res.json();
 
-    // setTasks(
-    //   tasks.map((task) =>
-    //     task.id === id ? { ...task, reminder: data.reminder } : task
-    //   )
-    // );
+  // setTasks(
+  //   tasks.map((task) =>
+  //     task.id === id ? { ...task, reminder: data.reminder } : task
+  //   )
+  // );
   // };
 
   const getPlanDetail = async (id) => {
@@ -201,7 +201,7 @@ const App = () => {
         <Routes>
           <Route path="/main" element={<Main />} />
           <Route path="/about" element={<About />} />
-          <Route path="/myPage/" element={<MyPage />} />
+          <Route path="/mypage/" element={<MyPage />} />
           <Route path="/tripDetail" element={<TripDetail />} />
           <Route path="/check" element={<Check />} />
           <Route path="/plan" element={<Plan />} />
