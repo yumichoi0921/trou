@@ -5,15 +5,20 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
-export default function LocalizedDatePicker() {
-  const [value, setValue] = React.useState(new Date());
+export default function LocalizedDatePicker(props) {
+  console.log(props);
+  const newLocal = [];
+  const newArr = [];
+  newArr.push(newLocal);
+
+  console.log(newArr[0]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={krLocale}>
       <div>
         <DatePicker
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
+          value={props.date}
+          onChange={(newValue) => props.setDate(newValue)}
           renderInput={(params) => <TextField {...params} />}
         />
       </div>
