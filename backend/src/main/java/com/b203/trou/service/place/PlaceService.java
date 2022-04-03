@@ -34,7 +34,7 @@ public class PlaceService {
         List<Tag> tags = tagRepository.findByTagNameLike(keyword);
         List<PlaceTag> placeTags=new ArrayList<>();
         for (Tag tag : tags) {
-           placeTags.addAll(placeTagRepository.findByTag(tag));
+            placeTags.addAll(placeTagRepository.findByTag(tag));
 
         }
         List<PlaceDto> result = placeTags.stream().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList());
@@ -44,14 +44,14 @@ public class PlaceService {
         }
 
 
-         result= placeRepository.findByPlaceNameContaining(keyword);
+        result= placeRepository.findByPlaceNameContaining(keyword);
 
         return Optional.of(result).orElseThrow(() -> new IllegalArgumentException("검색 결과가 없습니다."));
 
 
 
 
-        }
+    }
 
 
 
@@ -68,7 +68,7 @@ public class PlaceService {
 
     public String getPlacesById(long placeId) {
 
-         Place place = placeRepository.findById(placeId).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
+        Place place = placeRepository.findById(placeId).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
         return place.getPlaceName();
     }
 
