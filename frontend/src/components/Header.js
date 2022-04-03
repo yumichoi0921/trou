@@ -1,36 +1,27 @@
-import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
-import Button from "./Button";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Tabs, Tab, Stack } from "@mui/material";
 
-const Header = ({ title, onAdd, showAdd }) => {
-  const location = useLocation();
-
+const Nav = () => {
+  const navigate = useNavigate();
   return (
-    <header>
-      <h3>{title}</h3>
-      {location.pathname === "/" && (
-        <Button
-          color={showAdd ? "red" : "green"}
-          text={showAdd ? "Close" : "Add"}
-          onClick={onAdd}
-        />
-      )}
-    </header>
+    <Tabs>
+      <Tab label="MyPage" onClick={() => navigate("/mypage")} />
+      <Tab label="LogOut" />
+    </Tabs>
   );
 };
 
-Header.defaultProps = {
-  title: "Task Tracker",
-};
+const Header = () => {
+  const navigate = useNavigate();
 
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  return (
+    <header>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <h1 onClick={() => navigate("/main")}>TROU</h1>
+        <Nav />
+      </Stack>
+    </header>
+  );
 };
-
-// CSS in JS
-// const headingStyle = {
-//   color: 'red',
-//   backgroundColor: 'black',
-// }
 
 export default Header;

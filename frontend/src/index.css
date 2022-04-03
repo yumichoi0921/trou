@@ -5,28 +5,33 @@
   margin: 0;
   padding: 0;
 }
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
 
 body {
   font-family: "Poppins", sans-serif;
 }
 
-.container {
-  max-width: 95%;
-  height: 650px;
-  margin: 10px auto;
-  overflow: auto;
-  min-height: 600px;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
+.header {
+  align-items: center;
+  padding-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  margin-left: 40px;
+.container {
+  max-width: 95%;
+  height: 90%;
+  margin: auto;
+  overflow: auto;
+  min-height: 650px;
+  border: 1px solid steelblue;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .btn {
