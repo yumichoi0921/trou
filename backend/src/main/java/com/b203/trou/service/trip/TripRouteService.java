@@ -1,5 +1,6 @@
 package com.b203.trou.service.trip;
 
+import com.b203.trou.entity.trip.TripOrder;
 import com.b203.trou.entity.trip.TripPlan;
 import com.b203.trou.entity.trip.TripRoute;
 import com.b203.trou.model.trip.TripRouteDto;
@@ -8,6 +9,9 @@ import com.b203.trou.repository.trip.TripRouteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +19,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class TripRouteService {
+
+//
+//    public List<TripRouteDto> getTripRoutes(long tripPlanId) {
+//        List<TripRoute> tripRoute = tripRouteRepository.findByTripPlanId(tripPlanId);
+//        List<TripRouteDto> result = new ArrayList<>();
+//        for (TripRoute route : tripRoute) {
+//            TripRouteDto tripPlanDto = TripRouteDto.builder()
+//                    .routeId(route.getId())
+//                    .routeDate(route.getRouteDate())
+//                    .memo(route.getMemo())
+//                    .build();
+//            result.add(tripPlanDto);
+//        }
+//        return result;
+//    }
     private final TripRouteRepository tripRouteRepository;
     private final TripPlanRepository tripPlanRepository;
 

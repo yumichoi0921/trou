@@ -3,11 +3,13 @@ package com.b203.trou.model.review;
 import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.review.Score;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class ReviewDto {
 
