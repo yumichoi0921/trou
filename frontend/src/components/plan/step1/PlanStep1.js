@@ -16,8 +16,8 @@ const PlanStep1 = (props) => {
   }
 
   return (
-    <Grid item md={3} sx={{ textAlign: "center" }}>
-      <Area sx={{ overflow: "auto" }} spacing={3}>
+    <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
+      <Area>
         <Grid
           container
           spacing={2}
