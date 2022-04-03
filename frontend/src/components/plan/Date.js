@@ -6,12 +6,9 @@ import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export default function LocalizedDatePicker(props) {
-  console.log(props);
   const newLocal = [];
   const newArr = [];
   newArr.push(newLocal);
-
-  console.log(newArr[0]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={krLocale}>
