@@ -74,8 +74,8 @@ const Check = () => {
   return (
     <Fragment>
       {/* Grid 왼쪽 부분 */}
-      <Grid item md={3} sx={{ textAlign: "center" }}>
-        <Area sx={{ overflow: "auto" }}>
+      <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
+        <Area>
           <Stack spacing={2}>
             {routeList}
             <Stack
