@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -14,6 +14,11 @@ import Join from "./components/FirstMain/Join";
 import Detail from "./components/plan/detail/Detail";
 
 import Plan from "./components/plan/Plan";
+import PrivateRoutePlan from "./components/plan/detail/PrivateRoutePlan";
+import { Switch } from "@mui/material";
+
+import axios from "axios";
+
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -152,6 +157,34 @@ const App = () => {
     return data;
   };
 
+  const isShare = async () => {
+    try{
+      // console.log(routeId);
+      const res = await axios({
+          method: "get",
+          // url: `/share/${planId}/${userId}`,    
+          url: `/share/19/2`,    
+          baseURL: "http://localhost:8080",
+          timeout: 2000,
+      });
+      console.log('공유된건지 : ', res.data);
+      if(res.data.length > 0){
+        return true;
+      } else{
+        return false;
+      }
+    } catch{
+        console.log('share 에러발생');
+        return false;
+    }
+  };
+
+  const Test = () => {
+    const auth = isShare();
+    console.log('auth !!!!! ', auth);
+    return auth ? <Detail /> : <Navigate to="/login" />;
+  };
+
   return (
     <Router>
       <Routes>
@@ -172,7 +205,8 @@ const App = () => {
           <Route path="/tripDetail" element={<TripDetail />} />
           <Route path="/check" element={<Check />} />
           <Route path="/plan" element={<Plan />} />
-          <Route path="/planDetail" element={<Detail />} />
+          <Route path="/planDetail/:planId" element={<Detail />} />
+          {/* <Route path="/planDetail" element={<PrivateRoutePlan />} /> */}
         </Routes>
         {/* <Footer /> */}
       </div>
