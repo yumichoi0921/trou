@@ -6,7 +6,6 @@ import com.b203.trou.entity.tag.Tag;
 import com.b203.trou.entity.user.User;
 import com.b203.trou.entity.user.UserHistory;
 import com.b203.trou.model.place.PlaceDto;
-import com.b203.trou.model.user.UserDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.repository.place.PlaceRepository;
 import com.b203.trou.repository.tag.PlaceTagRepository;
@@ -17,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,8 +27,8 @@ public class PlaceService {
     private final PlaceRepository placeRepository;
     private final TagRepository tagRepository;
     private final PlaceTagRepository placeTagRepository;
-    private final UserHistoryRepository userHistoryRepository;
     private final UserRepository userRepository;
+    private final UserHistoryRepository userHistoryRepository;
     public List<PlaceDto> getPlaces(String keyword) { // 여행지의 태그, 여행지의 이름
 
         List<Tag> tags = tagRepository.findByTagNameLike(keyword);
@@ -73,6 +71,19 @@ public class PlaceService {
          Place place = placeRepository.findById(placeId).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
         return place.getPlaceName();
     }
+
+    public PlaceDto getPlace(long placeId) {
+        Place place = placeRepository.findById(placeId).orElseThrow(() -> new IllegalArgumentException("해당 장소가 없습니다."));
+        PlaceDto result = PlaceDto.builder()
+                .placeName(place.getPlaceName())
+                .image(place.getFirstImage())
+                .mapX(place.getMapX())
+                .mapY(place.getMapY())
+                .readCount(place.getReadCount())
+                .build();
+        return result;
+    }
+
 }
 
 

@@ -14,4 +14,5 @@ public class PlaceResponseDto {
     String tags;
     String mapx;
     String mapy;
+    String img;
 }
