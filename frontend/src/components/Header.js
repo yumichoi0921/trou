@@ -5,8 +5,8 @@ const Nav = () => {
   const navigate = useNavigate();
   return (
     <Tabs>
-      <Tab value="MyPage" label="MyPage" onClick={() => navigate("/mypage")} />
-      <Tab value="LogOut" label="LogOut" />
+      <Tab label="MyPage" onClick={() => navigate("/mypage")} />
+      <Tab label="LogOut" />
     </Tabs>
   );
 };
@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <h1 onClick={() => navigate("/")}>TROU</h1>
+        <h1 onClick={() => navigate("/main")}>TROU</h1>
         <Nav />
       </Stack>
     </header>
