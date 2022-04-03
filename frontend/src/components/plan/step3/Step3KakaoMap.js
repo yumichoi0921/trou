@@ -1,6 +1,6 @@
 /* global kakao */
 import React, { useEffect, useState } from "react";
-import Dijkstra from "./Dijkstra";
+import Dijkstra from "../Dijkstra";
 
 const KakaoMap = () => {
   // const [positions, setPositions] = useState([]);

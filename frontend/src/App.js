@@ -159,10 +159,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
       </Routes>
       <div className="header">
-        <Header
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
-        />
+        <Header />
       </div>
       <div className="container">
         <Routes>

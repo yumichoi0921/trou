@@ -9,29 +9,29 @@ html,
 body,
 #root {
   height: 100vh;
+  margin: 0;
 }
 
 body {
   font-family: "Poppins", sans-serif;
 }
 
+.header {
+  align-items: center;
+  padding-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .container {
   max-width: 95%;
   height: 90%;
-  margin: 10px auto;
+  margin: auto;
   overflow: auto;
   min-height: 650px;
   border: 1px solid steelblue;
   padding: 15px;
   border-radius: 5px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-  margin-left: 40px;
 }
 
 .btn {

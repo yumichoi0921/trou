@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Date from "./Date";
 import TagToggleButton from "./TagToggleButton";
-import KakaoMap from "./KakaoMap";
+import KakaoMap from "./step3/Step3KakaoMap";
 import Area from "./child/Area";
 import Item from "./child/Item";
 import Check from "./step3/Check";
