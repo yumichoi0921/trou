@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 
 function Users() {
-  const [plans, setPlans] = useState();
+  const [plans, setPlans] = useState([]);
   const userId = 1;
 
   useEffect(() => {
@@ -17,8 +17,6 @@ function Users() {
     };
     getPlans();
   }, []);
-
-  if (!plans) return null;
 
   return (
     <ul>
