@@ -7,6 +7,7 @@ import com.b203.trou.model.place.PlaceDto;
 import com.b203.trou.model.review.ReviewDto;
 import com.b203.trou.model.tag.TagDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class UserDto {
     long userId;
     String email;

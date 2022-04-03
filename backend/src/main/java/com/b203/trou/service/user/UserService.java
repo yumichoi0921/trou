@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -38,5 +40,15 @@ public class UserService {
 
         return new UserDto(user);
 
+    }
+
+    public List<UserDto> getEmails(String email) {
+        List<User> emails = userRepository.findByEmailContaining(email).orElseThrow(() -> new IllegalArgumentException("해당하는 유저가 없습니다."));
+        List<UserDto> result = emails.stream().map(user -> UserDto.builder().email(user.getEmail()).build()).collect(Collectors.toList());
+        for (UserDto userDto : result) {
+            System.out.print(userDto.getEmail());
+        }
+        System.out.println("여기야 여기");
+        return result;
     }
 }

@@ -5,59 +5,22 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { styled, Grid, Box, Button, Stack, Paper, Divider, Menu, MenuItem, alpha, TextareaAutosize, Avatar, InputLabel, FormControl, Select } from "@mui/material";
 import { Link } from "react-router-dom";
-import SelectDay from "./SelectDay"
+import SelectDay from "./SelectDay";
 import axios from "axios";
 import OrderListBar from "./OrderListBar";
 import Memo from "./Memo";
 import ModifyMemo from "./ModifyMemo";
 import Weather from "./Weather";
 import ShareFriends from "./ShareFriends";
+import KakaoMap from "../KakaoMap";
+import Area from "../child/Area";
+import Item from "../child/Item";
+import Local from "../child/Local";
 
-
-const Area = styled(Box)({
-    minHeight: '100%',
-    backgroundColor: "#90caf9",
-    padding: 25,
-    "&:hover": {
-        backgroundColor: "#64b5f6",
-        opacity: [0.9, 0.8, 0.7],
-    },
-});
-
-const Local = styled(Box)({
-    // minHeight: '90%',
-    backgroundColor: "#F1F9FA",
-    padding: 25,
-});
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
-
-const KakaoMap = () => {
-    useEffect(() => {
-        var container = document.getElementById("map");
-        var options = {
-            center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-            level: 3,
-        };
-        var map = new kakao.maps.Map(container, options);
-    }, []);
-
-    return (
-        <div>
-            <div id="map" style={{ width: "100%", height: "500px" }}></div>
-        </div>
-    );
-};
-
-
+import {useParams} from "react-router-dom";
 
 const Detail = () => {
+    const {planId} = useParams();
     const [day, setDay] = React.useState(0);
     const [memoState, setMemoState] = useState(true);
     const [memo, setMemo] = useState('1. 룰루 2. 랄라 3. 히히');    // 서버에서 받아온 값으로 변경됨
@@ -70,7 +33,7 @@ const Detail = () => {
             console.log('init!!');
             const response = await axios({
                 method: "get",
-                url: `/route/19`,    // 2 -> props로 받아온 planId로 변경하기.
+                url: `/route/${planId}`,    // param으로 받은거로 검색
                 baseURL: "http://localhost:8080",
                 timeout: 2000,
             });

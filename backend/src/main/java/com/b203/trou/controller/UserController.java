@@ -8,12 +8,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.sasl.AuthenticationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,5 +36,12 @@ public class UserController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @ApiOperation(value = "getEmails", notes = "회원 이메일 가져오기")
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getEmails(@PathVariable String email){
+        List<UserDto> emails = userService.getEmails(email);
+        return ResponseEntity.ok(emails);
     }
 }
