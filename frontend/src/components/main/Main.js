@@ -20,20 +20,30 @@ export default function Main() {
   const [places, setPlaces] = useState("");
   const [imgName, setImgName] = useState("");
   const [reviews, setReviews] = useState([]);
+  const [userId, setUserId] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const classes = styles;
   function clickSite(e) {
     //e.preventDefault();
-    console.log(e);
+    console.log(e.place_id);
     setImgName(e.placeName);
     setSrc(e.placeImage);
-    console.log(e.reviews);
     setReviews(e.reviews);
-
     handleShow();
   }
+  const clickRecommand = async (e) => {
+    console.log(e);
+    setImgName(e.place_name);
+    setSrc(e.img);
+    await axios.get("/review/place/" + e.place_id).then((r) => {
+      console.log(r.data);
+      setReviews(r.data);
+      // console.log(e.reviews);
+      handleShow();
+    });
+  };
 
   function Reivew(props) {
     return (
@@ -49,19 +59,11 @@ export default function Main() {
   };
 
   const SearchPlace = async (e) => {
-    try {
-      let keyword = e;
-      console.log(keyword);
-      const response = await axios({
-        method: "get",
-        url: `/place/${keyword}`,
-        baseURL: "http://localhost:8080",
-        timeout: 2000,
-      });
-      console.log(response.data);
-      let array = [];
-      array = response.data.map((place, i) => {
-        console.log(place);
+    let keyword = e;
+    console.log(keyword);
+    let array = [];
+    const response = await axios.get("/place/" + keyword).then((r) => {
+      array = r.data.map((place, i) => {
         if (place.image == null) {
           place.image = backImg;
         }
@@ -88,10 +90,55 @@ export default function Main() {
         );
       });
       setPlaces(array);
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
+
+  useEffect(() => {
+    setUserId(1);
+    const userId = 1;
+    const response = axios
+      .get("/place/recommand/" + userId)
+      .then((r) => {
+        console.log(r.data);
+        let array = [];
+        array = r.data.map((place, i) => {
+          if (place.img === " ") place.img = backImg;
+
+          return (
+            <div
+              style={{ float: "left", marginLeft: 20, height: 400, width: 400 }}
+              key={i}
+            >
+              <h2> {place.place_name}</h2>
+
+              <img
+                onClick={() => {
+                  clickRecommand(place);
+                }}
+                src={place.img}
+                alt={place.place_id}
+                name={place.place_name}
+                style={{
+                  height: "300px",
+                  width: "400px",
+                }}
+              />
+            </div>
+          );
+        });
+        setPlaces(array);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // let array = [];
+    // array = response.data.map((place, i) => {
+    //   console.log(place.place_Id + "" + i);
+    //   //return();
+    // });
+  }, []);
+
   const SearchDiv = styled(Grid)({
     marginTop: 50,
     paddingTop: 50,
