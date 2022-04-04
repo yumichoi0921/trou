@@ -16,7 +16,9 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 /**jwt 커스텀 필터
-JwtFilter : API에 요청이 오게되면 헤더에 토큰이 있나없나 확인**/
+JwtFilter : API에 요청이 오게되면 헤더에 토큰이 있나없나 확인
+ JWT 토큰의 인증정보를 SecurityContext에 저장하는 로직을 구현함.
+ request의 header에서 토큰정보를 꺼내오고 유효성 체크후(tokenProvider.validateToken()) 유효하다면, securityContext에 인증정보(Authentication)을 저장한다.**/
 public class JwtFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
