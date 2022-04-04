@@ -51,18 +51,12 @@ public class UserController {
          return ResponseEntity.status(200).build();
 
        }
-
-//        if(userService.CheckUserEmail(useremail)!=null){
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//        }else{
-//            return ResponseEntity.ok().build();
-//        }
     }
 
-    @ApiOperation(value = "getEmails", notes = "회원 이메일 가져오기")
-    @GetMapping("/{email}")
-    public ResponseEntity<?> getEmails(@PathVariable String email){
-        List<UserDto> emails = userService.getEmails(email);
-        return ResponseEntity.ok(emails);
+    @GetMapping("/info/{userEmail}")
+    public ResponseEntity<?> getUserInfoByEmail(@PathVariable String userEmail){
+        System.out.println(userEmail);
+        UserDto userDto = userService.getUserInfoByEmail(userEmail);
+        return ResponseEntity.ok(userDto);
     }
 }

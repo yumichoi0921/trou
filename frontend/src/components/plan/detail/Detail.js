@@ -115,7 +115,7 @@ const Detail = () => {
                                     {memoContent}
                                 </Local>
                                 <Local>
-                                    <ShareFriends></ShareFriends>
+                                    <ShareFriends planId={19}></ShareFriends>
                                 </Local>
                             </Stack>
                         </Area>

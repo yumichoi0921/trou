@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/place")
 @CrossOrigin(origins = "http://localhost:3000")
-public class placeController {
+public class PlaceController {
 
    private final PlaceService placeService;
 

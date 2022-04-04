@@ -64,4 +64,9 @@ public class UserService {
         System.out.println("여기야 여기");
         return result;
     }
+
+    public UserDto getUserInfoByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당하는 유저 정보가 없습니다."));
+        return UserDto.builder().userId(user.getId()).build();
+    }
 }
