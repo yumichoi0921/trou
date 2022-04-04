@@ -141,9 +141,10 @@ const Detail = () => {
                                 </Grid>
                             </Grid>
                             {/* <Schedule></Schedule> */}
-                            {orderList.map((order, index) => (
+                            <OrderListBar orderList={orderList}></OrderListBar>
+                            {/* {orderList.map((order, index) => (
                                 <OrderListBar key={index} order={order}></OrderListBar>
-                            ))}
+                            ))} */}
                         </Stack>
                         <Area sx={{ overflow: "auto" }}>
                             <KakaoMap></KakaoMap>

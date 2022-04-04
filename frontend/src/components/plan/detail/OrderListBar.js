@@ -1,33 +1,27 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import {Box, Stepper, StepLabel, StepContent, Step } from '@mui/material';
+import Item from '../child/Item';
 
-
-const OrderListBar = ({index, order}) => {
-    // let name = '';
-
-    // const getPlace = async () => {
-    //     try{
-    //         const res = await axios({
-    //             method: "get",
-    //             url: `/place/detail/${order.placeId}`,    
-    //             baseURL: "http://localhost:8080",
-    //             timeout: 2000,
-    //         });
-    //         name = res.data.placeName;
-    //     } catch{
-    //         console.log('에러발생');
-    //     }
-    // };
-    // // order.placeId
-    // useEffect(() => {
-    //     getPlace();
-    // }, []);
+const OrderListBar = ({orderList}) => {
     return (
-        <div>
-            {index}번째 장소 : {order.placeName} <br/>
-            startTime :  {order.startTime}  <br/>
-            endTime :  {order.endTime}
-        </div>
+        <Box sx={{ width: '100%' }}>
+            <Stepper activeStep={-1} alternativeLabel>
+                {orderList.map((label) => (
+                    <Step key={label} active={true}>
+                        <Item>
+                        <StepLabel>
+                            <p><b>{label.place.placeName}</b></p> <br/>
+                            시작 시간 : {label.startTime} <br/>
+                            종료 시간 : {label.endTime} 
+                        </StepLabel>
+                        {/* <StepContent>
+                            시작 시간 : {label.startTime} <br/>
+                            종료 시간 : {label.endTime}
+                        </StepContent> */}
+                        </Item>
+                    </Step>
+                ))}
+            </Stepper>
+        </Box>
     );
 };
 
