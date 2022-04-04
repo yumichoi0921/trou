@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Check from "./components/plan/step3/Check";
 import PlanStep3 from "./components/plan/step3/PlanStep3";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
@@ -28,7 +27,7 @@ const App = () => {
           <Route path="/main" element={<Main />} />
           <Route path="/mypage/" element={<MyPage />} />
           <Route path="/tripDetail" element={<TripDetail />} />
-          <Route path="/check" element={<Check />} />
+          <Route path="/check" element={<PlanStep3 />} />
           <Route path="/plan/*" element={<Plan />} />
           <Route path="/planDetail" element={<Detail />} />
         </Routes>

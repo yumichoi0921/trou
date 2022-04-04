@@ -8,7 +8,7 @@ import PlanStep2 from "./step2/PlanStep2";
 import KakaoMap from "./step3/Step3KakaoMap";
 import PlanRecommendation from "./step2/PlaceRecommendation";
 import { Link, Route, Router, Routes, useNavigate } from "react-router-dom";
-import Check from "./step3/Check";
+import PlanStep3 from "./step3/PlanStep3";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
