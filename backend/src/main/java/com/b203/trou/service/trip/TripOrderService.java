@@ -33,7 +33,7 @@ public class TripOrderService {
         List<TripOrderDto> result = new ArrayList<>();
         TripRoute tripRoute =  tripRouteRepository.findById(routeId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 루트가 없습니다."));
         for (TripOrderDto tripOrderDto: tripOrderDtos) {
-            Place place = placeRepository.findById(tripOrderDto.getPlaceId()).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
+            Place place = placeRepository.findById(tripOrderDto.getPlace().getPlaceId()).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
             TripOrder tripOrder = new TripOrder(tripRoute, place, tripOrderDto.getTripOrder(), tripOrderDto.getStartTime(), tripOrderDto.getEndTime());
             tripOrderRepository.save(tripOrder);
             result.add(new TripOrderDto(tripOrder));

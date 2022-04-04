@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from cmath import cos
 from sqlalchemy import Table, Column, Integer, String
 import pandas as pd
 from sqlalchemy import create_engine
