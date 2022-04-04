@@ -20,6 +20,7 @@ public class PlaceDto {
         this.mapX=place.getMapX();
         this.mapY=place.getMapY();
         this.readCount=place.getReadCount();
+        this.averageScore = reviews.stream().mapToDouble(ReviewDto::getScore).average().orElse(0.0);
 
     }
     public PlaceDto(List<ReviewDto> reviews, String placeName, String image) {
@@ -35,5 +36,6 @@ public class PlaceDto {
     double mapX;
     double mapY;
     int readCount;
+    double averageScore;
 
 }
