@@ -1,5 +1,6 @@
 import { Avatar, Grid } from "@mui/material";
 import { React } from "react";
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 const ShowFriends = ({friend}) => {
 
@@ -29,14 +30,16 @@ const ShowFriends = ({friend}) => {
             sx: {
                 bgcolor: stringToColor(name),
             },
-            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+            children: `${name[0]}`,
         };
     }
 
     return(
         <Grid item xs={6}>
-            <span>- {friend.userName}</span>
-            {/* <Avatar {...stringAvatar(friend.userName)} /> */}
+            <span>
+            <Avatar {...stringAvatar(friend)} /> 
+            {friend}
+            </span>
         </Grid> 
     );
 };

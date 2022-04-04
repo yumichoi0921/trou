@@ -55,18 +55,24 @@ public class UserService {
         return userRepository.findByEmail(userEmail).orElseThrow(()-> new AuthenticationException("해당하는 유저가 없습니다."));
     }
 
-    public List<UserDto> getEmails(String email) {
-        List<User> emails = userRepository.findByEmailContaining(email).orElseThrow(() -> new IllegalArgumentException("해당하는 유저가 없습니다."));
-        List<UserDto> result = emails.stream().map(user -> UserDto.builder().email(user.getEmail()).build()).collect(Collectors.toList());
-        for (UserDto userDto : result) {
-            System.out.print(userDto.getEmail());
-        }
-        System.out.println("여기야 여기");
-        return result;
-    }
-
     public UserDto getUserInfoByEmail(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당하는 유저 정보가 없습니다."));
-        return UserDto.builder().userId(user.getId()).build();
+        return UserDto.builder()
+                .userId(user.getId())
+                .userName(user.getUserName())
+                .build();
+    }
+
+    public List<UserDto> getUsers(String keyword) {
+        System.out.println("서비스 들어옴");
+        List<User> user = userRepository.findByEmailStartingWith(keyword).orElseThrow(() -> new IllegalArgumentException("해당하는 유저 리스트가 없습니다."));
+        System.out.println(user.get(0).getUserName());
+        List<UserDto> userDtos = user.stream()
+                .map(user1 -> UserDto.builder()
+                        .userName(user1.getUserName())
+                        .userId(user1.getId())
+                        .email(user1.getEmail())
+                        .build()).collect(Collectors.toList());
+        return userDtos;
     }
 }

@@ -53,10 +53,18 @@ public class UserController {
        }
     }
 
+    // email에 해당하는 userId 반환
     @GetMapping("/info/{userEmail}")
     public ResponseEntity<?> getUserInfoByEmail(@PathVariable String userEmail){
         System.out.println(userEmail);
         UserDto userDto = userService.getUserInfoByEmail(userEmail);
+        return ResponseEntity.ok(userDto);
+    }
+
+    @GetMapping("/list/{keyword}")
+    public ResponseEntity<?> getUsers(@PathVariable String keyword){
+        System.out.println(keyword);
+        List<UserDto> userDto = userService.getUsers(keyword);
         return ResponseEntity.ok(userDto);
     }
 }

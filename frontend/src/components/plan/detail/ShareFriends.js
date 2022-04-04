@@ -11,7 +11,12 @@ const ShareFriends = (props) => {
     const initShareFriends = async () => {
         await axios.get("/share/" + props.planId).then((res) => {
             console.log(res.data);
-            setFriends(res.data);
+            const tmp = [];
+            res.data.map((user,index) => {
+                let newTmp = user.userName;
+                tmp.push(newTmp);
+            });
+            setFriends(tmp);
             // freinds.push(res.data.userName);
         }).catch(err => {
             console.log(err);
@@ -42,7 +47,7 @@ const ShareFriends = (props) => {
                     <Avatar {...stringAvatar('Tim Neutkens')} />
                 </Grid> */}
             </Grid>
-            <ShareModal></ShareModal>
+            <ShareModal friends={friends} setFriends={setFriends}></ShareModal>
             {/* <Button variant="outlined">공유</Button> */}
 
         </Stack>

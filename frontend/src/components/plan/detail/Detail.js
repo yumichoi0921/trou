@@ -12,7 +12,8 @@ import Memo from "./Memo";
 import ModifyMemo from "./ModifyMemo";
 import Weather from "./Weather";
 import ShareFriends from "./ShareFriends";
-import KakaoMap from "../KakaoMap";
+import Step3KakaoMap from "../step3/Step3KakaoMap";
+// import KakaoMap from "../KakaoMap";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import Local from "../child/Local";
@@ -145,7 +146,7 @@ const Detail = () => {
                                 <p>상태바 자리</p>
                             </Item> */}
                             <Item>
-                                <KakaoMap></KakaoMap>
+                                <Step3KakaoMap></Step3KakaoMap>
                             </Item>
                         </Stack>
 
