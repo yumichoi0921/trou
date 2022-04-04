@@ -2,6 +2,7 @@ package com.b203.trou.model.place;
 
 import com.b203.trou.entity.place.Place;
 import com.b203.trou.model.review.ReviewDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlaceDto {
     public PlaceDto(Place place){
         this.reviews= place.getReviews().stream().map(ReviewDto::new).collect(Collectors.toList());
@@ -21,7 +23,6 @@ public class PlaceDto {
         this.mapY=place.getMapY();
         this.readCount=place.getReadCount();
         this.averageScore = reviews.stream().mapToDouble(ReviewDto::getScore).average().orElse(0.0);
-
     }
     public PlaceDto(List<ReviewDto> reviews, String placeName, String image) {
         this.reviews = reviews;
@@ -32,10 +33,10 @@ public class PlaceDto {
     List<ReviewDto> reviews;
     String placeName;
     String image;
-    long placeId;
-    double mapX;
-    double mapY;
-    int readCount;
-    double averageScore;
+    Long placeId;
+    Double mapX;
+    Double mapY;
+    Integer readCount;
+    Double averageScore;
 
 }
