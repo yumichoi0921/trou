@@ -9,11 +9,15 @@ import Check from "./components/plan/step3/Check";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
 import Main from "./components/main/Main";
-import Login from "./components/FirstMain/Login";
-import Join from "./components/FirstMain/Join";
-import Detail from "./components/plan/detail/Detail";
 
+import Detail from "./components/plan/detail/Detail";
 import Plan from "./components/plan/Plan";
+
+
+import FirstMain from './components/FirstMain/FirstMain';
+import Login from "./components/FirstMain/Login";
+import SelectPlace from "./components/FirstMain/SelectPlace";
+import Join from "./components/FirstMain/Join";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -155,8 +159,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<FirstMain />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/selectPlace" element={<SelectPlace />} />
       </Routes>
       <div className="header">
         <Header
