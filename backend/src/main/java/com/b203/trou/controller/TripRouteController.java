@@ -1,5 +1,6 @@
 package com.b203.trou.controller;
 
+import com.b203.trou.entity.trip.TripRoute;
 import com.b203.trou.model.trip.TripPlanDto;
 import com.b203.trou.model.trip.TripRouteDto;
 import com.b203.trou.service.trip.TripRouteService;
@@ -42,6 +43,16 @@ public class TripRouteController {
     public ResponseEntity<?> modifyTripRoute(@RequestBody TripRouteDto tripRouteDto, @PathVariable("routeId") long routeId) {
         try {
             TripRouteDto result = tripRouteService.modifyTripRoute(tripRouteDto, routeId);
+            return ResponseEntity.ok(result);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PatchMapping(value = "/memo/{routeId}")
+    public ResponseEntity<?> modifyMemo(@RequestBody TripRouteDto tripRouteDto, @PathVariable long routeId){
+        try {
+            TripRouteDto result = tripRouteService.modifyMemo(tripRouteDto, routeId);
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

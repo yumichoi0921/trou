@@ -12,16 +12,17 @@ import Memo from "./Memo";
 import ModifyMemo from "./ModifyMemo";
 import Weather from "./Weather";
 import ShareFriends from "./ShareFriends";
-import Step3KakaoMap from "../step3/Step3KakaoMap";
+import KakaoMap from "../step3/Step3KakaoMap";
 // import KakaoMap from "../KakaoMap";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import Local from "../child/Local";
 
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Schedule } from "@mui/icons-material";
 
 const Detail = () => {
-    const {planId} = useParams();
+    const { planId } = useParams();
     const [day, setDay] = React.useState(0);
     const [memoState, setMemoState] = useState(true);
     const [memo, setMemo] = useState('1. 룰루 2. 랄라 3. 히히');    // 서버에서 받아온 값으로 변경됨
@@ -30,7 +31,7 @@ const Detail = () => {
     const [orderList, setOrderList] = useState([]);
 
     const initRoute = async () => {  // async ? 
-        try{
+        try {
             console.log('init!!');
             const response = await axios({
                 method: "get",
@@ -40,61 +41,61 @@ const Detail = () => {
             });
             // let routeIdList = response.data.map(route => route.routeId);
             // let routes = Array.from(response.data);
-            
+
             setDList(response.data);
             setMemo(response.data[0].memo);
             setRouteId(response.data[0].routeId);
 
             let rId = response.data[0].routeId;
             console.log('id : ', rId);
-            try{
+            try {
                 // console.log(routeId);
                 const res = await axios({
                     method: "get",
-                    url: `/order/${rId}`,    
+                    url: `/order/${rId}`,
                     baseURL: "http://localhost:8080",
                     timeout: 2000,
                 });
                 console.log('orderList : ', res.data);
                 setOrderList(res.data);
-            } catch{
+            } catch {
                 console.log('에러발생');
             }
-        } catch{
+        } catch {
             console.log('에러발생');
         }
     }
-    
+
     useEffect(() => {
         initRoute();
     }, []);
 
     const ChangeOrderList = async () => {
-        try{
+        try {
             // console.log(routeId);
             const res = await axios({
                 method: "get",
-                url: `/order/${routeId}`,    
+                url: `/order/${routeId}`,
                 baseURL: "http://localhost:8080",
                 timeout: 2000,
             });
             console.log('orderList : ', res.data);
             setOrderList(res.data);
-        } catch{
+        } catch {
             console.log('에러발생');
         }
     };
 
     const handleChange = (event) => {
-        let idx = event.target.value; 
+        let idx = event.target.value;
         setDay(idx);
         setMemo(dList[idx].memo);
         setRouteId(dList[idx].routeId);
         ChangeOrderList();
     };
 
-    const lis = dList.map((item,index) =>(
-            <MenuItem value={index} key={index}>{item.day}일차 ({item.routeDate})</MenuItem>
+    const lis = dList.map((item, index) => (
+        <MenuItem value={index} key={index}>{item.day}일차 ({item.routeDate})</MenuItem>
     ));
     // setDayLists(lis);
 
@@ -102,7 +103,7 @@ const Detail = () => {
     if (memoState) {  // 수정버튼 누르기 전 true
         memoContent = <Memo memo={memo} setMemoState={setMemoState}></Memo>
     } else {  // 수정버튼 누르고 난 후 false
-        memoContent = <ModifyMemo memo={memo} setMemoState={setMemoState} setMemo={setMemo}></ModifyMemo>
+        memoContent = <ModifyMemo day={day} dList={dList} memo={memo} setMemoState={setMemoState} setMemo={setMemo}></ModifyMemo>
     }
 
     return (
@@ -122,7 +123,7 @@ const Detail = () => {
                         </Area>
                     </Grid>
                     <Grid item xs={12}>
-                        <Stack spacing={3} >
+                        <Stack spacing={2} >
                             <Grid container spacing={2}>
                                 <Grid item xs={3}>
                                     <Button
@@ -139,17 +140,14 @@ const Detail = () => {
                                     <Weather></Weather>
                                 </Grid>
                             </Grid>
-                            {orderList.map((order,index) => (
+                            {/* <Schedule></Schedule> */}
+                            {orderList.map((order, index) => (
                                 <OrderListBar key={index} order={order}></OrderListBar>
                             ))}
-                            {/* <Item>
-                                <p>상태바 자리</p>
-                            </Item> */}
-                            <Item>
-                                <Step3KakaoMap></Step3KakaoMap>
-                            </Item>
                         </Stack>
-
+                        <Area sx={{ overflow: "auto" }}>
+                            <KakaoMap></KakaoMap>
+                        </Area>
                     </Grid>
                 </Grid>
             </Box>
