@@ -5,8 +5,15 @@ import ListItem from '@mui/material/ListItem';
 import { Fragment } from 'react';
 import styles from './MyPage.module.css';
 import Plan from './Plan';
+import TripDetail from './TripDetail';
+
 
 const TripPlan = ({plan, getTripDetail}) => {
+
+    function handleClick(planId){
+        window.location.replace("/trip-detail/"+planId.planId);
+    }
+
     return(
         <Fragment>
             <Grid container spacing={2}>
@@ -26,10 +33,7 @@ const TripPlan = ({plan, getTripDetail}) => {
                 <Grid item xs={8}>                                      
                     <ListItem>
                         <div className={styles.planInfo}
-                            onClick={() => 
-                                //getTripDetail(plan.id);
-                                console.log("clicked")
-                            }
+                            onClick={() => handleClick({planId: plan.planId})}                            
                         >
                             <div>{plan.text}</div>
                             <div>{plan.startDate}~{plan.endDate}</div>

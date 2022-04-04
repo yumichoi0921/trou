@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
+import Plan from './Plan';
 
 function Users() {
-  const [plans, setPlans] = useState();
+  const [plans, setPlans] = useState([]);
   const userId = 1;
 
-  useEffect(() => {
+ useEffect(() => {
     const getPlans = async () => {
       try {
         const response = await axios.get("/plan/" + userId);
-        setPlans(response.data);
-      } catch (e) {
+        console.log(response.data);
+        setPlans(response.data);     
+        plans.forEach(element => console.log(element));
+    } catch (e) {
         console.log(e);
       }
     };
     getPlans();
   }, []);
 
-  if (!plans) return null;
+  //if (!plans) return null
 
   return (
     <ul>
       {plans.map((plan) => (
-        <li key={plan.planId}>{plan.planId}</li>
+        <Plan key={plan.planId} plan={plan}></Plan>
       ))}
       <Button></Button>
     </ul>

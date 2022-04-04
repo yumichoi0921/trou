@@ -2,20 +2,64 @@ import styles from './MyPage.module.css';
 import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import { Fragment } from 'react';
-import Collapse from '@mui/material/Collapse';
 import Place from './Place';
+import Review from './Review';
 import Schedule from "./Schedule";
-import Review from "./Review";
+import {useParams} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const TripDetail = () => {
+    const{planId} = useParams();   
+    const [routes, setRoutes] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+      const getRoutes = async () => {
+        try {
+          const response = await axios.get("/route/" + planId);
+          setRoutes(response.data);
+
+          for (const route of response.data) {
+            const response = await axios.get("/order/" + route.routeId);
+            console.log("orders")
+            console.log(response.data)
+            setOrders(response.data);
+            //console.log(route.routeId) //routeid: 32, 33
+            getReviews();
+          }
+
+      } catch (e) {
+          console.log(e);
+        }
+      };
+
+      const getReviews = async () => {
+        console.log("inside getReviews");
+        console.log(orders);
+        try {
+          for (const order of orders) {
+            const response = await axios.get("/review/place/" + order.placeId);
+            setReviews(response.data)
+          }
+      } catch (e) {
+          console.log(e);
+        }
+      };
+
+      getRoutes();
+      getReviews();
+    }, []);
+
     const plan = {
         id: 1,
         text: '서울',
         startDate: '2021-03-28',
         endDate: '2021-04-01'
     };
-    const orders = [
+    /*const orders = [
         {
           id: 1,
           routeId: 1,
@@ -96,8 +140,8 @@ const TripDetail = () => {
           order: 5,
           review: 3,
         },
-    ];
-    const routes = [
+    ];*/
+    /*const routes = [
         {
             id: 1,
             planId: 1
@@ -106,7 +150,7 @@ const TripDetail = () => {
             id: 2,
             planId: 1
         }
-    ];
+    ];*/
 
     return(
         <Fragment>
@@ -130,8 +174,12 @@ const TripDetail = () => {
                 <Schedule></Schedule>
                 {orders.map((order)=>(
                   <div>
-                    <Place key={order.id} order={order} />
-                    <Review key={order.id} score={order.review}></Review>
+                    <Place key={order.orderId} order={order} />
+                  </div>
+                ))}
+                {reviews.map((review)=>(
+                  <div>
+                    <Review key={review.reviewId} review={review} />
                   </div>
                 ))}
             </Grid>                       
