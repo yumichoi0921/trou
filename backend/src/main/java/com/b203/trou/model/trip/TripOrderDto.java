@@ -21,6 +21,7 @@ public class TripOrderDto {
     LocalTime startTime;
     @DateTimeFormat(pattern = "kk:mm")
     LocalTime endTime;
+    String image;
 
     public TripOrderDto(TripOrder tripOrder) {
         this.orderId = tripOrder.getId();
