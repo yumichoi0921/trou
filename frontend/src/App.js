@@ -2,10 +2,8 @@ import { useState, useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
-
 import About from "./components/About";
-import Check from "./components/plan/step3/Check";
+import PlanStep3 from "./components/plan/step3/PlanStep3";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
 import Main from "./components/main/Main";
@@ -15,8 +13,6 @@ import Detail from "./components/plan/detail/Detail";
 
 import Plan from "./components/plan/Plan";
 const App = () => {
-  const [showAddTask, setShowAddTask] = useState(false);
-  const [tasks, setTasks] = useState([]);
   const plans = [
     {
       id: 1,
@@ -167,11 +163,10 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/mypage/" element={<MyPage />} />
           <Route path="/tripDetail" element={<TripDetail />} />
-          <Route path="/check" element={<Check />} />
+          {/* <Route path="/plan/step3" element={<PlanStep3 />} /> */}
           <Route path="/plan" element={<Plan />} />
           <Route path="/planDetail" element={<Detail />} />
         </Routes>
-        {/* <Footer /> */}
       </div>
     </Router>
   );
