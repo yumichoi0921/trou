@@ -14,6 +14,7 @@ import Join from "./components/FirstMain/Join";
 import Detail from "./components/plan/detail/Detail";
 
 import Plan from "./components/plan/Plan";
+import PlanStep1 from "./components/plan/step1/PlanStep1";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -168,7 +169,11 @@ const App = () => {
           <Route path="/mypage/" element={<MyPage />} />
           <Route path="/tripDetail" element={<TripDetail />} />
           <Route path="/check" element={<Check />} />
-          <Route path="/plan" element={<Plan />} />
+          <Route path="/plan" element={<Plan />}>
+            <Route path="step1" element={<PlanStep1 />}></Route>
+            <Route path="step2" element={<PlanStep1 />}></Route>
+            <Route path="step3" element={<PlanStep1 />}></Route>
+          </Route>
           <Route path="/planDetail" element={<Detail />} />
         </Routes>
         {/* <Footer /> */}
