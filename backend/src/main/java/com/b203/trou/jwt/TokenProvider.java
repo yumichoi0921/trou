@@ -20,9 +20,11 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 // 토큰 생성, 유효성 검증을 담당할 TokenProvider
+//InitializingBean -> afterPropertiesSet 의존성 주입까지 끝낸 이후에 주입받은 secret 값을 base64 decode하여 key 변수에 할당
 @Slf4j
 @Component
 public class TokenProvider implements InitializingBean {
+    //application.yml에서 정의한 값을 주입받음
     private static final String AUTHORITIES_KEY = "auth";
     @Value("${jwt.secret}")
     private String secret;
@@ -39,9 +41,9 @@ public class TokenProvider implements InitializingBean {
             this.key = new SecretKeySpec(keyBytes, SignatureAlgorithm.HS512.getJcaName());
         }
 
-        //Jwt 토큰 생성 메소드
+        //Authentication 객체에 포함되어 있는 권한 정보들을 담은 토큰 생성 메소
         public String createToken(Authentication authentication){
-            //권한들 가져오기
+
             String authorities = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.joining(","));
@@ -58,7 +60,7 @@ public class TokenProvider implements InitializingBean {
                     .compact();
         }
 
-        //인증 성공시 SecurityContextHolder에 저장할 Authentication 객체 생성 (권한 정보를 파싱하여 Authentication 객체 리턴)
+        //인증 성공시 SecurityContextHolder에 저장할 Authentication 객체 생성 (토큰에 담겨 있는 권한 정보를 파싱하여 Authentication 객체 리턴)
         public Authentication getAuthentication(String token){
             //토큰에서 Payload(Claim) 추출
             Claims claims = Jwts
