@@ -61,10 +61,10 @@ public class PlaceController {
 
         PlaceResponseDto[] res=restTemplate.postForObject(baseUrl,places, PlaceResponseDto[].class);
 
-        for(int i=0; i < res.length; i++) {
-            System.out.println("======== res : " + i + " ========");
-            System.out.println(res[i].getPlace_id() + " " + res[i].getPlace_name() + " " + res[i].getTags());
-        }
+//        for(int i=0; i < res.length; i++) {
+//            System.out.println("======== res : " + i + " ========");
+//            System.out.println(res[i].getPlace_id() + " " + res[i].getPlace_name() + " " + res[i].getTags());
+//        }
 
 
 
