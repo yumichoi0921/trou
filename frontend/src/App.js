@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -159,10 +159,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
       </Routes>
       <div className="header">
-        <Header
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
-        />
+        <Header />
       </div>
       <div className="container">
         <Routes>

@@ -21,8 +21,6 @@ function Users() {
     getPlans();
   }, []);
 
-  //if (!plans) return null
-
   return (
     <ul>
       {plans.map((plan) => (

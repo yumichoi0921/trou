@@ -25,6 +25,12 @@ public class TripOrderService {
     public List<TripOrderDto> getTripOrder(long routeId) {
         TripRoute tripRoute =  tripRouteRepository.findById(routeId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 루트가 없습니다."));
         List<TripOrderDto> tripOrders = tripOrderRepository.findByTripRoute(tripRoute).stream().map(TripOrderDto::new).collect(Collectors.toList());
+        for (TripOrderDto tripOrderDto: tripOrders) {
+            Place place = placeRepository
+                    .findById(tripOrderDto.getPlaceId())
+                    .orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
+            tripOrderDto.setImage(place.getFirstImage());
+        }
         return tripOrders;
     }
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { styled, Box } from "@mui/material";
 const Area = styled(Box)({
-  height: 600,
+  height: "100%",
+  overflow: "auto",
   backgroundColor: "#b3e5fc",
   padding: 25,
   "&:hover": {
