@@ -24,7 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function PlanStep2(props) {
-  const [tags, setTags] = useState([]);
   const [curPage, setPage] = useState(1);
   const [age, setAge] = React.useState("");
 

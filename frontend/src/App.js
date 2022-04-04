@@ -1,3 +1,5 @@
+import { useState, useEffect, Fragment } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
@@ -162,8 +164,8 @@ const App = () => {
       // console.log(routeId);
       const res = await axios({
           method: "get",
-          // url: `/share/${planId}/${userId}`,    
-          url: `/share/19/2`,    
+          // url: `/share/${planId}/${userId}`,
+          url: `/share/19/2`,
           baseURL: "http://localhost:8080",
           timeout: 2000,
       });
@@ -192,10 +194,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
       </Routes>
       <div className="header">
-        <Header
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
-        />
+        <Header />
       </div>
       <div className="container">
         <Routes>
