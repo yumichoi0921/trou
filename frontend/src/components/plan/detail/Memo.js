@@ -7,7 +7,7 @@ const Memo = ({memo, setMemoState}) => {
             alignItems="center"
             spacing={1} >
             <p>메모장</p>
-            <p>{memo}</p>
+            <pre>{memo}</pre>
             <Button variant="outlined" onClick={event=>{
                 event.preventDefault();
                 setMemoState(false);
