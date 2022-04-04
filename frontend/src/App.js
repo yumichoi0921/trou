@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import Check from "./components/plan/step3/Check";
+import PlanStep3 from "./components/plan/step3/PlanStep3";
 import MyPage from "./components/myPage/MyPage";
 import TripDetail from "./components/myPage/TripDetail";
 import Main from "./components/main/Main";
@@ -13,57 +14,6 @@ import Join from "./components/FirstMain/Join";
 import Detail from "./components/plan/detail/Detail";
 import Plan from "./components/plan/Plan";
 const App = () => {
-  const plans = [
-    {
-      id: 1,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 2,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 3,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 4,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 5,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 6,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 7,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-    {
-      id: 8,
-      text: "서울",
-      startDate: "2021-03-28",
-      endDate: "2021-04-01",
-    },
-  ];
-
   return (
     <Router>
       <Routes>
@@ -82,7 +32,6 @@ const App = () => {
           <Route path="/plan/*" element={<Plan />} />
           <Route path="/planDetail" element={<Detail />} />
         </Routes>
-        {/* <Footer /> */}
       </div>
     </Router>
   );
