@@ -13,10 +13,10 @@ const Check = () => {
       routeDate: "2022-03-01",
       day: 1,
       routePlaces: [
-        { placeId: 128345, placeName: "여행지1" },
-        { placeId: 125405, placeName: "여행지2" },
-        { placeId: 125406, placeName: "여행지3" },
-        { placeId: 125407, placeName: "여행지4" },
+        { placeId: 128345, placeName: "여행지1", mapX: "", mapY: "" },
+        { placeId: 125405, placeName: "여행지2", mapX: "", mapY: "" },
+        { placeId: 125406, placeName: "여행지3", mapX: "", mapY: "" },
+        { placeId: 125407, placeName: "여행지4", mapX: "", mapY: "" },
       ],
     },
     {
@@ -24,10 +24,10 @@ const Check = () => {
       routeDate: "2022-03-02",
       day: 2,
       routePlaces: [
-        { placeId: 128345, placeName: "여행지1" },
-        { placeId: 125405, placeName: "여행지2" },
-        { placeId: 125406, placeName: "여행지3" },
-        { placeId: 125407, placeName: "여행지4" },
+        { placeId: 128345, placeName: "여행지1", mapX: "", mapY: "" },
+        { placeId: 125405, placeName: "여행지2", mapX: "", mapY: "" },
+        { placeId: 125406, placeName: "여행지3", mapX: "", mapY: "" },
+        { placeId: 125407, placeName: "여행지4", mapX: "", mapY: "" },
       ],
     },
   ];

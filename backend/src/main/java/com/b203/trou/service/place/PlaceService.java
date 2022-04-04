@@ -1,11 +1,13 @@
 package com.b203.trou.service.place;
 
 import com.b203.trou.entity.place.Place;
+import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.tag.PlaceTag;
 import com.b203.trou.entity.tag.Tag;
 import com.b203.trou.entity.user.User;
 import com.b203.trou.entity.user.UserHistory;
 import com.b203.trou.model.place.PlaceDto;
+import com.b203.trou.model.review.ReviewDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.repository.place.PlaceRepository;
 import com.b203.trou.repository.tag.PlaceTagRepository;
@@ -42,15 +44,10 @@ public class PlaceService {
         if(!result.isEmpty()){
             return result;
         }
-
-
+        
         result= placeRepository.findByPlaceNameContaining(keyword);
 
         return Optional.of(result).orElseThrow(() -> new IllegalArgumentException("검색 결과가 없습니다."));
-
-
-
-
     }
 
 
@@ -74,13 +71,15 @@ public class PlaceService {
 
     public PlaceDto getPlace(long placeId) {
         Place place = placeRepository.findById(placeId).orElseThrow(() -> new IllegalArgumentException("해당 장소가 없습니다."));
-        PlaceDto result = PlaceDto.builder()
-                .placeName(place.getPlaceName())
-                .image(place.getFirstImage())
-                .mapX(place.getMapX())
-                .mapY(place.getMapY())
-                .readCount(place.getReadCount())
-                .build();
+        PlaceDto result = new PlaceDto(place);
+//        PlaceDto result = PlaceDto.builder()
+//                .placeName(place.getPlaceName())
+//                .image(place.getFirstImage())
+//                .mapX(place.getMapX())
+//                .mapY(place.getMapY())
+//                .readCount(place.getReadCount())
+//                .averageScore(place.getReviews().stream().mapToDouble(Review::getScore).average().orElse(0.0))
+//                .build();
         return result;
     }
 
