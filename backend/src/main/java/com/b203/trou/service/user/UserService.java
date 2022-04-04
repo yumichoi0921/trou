@@ -6,6 +6,8 @@ import com.b203.trou.model.user.UserJoinDto;
 import com.b203.trou.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.security.sasl.AuthenticationException;
@@ -17,11 +19,13 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // 회원 가입
     @Transactional
     public User createUser(UserJoinDto userjoindto) {
-        User build = new User(userjoindto.getEmail(), userjoindto.getUserName(), userjoindto.getPassword());
+        User build = new User(userjoindto.getEmail(), userjoindto.getUserName(), passwordEncoder.encode(userjoindto.getPassword()) );
 
         return userRepository.save(build);
     }
