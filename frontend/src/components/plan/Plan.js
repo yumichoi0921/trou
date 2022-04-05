@@ -7,7 +7,8 @@ import PlanStep3 from "./step3/PlanStep3";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
-  const [curPage, setPage] = useState(1);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [plan, setPlan] = useState({});
 
   return (
@@ -27,8 +28,6 @@ export default function Plan() {
             <PlanStep1
               tags={tags}
               setTags={setTags}
-              curPage={curPage}
-              setPage={setPage}
               plan={plan}
               setPlan={setPlan}
             ></PlanStep1>
@@ -40,12 +39,25 @@ export default function Plan() {
             <PlanStep1
               tags={tags}
               setTags={setTags}
-              curPage={curPage}
-              setPage={setPage}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+              plan={plan}
+              setPlan={setPlan}
             ></PlanStep1>
           }
         ></Route>
-        <Route path="step2" element={<h1>step2</h1>}></Route>
+        <Route
+          path="step2"
+          element={
+            <PlanStep2
+              plan={plan}
+              setPlan={setPlan}
+              selectedTags={selectedTags}
+              selectedRestaurants={selectedRestaurants}
+              setSelectedRestaurants={setSelectedRestaurants}
+            ></PlanStep2>
+          }
+        ></Route>
         <Route
           path="step3"
           element={<PlanStep3 plan={plan} setPlan={setPlan} />}
