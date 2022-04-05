@@ -3,6 +3,7 @@ package com.b203.trou.model.user;
 import com.b203.trou.entity.user.User;
 import com.b203.trou.model.review.ReviewDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class UserDto {
     long userId;
     String email;

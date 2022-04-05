@@ -33,6 +33,8 @@ public class TripOrderDto {
                 .placeName(tripOrder.getPlace().getPlaceName())
                 .image(tripOrder.getPlace().getFirstImage())
                 .averageScore(tripOrder.getPlace().getReviews().stream().mapToDouble(Review::getScore).average().orElse(0.0))
+                .mapX(tripOrder.getPlace().getMapX())
+                .mapY(tripOrder.getPlace().getMapY())
                 .build();
         this.tripOrder = tripOrder.getTripOrder();
         this.startTime = tripOrder.getStartTime();

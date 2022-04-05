@@ -123,7 +123,6 @@ const TripDetail = () => {
                             <div>{plan.text}</div>
                             <div>{plan.startDate}~{plan.endDate}</div>
                         </div>
-                        
                     </ListItem>
                 </Grid>
                 
