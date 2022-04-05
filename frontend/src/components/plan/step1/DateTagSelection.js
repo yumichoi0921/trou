@@ -4,7 +4,7 @@ import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
   console.log(props);
@@ -91,7 +91,7 @@ const PlanStep1 = (props) => {
           <Box></Box>
 
           <Button variant="contained">
-            <Link to="step2">다음</Link>
+            <Link to="/plan/step2">다음</Link>
           </Button>
         </Stack>
       </Grid>

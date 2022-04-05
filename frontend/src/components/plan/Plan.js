@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import PlanStep1 from "./step1/PlanStep1";
 import PlanStep2 from "./step2/PlanStep2";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
 
 export default function Plan() {
@@ -45,6 +45,21 @@ export default function Plan() {
     },
   ];
 
+  const step2route = (
+    <Route
+      path="step2"
+      element={
+        <PlanStep2
+          plan={plan}
+          setPlan={setPlan}
+          selectedTags={selectedTags}
+          selectedRestaurants={selectedRestaurants}
+          setSelectedRestaurants={setSelectedRestaurants}
+        ></PlanStep2>
+      }
+    ></Route>
+  );
+
   return (
     <Fragment>
       <nav>
@@ -58,17 +73,7 @@ export default function Plan() {
       <Routes>
         <Route
           path="*"
-          element={
-            <PlanStep1
-              tags={tags}
-              setTags={setTags}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
-              plan={plan}
-              setPlan={setPlan}
-              date={date}
-            ></PlanStep1>
-          }
+          element={<Navigate replace to="step1"></Navigate>}
         ></Route>
         <Route
           path="step1"
@@ -81,6 +86,7 @@ export default function Plan() {
               plan={plan}
               setPlan={setPlan}
               date={date}
+              step2route={step2route}
             ></PlanStep1>
           }
         ></Route>

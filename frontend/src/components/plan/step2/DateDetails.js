@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
 
@@ -90,7 +91,9 @@ function DateDetails(props) {
           mr={3}
           ml={3}
         >
-          <Button variant="outlined">뒤로가기</Button>
+          <Button variant="outlined">
+            <Link to="/plan/step1">뒤로가기</Link>
+          </Button>
           <Button variant="contained">일정생성</Button>
         </Stack>
       </Grid>
