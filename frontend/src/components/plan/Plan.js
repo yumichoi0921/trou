@@ -22,10 +22,10 @@ export default function Plan() {
       routeId: "",
       routeDate: "",
       day: "",
-      orders: [],
+      order: [],
     },
   ];
-  const orders = [
+  const order = [
     {
       tripOrder: 0,
       placeId: 128345,
