@@ -10,7 +10,7 @@ const TagButton = styled(Button)((props) => ({
     borderColor: "#0062cc",
   },
 }));
-function TagList({ tags, setTags }) {
+function TagList({ tags, setTags, selectedTags, setSelectedTags }) {
   async function reverseButton(index) {
     const newTags = [...tags];
     newTags[index].isSelected = !newTags[index].isSelected;
