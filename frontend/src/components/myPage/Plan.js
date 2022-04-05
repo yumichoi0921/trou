@@ -4,12 +4,10 @@ import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import { Fragment } from 'react';
 import styles from './MyPage.module.css';
-import Plan from './Plan';
-import TripDetail from './TripDetail';
 
 
-const TripPlan = ({plan, getTripDetail}) => {
-
+const TripPlan = ({plan, image}) => {
+    console.log(image)
     function handleClick(planId){
         window.location.replace("/trip-detail/"+planId.planId);
     }
@@ -26,8 +24,7 @@ const TripPlan = ({plan, getTripDetail}) => {
                 </Grid>
                 <Grid item xs={3}>
                     <ListItem>
-                        <div className={styles.image}>
-                        </div>
+                        <img src={image} className={styles.image}></img>
                     </ListItem>
                 </Grid>
                 <Grid item xs={8}>                                      

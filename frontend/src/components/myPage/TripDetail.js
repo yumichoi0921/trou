@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import { Fragment } from 'react';
 import Place from './Place';
-import Review from './Review';
 import Schedule from "./Schedule";
 import {useParams} from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -14,43 +13,25 @@ const TripDetail = () => {
     const{planId} = useParams();   
     const [routes, setRoutes] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
       const getRoutes = async () => {
         try {
           const response = await axios.get("/route/" + planId);
           setRoutes(response.data);
-
+          console.log("여기")
+          console.log(response.data)
           for (const route of response.data) {
             const response = await axios.get("/order/" + route.routeId);
             console.log("orders")
-            console.log(response.data)
             setOrders(response.data);
             //console.log(route.routeId) //routeid: 32, 33
-            getReviews();
-          }
-
-      } catch (e) {
-          console.log(e);
-        }
-      };
-
-      const getReviews = async () => {
-        console.log("inside getReviews");
-        console.log(orders);
-        try {
-          for (const order of orders) {
-            const response = await axios.get("/review/place/" + order.placeId);
-            setReviews(response.data)
           }
       } catch (e) {
           console.log(e);
         }
       };
-
       getRoutes();
-      getReviews();
     }, []);
 
     const plan = {
@@ -106,7 +87,7 @@ const TripDetail = () => {
           planId: '부산여행',
           place: '남천동',
           order: 1,
-          review: 3,
+          review: 3.5,
         },
         {
           id: 7,
@@ -114,7 +95,7 @@ const TripDetail = () => {
           planId: '부산여행',
           place: '남천동',
           order: 2,
-          review: 2,
+          review: 2.5,
         },
         {
           id: 8,
@@ -130,7 +111,7 @@ const TripDetail = () => {
           planId: '부산여행',
           place: '남천동',
           order: 4,
-          review: 4,
+          review: 4.0,
         },
         {
           id: 10,
@@ -138,7 +119,7 @@ const TripDetail = () => {
           planId: '부산여행',
           place: '남천동',
           order: 5,
-          review: 3,
+          review: 3.1,
         },
     ];*/
     /*const routes = [
@@ -174,12 +155,7 @@ const TripDetail = () => {
                 <Schedule></Schedule>
                 {orders.map((order)=>(
                   <div>
-                    <Place key={order.orderId} order={order} />
-                  </div>
-                ))}
-                {reviews.map((review)=>(
-                  <div>
-                    <Review key={review.reviewId} review={review} />
+                    <Place key={order.id} order={order} />
                   </div>
                 ))}
             </Grid>                       
