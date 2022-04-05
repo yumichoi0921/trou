@@ -2,36 +2,36 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Collapse } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import Place from "./Place";
-const Route = ({ index, route, routes, orderSetter }) => {
-  const [places, setPlaces] = useState(route["routePlaces"]);
+const Route = ({ index, route, routes, setRoutes }) => {
   const [open, setOpen] = React.useState(false);
-
-  useEffect(() => {
-    const newRoutes = [...routes];
-    newRoutes[index]["routePlaces"] = places;
-    orderSetter(newRoutes);
-  }, [places]);
+  const [order, setOrder] = useState(route.order);
 
   const handleChange = () => {
     setOpen((prev) => !prev);
   };
-  const movePlace = useCallback(
-    (dragIndex, hoverIndex) => {
-      const newCards = [...places];
-      newCards.splice(dragIndex, 1);
-      newCards.splice(hoverIndex, 0, places[dragIndex]);
-      setPlaces(newCards);
-    },
-    [places]
-  );
 
-  const placeList = places.map((item, index) => (
+  useEffect(() => {
+    const newRoute = { ...route };
+    newRoute.order = order;
+    const newRoutes = [...routes];
+    newRoutes[index] = newRoute;
+    setRoutes(newRoutes);
+  }, [order]);
+
+  const movePlace = useCallback((dragIndex, hoverIndex) => {
+    const newOrder = [...route.order];
+    newOrder.splice(dragIndex, 1);
+    newOrder.splice(hoverIndex, 0, route.order[dragIndex]);
+    setOrder(newOrder);
+  });
+
+  let placeList = route.order.map((place, index) => (
     <Place
       index={index}
-      id={item.placeId}
-      name={item.placeName}
+      id={place.placeId}
+      name={place.placeName}
       movePlace={movePlace}
-      key={item.placeId}
+      key={place.placeId}
     />
   ));
 
