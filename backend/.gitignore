@@ -38,3 +38,4 @@ out/
 
 ### Secret Files ###
 **/application-secret.yml
+**/data/**
