@@ -7,9 +7,18 @@ import PlanStep3 from "./step3/PlanStep3";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [plan, setPlan] = useState({});
+
+  const date = {
+    startDate: startDate,
+    setStartDate: setStartDate,
+    endDate: endDate,
+    setEndDate: setEndDate,
+  };
 
   // const plan = {
   // planId:"",
@@ -53,8 +62,11 @@ export default function Plan() {
             <PlanStep1
               tags={tags}
               setTags={setTags}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
               plan={plan}
               setPlan={setPlan}
+              date={date}
             ></PlanStep1>
           }
         ></Route>
@@ -68,6 +80,7 @@ export default function Plan() {
               setSelectedTags={setSelectedTags}
               plan={plan}
               setPlan={setPlan}
+              date={date}
             ></PlanStep1>
           }
         ></Route>

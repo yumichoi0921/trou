@@ -1,4 +1,4 @@
-import Date from "./Step1DatePicker";
+import Step1DatePicker from "./Step1DatePicker";
 import TagToggleButton from "./TagToggleButton";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
@@ -7,15 +7,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-
+  console.log(props);
   useEffect(() => {
     const setDate = async () => {
       try {
         const plan = {
-          startDate: startDate,
-          endDate: endDate,
+          startDate: props.startDate,
+          endDate: props.endDate,
           routes: [],
         };
         props.setPlan(plan);
@@ -25,7 +23,7 @@ const PlanStep1 = (props) => {
       }
     };
     setDate();
-  }, [startDate, endDate]);
+  }, [props.startDate, props.endDate]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
@@ -46,13 +44,21 @@ const PlanStep1 = (props) => {
           <Item>가는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={startDate} setDate={setStartDate} />
+          <Step1DatePicker
+            date={props.date.startDate}
+            setDate={props.date.setStartDate}
+            str={"start"}
+          />
         </Grid>
         <Grid item md={5}>
           <Item>돌아오는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={endDate} setDate={setEndDate} />
+          <Step1DatePicker
+            date={props.date.endDate}
+            setDate={props.date.setEndDate}
+            str={"end"}
+          />
         </Grid>
       </Grid>
 

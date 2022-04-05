@@ -11,7 +11,7 @@ export default function LocalizedDatePicker(props) {
       <div>
         <DatePicker
           value={props.date}
-          onChange={(newValue) => props.setDate(newValue)}
+          onChange={props.setDate}
           renderInput={(params) => <TextField {...params} />}
         />
       </div>

@@ -18,6 +18,7 @@ const PlanStep1 = (props) => {
           setSelectedTags={props.setSelectedTags}
           plan={props.plan}
           setPlan={props.setPlan}
+          date={props.date}
         ></DateTagSelection>
       </Grid>
 

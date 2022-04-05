@@ -22,7 +22,6 @@ function TagList({ tags, setTags, selectedTags, setSelectedTags }) {
   useEffect(() => {
     async function getTags() {
       const res = await axios.get("http://localhost:8080/tag");
-      console.log(res.data.length);
       const resTags = res.data;
       setTags(
         resTags.map((resTag) => {
