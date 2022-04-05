@@ -1,14 +1,21 @@
-import {Stack, Button} from "@mui/material";
+import { Stack, Button, TextField } from "@mui/material";
 
-const Memo = ({memo, setMemoState}) => {
+const Memo = ({ memo, setMemoState }) => {
     return (
         <Stack direction="column"
             justifyContent="center"
             alignItems="center"
             spacing={1} >
             <p>메모장</p>
-            <p>{memo}</p>
-            <Button variant="outlined" onClick={event=>{
+            <TextField
+                id="outlined-multiline-static"
+                //   label="메모장"
+                multiline
+                rows={4}
+                defaultValue={memo}
+            /> <br />
+            {/* <pre>{memo}</pre> */}
+            <Button variant="outlined" onClick={event => {
                 event.preventDefault();
                 setMemoState(false);
             }}>수정</Button>
