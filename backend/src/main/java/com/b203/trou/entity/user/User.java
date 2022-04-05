@@ -76,7 +76,6 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        System.out.println("왜에에에에에에에엥에에에ㅔㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
         return email;
     }
 

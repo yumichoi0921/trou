@@ -55,14 +55,6 @@ public class UserController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         //생성된 Token을 Response Header에 넣고, Token vo 객체를 이용해 Response Body에도 넣어서 리턴
         return new ResponseEntity<>(new TokenDto(jwt, userService.signInUser(userdto)), httpHeaders, HttpStatus.OK);
-
-//        try {
-//            System.out.println(userdto);
-//            UserDto userDto = userService.signInUser(userdto);
-//            return ResponseEntity.ok(userDto);
-//        } catch (AuthenticationException e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//        }
     }
 
     @GetMapping("/{userEmail}")
@@ -78,10 +70,5 @@ public class UserController {
 
        }
 
-//        if(userService.CheckUserEmail(useremail)!=null){
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//        }else{
-//            return ResponseEntity.ok().build();
-//        }
     }
 }

@@ -20,10 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-//       User user = userRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("해당하는 유저가 없습니다."));
-        System.out.println("아아아아악!!!!!"+username);
         User user = userRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("해당하는 유저가 없습니다."));
-        System.out.println("아아아아악!!!!!"+user.toString());
         return org.springframework.security.core.userdetails.User.builder().username(user.getEmail()).password(user.getPassword()).roles(user.getRole().getKey()).build();
 
     }
