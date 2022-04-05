@@ -4,7 +4,7 @@ import DateTagSelection from "./DateTagSelection";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import React, { useState, useEffect } from "react";
-import KakaoMap from "../step3/Step3KakaoMap";
+import KakaoMap from "./Step1KakaoMap";
 
 const PlanStep1 = (props) => {
   function nextPage() {
