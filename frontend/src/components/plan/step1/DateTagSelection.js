@@ -1,19 +1,12 @@
-import Date from "../Date";
+import Date from "./Step1DatePicker";
 import TagToggleButton from "./TagToggleButton";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  function nextPage() {
-    if (props.curPage === 3) return;
-    props.setPage(props.curPage + 1);
-  }
-  function prevPage() {
-    if (props.curPage === 1) return;
-    props.setPage(props.curPage - 1);
-  }
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
@@ -26,6 +19,7 @@ const PlanStep1 = (props) => {
           routes: [],
         };
         props.setPlan(plan);
+        console.log(plan);
       } catch (e) {
         console.log(e);
       }
@@ -71,6 +65,8 @@ const PlanStep1 = (props) => {
             <TagToggleButton
               tags={props.tags}
               setTags={props.setTags}
+              selectedTags={props.selectedTags}
+              setSelectedTags={props.setSelectedTags}
             ></TagToggleButton>
           </Grid>
         </Grid>
@@ -84,16 +80,12 @@ const PlanStep1 = (props) => {
           spacing={2}
           mt={3}
           mr={3}
+          ml={3}
         >
-          {props.curPage !== 1 ? (
-            <Button variant="outlined" onClick={prevPage}>
-              이전
-            </Button>
-          ) : (
-            <Box></Box>
-          )}
-          <Button variant="contained" onClick={nextPage}>
-            다음
+          <Box></Box>
+
+          <Button variant="contained">
+            <Link to="step2">다음</Link>
           </Button>
         </Stack>
       </Grid>
