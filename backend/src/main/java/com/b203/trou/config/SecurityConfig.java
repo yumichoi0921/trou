@@ -47,12 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                  .and()
                  .authorizeRequests()
-                 .antMatchers("/users/*").permitAll()
-                 .anyRequest().authenticated()
+                 .antMatchers("/*").permitAll()
+
 
                  .and()
                  .apply(new JwtSecurityConfig(tokenProvider)); // 커스텀하게 작선한 jwtSecurityConfig도 적용
 
 
     }
+//     .anyRequest().authenticated()
 }

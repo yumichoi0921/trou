@@ -7,7 +7,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TockenDto {
+public class TokenDto {
 
     private String tocken;
+    private UserDto user;
 }
