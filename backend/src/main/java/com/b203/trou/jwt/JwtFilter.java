@@ -1,0 +1,57 @@
+package com.b203.trou.jwt;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.GenericFilterBean;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+@Slf4j
+@RequiredArgsConstructor
+/**jwt 커스텀 필터
+JwtFilter : API에 요청이 오게되면 헤더에 토큰이 있나없나 확인
+ JWT 토큰의 인증정보를 SecurityContext에 저장하는 로직을 구현함.
+ request의 header에서 토큰정보를 꺼내오고 유효성 체크후(tokenProvider.validateToken()) 유효하다면, securityContext에 인증정보(Authentication)을 저장한다.**/
+public class JwtFilter extends GenericFilterBean {
+
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    private final TokenProvider tokenProvider;
+
+    //jwt 토큰의 인증 정보를 현재 실행중인 스레드(Security Context) 에 저장한다.
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+
+        //request  에서 jwt 토큰 정보 추출
+        String jwt = resolveToken(httpServletRequest);
+        String requestURI = httpServletRequest.getRequestURI();
+
+        //토큰 유효성 검증에 통과하면
+        if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+            Authentication authentication = tokenProvider.getAuthentication(jwt);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+        } else {
+            log.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+        }
+
+        chain.doFilter(request, response);
+    }
+
+    //request header에서 토큰 정보를 꺼내오는 메소드
+    private String resolveToken(HttpServletRequest httpServletRequest) {
+        String bearerToken = httpServletRequest.getHeader(AUTHORIZATION_HEADER);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+}
