@@ -60,9 +60,19 @@ public class TripRouteService {
         return new TripRouteDto(tripRoute);
     }
 
+    @Transactional
+    public TripRouteDto modifyMemo(TripRouteDto tripRouteDto, long routeId) {
+        TripRoute tripRoute = tripRouteRepository.findById(routeId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 루트가 없습니다."));
+        tripRoute.setMemo(tripRouteDto.getMemo());
+//        tripRouteRepository.save(tripRoute);
+        return new TripRouteDto(tripRoute);
+    }
+
     public TripRouteDto deleteTripRoute(long routeId) {
         TripRoute tripRoute = tripRouteRepository.findById(routeId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 루트가 없습니다."));
         tripRouteRepository.delete(tripRoute);
         return new TripRouteDto(tripRoute);
     }
+
+
 }

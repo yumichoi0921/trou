@@ -1,36 +1,31 @@
 import {Stack, Grid, Avatar} from "@mui/material";
-import ShareModal from "./ShareModal"
+import { React, useEffect, useState } from "react";
+import ShareModal from "./ShareModal";
+import axios from "axios";
+import ShowFreinds from "./ShowFriends";
 
 // 공유된 친구 이름 props로 받아서 넣기                    
-const ShareFriends = () => {
-    function stringToColor(string) {
-        let hash = 0;
-        let i;
-        
-        /* eslint-disable no-bitwise */
-        for (i = 0; i < string.length; i += 1) {
-            hash = string.charCodeAt(i) + ((hash << 5) - hash);
-        }
-    
-        let color = '#';
-    
-        for (i = 0; i < 3; i += 1) {
-            const value = (hash >> (i * 8)) & 0xff;
-            color += `00${value.toString(16)}`.slice(-2);
-        }
-        /* eslint-enable no-bitwise */
-        
-        return color;
-    }
-    
-    function stringAvatar(name) {
-        return {
-            sx: {
-                bgcolor: stringToColor(name),
-            },
-            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-        };
-    }
+const ShareFriends = (props) => {
+    const [friends, setFriends] = useState([]);
+
+    const initShareFriends = async () => {
+        await axios.get("/share/" + props.planId).then((res) => {
+            console.log(res.data);
+            const tmp = [];
+            res.data.map((user,index) => {
+                let newTmp = user.userName;
+                tmp.push(newTmp);
+            });
+            setFriends(tmp);
+            // freinds.push(res.data.userName);
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
+    useEffect(() => {
+        initShareFriends();
+    }, []);
     
     return (
         <Stack direction="column"
@@ -39,7 +34,10 @@ const ShareFriends = () => {
             spacing={1} >
             <p>초대 친구들</p>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
+                {friends.map((friend,index) => (
+                    <ShowFreinds key={index} friend={friend}></ShowFreinds>
+                ))}
+                {/* <Grid item xs={6}>
                     <Avatar {...stringAvatar('Kent Dodds')} />
                 </Grid>
                 <Grid item xs={6}>
@@ -47,9 +45,9 @@ const ShareFriends = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Avatar {...stringAvatar('Tim Neutkens')} />
-                </Grid>
+                </Grid> */}
             </Grid>
-            <ShareModal></ShareModal>
+            <ShareModal friends={friends} setFriends={setFriends}></ShareModal>
             {/* <Button variant="outlined">공유</Button> */}
 
         </Stack>
