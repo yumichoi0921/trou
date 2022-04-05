@@ -3,7 +3,7 @@ import TagToggleButton from "./TagToggleButton";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import Item from "../child/Item";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const PlanStep1 = (props) => {
   function nextPage() {
@@ -14,6 +14,24 @@ const PlanStep1 = (props) => {
     if (props.curPage === 1) return;
     props.setPage(props.curPage - 1);
   }
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+  useEffect(() => {
+    const setDate = async () => {
+      try {
+        const plan = {
+          startDate: startDate,
+          endDate: endDate,
+          routes: [],
+        };
+        props.setPlan(plan);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    setDate();
+  }, [startDate, endDate]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
@@ -34,13 +52,13 @@ const PlanStep1 = (props) => {
           <Item>가는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={props.beginDate} setDate={props.setBeginDate} />
+          <Date date={startDate} setDate={setStartDate} />
         </Grid>
         <Grid item md={5}>
           <Item>돌아오는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={props.endDate} setDate={props.setEndDate} />
+          <Date date={endDate} setDate={setEndDate} />
         </Grid>
       </Grid>
 

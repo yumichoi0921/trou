@@ -3,9 +3,8 @@ import TagToggleButton from "./TagToggleButton";
 import DateTagSelection from "./DateTagSelection";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
-import Item from "../child/Item";
-import React from "react";
-import KakaoMap from "../step3/Step3KakaoMap";
+import React, { useState, useEffect } from "react";
+import KakaoMap from "./Step1KakaoMap";
 
 const PlanStep1 = (props) => {
   function nextPage() {
@@ -20,31 +19,26 @@ const PlanStep1 = (props) => {
   return (
     <Grid container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
-      <Grid item md={3} sx={{ textAlign: "center" }}>
+      <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateTagSelection
           tags={props.tags}
           setTags={props.setTags}
           curPage={props.curPage}
           setPage={props.setPage}
-          beginDate={props.beginDate}
-          setBeginDate={props.setBeginDate}
-          endDate={props.endDate}
-          setEndDate={props.setEndDate}
+          plan={props.plan}
+          setPlan={props.setPlan}
         ></DateTagSelection>
-        {/* <Check></Check> */}
       </Grid>
 
       {/* Grid 지도 */}
-      <Grid item md={6}>
+      <Grid item md={6} sx={{ height: "100%" }}>
         <Area sx={{ overflow: "auto" }}>
           <KakaoMap></KakaoMap>
         </Area>
       </Grid>
       {/* Grid 오른쪽 여행지 추천 */}
       <Grid item md={3}>
-        <Area sx={{ overflow: "auto" }}>
-          <KakaoMap></KakaoMap>
-        </Area>
+        <Area sx={{ overflow: "auto" }}>{/* <KakaoMap></KakaoMap> */}</Area>
       </Grid>
     </Grid>
   );
