@@ -10,7 +10,7 @@ import axios from "axios";
 const clientId =
   "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
 
-export default function FirstMain() {
+export default function Login() {
 
   const onSuccess = async (response) => {
     // const { googleId, profileObj : { email, name } } = response;
