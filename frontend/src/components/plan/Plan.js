@@ -10,40 +10,15 @@ export default function Plan() {
   const [curPage, setPage] = useState(1);
   const [plan, setPlan] = useState({});
 
-  // const plan = {
-  // planId:"",
-  //   startDate: "",
-  //   endDate: "",
-  //   routes: [],
-  // };
-
-  const route = [
-    {
-      routeId: "",
-      routeDate: "",
-      day: "",
-      order: [],
-    },
-  ];
-  const order = [
-    {
-      tripOrder: 0,
-      placeId: 128345,
-      placeName: "여행지1",
-      mapX: "",
-      mapY: "",
-    },
-  ];
-
   return (
     <Fragment>
-      <nav>
+      {/* <nav>
         <Link to="step1">step1</Link>
         <br></br>
         <Link to="step2">step2</Link>
         <br></br>
         <Link to="step3">step3</Link>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route

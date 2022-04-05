@@ -1,14 +1,14 @@
 /* global kakao */
 const INF = Infinity;
 async function getMinDistance(order) {
-  const place = order.slice(0, order.length - 1);
+  const places = order.slice(0, order.length - 1);
   const edges = [];
-  for (const s of place) {
+  for (const s of places) {
     const distances = [];
-    for (const e of place) {
+    for (const e of places) {
       const line = [
-        new kakao.maps.LatLng(s.mapX, s.mapY),
-        new kakao.maps.LatLng(e.mapX, e.mapY),
+        new kakao.maps.LatLng(s.place.mapY, s.place.mapX),
+        new kakao.maps.LatLng(e.place.mapY, e.place.mapX),
       ];
       var polyline = await new kakao.maps.Polyline({
         path: line, // 선을 구성하는 좌표배열 입니다

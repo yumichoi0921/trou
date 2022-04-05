@@ -4,6 +4,7 @@ import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.trip.TripOrder;
 import com.b203.trou.model.place.PlaceDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 import java.util.stream.DoubleStream;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class TripOrderDto {
 
