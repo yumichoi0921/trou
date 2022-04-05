@@ -35,13 +35,7 @@ const PlanStep1 = (props) => {
       </Grid>
 
       {/* Grid 지도 */}
-      <Grid item md={6}>
-        <Area sx={{ overflow: "auto" }}>
-          <KakaoMap></KakaoMap>
-        </Area>
-      </Grid>
-      {/* Grid 오른쪽 여행지 추천 */}
-      <Grid item md={3}>
+      <Grid item md={9}>
         <Area sx={{ overflow: "auto" }}>
           <KakaoMap></KakaoMap>
         </Area>

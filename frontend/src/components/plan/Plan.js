@@ -20,9 +20,7 @@ export default function Plan() {
     <Fragment>
       <nav>
         <Link to="step1">step1</Link>
-        <br></br>
         <Link to="step2">step2</Link>
-        <br></br>
         <Link to="step3">step3</Link>
       </nav>
 
@@ -57,7 +55,7 @@ export default function Plan() {
             ></PlanStep1>
           }
         ></Route>
-        <Route path="step2" element={<h1>step2</h1>}></Route>
+        <Route path="step2" element={<PlanStep2></PlanStep2>}></Route>
         <Route path="step3" element={<h1>step3</h1>}></Route>
       </Routes>
     </Fragment>
