@@ -24,7 +24,7 @@ export default function Join() {
   const [email2, setEmail2] = useState("");
   const [userName, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  const [passwordCheck, setPasswordCheck] = useState("");
   //중복 체크를 했는지 확인   변수
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
@@ -61,17 +61,21 @@ export default function Join() {
     } else if (!checkPassword) {
       alert("비밀번호를 확인해주세요");
       setPassword("");
+    } else if (password!=passwordCheck) { 
+      alert("비밀번호가 맞지 않습니다.");
+      setPasswordCheck("");
     } else { 
 
       let body = {
         email: email,
         password: password,
-        userName: userName
+        name: userName
       }
-      axios.post("/users/signup", { body }).then((res) => {
+      console.log(body);
+      axios.post("/users/signup", body ).then((res) => {
         
         alert("회원 가입 완료!");
-        document.location.href = '/login'
+        document.location.href = '/select'
       }).catch(error => {
         alert("가입 실패!");
         })
@@ -153,6 +157,15 @@ export default function Join() {
                 type="password"
                 autoComplete="current-password"
               />
+              <p className={styles.input_title}>PW Check</p>
+              <TextField
+                className={styles.input_text}
+                id="outlined-password-input"
+                onChange={(e) => setPasswordCheck(e.target.value)}
+                label="비밀번호를 다시 입력하세요"
+                type="password"
+                autoComplete="current-password"
+              />
               <div className={styles.Join_form_btn}>
                 <Button
                   className={styles.signup_btn}
@@ -162,15 +175,7 @@ export default function Join() {
                 >
                   가입하기
                 </Button>
-                {/* <Button
-                  className={styles.Back_btn}
-                  component={Link}
-                  to={"/login"}
-                  variant="contained"
-                  size="large"
-                >
-                  뒤로가기
-                </Button> */}
+                
               </div>
             </form>
           </CardContent>

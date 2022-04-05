@@ -17,6 +17,21 @@ export default function Login() {
     // await onGoogleLogin (
     //   // 구글 로그인 성공시 서버에 전달할 데이터
     // );
+
+    const profile = response.getBasicProfile();
+    const userdata = {
+    
+      auth_code: profile.getId()
+    }; 
+
+    // axios.post("/users/signin", body).then((res) => {
+    //   document.location.href = '/main'
+    // }).catch(error => {
+    //   alert("아이디 또는 비밀번호를 확인해주세요.");
+    //   setUserEmaill("");
+    //   setUserPassword("");
+    // })
+   
   };
 
   const onFailure = (error) => {
@@ -27,7 +42,9 @@ export default function Login() {
   const [userPassword, setUserPassword] = useState("");
 
   const Login = () => { 
-    if (userEmail == "" && userPassword == "") {
+    const em = userEmail;
+    const pa = userPassword;
+    if (em == "" && pa == "") {
       alert("아이디 또는 비밀번호를 입력해주세요.");
     } else {
       let body = {
@@ -35,7 +52,7 @@ export default function Login() {
         password: userPassword
       }
       axios.post("/users/signin", body).then((res) => {
-        document.location.href = '/main'
+        console.log(res);
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
         setUserEmaill("");
@@ -43,6 +60,7 @@ export default function Login() {
       })
     }
   }
+
 
   return (
     <div className={styles.backgound}>
@@ -65,7 +83,7 @@ export default function Login() {
                 label="이메일를 입력하세요."
                 type="text"
                 value={userEmail}
-                onKeyPress={ Login }
+        
                 onChange={ (e)=>setUserEmaill(e.target.value)}
               />
               <p className={styles.input_title}>PW</p>
@@ -77,7 +95,7 @@ export default function Login() {
                 autoComplete="current-password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-                onKeyPress={ Login }
+                
               />
               <div className={styles.form_link}>
                 <span className={styles.join_btn}>

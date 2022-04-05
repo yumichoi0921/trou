@@ -1,7 +1,7 @@
 import backgroundVideo from "../img/background.mp4";
 
 import styles from "../FirstMain/FirstMain.module.css";
-import { Card} from "@mui/material";
+import { Card } from "@mui/material";
 
 export default function SelectPlace() {
   return (

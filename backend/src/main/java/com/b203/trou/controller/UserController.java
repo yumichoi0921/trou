@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -30,16 +29,19 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    @ApiOperation(value = "registerInfo", notes = "회원가입")
+
+    @ApiOperation(value = "register", notes = "회원가입")
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody UserJoinDto userjoindto) {
+        System.out.println(userjoindto.toString());
         userService.createUser(userjoindto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
+    @ApiOperation(value = "signin", notes = "로그인")
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody UserDto userdto) throws AuthenticationException {
         System.out.println(userdto.getEmail()+ userdto.getPassword());
@@ -57,6 +59,8 @@ public class UserController {
         return new ResponseEntity<>(new TokenDto(jwt, userService.signInUser(userdto)), httpHeaders, HttpStatus.OK);
     }
 
+
+    @ApiOperation(value = "checkEmail", notes = "이메일 중복 확인")
     @GetMapping("/{userEmail}")
     public ResponseEntity<?> checkEmail(@PathVariable("userEmail") String useremail) throws AuthenticationException {
        try{
@@ -70,5 +74,8 @@ public class UserController {
 
        }
 
+
     }
+
+
 }
