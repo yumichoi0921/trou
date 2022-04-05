@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-export default function FirstMain() {
+export default function Join() {
   const emailList = [
     { label: "naver.com" },
     { label: "hanmail.net" },
