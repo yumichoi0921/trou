@@ -50,7 +50,7 @@ public class ShareService {
         List<Share> shares = shareRepository.findByTripPlanId(planId).orElseThrow(() -> new IllegalArgumentException("해당하는 정보가 없습니다."));;
         List<UserDto> userDtos = shares.stream().map(share -> UserDto.builder()
                 .userId(share.getUser().getId())
-                .userName(share.getUser().getUserName())
+                .name(share.getUser().getName())
                 .email(share.getUser().getEmail())
                 .build())
                 .collect(Collectors.toList());

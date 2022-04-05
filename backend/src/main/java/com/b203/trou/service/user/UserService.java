@@ -66,17 +66,16 @@ public class UserService  {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당하는 유저 정보가 없습니다."));
         return UserDto.builder()
                 .userId(user.getId())
-                .userName(user.getUserName())
+                .name(user.getName())
                 .build();
     }
 
     public List<UserDto> getUsers(String keyword) {
-        System.out.println("서비스 들어옴");
         List<User> user = userRepository.findByEmailStartingWith(keyword).orElseThrow(() -> new IllegalArgumentException("해당하는 유저 리스트가 없습니다."));
-        System.out.println(user.get(0).getUserName());
+        System.out.println(user.get(0).getName());
         List<UserDto> userDtos = user.stream()
                 .map(user1 -> UserDto.builder()
-                        .userName(user1.getUserName())
+                        .name(user1.getName())
                         .userId(user1.getId())
                         .email(user1.getEmail())
                         .build()).collect(Collectors.toList());

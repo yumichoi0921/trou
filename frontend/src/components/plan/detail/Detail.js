@@ -4,7 +4,7 @@
 /* global kakao */
 import React, { Fragment, useEffect, useState } from "react";
 import { Grid, Box, Button, Stack, Divider, MenuItem } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Routes } from "react-router-dom";
 import SelectDay from "./SelectDay";
 import axios from "axios";
 import OrderListBar from "./OrderListBar";
@@ -26,6 +26,51 @@ const Detail = () => {
     const [dList, setDList] = useState([]);    // props로 받은거 넣기?
     const [routeId, setRouteId] = useState(0);
     const [orderList, setOrderList] = useState([]);
+    const [sendData, setSendData] = useState([]);
+
+    const initSendData = (routeList) => {
+        console.log("initSendData !!!");
+        // 0번째는 이미 받았어 1번째부터 for문으로 받아서 저장하자.
+        let routeLen = routeList.length;
+        let tmpRoute = [];
+        const tmpSend = [];
+        for(let idx = 0;idx < routeLen; idx++){
+            let id = routeList[idx].routeId;
+            let date = routeList[idx].routeDate;
+            let rday = routeList[idx].day;
+            axios.get(`/order/${routeList[idx].routeId}`).then((res) => {
+                let orders = res.data;
+                let tmpOrder = [];
+                for(let j=0;j<orders.length;j++){
+                    tmpOrder.push({
+                        tripOrder : orders[j].tripOrder,
+                        placeId :  orders[j].place.placeId,
+                        placeName : orders[j].place.placeName,
+                        mapX : orders[j].place.mapX,
+                        mapY : orders[j].place.mapY,
+                    });
+                }
+                tmpRoute.push({
+                    routeId : id,
+                    routeDate : date,
+                    day : rday,
+                    order : tmpOrder
+                });
+                
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        console.log('tmpSend 넣어주는 곳');
+        tmpSend.push({
+            startDate : routeList[0].routeDate, 
+            endDate : routeList[routeLen-1].routeDate,
+            routes : tmpRoute
+        });
+        setSendData(tmpSend);
+        console.log('으아아 센드데이터',tmpSend);
+        // console.log(routes,orders);
+    };
 
     const initRoute = async () => {  // async ? 
         try {
@@ -36,7 +81,7 @@ const Detail = () => {
                 baseURL: "http://localhost:8080",
                 timeout: 2000,
             });
-
+            console.log('route! : ' , response.data);
             setDList(response.data);
             setMemo(response.data[0].memo);
             setRouteId(response.data[0].routeId);
@@ -52,6 +97,8 @@ const Detail = () => {
                 });
                 console.log('orderList : ', res.data);
                 setOrderList(res.data);
+
+                await initSendData(response.data);
             } catch {
                 console.log('에러발생');
             }
@@ -122,7 +169,7 @@ const Detail = () => {
                                 <Grid item xs={3}>
                                     <Button
                                         component={Link}
-                                        to={"/"}    //**************** 수정하는 페이지로 변경하기 ***************/ 
+                                        to={"step3"}    //**************** 수정하는 페이지로 변경하기 ***************/ 
                                         variant="contained">
                                         수정하기
                                     </Button>
@@ -137,11 +184,18 @@ const Detail = () => {
                             <OrderListBar orderList={orderList}></OrderListBar>
                         </Stack>
                         <Area sx={{ overflow: "auto" }}>
-                            <KakaoMap></KakaoMap>
+                            {/* <KakaoMap plan={sendData}></KakaoMap> */}
                         </Area>
                     </Grid>
                 </Grid>
             </Box>
+
+            {/* <Routes>
+                <Route
+                    path="*"
+
+                ></Route>
+            </Routes> */}
         </Fragment>
     );
 };
