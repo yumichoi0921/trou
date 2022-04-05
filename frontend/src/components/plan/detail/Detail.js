@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 /* global kakao */
 import React, { Fragment, useEffect, useState } from "react";
-import { styled, Grid, Box, Button, Stack, Paper, Divider, Menu, MenuItem, alpha, TextareaAutosize, Avatar, InputLabel, FormControl, Select } from "@mui/material";
+import { Grid, Box, Button, Stack, Divider, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import SelectDay from "./SelectDay";
 import axios from "axios";
@@ -13,19 +13,16 @@ import ModifyMemo from "./ModifyMemo";
 import Weather from "./Weather";
 import ShareFriends from "./ShareFriends";
 import KakaoMap from "../step3/Step3KakaoMap";
-// import KakaoMap from "../KakaoMap";
 import Area from "../child/Area";
-import Item from "../child/Item";
 import Local from "../child/Local";
 
 import { useParams } from "react-router-dom";
-import { Schedule } from "@mui/icons-material";
 
 const Detail = () => {
     const { planId } = useParams();
     const [day, setDay] = React.useState(0);
     const [memoState, setMemoState] = useState(true);
-    const [memo, setMemo] = useState('1. 룰루 2. 랄라 3. 히히');    // 서버에서 받아온 값으로 변경됨
+    const [memo, setMemo] = useState();    // 서버에서 받아온 값으로 변경됨
     const [dList, setDList] = useState([]);    // props로 받은거 넣기?
     const [routeId, setRouteId] = useState(0);
     const [orderList, setOrderList] = useState([]);
@@ -39,8 +36,6 @@ const Detail = () => {
                 baseURL: "http://localhost:8080",
                 timeout: 2000,
             });
-            // let routeIdList = response.data.map(route => route.routeId);
-            // let routes = Array.from(response.data);
 
             setDList(response.data);
             setMemo(response.data[0].memo);
@@ -49,7 +44,6 @@ const Detail = () => {
             let rId = response.data[0].routeId;
             console.log('id : ', rId);
             try {
-                // console.log(routeId);
                 const res = await axios({
                     method: "get",
                     url: `/order/${rId}`,
@@ -140,11 +134,7 @@ const Detail = () => {
                                     <Weather></Weather>
                                 </Grid>
                             </Grid>
-                            {/* <Schedule></Schedule> */}
                             <OrderListBar orderList={orderList}></OrderListBar>
-                            {/* {orderList.map((order, index) => (
-                                <OrderListBar key={index} order={order}></OrderListBar>
-                            ))} */}
                         </Stack>
                         <Area sx={{ overflow: "auto" }}>
                             <KakaoMap></KakaoMap>

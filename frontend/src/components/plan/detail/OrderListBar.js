@@ -1,4 +1,4 @@
-import {Box, Stepper, StepLabel, StepContent, Step } from '@mui/material';
+import {Box, Stepper, StepLabel, Step } from '@mui/material';
 import Item from '../child/Item';
 
 const OrderListBar = ({orderList}) => {
@@ -13,10 +13,6 @@ const OrderListBar = ({orderList}) => {
                             시작 시간 : {label.startTime} <br/>
                             종료 시간 : {label.endTime} 
                         </StepLabel>
-                        {/* <StepContent>
-                            시작 시간 : {label.startTime} <br/>
-                            종료 시간 : {label.endTime}
-                        </StepContent> */}
                         </Item>
                     </Step>
                 ))}
