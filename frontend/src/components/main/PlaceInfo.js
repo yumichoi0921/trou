@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Modal, Rating } from "@mui/material";
+import { Grid, Modal, Rating, Typography, Box, ListItem } from "@mui/material";
+import {
+  Button,
+  List,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+} from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -7,64 +15,90 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 1000,
+  height: "80%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
   px: 4,
-  pb: 3,
+  pb: 2,
 };
-function Reivew(props) {
+
+const Review = ({ review }) => {
+  console.log(review);
   return (
-    <li style={{ margin: 10, textAlign: "center", my: 3 }}>
-      <b style={{ marginRight: 20 }}>{props.user}</b> {props.content}
-      <Rating
-        style={{ marginLeft: 20 }}
-        name="read-only"
-        value={props.score}
-        readOnly
+    <ListItem alignItems="flex-start">
+      <ListItemAvatar>
+        <Avatar>{review.name}</Avatar>
+      </ListItemAvatar>
+      <ListItemText
+        primary={
+          <Rating
+            style={{ marginLeft: 20 }}
+            name="read-only"
+            value={review.score}
+            readOnly
+          />
+        }
+        secondary={
+          <React.Fragment>
+            <Typography
+              sx={{ display: "inline" }}
+              component="span"
+              variant="body2"
+              color="text.primary"
+            ></Typography>
+            {review.content}
+          </React.Fragment>
+        }
       />
-    </li>
+      <Divider variant="inset" component="li" />
+    </ListItem>
   );
-}
-function PlaceInfo({ show, setShow, place }) {
-  const [reviews, setReviews] = useState([]);
+};
+function PlaceInfo({ show, handleClose, place }) {
+  if (!place) return;
 
   return (
     <Modal
       open={show}
-      onClose={setShow(!show)}
+      onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Grid container sx={style} xs={12} spacing={3}>
-        <Grid item xs={12}>
-          <h2> {place.placeName} </h2>
+      <Grid container sx={style} spacing={1}>
+        <Grid container item md={12}>
+          <Grid item md={6}>
+            <h2> {place.placeName} </h2>
+          </Grid>
+          <Grid item md={6}>
+            <h2>사용자 후기</h2>
+          </Grid>
         </Grid>
-        <Grid item container>
-          <Grid item>
-            <img src={place.img} alt="" style={{ width: "400px" }}></img>
+        <Grid container item md={12} sx={{ height: "70%" }}>
+          <Grid item md={6} sx={{ height: "100%" }}>
+            <img
+              src={place.image}
+              alt=""
+              style={{ width: "100%", height: "100%" }}
+            ></img>
           </Grid>
-
-          <Grid
-            item
-            style={{ textAlign: "center", marginLeft: 90 }}
-            sx={{ justifyContent: "center", my: 3 }}
-          >
-            <h4>사용자 후기</h4>
-            <ul style={{ listStyle: "none" }}>
-              {place.reviews.map((r, i) => (
-                <Reivew
-                  style={{ textAlign: "center" }}
-                  sx={{ justifyContent: "center", my: 3 }}
-                  key={i}
-                  user={r.userName}
-                  content={r.content}
-                  score={r.score}
-                ></Reivew>
-              ))}
-            </ul>
+          <Grid container item md={6} sx={{ height: "100%" }}>
+            <Grid item sx={{ height: "100%", overflow: "scroll" }}>
+              <List>
+                {place.reviews &&
+                  place.reviews.map((review) => (
+                    <Review review={review}></Review>
+                  ))}
+              </List>
+            </Grid>
           </Grid>
+        </Grid>
+        <Grid container item md={12} sx={{ justifyContent: "space-around" }}>
+          <Button variant="contained">일정담기</Button>
+          <Button variant="outlined" onClick={handleClose}>
+            닫기
+          </Button>
         </Grid>
       </Grid>
     </Modal>
