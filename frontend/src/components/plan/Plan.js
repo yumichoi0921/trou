@@ -7,43 +7,19 @@ import PlanStep3 from "./step3/PlanStep3";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
-  const [curPage, setPage] = useState(1);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [plan, setPlan] = useState({});
-
-  // const plan = {
-  // planId:"",
-  //   startDate: "",
-  //   endDate: "",
-  //   routes: [],
-  // };
-
-  const route = [
-    {
-      routeId: "",
-      routeDate: "",
-      day: "",
-      order: [],
-    },
-  ];
-  const order = [
-    {
-      tripOrder: 0,
-      placeId: 128345,
-      placeName: "여행지1",
-      mapX: "",
-      mapY: "",
-    },
-  ];
 
   return (
     <Fragment>
-      <nav>
+      {/* <nav>
         <Link to="step1">step1</Link>
         <br></br>
         <Link to="step2">step2</Link>
         <br></br>
         <Link to="step3">step3</Link>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route
@@ -52,8 +28,6 @@ export default function Plan() {
             <PlanStep1
               tags={tags}
               setTags={setTags}
-              curPage={curPage}
-              setPage={setPage}
               plan={plan}
               setPlan={setPlan}
             ></PlanStep1>
@@ -65,12 +39,25 @@ export default function Plan() {
             <PlanStep1
               tags={tags}
               setTags={setTags}
-              curPage={curPage}
-              setPage={setPage}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+              plan={plan}
+              setPlan={setPlan}
             ></PlanStep1>
           }
         ></Route>
-        <Route path="step2" element={<h1>step2</h1>}></Route>
+        <Route
+          path="step2"
+          element={
+            <PlanStep2
+              plan={plan}
+              setPlan={setPlan}
+              selectedTags={selectedTags}
+              selectedRestaurants={selectedRestaurants}
+              setSelectedRestaurants={setSelectedRestaurants}
+            ></PlanStep2>
+          }
+        ></Route>
         <Route
           path="step3"
           element={<PlanStep3 plan={plan} setPlan={setPlan} />}
