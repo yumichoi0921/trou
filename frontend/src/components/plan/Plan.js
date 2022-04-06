@@ -5,7 +5,7 @@ import PlanStep2 from "./step2/PlanStep2";
 import { Link, Route, Routes } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
 
-export default function Plan() {
+export default function Plan({ st }) {
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -55,6 +55,7 @@ export default function Plan() {
               selectedTags={selectedTags}
               selectedRestaurants={selectedRestaurants}
               setSelectedRestaurants={setSelectedRestaurants}
+              st={st}
             ></PlanStep2>
           }
         ></Route>

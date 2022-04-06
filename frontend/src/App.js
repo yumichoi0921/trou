@@ -21,7 +21,7 @@ const App = () => {
       <div className="header">
         <Header />
       </div>
-      <div className="container">
+      <div className="body">
         <Routes>
           <Route path="/main" element={<Main />} />
           <Route path="/mypage/" element={<MyPage />} />
