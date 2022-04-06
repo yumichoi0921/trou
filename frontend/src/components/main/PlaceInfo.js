@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { Link } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid, Modal, Rating, Typography, Box, ListItem } from "@mui/material";
 import {
   Button,
@@ -25,7 +26,6 @@ const style = {
 };
 
 const Review = ({ review }) => {
-  console.log(review);
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
@@ -57,8 +57,8 @@ const Review = ({ review }) => {
   );
 };
 function PlaceInfo({ show, handleClose, place }) {
+  const navigate = useNavigate();
   if (!place) return;
-
   return (
     <Modal
       open={show}
@@ -87,15 +87,23 @@ function PlaceInfo({ show, handleClose, place }) {
             <Grid item sx={{ height: "100%", overflow: "scroll" }}>
               <List>
                 {place.reviews &&
-                  place.reviews.map((review) => (
-                    <Review review={review}></Review>
+                  place.reviews.map((review, i) => (
+                    <Review review={review} key={i}></Review>
                   ))}
               </List>
             </Grid>
           </Grid>
         </Grid>
         <Grid container item md={12} sx={{ justifyContent: "space-around" }}>
-          <Button variant="contained">일정담기</Button>
+          <Button
+            variant="contained"
+            onClick={() =>
+              navigate("/plan", { state: { startingPoint: place } })
+            }
+          >
+            일정담기
+            {/* <Link to="/plan" startingPoint={{place}}>일정담기</Link> */}
+          </Button>
           <Button variant="outlined" onClick={handleClose}>
             닫기
           </Button>

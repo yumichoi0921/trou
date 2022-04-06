@@ -32,7 +32,6 @@ export default function Main() {
   const handleClose = () => setShow(false);
 
   const placeInfoShow = (place) => {
-    console.log(place);
     setPlaceInfo(place);
     handleShow();
   };
@@ -70,7 +69,7 @@ export default function Main() {
   const getPlaces = (response) => {
     let array = [];
     let index = 0;
-    console.log(response.data);
+
     array = response.data.map((place) => {
       if (!place.image) {
         index = Math.floor(Math.random() * (5 - 1) + 1);
