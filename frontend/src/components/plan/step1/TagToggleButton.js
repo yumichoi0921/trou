@@ -26,24 +26,6 @@ function TagList({ tag }) {
     }
     console.log(tag.selectedTags);
   }
-  useEffect(() => {
-    async function getTags() {
-      const res = await axios.get("http://localhost:8080/tag");
-      const resTags = res.data;
-      tag.setTags(
-        resTags.map((resTag) => {
-          const tag = {
-            tagId: resTag.tagId,
-            tagName: resTag.tagName,
-            isSelected: false,
-            color: "#e3f2fd",
-          };
-          return tag;
-        })
-      );
-    }
-    getTags();
-  }, []);
 
   const tagList = tag.tags.map((tag, index) => (
     <TagButton

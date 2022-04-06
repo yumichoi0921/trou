@@ -12,73 +12,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
+import DateDestinationPicker from "./DateDestinationPicker";
+import SelectedPlan from "./SelectedPlace";
 
 function DateDetails(props) {
-  const [curPage, setPage] = useState(1);
-  const [age, setAge] = React.useState("");
+  console.log(props);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  function confirmPlan() {}
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
-              날짜선택
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+      <Grid>
+        <DateDestinationPicker></DateDestinationPicker>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <Item>출발지</Item>
-        </Grid>
-        <Grid item md={7}>
-          <Item>부산</Item>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <Item>도착지</Item>
-        </Grid>
-        <Grid item md={7}>
-          <Item>호텔</Item>
-        </Grid>
+      <Grid>
+        <SelectedPlan place={"장소"} selected={props.selected}></SelectedPlan>
       </Grid>
 
       <Grid item>
@@ -94,7 +42,9 @@ function DateDetails(props) {
           <Button variant="outlined">
             <Link to="/plan/step1">뒤로가기</Link>
           </Button>
-          <Button variant="contained">일정생성</Button>
+          <Button variant="contained" onClick={confirmPlan}>
+            일정생성
+          </Button>
         </Stack>
       </Grid>
     </Area>

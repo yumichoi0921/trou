@@ -7,12 +7,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
+  console.log(props);
   useEffect(() => {
     const setDate = async () => {
       try {
         const plan = {
-          startDate: props.startDate,
-          endDate: props.endDate,
+          startDate: props.date.startDate,
+          endDate: props.date.endDate,
           routes: [],
         };
         props.setPlan(plan);

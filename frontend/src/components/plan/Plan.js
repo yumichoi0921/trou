@@ -4,13 +4,14 @@ import PlanStep1 from "./step1/PlanStep1";
 import PlanStep2 from "./step2/PlanStep2";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
+import axios from "axios";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedRestaurants, setSelectedRestaurants] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState([]);
   const [plan, setPlan] = useState({});
 
   const date = {
@@ -26,6 +27,30 @@ export default function Plan() {
     selectedTags: selectedTags,
     setSelectedTags: setSelectedTags,
   };
+
+  const selected = {
+    selectedPlace: selectedPlace,
+    setSelectedPlace: setSelectedPlace,
+  };
+
+  useEffect(() => {
+    async function getTags() {
+      const res = await axios.get("http://localhost:8080/tag");
+      const resTags = res.data;
+      tag.setTags(
+        resTags.map((resTag) => {
+          const tag = {
+            tagId: resTag.tagId,
+            tagName: resTag.tagName,
+            isSelected: false,
+            color: "#e3f2fd",
+          };
+          return tag;
+        })
+      );
+    }
+    getTags();
+  }, []);
 
   // const plan = {
   // planId:"",
@@ -85,8 +110,7 @@ export default function Plan() {
               plan={plan}
               setPlan={setPlan}
               selectedTags={selectedTags}
-              selectedRestaurants={selectedRestaurants}
-              setSelectedRestaurants={setSelectedRestaurants}
+              selected={selected}
             ></PlanStep2>
           }
         ></Route>
