@@ -24,6 +24,7 @@ export default function Login() {
       }
       axios.post("/users/signin", body).then((res) => {
         console.log(res);      
+        localStorage.setItem('userId', res.data.user.userId);
         document.location.href = '/main'
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
