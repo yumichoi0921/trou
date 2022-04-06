@@ -2,7 +2,7 @@ import axios from "axios";
 import { React, useEffect, useState } from "react";
 import ShowCourse from "./ShowCourse";
 function RecommendCourse(props) {
-  const [courese, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   const findRecommandCourse = async () => {
     console.log(props.placeName);
@@ -29,8 +29,13 @@ function RecommendCourse(props) {
 
   return (
     <div>
-      {courese.map((course, index) => (
-        <ShowCourse key={index} course={course}></ShowCourse>
+      {courses.map((course, index) => (
+        <ShowCourse
+          key={index}
+          selected={props.selected}
+          course={course}
+          setPlaceList={props.setPlaceList}
+        ></ShowCourse>
       ))}
     </div>
   );
