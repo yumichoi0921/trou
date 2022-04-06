@@ -3,7 +3,9 @@ import background from './background.png';
 import { FaStar } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 
-const Review = ({score}) => {
+const Review = ({review}) => {
+    console.log("리뷰")
+    console.log(review)
     const [clicked, setClicked] = useState([false, false, false, false, false]);
     
 
@@ -23,10 +25,10 @@ const Review = ({score}) => {
   //별점수를 가져오기 위함 (리뷰 조회)
   let clickStates = [...clicked];
   useEffect(()=> {
-    console.log('헬로')
-    console.log(score)
+    //console.log('헬로')
+    //console.log(score)
     for (let i = 0; i < 5; i++) {
-        if (i <= score) clickStates[i] = true;
+        if (i <= review) clickStates[i] = true;
         else clickStates[i] = false;
     }
     setClicked(clickStates);
