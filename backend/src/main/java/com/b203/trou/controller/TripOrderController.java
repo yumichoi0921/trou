@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -72,7 +73,18 @@ public class TripOrderController {
 
 
         try{
-            List<List<TripOrderDto>> result = tripOrderService.getRoutsByPlaceName(placeName);
+            List<List<TripOrderDto>> result = new ArrayList<>();
+            for(int j=0;j<res.length;j++){
+
+                List<List<TripOrderDto>> course=  tripOrderService.getRoutsByPlaceName(res[j]);
+            System.out.println("이름"+res[j]);
+            for(int k=0;k<course.size();k++){
+                result.add(course.get(k));
+            }
+            for(int i=0;i<result.size();i++) {
+                System.out.print(result.get(i)+" ");
+            }
+            }
             return ResponseEntity.ok(result);
         }catch (IllegalStateException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
