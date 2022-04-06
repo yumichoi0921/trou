@@ -20,7 +20,7 @@ export default function Plan() {
     setSelectedPlace: setSelectedPlace,
     selectedDate: selectedDate,
     setSelectedDate: setSelectedDate,
-    selectedTags: selectedTags
+    selectedTags: selectedTags,
   };
 
   const date = {
@@ -37,9 +37,8 @@ export default function Plan() {
     setSelectedTags: setSelectedTags,
   };
 
-  useEffect(() => {
-    async function getTags() {
-      const res = await axios.get("http://localhost:8080/tag");
+  if (tags.length === 0) {
+    axios.get("http://localhost:8080/tag").then((res) => {
       const resTags = res.data;
       tag.setTags(
         resTags.map((resTag) => {
@@ -52,9 +51,8 @@ export default function Plan() {
           return tag;
         })
       );
-    }
-    getTags();
-  }, []);
+    });
+  }
 
   // const plan = {
   // planId:"",
