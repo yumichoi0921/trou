@@ -23,13 +23,10 @@ const App = () => {
     return (
       <Router>
         <Routes>
-          <Route path="/main" element={<Main />} />
-          <Route path="/mypage/" element={<MyPage />} />
-          <Route path="/trip-detail/:planId" element={<TripDetail />} />
-          <Route path="/check" element={<PlanStep3 />} />
-          <Route path="/plan/*" element={<Plan />} />
-          <Route path="/planDetail/:planId" element={<Detail />} />
-
+          <Route path="/" element={<FirstMain />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/select" element={<SelectPlace />} />
         </Routes>
       </Router>
     );
