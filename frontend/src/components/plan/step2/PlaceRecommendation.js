@@ -77,17 +77,24 @@ const TabsList = styled(TabsListUnstyled)`
 
 export default function PlaceRecommendation(props) {
   const [restaurants, setRestaurants] = React.useState([]);
+  const [places, setPlaces] = React.useState([]);
+
   console.log(props);
-  const restaurantList = restaurants.map((restaurant, index) => (
+
+  const placeList = places.map((place, index) => (
+    <RecommendedPlace></RecommendedPlace>
+  ));
+
+  const restaurantList = restaurants.map((place, index) => (
     <RecommendedPlace
-      restaurant={restaurant}
+      place={place}
       selected={props.selected}
       placeList={props.placeList}
       setPlaceList={props.setPlaceList}
       variant="contained"
       sx={{ m: 1 }}
     >
-      {restaurant.name}
+      {place.name}
     </RecommendedPlace>
   ));
 

@@ -3,12 +3,12 @@ import React from "react";
 import SelectedPlace from "./SelectedPlace";
 
 function RecommendedPlace(props) {
-  function addRestaurant() {
+  function addPlace() {
     if (!props.selected.selectedPlace[props.selected.selectedDate])
       props.selected.selectedPlace[props.selected.selectedDate] = [];
     const selectedPlace =
       props.selected.selectedPlace[props.selected.selectedDate];
-    if (!selectedPlace.includes(props.restaurant)) {
+    if (!selectedPlace.includes(props.place)) {
       props.setPlaceList(
         selectedPlace.map((place) => (
           <SelectedPlace
@@ -17,7 +17,7 @@ function RecommendedPlace(props) {
           ></SelectedPlace>
         ))
       );
-      selectedPlace.push(props.restaurant);
+      selectedPlace.push(props.place);
     }
     console.log(selectedPlace);
     // const selectedPlace = props.selected.selectedPlace;
@@ -28,7 +28,7 @@ function RecommendedPlace(props) {
   }
   return (
     <div>
-      {props.restaurant.name} <Button onClick={addRestaurant}>추가</Button>
+      {props.place.name} <Button onClick={addPlace}>추가</Button>
     </div>
   );
 }

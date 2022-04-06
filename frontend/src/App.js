@@ -12,6 +12,7 @@ import Join from "./components/FirstMain/Join";
 import Detail from "./components/plan/detail/Detail";
 import Plan from "./components/plan/Plan";
 const App = () => {
+  const [startingPoing, setStartingPoing] = useState()
   return (
     <Router>
       <Routes>

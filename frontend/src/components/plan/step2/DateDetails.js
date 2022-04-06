@@ -19,10 +19,11 @@ function DateDetails(props) {
   console.log(props);
 
   function confirmPlan() {
-    console.log("일정 생성");
+    props.selected.selectedPlace.forEach((p, index) =>
+      console.log(index + 1, "일차 : ", p)
+    );
   }
 
-  const places = props.selected.selectedPlace[props.selected.selectedDate];
   const [placeList, setPlaceList] = useState();
   //   const placeList = places.map((place, index) => (
   //     <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
@@ -34,7 +35,6 @@ function DateDetails(props) {
     ]
       ? props.selected.selectedPlace[props.selected.selectedDate]
       : [];
-    console.log(selectedPlace);
     setPlaceList(
       selectedPlace.map((place) => (
         <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
