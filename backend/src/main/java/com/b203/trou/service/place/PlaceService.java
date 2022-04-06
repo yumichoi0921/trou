@@ -6,6 +6,7 @@ import com.b203.trou.entity.tag.Tag;
 import com.b203.trou.entity.user.User;
 import com.b203.trou.entity.user.UserHistory;
 import com.b203.trou.model.place.PlaceDto;
+import com.b203.trou.model.tag.TagDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.repository.place.PlaceRepository;
 import com.b203.trou.repository.tag.PlaceTagRepository;
@@ -29,33 +30,33 @@ public class PlaceService {
     private final PlaceTagRepository placeTagRepository;
     private final UserRepository userRepository;
     private final UserHistoryRepository userHistoryRepository;
+
     public List<PlaceDto> getPlaces(String keyword) { // 여행지의 태그, 여행지의 이름
 
         List<Tag> tags = tagRepository.findByTagNameLike(keyword);
-        List<PlaceTag> placeTags=new ArrayList<>();
+        List<PlaceTag> placeTags = new ArrayList<>();
         for (Tag tag : tags) {
             placeTags.addAll(placeTagRepository.findByTag(tag));
-
         }
-        List<PlaceDto> result = placeTags.stream().distinct().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList());
+        // 제주 Area Code 하드코딩
+        List<PlaceDto> result = placeTags.stream().distinct().filter(p -> p.getPlace().getAreaCode().equals("39")).limit(50).map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList());
 
-        if(!result.isEmpty()){
+        if (!result.isEmpty()) {
             return result;
         }
-        
-        result= placeRepository.findByPlaceNameContaining(keyword);
+
+        result = placeRepository.findByPlaceNameContainingAndAreaCode(keyword, "39");
 
         return Optional.of(result).orElseThrow(() -> new IllegalArgumentException("검색 결과가 없습니다."));
     }
 
 
-
     public List<UserHistoryDto> getHistory(long userId) {
-        User user = userRepository.findById(userId).orElseThrow(()->new IllegalArgumentException("해당하는 유저가 없습니다."));
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당하는 유저가 없습니다."));
 
 
         List<UserHistory> userHistory = userHistoryRepository.findByUser(user);
-        System.out.println("userHistory: "+userHistory);
+        System.out.println("userHistory: " + userHistory);
         List<UserHistoryDto> userHistoryDtoList = userHistory.stream().map(u -> new UserHistoryDto(u)).collect(Collectors.toList());
         return userHistoryDtoList;
 
@@ -63,7 +64,7 @@ public class PlaceService {
 
     public String getPlacesById(long placeId) {
 
-        Place place = placeRepository.findById(placeId).orElseThrow(()->new IllegalArgumentException("해당하는 장소가 없습니다."));
+        Place place = placeRepository.findById(placeId).orElseThrow(() -> new IllegalArgumentException("해당하는 장소가 없습니다."));
         return place.getPlaceName();
     }
 
@@ -81,16 +82,14 @@ public class PlaceService {
         return result;
     }
 
-    public List<PlaceDto> getTagRelatedPlaces(List<String> tags) {
+    public List<PlaceDto> getTagRelatedPlaces(List<TagDto> tags) {
         List<PlaceDto> places = new ArrayList<>();
-        for (String tag : tags) {
-            List<Tag> tagList = tagRepository.findByTagNameLike(tag);
-            List<PlaceTag> placeTags=new ArrayList<>();
-            for (Tag t : tagList) {
-                placeTags.addAll(placeTagRepository.findByTag(t));
-
-            }
-            places.addAll(placeTags.stream().distinct().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList()));
+        for (TagDto tagDto : tags) {
+            Tag tag = tagRepository.findById(tagDto.getTagId()).orElseThrow(IllegalAccessError::new);
+            List<PlaceTag> placeTags = new ArrayList<>(placeTagRepository.findByTag(tag));
+            // 제주 Area Code 하드코딩
+            places.addAll(placeTags.stream().filter(p -> p.getPlace().getAreaCode().equals("39")).limit(50).map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList()));
+            if (places.size() > 50) break;
         }
         return places.stream().distinct().collect(Collectors.toList());
     }

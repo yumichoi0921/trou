@@ -2,6 +2,7 @@ package com.b203.trou.controller;
 import com.b203.trou.model.place.PlaceDto;
 import com.b203.trou.model.place.PlaceRequestDto;
 import com.b203.trou.model.place.PlaceResponseDto;
+import com.b203.trou.model.tag.TagDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.service.place.PlaceService;
 import com.b203.trou.service.user.UserHistoryService;
@@ -73,12 +74,10 @@ public class PlaceController {
         return ResponseEntity.ok(res);
     }
 
-
-    @PostMapping("/tag")
-    public ResponseEntity<?> getTagRelatedPlaces(@RequestParam List<String> tags) {
+    @PostMapping("/related/tag")
+    public ResponseEntity<?> getTagRelatedPlaces(@RequestBody List<TagDto> tags) {
         List<PlaceDto> places = placeService.getTagRelatedPlaces(tags);
         return ResponseEntity.ok(places);
     }
-
 
 }
