@@ -3,44 +3,48 @@ import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
 import { useState } from "react";
 import { Button, Card, CardContent, TextField } from "@mui/material";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { connect } from 'react-redux';
+import {login} from '../../actions/index';
+// const clientId =
+//   "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
 
-const clientId =
-  "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
+export  function Login({login}) {
 
-export default function Login() {
+  // const onSuccess = async (response) => {
+  //   // const { googleId, profileObj : { email, name } } = response;
+  //   // await onGoogleLogin (
+  //   //   // 구글 로그인 성공시 서버에 전달할 데이터
+  //   // );
 
-  const onSuccess = async (response) => {
-    // const { googleId, profileObj : { email, name } } = response;
-    // await onGoogleLogin (
-    //   // 구글 로그인 성공시 서버에 전달할 데이터
-    // );
-
-    const profile = response.getBasicProfile();
-    const userdata = {
+  //   const profile = response.getBasicProfile();
+  //   const userdata = {
     
-      auth_code: profile.getId()
-    }; 
+  //     auth_code: profile.getId()
+  //   }; 
 
-    // axios.post("/users/signin", body).then((res) => {
-    //   document.location.href = '/main'
-    // }).catch(error => {
-    //   alert("아이디 또는 비밀번호를 확인해주세요.");
-    //   setUserEmaill("");
-    //   setUserPassword("");
-    // })
+  //   // axios.post("/users/signin", body).then((res) => {
+  //   //   document.location.href = '/main'
+  //   // }).catch(error => {
+  //   //   alert("아이디 또는 비밀번호를 확인해주세요.");
+  //   //   setUserEmaill("");
+  //   //   setUserPassword("");
+  //   // })
    
-  };
+  // };
 
-  const onFailure = (error) => {
-    console.log(error);
-  };
+  // const onFailure = (error) => {
+  //   console.log(error);
+  // };
 
   const [userEmail, setUserEmaill] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
+
+
+
+  
   const Login = () => { 
     const em = userEmail;
     const pa = userPassword;
@@ -53,7 +57,7 @@ export default function Login() {
       }
       axios.post("/users/signin", body).then((res) => {
         console.log(res);
-
+        login(res.data.user);
         
         // document.location.href = '/'
       }).catch(error => {
@@ -117,7 +121,7 @@ export default function Login() {
               </div>
 
               {/* <img src={or} alt="or"></img> */}
-              <div className={styles.or}>
+              {/* <div className={styles.or}>
                 <hr className={styles.left_line}></hr>
                 <span> 또는 </span>
                 <hr className={styles.right_line}></hr>
@@ -129,7 +133,7 @@ export default function Login() {
                   onSuccess={onSuccess}
                   onFailure={onFailure}
                 />
-              </div>
+              </div> */}
             </form>
           </CardContent>
         </Card>
@@ -137,3 +141,16 @@ export default function Login() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  login: user => dispatch(login(user))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
