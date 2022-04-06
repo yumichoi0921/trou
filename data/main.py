@@ -9,6 +9,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 from typing import List
 from pydantic import BaseModel
 from fastapi import FastAPI,Query
+from sklearn.decomposition import TruncatedSVD
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt 
 
 app = FastAPI()
 
@@ -18,7 +22,7 @@ def init():
     db_connection = create_engine(db_connection_str)
     conn = db_connection.connect()
 
-    sql = "select p.place_id,p.place_name,p.read_count,GROUP_CONCAT(tt.tag_name separator ' ') as tags,p.mapx, p.mapy, COALESCE(p.first_image, ' ') as img from place as p, place_tag as t , tag as tt where p.place_id = t.place_id and t.tag_id = tt.tag_id group by p.place_id"
+    sql = "select p.place_id,p.place_name,GROUP_CONCAT(tt.tag_name separator ' ') as tags from place as p, place_tag as t , tag as tt where p.place_id = t.place_id and t.tag_id = tt.tag_id group by p.place_id"
     result = pd.read_sql_query(sql, conn)
     global tagDataFrame
     tagDataFrame = pd.DataFrame(result)
@@ -34,14 +38,11 @@ def init():
 
 class OutEntity(BaseModel):
     place_id: str
-    place_name: str
-    read_count: int
-    tags: str
-    mapx: str
-    mapy: str
-    img: str
-    class Config:
-        orm_mode = True 
+    # place_name: str
+    # tags: str
+  
+    # class Config:
+    #     orm_mode = True 
 
 class Place(BaseModel):
     name: str     
@@ -66,13 +67,61 @@ def recommend_place_list( place_names : List[Place]):
         tmp = tagDataFrame.iloc[sim_index]
         result = pd.concat([result, tmp])
     result.drop_duplicates(['place_id'])
-    result = result.sort_values(
-        'read_count', ascending=False)[:20]
+    # result = result.sort_values(
+    #     'read_count', ascending=False)[:20]
+    result= result.loc[:,['place_id']]
     dictList = result.to_dict('records')
+    print(result)
     
     
     return dictList
 
 
 
-#print(recommend_place_list(tagDataFrame, place_names=["정방폭포", "훈데르트바서파크"]))
+def init2():
+    db_connection_str = 'mysql+pymysql://root:b203@j6b203.p.ssafy.io:33306/trou'
+    db_connection = create_engine(db_connection_str)
+    conn = db_connection.connect()
+
+    sql = "select p.place_id,p.place_name,GROUP_CONCAT(tt.tag_name separator ' ') as tags from place as p, place_tag as t , tag as tt where p.place_id = t.place_id and t.tag_id = tt.tag_id group by p.place_id"
+    result = pd.read_sql_query(sql, conn)
+    global tagDataFrame
+    tagDataFrame = pd.DataFrame(result)
+   
+
+    sql2="select user_id, place_id, score from review"
+    result2= pd.read_sql_query(sql2, conn)
+    result3= pd.merge(result,result2,on="place_id")
+    ##user-place 테이블 생성, 0으로 채우기
+    usr_place_pivot= result3.pivot_table('score', index='user_id',columns='place_name')
+    usr_place_pivot=usr_place_pivot.fillna(0)
+    ##place-user 테이블 생성, 전치 행렬
+    place_usr_pivot = usr_place_pivot.values.T
+
+    global plcae_title_list
+    global corr
+    global place_title
+    ## 4개 추천해주기
+    SVD = TruncatedSVD(n_components=2)
+    matrix=SVD.fit_transform(place_usr_pivot)
+
+    ## 상관관계수 값 구하기
+    
+    corr = np.corrcoef(matrix)
+
+    print(corr.shape)
+
+    place_title = usr_place_pivot.columns
+    plcae_title_list= list(place_title)
+
+
+@app.get('/recommand/user/{title}',response_model=List[str])
+def recommand_place(title: str):
+    init2()
+    target=plcae_title_list.index(title)
+    corr_target = corr[target]
+    result= list(place_title[(corr_target>=0.9)])[:10]
+    print(result)
+    return result
+
+# recommend_place_list([{"name":"천지연폭포 (제주도 국가지질공원)"},{"name":"정방폭포"}])

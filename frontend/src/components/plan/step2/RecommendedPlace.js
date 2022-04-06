@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import SelectedPlace from "./SelectedPlace";
 
-function RecommendedRestaurant(props) {
+function RecommendedPlace(props) {
   function addPlace() {
     if (!props.selected.selectedPlace[props.selected.selectedDate])
       props.selected.selectedPlace[props.selected.selectedDate] = [];
@@ -29,9 +29,9 @@ function RecommendedRestaurant(props) {
   }
   return (
     <div>
-      {props.place.name} <Button onClick={addPlace}>추가</Button>
+      {props.place.placeName} <Button onClick={addPlace}>추가</Button>
     </div>
   );
 }
 
-export default RecommendedRestaurant;
+export default RecommendedPlace;

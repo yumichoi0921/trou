@@ -32,8 +32,21 @@ const Header = () => {
   return (
     <header>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <h1 onClick={() => navigate("/main")}>TROU</h1>
-        <Nav />
+        <Box>
+          <h1 onClick={() => navigate("/main")}>TROU</h1>
+        </Box>
+        <Box>
+          <Tab
+            value="mypage"
+            label="MyPage"
+            onClick={() => navigate("/mypage")}
+          />
+          <Tab
+            value="logout"
+            label="LogOut"
+            onClick={() => console.log("로그아웃")}
+          />
+        </Box>
       </Stack>
     </header>
   );

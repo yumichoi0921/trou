@@ -9,76 +9,58 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
+import DateDestinationPicker from "./DateDestinationPicker";
+import SelectedPlace from "./SelectedPlace";
 
 function DateDetails(props) {
-  const [curPage, setPage] = useState(1);
-  const [age, setAge] = React.useState("");
+  console.log(props);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  function confirmPlan() {
+    props.selected.selectedPlace.forEach((p, index) =>
+      console.log(index + 1, "일차 : ", p)
+    );
+  }
+
+  const [placeList, setPlaceList] = useState();
+  //   const placeList = places.map((place, index) => (
+  //     <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
+  //   ));
+
+  React.useEffect(() => {
+    const selectedPlace = props.selected.selectedPlace[
+      props.selected.selectedDate
+    ]
+      ? props.selected.selectedPlace[props.selected.selectedDate]
+      : [];
+    setPlaceList(
+      selectedPlace.map((place, index) => (
+        <SelectedPlace
+          key={index}
+          place={place}
+          selected={props.selected}
+          setPlaceList={props.setPlaceList}
+        ></SelectedPlace>
+      ))
+    );
+  }, [
+    props.selected.selectedDate,
+    props.selected.selecctedPlace,
+    props.placeList,
+  ]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
-              날짜선택
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+      <Grid>
+        <DateDestinationPicker
+          date={props.date}
+          selectedDate={props.selected.selectedDate}
+          setSelectedDate={props.selected.setSelectedDate}
+        ></DateDestinationPicker>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <Item>출발지</Item>
-        </Grid>
-        <Grid item md={7}>
-          <Item>부산</Item>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mb: 3 }}
-      >
-        <Grid item md={5}>
-          <Item>도착지</Item>
-        </Grid>
-        <Grid item md={7}>
-          <Item>호텔</Item>
-        </Grid>
-      </Grid>
+      <Grid>{placeList}</Grid>
 
       <Grid item>
         <Stack
@@ -90,8 +72,12 @@ function DateDetails(props) {
           mr={3}
           ml={3}
         >
-          <Button variant="outlined">뒤로가기</Button>
-          <Button variant="contained">일정생성</Button>
+          <Button variant="outlined">
+            <Link to="/plan/step1">뒤로가기</Link>
+          </Button>
+          <Button variant="contained" onClick={confirmPlan}>
+            일정생성
+          </Button>
         </Stack>
       </Grid>
     </Area>

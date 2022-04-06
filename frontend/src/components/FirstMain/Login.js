@@ -3,37 +3,21 @@ import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
 import { useState } from "react";
 import { Button, Card, CardContent, TextField } from "@mui/material";
-import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useSelector, useDispatch } from 'react-redux'
-import {loginCheck} from '../../store';
-
-const clientId =
-  "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
+import axios from 'axios';
 
 export default function Login() {
   const tmp = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const onSuccess = async (response) => {
-    alert('구글 로그인 성공!');
-    console.log(response);
-    // const { googleId, profileObj : { email, name } } = response;
-    // await onGoogleLogin (
-    //   // 구글 로그인 성공시 서버에 전달할 데이터
-    // );
-  };
-
-  const onFailure = (error) => {
-    console.log(error);
-  };
-
   const [userEmail, setUserEmaill] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  const Login = () => { 
-    if (userEmail == "" && userPassword == "") {
+
+  const Login = () => {
+    const em = userEmail;
+    const pa = userPassword;
+    if (em == "" && pa == "") {
       alert("아이디 또는 비밀번호를 입력해주세요.");
     } else {
       let body = {
@@ -48,7 +32,7 @@ export default function Login() {
         dispatch(loginCheck(res.data.user.userId));
         console.log(tmp);
         // => history.push로 변경하기?
-        document.location.href = '/main'; 
+        document.location.href = '/main';
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
         setUserEmaill("");
@@ -56,6 +40,7 @@ export default function Login() {
       })
     }
   }
+
 
   return (
     <div className={styles.backgound}>
@@ -78,7 +63,7 @@ export default function Login() {
                 label="이메일를 입력하세요."
                 type="text"
                 value={userEmail}
-                // onKeyPress={ Login }
+
                 onChange={ (e)=>setUserEmaill(e.target.value)}
               />
               <p className={styles.input_title}>PW</p>
@@ -90,7 +75,7 @@ export default function Login() {
                 autoComplete="current-password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-                // onKeyPress={ Login }
+
               />
               <div className={styles.form_link}>
                 <span className={styles.join_btn}>
@@ -107,21 +92,6 @@ export default function Login() {
                   Login
                 </Button>
               </div>
-
-              {/* <img src={or} alt="or"></img> */}
-              {/* <div className={styles.or}>
-                <hr className={styles.left_line}></hr>
-                <span> 또는 </span>
-                <hr className={styles.right_line}></hr>
-              </div>
-              <div className={styles.goole_login_btn}>
-                <GoogleLogin
-                  clientId={clientId}
-                  responseType={"id_token"}
-                  onSuccess={onSuccess}
-                  onFailure={onFailure}
-                />
-              </div> */}
             </form>
           </CardContent>
         </Card>
