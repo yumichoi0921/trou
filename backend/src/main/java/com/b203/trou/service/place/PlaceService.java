@@ -1,13 +1,11 @@
 package com.b203.trou.service.place;
 
 import com.b203.trou.entity.place.Place;
-import com.b203.trou.entity.review.Review;
 import com.b203.trou.entity.tag.PlaceTag;
 import com.b203.trou.entity.tag.Tag;
 import com.b203.trou.entity.user.User;
 import com.b203.trou.entity.user.UserHistory;
 import com.b203.trou.model.place.PlaceDto;
-import com.b203.trou.model.review.ReviewDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.repository.place.PlaceRepository;
 import com.b203.trou.repository.tag.PlaceTagRepository;
@@ -39,7 +37,7 @@ public class PlaceService {
             placeTags.addAll(placeTagRepository.findByTag(tag));
 
         }
-        List<PlaceDto> result = placeTags.stream().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList());
+        List<PlaceDto> result = placeTags.stream().distinct().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList());
 
         if(!result.isEmpty()){
             return result;
@@ -83,6 +81,19 @@ public class PlaceService {
         return result;
     }
 
+    public List<PlaceDto> getTagRelatedPlaces(List<String> tags) {
+        List<PlaceDto> places = new ArrayList<>();
+        for (String tag : tags) {
+            List<Tag> tagList = tagRepository.findByTagNameLike(tag);
+            List<PlaceTag> placeTags=new ArrayList<>();
+            for (Tag t : tagList) {
+                placeTags.addAll(placeTagRepository.findByTag(t));
+
+            }
+            places.addAll(placeTags.stream().distinct().map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList()));
+        }
+        return places.stream().distinct().collect(Collectors.toList());
+    }
 }
 
 

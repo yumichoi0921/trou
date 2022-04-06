@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -73,6 +74,11 @@ public class PlaceController {
     }
 
 
+    @PostMapping("/tag")
+    public ResponseEntity<?> getTagRelatedPlaces(@RequestParam List<String> tags) {
+        List<PlaceDto> places = placeService.getTagRelatedPlaces(tags);
+        return ResponseEntity.ok(places);
+    }
 
 
 }
