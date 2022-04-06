@@ -20,6 +20,7 @@ export default function Plan() {
     setSelectedPlace: setSelectedPlace,
     selectedDate: selectedDate,
     setSelectedDate: setSelectedDate,
+    selectedTags: selectedTags
   };
 
   const date = {

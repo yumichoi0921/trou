@@ -5,9 +5,12 @@ import TabsListUnstyled from "@mui/base/TabsListUnstyled";
 import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
 import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
 import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
+import RestaurantSearch from "./RestaurantSearch";
 import PlaceSearch from "./PlaceSearch";
 import RecommendedPlace from "./RecommendedPlace";
 import Item from "../child/Item";
+import RecommendedRestaurant from "./RecommendedRestaurant";
+import axios from "axios";
 
 const blue = {
   50: "#F0F7FF",
@@ -78,14 +81,24 @@ const TabsList = styled(TabsListUnstyled)`
 export default function PlaceRecommendation(props) {
   const [restaurants, setRestaurants] = React.useState([]);
   const [places, setPlaces] = React.useState([]);
+  const [relatedPlaces, setRelatedPlaces] = React.useState([]);
 
   console.log(props);
 
-  const placeList = places.map((place, index) => (
-    <RecommendedPlace></RecommendedPlace>
-  ));
+  React.useEffect(() => {
+    const tags = props.selected.selectedTags.map((t) => t.tagName);
+    console.log(tags);
+    async function getRelatedPlace() {
+      const res = await axios.post(
+        "http://localhost:8080/place/related/tag",
+        props.selected.selectedTags
+      );
+      console.log(res.data);
+    }
+    getRelatedPlace();
+  }, [props.selected.selectedTags]);
 
-  const restaurantList = restaurants.map((place, index) => (
+  const placeList = places.map((place, index) => (
     <RecommendedPlace
       place={place}
       selected={props.selected}
@@ -98,21 +111,42 @@ export default function PlaceRecommendation(props) {
     </RecommendedPlace>
   ));
 
+  const restaurantList = restaurants.map((place, index) => (
+    <RecommendedRestaurant
+      place={place}
+      selected={props.selected}
+      placeList={props.placeList}
+      setPlaceList={props.setPlaceList}
+      variant="contained"
+      sx={{ m: 1 }}
+    >
+      {place.name}
+    </RecommendedRestaurant>
+  ));
+
   return (
     <React.Fragment>
+      <Item mb={2}>추천 장소</Item>
+      <Item mb={2}>장소1</Item>
       <TabsUnstyled defaultValue={0}>
         <TabsList>
-          <Tab>추천 일정</Tab>
-          <Tab>추천 맛집</Tab>
+          <Tab>장소 검색</Tab>
+          <Tab>맛집 검색</Tab>
         </TabsList>
-        <PlaceSearch
-          restaurants={restaurants}
-          setRestaurants={setRestaurants}
-        ></PlaceSearch>
+
         <TabPanel value={0}>
-          <Item mt={2}>일정</Item>
+          <PlaceSearch places={places} setPlaces={setPlaces}></PlaceSearch>
+          {placeList.length === 0 ? null : (
+            <Item sx={{ overflow: "auto" }} mt={2}>
+              {placeList}
+            </Item>
+          )}
         </TabPanel>
         <TabPanel value={1}>
+          <RestaurantSearch
+            restaurants={restaurants}
+            setRestaurants={setRestaurants}
+          ></RestaurantSearch>
           {restaurantList.length === 0 ? null : (
             <Item sx={{ overflow: "auto" }} mt={2}>
               {restaurantList}
