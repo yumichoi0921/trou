@@ -61,7 +61,11 @@ export default function PlanStep2(props) {
             placeList={placeList}
             setPlaceList={setPlaceList}
           ></PlaceRecommendation>
-          <RecommendCourse placeName={"정방폭포"}></RecommendCourse>
+          <RecommendCourse
+            selected={props.selected}
+            placeName={"정방폭포"}
+            setPlaceList={setPlaceList}
+          ></RecommendCourse>
         </Area>
       </Grid>
     </Grid>
