@@ -15,25 +15,25 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
     if (course.length === 0) {
       course = [];
     }
-    console.log("course:" + course[0]);
-    // course.forEarch((c) => {
-    //   if (!selected.selectedPlace[selected.selectedDate])
-    //     selected.selectedPlace[selected.selectedDate] = [];
-    //   const selectedPlace = selected.selectedPlace[selected.selectedDate];
-    //   if (!selectedPlace.includes(c.place)) {
-    //     setPlaceList(
-    //       selectedPlace.map((place, index) => (
-    //         <SelectedPlace
-    //           place={place.placeName}
-    //           selected={selected}
-    //           setPlaceList={setPlaceList}
-    //         ></SelectedPlace>
-    //       ))
-    //     );
-    //     selectedPlace.push(c.place);
-    //   }
-    //   console.log(selectedPlace);
-    // });
+    console.log(course[0].place);
+    for (let c of course) {
+      if (!selected.selectedPlace[selected.selectedDate])
+        selected.selectedPlace[selected.selectedDate] = [];
+      const selectedPlace = selected.selectedPlace[selected.selectedDate];
+      if (!selectedPlace.includes(c.place)) {
+        setPlaceList(
+          selectedPlace.map((place, index) => (
+            <SelectedPlace
+              place={place.placeName}
+              selected={selected}
+              setPlaceList={setPlaceList}
+            ></SelectedPlace>
+          ))
+        );
+        selectedPlace.push(c.place);
+      }
+      console.log(selectedPlace);
+    }
   }
   function Course(props) {
     return (

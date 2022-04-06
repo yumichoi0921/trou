@@ -2,7 +2,7 @@ import axios from "axios";
 import { React, useEffect, useState } from "react";
 import ShowCourse from "./ShowCourse";
 function RecommendCourse(props) {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([[]]);
 
   const findRecommandCourse = async () => {
     console.log(props.placeName);
