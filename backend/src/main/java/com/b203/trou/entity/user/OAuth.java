@@ -19,4 +19,9 @@ public class OAuth extends BaseEntity {
     private User user;
 
     private String authCode;
+
+
+    public OAuth(String authCode) {
+        this.authCode = authCode;
+    }
 }
