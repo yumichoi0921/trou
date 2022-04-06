@@ -22,7 +22,7 @@ def init():
     db_connection = create_engine(db_connection_str)
     conn = db_connection.connect()
 
-    sql = "select p.place_id,p.place_name,p.read_count,GROUP_CONCAT(tt.tag_name separator ' ') as tags,p.mapx, p.mapy, COALESCE(p.first_image, ' ') as img from place as p, place_tag as t , tag as tt where p.place_id = t.place_id and t.tag_id = tt.tag_id group by p.place_id"
+    sql = "select p.place_id,p.place_name,GROUP_CONCAT(tt.tag_name separator ' ') as tags from place as p, place_tag as t , tag as tt where p.place_id = t.place_id and t.tag_id = tt.tag_id group by p.place_id"
     result = pd.read_sql_query(sql, conn)
     global tagDataFrame
     tagDataFrame = pd.DataFrame(result)
@@ -38,14 +38,11 @@ def init():
 
 class OutEntity(BaseModel):
     place_id: str
-    place_name: str
-    read_count: int
-    tags: str
-    mapx: str
-    mapy: str
-    img: str
-    class Config:
-        orm_mode = True 
+    # place_name: str
+    # tags: str
+  
+    # class Config:
+    #     orm_mode = True 
 
 class Place(BaseModel):
     name: str     
@@ -70,9 +67,11 @@ def recommend_place_list( place_names : List[Place]):
         tmp = tagDataFrame.iloc[sim_index]
         result = pd.concat([result, tmp])
     result.drop_duplicates(['place_id'])
-    result = result.sort_values(
-        'read_count', ascending=False)[:20]
+    # result = result.sort_values(
+    #     'read_count', ascending=False)[:20]
+    result= result.loc[:,['place_id']]
     dictList = result.to_dict('records')
+    print(result)
     
     
     return dictList
@@ -125,4 +124,4 @@ def recommand_place(title: str):
     print(result)
     return result
 
-recommand_place("천지연폭포 (제주도 국가지질공원)")
+# recommend_place_list([{"name":"천지연폭포 (제주도 국가지질공원)"},{"name":"정방폭포"}])

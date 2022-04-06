@@ -16,7 +16,9 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -63,9 +65,14 @@ public class PlaceController {
 
 
         PlaceResponseDto[] res=restTemplate.postForObject(baseUrl,places, PlaceResponseDto[].class);
+        List<PlaceDto> recommandPlace = new ArrayList<>();
+        for(int i=0;i<res.length;i++){
+            recommandPlace.add(placeService.getPlace(res[i].getPlace_id()));
+           // System.out.println(placeService.getPlace(res[i].getPlace_id()).getPlaceName());
+        }
 
 
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(recommandPlace);
     }
 
 
