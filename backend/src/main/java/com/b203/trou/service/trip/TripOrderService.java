@@ -7,6 +7,8 @@ import com.b203.trou.model.trip.TripOrderDto;
 import com.b203.trou.repository.place.PlaceRepository;
 import com.b203.trou.repository.trip.TripOrderRepository;
 import com.b203.trou.repository.trip.TripRouteRepository;
+import com.b203.trou.service.place.PlaceService;
+import io.jsonwebtoken.lang.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,5 +56,25 @@ public class TripOrderService {
         TripOrder tripOrder = tripOrderRepository.findById(orderId).orElseThrow(()->new IllegalArgumentException("해당하는 트립 오더가 없습니다."));
         tripOrderRepository.delete(tripOrder);
         return new TripOrderDto(tripOrder);
+    }
+
+    public List<List<TripOrderDto>> getRoutsByPlaceName (String placeName){
+        Place place = placeRepository.findByPlaceName(placeName);
+        List<TripOrder> tripOrderList=tripOrderRepository.findAllByPlace(place);
+
+        List<List<TripOrderDto>>  routes = new ArrayList<>();
+        for(int i=0;i<tripOrderList.size();i++){
+            System.out.println("트립- "+tripOrderList.get(i).getTripRoute().getId());
+            List<TripOrder> oneOrder = new ArrayList<>();
+            oneOrder= tripOrderRepository.findByTripRoute(tripOrderList.get(i).getTripRoute());
+            for(int j=0;j<oneOrder.size();j++)
+            System.out.print(oneOrder.get(j).getId()+" ");
+
+            routes.add(oneOrder.stream().map(o -> new TripOrderDto(o)).collect(Collectors.toList()));
+
+        }
+
+        return routes;
+
     }
 }

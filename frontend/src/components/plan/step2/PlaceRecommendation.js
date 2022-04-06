@@ -6,7 +6,7 @@ import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
 import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
 import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
 import PlaceSearch from "./PlaceSearch";
-import RecommendedRestaurant from "./RecommendedRestaurant";
+import RecommendedPlace from "./RecommendedPlace";
 import Item from "../child/Item";
 
 const blue = {
@@ -78,15 +78,14 @@ const TabsList = styled(TabsListUnstyled)`
 export default function PlaceRecommendation(props) {
   console.log(props);
   const restaurantList = props.restaurants.map((restaurant, index) => (
-    <RecommendedRestaurant
+    <RecommendedPlace
       restaurant={restaurant}
-      selectedRestaurants={props.selectedRestaurants}
-      setSelectedRestaurants={props.setSelectedRestaurants}
+      selected={props.selected}
       variant="contained"
       sx={{ m: 1 }}
     >
       {restaurant.name}
-    </RecommendedRestaurant>
+    </RecommendedPlace>
   ));
 
   return (
@@ -105,7 +104,7 @@ export default function PlaceRecommendation(props) {
         </TabPanel>
         <TabPanel value={1}>
           {restaurantList.length === 0 ? null : (
-            <Item sx={{ height: "30%", overflow: "auto" }} mt={2}>
+            <Item sx={{ overflow: "auto" }} mt={2}>
               {restaurantList}
             </Item>
           )}

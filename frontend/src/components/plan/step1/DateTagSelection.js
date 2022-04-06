@@ -1,31 +1,13 @@
-import Date from "./Step1DatePicker";
+import Step1DatePicker from "./Step1DatePicker";
 import TagToggleButton from "./TagToggleButton";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-
-  useEffect(() => {
-    const setDate = async () => {
-      try {
-        const plan = {
-          startDate: startDate,
-          endDate: endDate,
-          routes: [],
-        };
-        props.setPlan(plan);
-        console.log(plan);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    setDate();
-  }, [startDate, endDate]);
+  console.log(props);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
@@ -46,13 +28,19 @@ const PlanStep1 = (props) => {
           <Item>가는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={startDate} setDate={setStartDate} />
+          <Step1DatePicker
+            date={props.date.startDate}
+            setDate={props.date.setStartDate}
+          />
         </Grid>
         <Grid item md={5}>
           <Item>돌아오는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={endDate} setDate={setEndDate} />
+          <Step1DatePicker
+            date={props.date.endDate}
+            setDate={props.date.setEndDate}
+          />
         </Grid>
       </Grid>
 
@@ -62,12 +50,7 @@ const PlanStep1 = (props) => {
         </Grid>
         <Grid item>
           <Grid item>
-            <TagToggleButton
-              tags={props.tags}
-              setTags={props.setTags}
-              selectedTags={props.selectedTags}
-              setSelectedTags={props.setSelectedTags}
-            ></TagToggleButton>
+            <TagToggleButton tag={props.tag}></TagToggleButton>
           </Grid>
         </Grid>
       </Grid>
@@ -85,7 +68,7 @@ const PlanStep1 = (props) => {
           <Box></Box>
 
           <Button variant="contained">
-            <Link to="step2">다음</Link>
+            <Link to="/plan/step2">다음</Link>
           </Button>
         </Stack>
       </Grid>

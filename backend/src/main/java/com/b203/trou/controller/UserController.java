@@ -34,13 +34,14 @@ public class UserController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    @ApiOperation(value = "registerInfo", notes = "회원가입")
+
+    @ApiOperation(value = "register", notes = "회원가입")
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody UserJoinDto userjoindto) {
         userService.createUser(userjoindto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
+    @ApiOperation(value = "signin", notes = "로그인")
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody UserDto userdto) throws AuthenticationException {
         System.out.println(userdto.getEmail()+ userdto.getPassword());
@@ -58,7 +59,9 @@ public class UserController {
         return new ResponseEntity<>(new TokenDto(jwt, userService.signInUser(userdto)), httpHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/{userEmail}")
+
+    @ApiOperation(value = "checkEmail", notes = "이메일 중복 확인")
+    @GetMapping("/check/{userEmail}")
     public ResponseEntity<?> checkEmail(@PathVariable("userEmail") String useremail) throws AuthenticationException {
        try{
            userService.CheckUserEmail(useremail);

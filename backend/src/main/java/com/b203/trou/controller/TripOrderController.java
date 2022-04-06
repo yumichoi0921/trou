@@ -1,12 +1,14 @@
 package com.b203.trou.controller;
 
+import com.b203.trou.entity.trip.TripOrder;
 import com.b203.trou.model.trip.TripOrderDto;
 import com.b203.trou.service.trip.TripOrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -53,6 +55,26 @@ public class TripOrderController {
             TripOrderDto result = tripOrderService.deleteTripOrder(orderId);
             return ResponseEntity.ok("트립 오더가 삭제되었습니다.");
         } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/placeId/{placeName}")
+    public ResponseEntity<?> getCourse(@PathVariable ("placeName") String placeName){
+        RestTemplate restTemplate = new RestTemplate();
+
+        String baseUrl = "http://127.0.0.1:8000/recommand/user/{placeName}";
+
+        HttpHeaders headers    = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+        HttpEntity request = new HttpEntity(headers);
+        String[] res=restTemplate.getForObject(baseUrl, String[].class,placeName);
+
+
+        try{
+            List<List<TripOrderDto>> result = tripOrderService.getRoutsByPlaceName(placeName);
+            return ResponseEntity.ok(result);
+        }catch (IllegalStateException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
