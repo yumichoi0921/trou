@@ -52,6 +52,8 @@ const PlanStep3 = (/*plan, setPlan*/) => {
       {
         routeId: 0,
         routeDate: "2022-04-04",
+        startPlace: {},
+        endPlace: {},
         day: 1,
         order: [
           {

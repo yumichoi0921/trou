@@ -29,7 +29,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function PlanStep2(props) {
   console.log(props);
-  const [restaurants, setRestaurants] = useState([]);
+
+  const [placeList, setPlaceList] = useState();
 
   return (
     <Grid container spacing={1} sx={{ height: "100%" }}>
@@ -40,6 +41,8 @@ export default function PlanStep2(props) {
           date={props.date}
           setPlan={props.setPlan}
           selected={props.selected}
+          placeList={placeList}
+          setPlaceList={setPlaceList}
         ></DateDetails>
       </Grid>
 
@@ -54,9 +57,9 @@ export default function PlanStep2(props) {
       <Grid item md={3}>
         <Area sx={{ overflow: "auto" }}>
           <PlaceRecommendation
-            restaurants={restaurants}
-            setRestaurants={setRestaurants}
             selected={props.selected}
+            placeList={placeList}
+            setPlaceList={setPlaceList}
           ></PlaceRecommendation>
           <RecommendCourse placeName={"정방폭포"}></RecommendCourse>
         </Area>

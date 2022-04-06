@@ -1,27 +1,29 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, Stack } from "@mui/material";
-
-const Nav = () => {
-  const navigate = useNavigate();
-  return (
-    <Tabs>
-      <Tab label="MyPage" onClick={() => navigate("/mypage")} />
-      <Tab label="LogOut" />
-    </Tabs>
-  );
-};
+import { useNavigate } from "react-router-dom";
+import { Tab, Stack, Box } from "@mui/material";
 
 const Header = () => {
   const navigate = useNavigate();
-    return (
-      <header>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+  return (
+    <header>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Box>
           <h1 onClick={() => navigate("/main")}>TROU</h1>
-          <Nav />
-        </Stack>
-      </header>
-    );
-  
+        </Box>
+        <Box>
+          <Tab
+            value="mypage"
+            label="MyPage"
+            onClick={() => navigate("/mypage")}
+          />
+          <Tab
+            value="logout"
+            label="LogOut"
+            onClick={() => console.log("로그아웃")}
+          />
+        </Box>
+      </Stack>
+    </header>
+  );
 };
 
 export default Header;
