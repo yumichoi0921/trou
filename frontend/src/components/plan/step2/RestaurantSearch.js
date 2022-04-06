@@ -23,10 +23,22 @@ export default function RestaurantSearch(props) {
   const [keyword, setKeyword] = React.useState("");
 
   React.useEffect(() => {
-    const tags = [];
     async function getTags() {
-      const res = await axios.get("http://localhost:8080/place/" + keyword);
-      props.setPlaces(res.data);
+      const res = await axios.get(
+        "http://localhost:8080/restaurant/" + keyword
+      );
+      console.log(res.data);
+      props.setRestaurants(
+        res.data.map((r) => {
+          return {
+            address: r.address,
+            area: r.area,
+            latitude: r.latitude,
+            longitude: r.longitude,
+            placeName: r.name,
+          };
+        })
+      );
     }
     if (keyword) getTags();
   }, [keyword]);
@@ -34,7 +46,7 @@ export default function RestaurantSearch(props) {
   return (
     <Item sx={{ "& > :not(style)": { m: 1 } }}>
       <FormControl variant="standard">
-        <InputLabel htmlFor="input-with-icon-adornment">장소 검색</InputLabel>
+        <InputLabel htmlFor="input-with-icon-adornment">맛집 검색</InputLabel>
         <Input
           id="input-with-icon-adornment"
           value={keyword}
