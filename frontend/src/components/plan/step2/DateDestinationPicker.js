@@ -41,6 +41,7 @@ function DateDestinationPicker(props) {
               value={props.selectedDate}
               onChange={handleChange}
               label="Date"
+              defaultValue={0}
             >
               {dateList}
             </Select>

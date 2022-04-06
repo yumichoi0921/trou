@@ -2,13 +2,13 @@ import { Button } from "@mui/material";
 import React from "react";
 import Item from "../child/Item";
 
-function SelectedPlan(props) {
+function SelectedPlace(props) {
   console.log(props);
   return (
     <Item>
-      <Button>{props.place}</Button>
+      <Button>abcd</Button>
     </Item>
   );
 }
 
-export default SelectedPlan;
+export default SelectedPlace;

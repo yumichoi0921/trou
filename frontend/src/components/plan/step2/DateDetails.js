@@ -13,26 +13,49 @@ import { Link } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import DateDestinationPicker from "./DateDestinationPicker";
-import SelectedPlan from "./SelectedPlace";
+import SelectedPlace from "./SelectedPlace";
 
 function DateDetails(props) {
-  const [date, setDate] = React.useState("");
   console.log(props);
 
-  function confirmPlan() {}
+  function confirmPlan() {
+    console.log("일정 생성");
+  }
+
+  const places = props.selected.selectedPlace[props.selected.selectedDate];
+  const [placeList, setPlaceList] = useState();
+  //   const placeList = places.map((place, index) => (
+  //     <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
+  //   ));
+
+  React.useEffect(() => {
+    const selectedPlace = props.selected.selectedPlace[
+      props.selected.selectedDate
+    ]
+      ? props.selected.selectedPlace[props.selected.selectedDate]
+      : [];
+    console.log(selectedPlace);
+    setPlaceList(
+      selectedPlace.map((place) => (
+        <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
+      ))
+    );
+  }, [
+    props.selected.selectedDate,
+    props.selected.selecctedPlace,
+    props.placeList,
+  ]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
       <Grid>
         <DateDestinationPicker
           date={props.date}
-          selectedDate={date}
-          setSelectedDate={setDate}
+          selectedDate={props.selected.selectedDate}
+          setSelectedDate={props.selected.setSelectedDate}
         ></DateDestinationPicker>
       </Grid>
-      <Grid>
-        <SelectedPlan place={"장소"} selected={props.selected}></SelectedPlan>
-      </Grid>
+      <Grid>{placeList}</Grid>
 
       <Grid item>
         <Stack

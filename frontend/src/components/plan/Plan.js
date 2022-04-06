@@ -11,8 +11,16 @@ export default function Plan() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState([]);
   const [plan, setPlan] = useState({});
+  const [selectedPlace, setSelectedPlace] = useState([[]]);
+  const [selectedDate, setSelectedDate] = useState(0);
+
+  const selected = {
+    selectedPlace: selectedPlace,
+    setSelectedPlace: setSelectedPlace,
+    selectedDate: selectedDate,
+    setSelectedDate: setSelectedDate,
+  };
 
   const date = {
     startDate: startDate,
@@ -26,11 +34,6 @@ export default function Plan() {
     setTags: setTags,
     selectedTags: selectedTags,
     setSelectedTags: setSelectedTags,
-  };
-
-  const selected = {
-    selectedPlace: selectedPlace,
-    setSelectedPlace: setSelectedPlace,
   };
 
   useEffect(() => {

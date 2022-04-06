@@ -76,11 +76,14 @@ const TabsList = styled(TabsListUnstyled)`
 `;
 
 export default function PlaceRecommendation(props) {
+  const [restaurants, setRestaurants] = React.useState([]);
   console.log(props);
-  const restaurantList = props.restaurants.map((restaurant, index) => (
+  const restaurantList = restaurants.map((restaurant, index) => (
     <RecommendedPlace
       restaurant={restaurant}
       selected={props.selected}
+      placeList={props.placeList}
+      setPlaceList={props.setPlaceList}
       variant="contained"
       sx={{ m: 1 }}
     >
@@ -96,8 +99,8 @@ export default function PlaceRecommendation(props) {
           <Tab>추천 맛집</Tab>
         </TabsList>
         <PlaceSearch
-          restaurants={props.restaurants}
-          setRestaurants={props.setRestaurants}
+          restaurants={restaurants}
+          setRestaurants={setRestaurants}
         ></PlaceSearch>
         <TabPanel value={0}>
           <Item mt={2}>일정</Item>
