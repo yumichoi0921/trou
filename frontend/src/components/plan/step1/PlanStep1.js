@@ -12,10 +12,7 @@ const PlanStep1 = (props) => {
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateTagSelection
-          tags={props.tags}
-          setTags={props.setTags}
-          selectedTags={props.selectedTags}
-          setSelectedTags={props.setSelectedTags}
+          tag={props.tag}
           plan={props.plan}
           setPlan={props.setPlan}
           date={props.date}

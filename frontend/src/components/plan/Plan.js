@@ -24,8 +24,8 @@ export default function Plan() {
     tags: tags,
     setTags: setTags,
     selectedTags: selectedTags,
-    setSelectedTags: setSelectedTags
-  }
+    setSelectedTags: setSelectedTags,
+  };
 
   // const plan = {
   // planId:"",
@@ -71,10 +71,7 @@ export default function Plan() {
           path="step1"
           element={
             <PlanStep1
-              tags={tags}
-              setTags={setTags}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
+              tag={tag}
               plan={plan}
               setPlan={setPlan}
               date={date}

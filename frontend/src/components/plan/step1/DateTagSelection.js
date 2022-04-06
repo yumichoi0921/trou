@@ -7,7 +7,6 @@ import React, { useState, useEffect } from "react";
 import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  console.log(props);
   useEffect(() => {
     const setDate = async () => {
       try {
@@ -68,12 +67,7 @@ const PlanStep1 = (props) => {
         </Grid>
         <Grid item>
           <Grid item>
-            <TagToggleButton
-              tags={props.tags}
-              setTags={props.setTags}
-              selectedTags={props.selectedTags}
-              setSelectedTags={props.setSelectedTags}
-            ></TagToggleButton>
+            <TagToggleButton tag={props.tag}></TagToggleButton>
           </Grid>
         </Grid>
       </Grid>
