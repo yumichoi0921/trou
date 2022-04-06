@@ -51,7 +51,9 @@ export default function Plan(props) {
       );
     }
     async function getStartingPoint() {
-      setStartingPoint(location.state.startingPoint);
+      if (location.state.startingPoint) {
+        setStartingPoint(location.state.startingPoint);
+      }
     }
     getTags();
     getStartingPoint();
