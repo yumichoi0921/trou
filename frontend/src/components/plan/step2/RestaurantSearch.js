@@ -27,7 +27,18 @@ export default function RestaurantSearch(props) {
       const res = await axios.get(
         "http://localhost:8080/restaurant/" + keyword
       );
-      props.setRestaurants(res.data);
+      console.log(res.data);
+      props.setRestaurants(
+        res.data.map((r) => {
+          return {
+            address: r.address,
+            area: r.area,
+            latitude: r.latitude,
+            longitude: r.longitude,
+            placeName: r.name,
+          };
+        })
+      );
     }
     if (keyword) getTags();
   }, [keyword]);

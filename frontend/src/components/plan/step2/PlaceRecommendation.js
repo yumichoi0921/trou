@@ -11,6 +11,7 @@ import RecommendedPlace from "./RecommendedPlace";
 import Item from "../child/Item";
 import RecommendedRestaurant from "./RecommendedRestaurant";
 import axios from "axios";
+import TagRelatedPlace from "./TagRelatedPlace";
 
 const blue = {
   50: "#F0F7FF",
@@ -86,7 +87,7 @@ export default function PlaceRecommendation(props) {
   console.log(props);
 
   React.useEffect(() => {
-    const tags = props.selected.selectedTags.map((t) => t.tagName);
+    const tags = props.selected.selectedTags.map((t, index) => t.tagName);
     console.log(tags);
     async function getRelatedPlace() {
       const res = await axios.post(
@@ -94,12 +95,28 @@ export default function PlaceRecommendation(props) {
         props.selected.selectedTags
       );
       console.log(res.data);
+      setRelatedPlaces(res.data);
     }
     getRelatedPlace();
   }, [props.selected.selectedTags]);
 
+  const relatedPlaceList = relatedPlaces.map((place, index) => (
+    <TagRelatedPlace
+      key={index}
+      place={place}
+      selected={props.selected}
+      placeList={props.placeList}
+      setPlaceList={props.setPlaceList}
+      variant="contained"
+      sx={{ m: 1 }}
+    >
+      {place.name}
+    </TagRelatedPlace>
+  ));
+
   const placeList = places.map((place, index) => (
     <RecommendedPlace
+      key={index}
       place={place}
       selected={props.selected}
       placeList={props.placeList}
@@ -113,6 +130,7 @@ export default function PlaceRecommendation(props) {
 
   const restaurantList = restaurants.map((place, index) => (
     <RecommendedRestaurant
+      key={index}
       place={place}
       selected={props.selected}
       placeList={props.placeList}
@@ -126,8 +144,12 @@ export default function PlaceRecommendation(props) {
 
   return (
     <React.Fragment>
-      <Item mb={2}>추천 장소</Item>
-      <Item mb={2}>장소1</Item>
+      {relatedPlaceList.length === 0 ? null : (
+        <React.Fragment>
+          <Item mb={2}>추천 장소</Item>
+          <Item mb={2}>{relatedPlaceList}</Item>
+        </React.Fragment>
+      )}
       <TabsUnstyled defaultValue={0}>
         <TabsList>
           <Tab>장소 검색</Tab>

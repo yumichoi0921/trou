@@ -10,10 +10,11 @@ function RecommendedRestaurant(props) {
       props.selected.selectedPlace[props.selected.selectedDate];
     if (!selectedPlace.includes(props.place)) {
       props.setPlaceList(
-        selectedPlace.map((place) => (
+        selectedPlace.map((place, index) => (
           <SelectedPlace
-            place={place}
+            place={place.placeName}
             selected={props.selected}
+            setPlaceList={props.setPlaceList}
           ></SelectedPlace>
         ))
       );

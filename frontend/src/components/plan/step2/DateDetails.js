@@ -36,8 +36,13 @@ function DateDetails(props) {
       ? props.selected.selectedPlace[props.selected.selectedDate]
       : [];
     setPlaceList(
-      selectedPlace.map((place) => (
-        <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
+      selectedPlace.map((place, index) => (
+        <SelectedPlace
+          key={index}
+          place={place}
+          selected={props.selected}
+          setPlaceList={props.setPlaceList}
+        ></SelectedPlace>
       ))
     );
   }, [
