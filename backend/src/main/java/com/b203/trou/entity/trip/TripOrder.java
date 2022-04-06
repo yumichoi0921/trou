@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalTime;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -44,4 +45,6 @@ public class TripOrder {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+
 }
