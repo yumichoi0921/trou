@@ -8,22 +8,6 @@ import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
   console.log(props);
-  useEffect(() => {
-    const setDate = async () => {
-      try {
-        const plan = {
-          startDate: props.date.startDate,
-          endDate: props.date.endDate,
-          routes: [],
-        };
-        props.setPlan(plan);
-        console.log(plan);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    setDate();
-  }, [props.startDate, props.endDate]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
