@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.b203.trou.model.user.TokenDto;
 import javax.security.sasl.AuthenticationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -29,7 +31,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
@@ -37,7 +38,6 @@ public class UserController {
     @ApiOperation(value = "register", notes = "회원가입")
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody UserJoinDto userjoindto) {
-        System.out.println(userjoindto.toString());
         userService.createUser(userjoindto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -73,9 +73,20 @@ public class UserController {
          return ResponseEntity.status(200).build();
 
        }
-
-
     }
 
+    // email에 해당하는 userId 반환
+    @GetMapping("/info/{userEmail}")
+    public ResponseEntity<?> getUserInfoByEmail(@PathVariable String userEmail){
+        System.out.println(userEmail);
+        UserDto userDto = userService.getUserInfoByEmail(userEmail);
+        return ResponseEntity.ok(userDto);
+    }
 
+    @GetMapping("/list/{keyword}")
+    public ResponseEntity<?> getUsers(@PathVariable String keyword){
+        System.out.println(keyword);
+        List<UserDto> userDto = userService.getUsers(keyword);
+        return ResponseEntity.ok(userDto);
+    }
 }

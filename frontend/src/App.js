@@ -15,8 +15,6 @@ import SelectPlace from "./components/FirstMain/SelectPlace"
 
 import Detail from "./components/plan/detail/Detail";
 import Plan from "./components/plan/Plan";
-
-
 const App = () => {
   if (window.location.pathname === '/' ||window.location.pathname === '/select') {
     return (
@@ -36,14 +34,14 @@ const App = () => {
           <Header />
         </div>
         <div className="container">
-          <Routes>
-            <Route path="/main" element={<Main />} />
-            <Route path="/mypage/" element={<MyPage />} />
-            <Route path="/tripDetail" element={<TripDetail />} />
-            <Route path="/check" element={<PlanStep3 />} />
-            <Route path="/plan/*" element={<Plan />} />
-            <Route path="/planDetail" element={<Detail />} />
-          </Routes>
+           <Routes>
+                    <Route path="/main" element={<Main />} />
+                    <Route path="/mypage/" element={<MyPage />} />
+                    <Route path="/tripDetail" element={<TripDetail />} />
+                    <Route path="/check" element={<PlanStep3 />} />
+                    <Route path="/plan/*" element={<Plan />} />
+                    <Route path="/planDetail/:planId" element={<Detail />} />
+                  </Routes>
         </div>
       </Router>
     );
