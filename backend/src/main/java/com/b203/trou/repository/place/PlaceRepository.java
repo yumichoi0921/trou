@@ -15,4 +15,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     List<PlaceDto> findByPlaceNameContaining(String keyword);
 
 
+    Place findByPlaceName(String placeName);
 }

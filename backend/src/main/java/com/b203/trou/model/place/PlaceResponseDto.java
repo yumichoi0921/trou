@@ -8,11 +8,6 @@ import lombok.*;
 @Setter
 @Data
 public class PlaceResponseDto {
-    String place_id;
-    String place_name;
-    int read_count;
-    String tags;
-    String mapx;
-    String mapy;
-    String img;
+    long place_id;
+
 }

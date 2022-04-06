@@ -18,9 +18,14 @@ body {
 
 .header {
   align-items: center;
-  padding-top: 10px;
+  padding-top: 5px;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.body {
+  max-width: 95%;
+  margin: auto;
 }
 
 .container {
@@ -28,7 +33,7 @@ body {
   height: 90%;
   margin: auto;
   overflow: auto;
-  min-height: 650px;
+  /* min-height: 650px; */
   border: 1px solid steelblue;
   padding: 15px;
   border-radius: 5px;

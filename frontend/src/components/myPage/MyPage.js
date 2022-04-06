@@ -10,6 +10,7 @@ function Users() {
   useEffect(() => {
     if (plans.length > 0) {
       console.log(plans);
+
     }
   }, [plans]);
 
@@ -64,6 +65,7 @@ function Users() {
                 </Plan>
           ))}
           <Button></Button>
+
     </ul>
   );
 }

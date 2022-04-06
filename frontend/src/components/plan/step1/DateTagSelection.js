@@ -1,37 +1,13 @@
-import Date from "../Date";
+import Step1DatePicker from "./Step1DatePicker";
 import TagToggleButton from "./TagToggleButton";
 import { Button, Stack, styled, Box, Grid } from "@mui/material";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import React, { useState, useEffect } from "react";
+import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  function nextPage() {
-    if (props.curPage === 3) return;
-    props.setPage(props.curPage + 1);
-  }
-  function prevPage() {
-    if (props.curPage === 1) return;
-    props.setPage(props.curPage - 1);
-  }
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-
-  useEffect(() => {
-    const setDate = async () => {
-      try {
-        const plan = {
-          startDate: startDate,
-          endDate: endDate,
-          routes: [],
-        };
-        props.setPlan(plan);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    setDate();
-  }, [startDate, endDate]);
+  console.log(props);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
@@ -52,13 +28,19 @@ const PlanStep1 = (props) => {
           <Item>가는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={startDate} setDate={setStartDate} />
+          <Step1DatePicker
+            date={props.date.startDate}
+            setDate={props.date.setStartDate}
+          />
         </Grid>
         <Grid item md={5}>
           <Item>돌아오는 날</Item>
         </Grid>
         <Grid item md={7}>
-          <Date date={endDate} setDate={setEndDate} />
+          <Step1DatePicker
+            date={props.date.endDate}
+            setDate={props.date.setEndDate}
+          />
         </Grid>
       </Grid>
 
@@ -68,10 +50,7 @@ const PlanStep1 = (props) => {
         </Grid>
         <Grid item>
           <Grid item>
-            <TagToggleButton
-              tags={props.tags}
-              setTags={props.setTags}
-            ></TagToggleButton>
+            <TagToggleButton tag={props.tag}></TagToggleButton>
           </Grid>
         </Grid>
       </Grid>
@@ -84,16 +63,12 @@ const PlanStep1 = (props) => {
           spacing={2}
           mt={3}
           mr={3}
+          ml={3}
         >
-          {props.curPage !== 1 ? (
-            <Button variant="outlined" onClick={prevPage}>
-              이전
-            </Button>
-          ) : (
-            <Box></Box>
-          )}
-          <Button variant="contained" onClick={nextPage}>
-            다음
+          <Box></Box>
+
+          <Button variant="contained">
+            <Link to="/plan/step2">다음</Link>
           </Button>
         </Stack>
       </Grid>
