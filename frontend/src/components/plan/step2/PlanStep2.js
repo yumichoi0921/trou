@@ -17,6 +17,7 @@ import Area from "../child/Area";
 import KakaoMap from "../step1/Step1KakaoMap";
 import PlaceRecommendation from "./PlaceRecommendation";
 import DateDetails from "./DateDetails";
+import RecommendCourse from "./RecommandCourse";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -60,6 +61,11 @@ export default function PlanStep2(props) {
             placeList={placeList}
             setPlaceList={setPlaceList}
           ></PlaceRecommendation>
+          <RecommendCourse
+            selected={props.selected}
+            placeName={"정방폭포"}
+            setPlaceList={setPlaceList}
+          ></RecommendCourse>
         </Area>
       </Grid>
     </Grid>
