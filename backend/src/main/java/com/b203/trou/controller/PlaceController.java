@@ -2,7 +2,6 @@ package com.b203.trou.controller;
 import com.b203.trou.model.place.PlaceDto;
 import com.b203.trou.model.place.PlaceRequestDto;
 import com.b203.trou.model.place.PlaceResponseDto;
-import com.b203.trou.model.trip.TripPlanDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.service.place.PlaceService;
 import com.b203.trou.service.trip.TripPlanService;
@@ -16,9 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
