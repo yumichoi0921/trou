@@ -6,8 +6,9 @@ import { Fragment } from 'react';
 import styles from './MyPage.module.css';
 
 
-const TripPlan = ({plan, image}) => {
-    console.log(image)
+const TripPlan = ({plan, image, region}) => {
+    console.log(region)
+    let index = Math.floor(Math.random() * (5 - 1) + 1);
     function handleClick(planId){
         window.location.replace("/trip-detail/"+planId.planId);
     }
@@ -24,7 +25,10 @@ const TripPlan = ({plan, image}) => {
                 </Grid>
                 <Grid item xs={3}>
                     <ListItem>
-                        <img src={image} className={styles.image}></img>
+                        {image!=null?
+                            <img src={image} className={styles.image}></img>:
+                            <img src={`/imgs/img${index}.jpg`} className={styles.image}></img>
+                        }
                     </ListItem>
                 </Grid>
                 <Grid item xs={8}>                                      
@@ -32,8 +36,11 @@ const TripPlan = ({plan, image}) => {
                         <div className={styles.planInfo}
                             onClick={() => handleClick({planId: plan.planId})}                            
                         >
-                            <div>{plan.text}</div>
-                            <div>{plan.startDate}~{plan.endDate}</div>
+                        {region!=null?
+                            <div>{region.substring(0, region.indexOf(' '))}</div>:
+                            <div>{"지역없음"}</div>
+                        }    
+                        <div>{plan.startDate}~{plan.endDate}</div>
                         </div>
                     </ListItem>
                 </Grid>

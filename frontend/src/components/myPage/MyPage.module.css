@@ -42,3 +42,8 @@
 .clickedstar {
   color: rgb(212, 180, 0);
 }
+
+.tripContent {
+  margin: 20px;
+  float: left;
+}

@@ -10,21 +10,6 @@ function Users() {
   useEffect(() => {
     if (plans.length > 0) {
       console.log(plans);
-      //console.log(plans[15].routes[0].order[3].place);
-      //console.log(plans[15].routes[0].order[3].place.image);
-      
-      /*return (
-        <ul>
-          {plans.map((plan) => (
-            plan.routes.length > 0 && plan.routes[0].order.length > 0 ?
-            <Plan key={plan.planId} plan={plan} image={plan.routes[0].order[0].place.image}>
-            </Plan>:
-            <Plan key={plan.planId} plan={plan} image={null}>
-            </Plan>
-          ))}
-          <Button></Button>
-        </ul>
-      );*/
     }
   }, [plans]);
 
@@ -69,12 +54,11 @@ function Users() {
     getPlans();
   }, []);
 
-  console.log("111")
   return (
     <ul>
         {plans.map((plan) => (
             plan.routes.length > 0 && plan.routes[0].order.length > 0 ?
-                <Plan key={plan.planId} plan={plan} image={plan.routes[0].order[3].place.image}>
+                <Plan key={plan.planId} plan={plan} image={plan.routes[0].order[3].place.image} region={plan.routes[0].order[0].region}>
                 </Plan>:
                 <Plan key={plan.planId} plan={plan} image={null}>
                 </Plan>
