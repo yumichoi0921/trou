@@ -4,12 +4,14 @@ import PlanStep1 from "./step1/PlanStep1";
 import PlanStep2 from "./step2/PlanStep2";
 import { Link, Route, Routes } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
+import Detail from "./detail/Detail";
 
 export default function Plan() {
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [plan, setPlan] = useState({});
+  const [sendData, setSendData] = useState({});
 
   return (
     <Fragment>
@@ -62,6 +64,7 @@ export default function Plan() {
           path="step3"
           element={<PlanStep3 plan={plan} setPlan={setPlan} />}
         ></Route>
+        <Route path="detail/:planId" element={<Detail sendData={plan} setSendData={setPlan} />} />
       </Routes>
     </Fragment>
   );
