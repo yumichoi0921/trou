@@ -27,6 +27,7 @@ public class TripOrderDto {
     LocalTime endTime;
     PlaceDto place;
 
+    String region; // 여행지 지역이름 추가
 
     public TripOrderDto(TripOrder tripOrder) {
         this.orderId = tripOrder.getId();
@@ -41,6 +42,7 @@ public class TripOrderDto {
         this.tripOrder = tripOrder.getTripOrder();
         this.startTime = tripOrder.getStartTime();
         this.endTime = tripOrder.getEndTime();
+        this.region = tripOrder.getPlace().getAddr1();
     }
 
 
