@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import SelectedPlace from "./SelectedPlace";
 
-function RecommendedPlace(props) {
+function TagRelatedPlace(props) {
   function addPlace() {
     if (!props.selected.selectedPlace[props.selected.selectedDate])
       props.selected.selectedPlace[props.selected.selectedDate] = [];
@@ -34,4 +34,4 @@ function RecommendedPlace(props) {
   );
 }
 
-export default RecommendedPlace;
+export default TagRelatedPlace;
