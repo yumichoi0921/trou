@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                  .antMatchers("/users/signin","users/register","/users/check").permitAll()
                  .antMatchers("/swagger-ui/**").permitAll()
-                 .anyRequest().authenticated()
+//                 .anyRequest().authenticated()
 
                  .and()
                  .apply(new JwtSecurityConfig(tokenProvider)); // 커스텀하게 작선한 jwtSecurityConfig도 적용
