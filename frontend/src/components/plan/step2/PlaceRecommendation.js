@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/system";
+import { Stack, Box } from "@mui/material";
 import TabsUnstyled from "@mui/base/TabsUnstyled";
 import TabsListUnstyled from "@mui/base/TabsListUnstyled";
 import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
@@ -34,7 +35,6 @@ const Tab = styled(TabUnstyled)`
   background-color: #e1f5fe;
   width: 100%;
   padding: 12px 16px;
-  margin: 6px 6px;
   border: none;
   border-radius: 5px;
   display: flex;
@@ -69,7 +69,7 @@ const TabPanel = styled(TabPanelUnstyled)`
 `;
 
 const TabsList = styled(TabsListUnstyled)`
-  min-width: 320px;
+  width: "100%";
   background-color: #e1f5fe;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -108,7 +108,7 @@ export default function PlaceRecommendation(props) {
       placeList={props.placeList}
       setPlaceList={props.setPlaceList}
       variant="contained"
-      sx={{ m: 1 }}
+      sx={{ margin: "auto" }}
     >
       {place.name}
     </TagRelatedPlace>
@@ -122,7 +122,7 @@ export default function PlaceRecommendation(props) {
       placeList={props.placeList}
       setPlaceList={props.setPlaceList}
       variant="contained"
-      sx={{ m: 1 }}
+      sx={{ margin: "auto" }}
     >
       {place.name}
     </RecommendedPlace>
@@ -136,48 +136,55 @@ export default function PlaceRecommendation(props) {
       placeList={props.placeList}
       setPlaceList={props.setPlaceList}
       variant="contained"
-      sx={{ m: 1 }}
+      sx={{ overflow: "auto" }}
     >
       {place.name}
     </RecommendedRestaurant>
   ));
 
   return (
-    <React.Fragment>
-      {relatedPlaceList.length === 0 ? null : (
-        <React.Fragment>
-          <Item mb={2}>추천 장소</Item>
-          <Item mb={2}>{relatedPlaceList}</Item>
-        </React.Fragment>
-      )}
+    <Stack sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
       <TabsUnstyled defaultValue={0}>
         <TabsList>
+          <Tab>추천 장소</Tab>
           <Tab>장소 검색</Tab>
           <Tab>맛집 검색</Tab>
         </TabsList>
 
-        <TabPanel value={0}>
-          <PlaceSearch places={places} setPlaces={setPlaces}></PlaceSearch>
-          {placeList.length === 0 ? null : (
-            <Item sx={{ overflow: "auto" }} mt={2}>
-              {placeList}
-            </Item>
-          )}
+        <TabPanel value={0} sx={{ width: "100%", height: "50%" }}>
+          <Item sx={{ height: "100%", overflow: "auto", mt: 1 }}>
+            {relatedPlaceList.length === 0 ? null : (
+              <Box mb={2}>{relatedPlaceList}</Box>
+            )}
+          </Item>
         </TabPanel>
-        <TabPanel value={1}>
-          <RestaurantSearch
-            restaurants={restaurants}
-            setRestaurants={setRestaurants}
-          ></RestaurantSearch>
-          {restaurantList.length === 0 ? null : (
-            <Item sx={{ overflow: "auto" }} mt={2}>
-              {restaurantList}
-            </Item>
-          )}
+        <TabPanel value={1} sx={{ width: "100%", height: "50%" }}>
+          <Box>
+            <PlaceSearch setPlaces={setPlaces}></PlaceSearch>
+          </Box>
+          <Item sx={{ height: "90%", overflow: "auto", mt: 1 }}>
+            {placeList.length === 0 ? null : <Box>{placeList}</Box>}
+          </Item>
+        </TabPanel>
+        <TabPanel value={2} sx={{ width: "100%", height: "50%" }}>
+          <Box>
+            <RestaurantSearch
+              restaurants={restaurants}
+              setRestaurants={setRestaurants}
+            ></RestaurantSearch>
+          </Box>
+          <Item sx={{ height: "90%", overflow: "auto", mt: 1 }}>
+            {restaurantList.length === 0 ? null : (
+              <Box sx={{ overflow: "auto", width: "100%" }} mt={2}>
+                {restaurantList}
+              </Box>
+            )}
+          </Item>
         </TabPanel>
       </TabsUnstyled>
-      <Item mt={3}>비슷한 유저의 여행 코스</Item>
-      <Item mt={3}>A - B - C</Item>
-    </React.Fragment>
+
+      {/* <Item mt={3}>비슷한 유저의 여행 코스</Item>
+      <Item mt={3}>A - B - C</Item> */}
+    </Stack>
   );
 }

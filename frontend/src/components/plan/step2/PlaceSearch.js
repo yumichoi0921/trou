@@ -32,7 +32,7 @@ export default function RestaurantSearch(props) {
   }, [keyword]);
 
   return (
-    <Item sx={{ "& > :not(style)": { m: 1 } }}>
+    <Item sx={{ height: "10%" }}>
       <FormControl variant="standard">
         <InputLabel htmlFor="input-with-icon-adornment">장소 검색</InputLabel>
         <Input

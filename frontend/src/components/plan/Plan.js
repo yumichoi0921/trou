@@ -10,9 +10,18 @@ export default function Plan(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState([]);
   const [plan, setPlan] = useState({});
   const [startingPoint, setStartingPoint] = useState({});
+  const [selectedPlace, setSelectedPlace] = useState([[]]);
+  const [selectedDate, setSelectedDate] = useState(0);
+
+  const selected = {
+    selectedPlace: selectedPlace,
+    setSelectedPlace: setSelectedPlace,
+    selectedDate: selectedDate,
+    setSelectedDate: setSelectedDate,
+    selectedTags: selectedTags,
+  };
 
   const date = {
     startDate: startDate,
@@ -28,15 +37,9 @@ export default function Plan(props) {
     setSelectedTags: setSelectedTags,
   };
 
-  const selected = {
-    selectedPlace: selectedPlace,
-    setSelectedPlace: setSelectedPlace,
-  };
   const location = useLocation();
-
-  useEffect(() => {
-    async function getTags() {
-      const res = await axios.get("http://localhost:8080/tag");
+  if (tags.length === 0) {
+    axios.get("http://localhost:8080/tag").then((res) => {
       const resTags = res.data;
       tag.setTags(
         resTags.map((resTag) => {
@@ -49,13 +52,14 @@ export default function Plan(props) {
           return tag;
         })
       );
-    }
+    });
+  }
+  useEffect(() => {
     async function getStartingPoint() {
       if (location.state.startingPoint) {
         setStartingPoint(location.state.startingPoint);
       }
     }
-    getTags();
     getStartingPoint();
   }, []);
 
