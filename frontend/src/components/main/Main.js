@@ -87,7 +87,7 @@ export default function Main() {
         if (place.image === null) {
           index = Math.floor(Math.random() * (5 - 1) + 1);
           console.log(index);
-          place.image = `/imgs/img${index}.jpg`;
+          //place.image = `/imgs/img${index}.jpg`;
           place.index = index;
           place.isImg = false;
         } else {
