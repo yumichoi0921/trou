@@ -10,36 +10,24 @@ const TagButton = styled(Button)((props) => ({
     borderColor: "#0062cc",
   },
 }));
-function TagList({ tags, setTags }) {
+function TagList({ tag }) {
   async function reverseButton(index) {
-    const newTags = [...tags];
+    const newTags = [...tag.tags];
     newTags[index].isSelected = !newTags[index].isSelected;
     newTags[index].color = newTags[index].isSelected ? "#64b5f6" : "#e3f2fd";
-    setTags(newTags);
+    tag.setTags(newTags);
     console.log(newTags[index].tagName + " " + newTags[index].isSelected);
     console.log(newTags[index].tagName + " " + newTags[index].color);
-  }
-  useEffect(() => {
-    async function getTags() {
-      const res = await axios.get("http://localhost:8080/tag");
-      console.log(res.data.length);
-      const resTags = res.data;
-      setTags(
-        resTags.map((resTag) => {
-          const tag = {
-            tagId: resTag.tagId,
-            tagName: resTag.tagName,
-            isSelected: false,
-            color: "#e3f2fd",
-          };
-          return tag;
-        })
-      );
+    const setTag = tag.selectedTags;
+    if (newTags[index].isSelected) {
+      setTag.push(newTags[index]);
+    } else {
+      tag.setSelectedTags(tag.selectedTags.filter((t) => t !== newTags[index]));
     }
-    getTags();
-  }, []);
+    console.log(tag.selectedTags);
+  }
 
-  const tagList = tags.map((tag, index) => (
+  const tagList = tag.tags.map((tag, index) => (
     <TagButton
       onClick={() => reverseButton(index)}
       id={tag.tagId}

@@ -4,6 +4,7 @@ import com.b203.trou.jwt.JwtAccessDeniedHandler;
 import com.b203.trou.jwt.JwtAuthenticationEntryPoint;
 import com.b203.trou.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -47,13 +48,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                  .and()
                  .authorizeRequests()
-                 .antMatchers("/*").permitAll()
 
+                 .antMatchers("/users/signin","users/register","/users/check").permitAll()
+                 .antMatchers("/swagger-ui/**").permitAll()
+                 .anyRequest().authenticated()
 
                  .and()
                  .apply(new JwtSecurityConfig(tokenProvider)); // 커스텀하게 작선한 jwtSecurityConfig도 적용
 
 
     }
-//     .anyRequest().authenticated()
+
 }
