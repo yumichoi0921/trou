@@ -17,4 +17,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     List<PlaceDto> findByPlaceNameContainingAndAreaCode(String keyword, String areaCode);
 
 
+    Place findByPlaceName(String placeName);
 }

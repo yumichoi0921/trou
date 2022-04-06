@@ -5,6 +5,7 @@ import com.b203.trou.model.place.PlaceResponseDto;
 import com.b203.trou.model.tag.TagDto;
 import com.b203.trou.model.user.UserHistoryDto;
 import com.b203.trou.service.place.PlaceService;
+import com.b203.trou.service.trip.TripPlanService;
 import com.b203.trou.service.user.UserHistoryService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,7 @@ public class PlaceController {
 
     private final PlaceService placeService;
     private final UserHistoryService userHistoryService;
+    private final TripPlanService tripPlanService;
 
     @GetMapping("/detail/{placeId}")
     public ResponseEntity<?> selectPlaces(@PathVariable long placeId ) {
@@ -62,16 +64,14 @@ public class PlaceController {
 
 
         PlaceResponseDto[] res=restTemplate.postForObject(baseUrl,places, PlaceResponseDto[].class);
-
-//        for(int i=0; i < res.length; i++) {
-//            System.out.println("======== res : " + i + " ========");
-//            System.out.println(res[i].getPlace_id() + " " + res[i].getPlace_name() + " " + res[i].getTags());
-//        }
-
-
+        List<PlaceDto> recommandPlace = new ArrayList<>();
+        for(int i=0;i<res.length;i++){
+            recommandPlace.add(placeService.getPlace(res[i].getPlace_id()));
+           // System.out.println(placeService.getPlace(res[i].getPlace_id()).getPlaceName());
+        }
 
 
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(recommandPlace);
     }
 
     @PostMapping("/related/tag")
