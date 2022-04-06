@@ -25,13 +25,13 @@ const Route = ({ index, route, routes, setRoutes }) => {
     setOrder(newOrder);
   });
 
-  let placeList = route.order.map((place, index) => (
+  let placeList = route.order.map((item, index) => (
     <Place
       index={index}
-      id={place.placeId}
-      name={place.placeName}
+      id={item.place.placeId}
+      name={item.place.placeName}
       movePlace={movePlace}
-      key={place.placeId}
+      key={item.place.placeId}
     />
   ));
 

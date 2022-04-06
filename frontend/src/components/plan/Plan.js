@@ -79,13 +79,13 @@ export default function Plan() {
 
   return (
     <Fragment>
-      <nav>
+      {/* <nav>
         <Link to="step1">step1</Link>
         <br></br>
         <Link to="step2">step2</Link>
         <br></br>
         <Link to="step3">step3</Link>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route
