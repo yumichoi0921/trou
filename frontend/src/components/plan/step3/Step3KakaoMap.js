@@ -11,11 +11,13 @@ const KakaoMap = ({ plan }) => {
       };
       var map = new kakao.maps.Map(container, options);
       for (const route of plan.routes) {
+        console.log('route : ', route);    
         // 마커를 표시할 위치 배열입니다
         var positions = route.order.map((p) => ({
           title: p.placeName,
           latlng: new kakao.maps.LatLng(p.mapX, p.mapY),
         }));
+        console.log('positions : ', positions);    
         // 마커 이미지의 이미지 주소입니다
         var imageSrc =
           "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";

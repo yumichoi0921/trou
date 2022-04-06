@@ -13,6 +13,7 @@ const Memo = ({ memo, setMemoState }) => {
                 multiline
                 rows={4}
                 defaultValue={memo}
+                disabled = {true}
             /> <br />
             {/* <pre>{memo}</pre> */}
             <Button variant="outlined" onClick={event => {

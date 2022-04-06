@@ -4,7 +4,7 @@
 /* global kakao */
 import React, { Fragment, useEffect, useState } from "react";
 import { Grid, Box, Button, Stack, Divider, MenuItem } from "@mui/material";
-import { Link, Routes } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import SelectDay from "./SelectDay";
 import axios from "axios";
 import OrderListBar from "./OrderListBar";
@@ -15,6 +15,8 @@ import ShareFriends from "./ShareFriends";
 import KakaoMap from "../step3/Step3KakaoMap";
 import Area from "../child/Area";
 import Local from "../child/Local";
+import PlanStep3_1 from "../step3/PlanStep3";
+import App from "../../../App";
 
 import { useParams } from "react-router-dom";
 
@@ -26,88 +28,85 @@ const Detail = () => {
     const [dList, setDList] = useState([]);    // props로 받은거 넣기?
     const [routeId, setRouteId] = useState(0);
     const [orderList, setOrderList] = useState([]);
-    const [sendData, setSendData] = useState([]);
-
-    const initSendData = (routeList) => {
-        console.log("initSendData !!!");
-        // 0번째는 이미 받았어 1번째부터 for문으로 받아서 저장하자.
-        let routeLen = routeList.length;
-        let tmpRoute = [];
-        const tmpSend = [];
-        for(let idx = 0;idx < routeLen; idx++){
-            let id = routeList[idx].routeId;
-            let date = routeList[idx].routeDate;
-            let rday = routeList[idx].day;
-            axios.get(`/order/${routeList[idx].routeId}`).then((res) => {
-                let orders = res.data;
-                let tmpOrder = [];
-                for(let j=0;j<orders.length;j++){
-                    tmpOrder.push({
-                        tripOrder : orders[j].tripOrder,
-                        placeId :  orders[j].place.placeId,
-                        placeName : orders[j].place.placeName,
-                        mapX : orders[j].place.mapX,
-                        mapY : orders[j].place.mapY,
-                    });
-                }
-                tmpRoute.push({
-                    routeId : id,
-                    routeDate : date,
-                    day : rday,
-                    order : tmpOrder
-                });
-                
-            }).catch(err => {
-                console.log(err);
-            });
-        }
-        console.log('tmpSend 넣어주는 곳');
-        tmpSend.push({
-            startDate : routeList[0].routeDate, 
-            endDate : routeList[routeLen-1].routeDate,
-            routes : tmpRoute
-        });
-        setSendData(tmpSend);
-        console.log('으아아 센드데이터',tmpSend);
-        // console.log(routes,orders);
-    };
-
-    const initRoute = async () => {  // async ? 
-        try {
-            console.log('init!!');
-            const response = await axios({
-                method: "get",
-                url: `/route/${planId}`,    // param으로 받은거로 검색
-                baseURL: "http://localhost:8080",
-                timeout: 2000,
-            });
-            console.log('route! : ' , response.data);
-            setDList(response.data);
-            setMemo(response.data[0].memo);
-            setRouteId(response.data[0].routeId);
-
-            let rId = response.data[0].routeId;
-            console.log('id : ', rId);
-            try {
-                const res = await axios({
-                    method: "get",
-                    url: `/order/${rId}`,
-                    baseURL: "http://localhost:8080",
-                    timeout: 2000,
-                });
-                console.log('orderList : ', res.data);
-                setOrderList(res.data);
-
-                await initSendData(response.data);
-            } catch {
-                console.log('에러발생');
-            }
-        } catch {
-            console.log('에러발생');
-        }
-    }
+    const [sendData, setSendData] = useState({});
 
     useEffect(() => {
+        if(Object.keys(sendData).length !== 0 && sendData.constructor === Object){
+            alert('HI');
+            console.log(sendData);
+        }
+    }, [sendData]);
+
+    useEffect(() => {
+        let routeList = null;
+        let rId = null;
+        let tmpRoute = [];
+        let routeLen = null;
+        let tmpSend = null;
+        const initRoute = async () => {
+            try{
+                const response = await axios.get(`/route/${planId}`);
+                rId = response.data[0].routeId;
+                routeList = response.data;
+                setDList(response.data);
+                setMemo(response.data[0].memo);
+                setRouteId(response.data[0].routeId);
+                await initOrder();
+                await initSendData();
+                console.log('tmpSend :  ', tmpSend);
+                setSendData(tmpSend);
+                // console.log('sendData : ', sendData);
+            } catch(e){
+                console.log('initRoute 오류');
+            }
+        };
+        const initOrder = async () => {
+            try{
+                console.log(rId);
+                const res = await axios.get(`/order/${rId}`);
+                console.log('routeList : ', routeList);
+                console.log('orderList : ', res.data);
+                setOrderList(res.data);
+            } catch(e){
+                console.log('initOrder 오류');
+            }
+        };
+        const initSendData = async () => {
+            try{
+                console.log("initSendData !!!", routeList);
+                routeLen = routeList.length;
+                for (let idx = 0; idx < routeLen; idx++) {
+                    let id = routeList[idx].routeId;
+                    let date = routeList[idx].routeDate;
+                    let rday = routeList[idx].day;
+                    const res = await axios.get(`/order/${routeList[idx].routeId}`);
+                    let orders = res.data;
+                    let tmpOrder = [];
+                    for (let j = 0; j < orders.length; j++) {
+                        tmpOrder.push({
+                            tripOrder: orders[j].tripOrder,
+                            placeId: orders[j].place.placeId,
+                            placeName: orders[j].place.placeName,
+                            mapX: orders[j].place.mapX,
+                            mapY: orders[j].place.mapY,
+                        });  
+                    }
+                    tmpRoute.push({
+                        routeId: id,
+                        routeDate: date,
+                        day: rday,
+                        order: tmpOrder
+                    });
+                }
+                tmpSend = {
+                    startDate: routeList[0].routeDate,
+                    endDate: routeList[routeLen - 1].routeDate,
+                    routes: tmpRoute
+                };
+            }catch(e){
+                console.log('initSenData 오류');
+            }
+        };
         initRoute();
     }, []);
 
@@ -169,7 +168,7 @@ const Detail = () => {
                                 <Grid item xs={3}>
                                     <Button
                                         component={Link}
-                                        to={"step3"}    //**************** 수정하는 페이지로 변경하기 ***************/ 
+                                        to={"/plan/step3_1"}    //**************** 수정하는 페이지로 변경하기 ***************/ 
                                         variant="contained">
                                         수정하기
                                     </Button>
@@ -184,18 +183,19 @@ const Detail = () => {
                             <OrderListBar orderList={orderList}></OrderListBar>
                         </Stack>
                         <Area sx={{ overflow: "auto" }}>
-                            {/* <KakaoMap plan={sendData}></KakaoMap> */}
+                            <KakaoMap plan={sendData}></KakaoMap>
                         </Area>
                     </Grid>
                 </Grid>
             </Box>
 
-            {/* <Routes>
+            <Routes>
                 <Route
-                    path="*"
-
+                    path="/plan/step3_1"
+                    element={<App></App>}
+                // element={<PlanStep3_1 tmp={sendData} flag={true} />}
                 ></Route>
-            </Routes> */}
+            </Routes>
         </Fragment>
     );
 };

@@ -13,7 +13,7 @@ const ShareFriends = (props) => {
             console.log(res.data);
             const tmp = [];
             res.data.map((user,index) => {
-                let newTmp = user.userName;
+                let newTmp = user.name;
                 tmp.push(newTmp);
             });
             setFriends(tmp);
