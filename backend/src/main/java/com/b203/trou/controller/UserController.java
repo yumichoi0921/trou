@@ -61,7 +61,7 @@ public class UserController {
 
 
     @ApiOperation(value = "checkEmail", notes = "이메일 중복 확인")
-    @GetMapping("/{userEmail}")
+    @GetMapping("/check/{userEmail}")
     public ResponseEntity<?> checkEmail(@PathVariable("userEmail") String useremail) throws AuthenticationException {
        try{
            userService.CheckUserEmail(useremail);
