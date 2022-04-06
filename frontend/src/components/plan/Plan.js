@@ -109,6 +109,7 @@ export default function Plan() {
             <PlanStep2
               plan={plan}
               setPlan={setPlan}
+              date={date}
               selectedTags={selectedTags}
               selected={selected}
             ></PlanStep2>

@@ -16,6 +16,7 @@ import DateDestinationPicker from "./DateDestinationPicker";
 import SelectedPlan from "./SelectedPlace";
 
 function DateDetails(props) {
+  const [date, setDate] = React.useState("");
   console.log(props);
 
   function confirmPlan() {}
@@ -23,7 +24,11 @@ function DateDetails(props) {
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
       <Grid>
-        <DateDestinationPicker></DateDestinationPicker>
+        <DateDestinationPicker
+          date={props.date}
+          selectedDate={date}
+          setSelectedDate={setDate}
+        ></DateDestinationPicker>
       </Grid>
       <Grid>
         <SelectedPlan place={"장소"} selected={props.selected}></SelectedPlan>

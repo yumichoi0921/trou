@@ -36,6 +36,7 @@ export default function PlanStep2(props) {
       <Grid item md={3} sx={{ textAlign: "center" }}>
         <DateDetails
           plan={props.plan}
+          date={props.date}
           setPlan={props.setPlan}
           selected={props.selected}
         ></DateDetails>

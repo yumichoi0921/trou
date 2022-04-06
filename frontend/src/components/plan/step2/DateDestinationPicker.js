@@ -1,14 +1,25 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Item from "../child/Item";
 
-function DateDestinationPicker() {
-  const [curPage, setPage] = useState(1);
-  const [age, setAge] = React.useState("");
+function DateDestinationPicker(props) {
+  console.log(props.date);
+  const dates = [];
+  const i = new Date(props.date.startDate);
+  while (i.getDate() <= props.date.endDate.getDate()) {
+    dates.push(new Date(i));
+    i.setDate(i.getDate() + 1);
+  }
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    props.setSelectedDate(event.target.value);
   };
+
+  const dateList = dates.map((date, index) => (
+    <MenuItem value={index}>
+      {index + 1}일차 ({date.getMonth() + 1}월 {date.getDate()}일)
+    </MenuItem>
+  ));
 
   return (
     <Fragment>
@@ -19,7 +30,7 @@ function DateDestinationPicker() {
         alignItems="center"
         sx={{ mb: 3 }}
       >
-        <Grid item md={5}>
+        <Grid>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">
               날짜선택
@@ -27,16 +38,11 @@ function DateDestinationPicker() {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={age}
+              value={props.selectedDate}
               onChange={handleChange}
-              label="Age"
+              label="Date"
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {dateList}
             </Select>
           </FormControl>
         </Grid>

@@ -31,7 +31,6 @@ const PlanStep1 = (props) => {
           <Step1DatePicker
             date={props.date.startDate}
             setDate={props.date.setStartDate}
-            str={"start"}
           />
         </Grid>
         <Grid item md={5}>
@@ -41,7 +40,6 @@ const PlanStep1 = (props) => {
           <Step1DatePicker
             date={props.date.endDate}
             setDate={props.date.setEndDate}
-            str={"end"}
           />
         </Grid>
       </Grid>
