@@ -123,7 +123,7 @@ export default function Main() {
               <h2>어디로 여행을 떠나시나요?</h2>
             </Box>
             <Box>
-              <Item>
+              <Item  sx={{ width: 500}}>
                 <Search
                   sx={{ color: "action.active", mr: 1, my: 1, fontSize: 40 }}
                 />
