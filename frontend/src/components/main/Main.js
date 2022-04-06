@@ -14,6 +14,9 @@ import {
 import styles from "./Main.css";
 
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+import { loginCheck } from "../../store";
+
 //import  Button  from "@mui/material/Button";
 import {
   Grid,
@@ -32,6 +35,12 @@ export default function Main() {
   const [imgName, setImgName] = useState("");
   const [reviews, setReviews] = useState([]);
   const [userId, setUserId] = useState([]);
+
+  /*  로그인 정보 확인 하는 변수  */
+  const localStoragetokenCheck = localStorage.getItem('token');
+  const dispatch = useDispatch();
+  const uId = useSelector((state) => state.userId);
+  /*  로그인 정보 확인 하는 변수  */
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -137,9 +146,12 @@ export default function Main() {
   };
 
   useEffect(() => {
-    setUserId(1);
-    const userId = 1;
-
+    if(!localStoragetokenCheck){
+      alert('로그인 후 이용하세요.');
+      document.location.href = '/login';
+    }
+    dispatch(loginCheck());
+    setUserId(uId);
     const response = axios
       .get("/place/recommand/" + userId)
       .then((r) => {

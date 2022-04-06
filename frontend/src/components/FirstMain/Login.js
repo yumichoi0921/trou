@@ -6,13 +6,19 @@ import { Button, Card, CardContent, TextField } from "@mui/material";
 import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux'
+import {loginCheck} from '../../store';
 
 const clientId =
   "913002487026-ehbp4pgqmf5ts3lnb05i0h6587tf4e14.apps.googleusercontent.com";
 
 export default function Login() {
+  const tmp = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const onSuccess = async (response) => {
+    alert('구글 로그인 성공!');
+    console.log(response);
     // const { googleId, profileObj : { email, name } } = response;
     // await onGoogleLogin (
     //   // 구글 로그인 성공시 서버에 전달할 데이터
@@ -35,7 +41,14 @@ export default function Login() {
         password: userPassword
       }
       axios.post("/users/signin", body).then((res) => {
-        document.location.href = '/main'
+        alert('로그인 성공!');
+        console.log('회원 정보 : ', res.data);
+        localStorage.setItem('token', res.data.tocken);
+        console.log(tmp);
+        dispatch(loginCheck(res.data.user.userId));
+        console.log(tmp);
+        // => history.push로 변경하기?
+        document.location.href = '/main'; 
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
         setUserEmaill("");
@@ -65,7 +78,7 @@ export default function Login() {
                 label="이메일를 입력하세요."
                 type="text"
                 value={userEmail}
-                onKeyPress={ Login }
+                // onKeyPress={ Login }
                 onChange={ (e)=>setUserEmaill(e.target.value)}
               />
               <p className={styles.input_title}>PW</p>
@@ -77,7 +90,7 @@ export default function Login() {
                 autoComplete="current-password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-                onKeyPress={ Login }
+                // onKeyPress={ Login }
               />
               <div className={styles.form_link}>
                 <span className={styles.join_btn}>
@@ -96,7 +109,7 @@ export default function Login() {
               </div>
 
               {/* <img src={or} alt="or"></img> */}
-              <div className={styles.or}>
+              {/* <div className={styles.or}>
                 <hr className={styles.left_line}></hr>
                 <span> 또는 </span>
                 <hr className={styles.right_line}></hr>
@@ -108,7 +121,7 @@ export default function Login() {
                   onSuccess={onSuccess}
                   onFailure={onFailure}
                 />
-              </div>
+              </div> */}
             </form>
           </CardContent>
         </Card>
