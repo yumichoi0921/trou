@@ -27,13 +27,19 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function PlanStep2(props) {
+  console.log(props);
   const [restaurants, setRestaurants] = useState([]);
 
   return (
     <Grid container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center" }}>
-        <DateDetails></DateDetails>
+        <DateDetails
+          plan={props.plan}
+          date={props.date}
+          setPlan={props.setPlan}
+          selected={props.selected}
+        ></DateDetails>
       </Grid>
 
       {/* Grid 지도 */}
@@ -49,8 +55,7 @@ export default function PlanStep2(props) {
           <PlaceRecommendation
             restaurants={restaurants}
             setRestaurants={setRestaurants}
-            selectedRestaurants={props.selectedRestaurants}
-            setSelectedRestaurants={props.setSelectedRestaurants}
+            selected={props.selected}
           ></PlaceRecommendation>
         </Area>
       </Grid>
