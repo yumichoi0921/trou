@@ -41,7 +41,7 @@ export default function Join() {
   const checkUserEmail = () => {
 
   
-    axios.get("/users/" + email).then((res) => {
+    axios.get("/users/check/" + email).then((res) => {
       console.log(email);
       if (res.status == 200) { 
         alert("사용 가능한 아이디 입니다.");
