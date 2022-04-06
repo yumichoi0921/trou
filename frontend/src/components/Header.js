@@ -4,7 +4,7 @@ import { Tabs, Tab, Stack } from "@mui/material";
 const Nav = () => {
   const navigate = useNavigate();
   return (
-    <Tabs>
+    <Tabs value={0}>
       <Tab label="MyPage" onClick={() => navigate("/mypage")} />
       <Tab label="LogOut" />
     </Tabs>

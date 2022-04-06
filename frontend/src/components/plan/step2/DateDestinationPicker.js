@@ -16,7 +16,7 @@ function DateDestinationPicker(props) {
   };
 
   const dateList = dates.map((date, index) => (
-    <MenuItem value={index}>
+    <MenuItem key={index} value={index}>
       {index + 1}일차 ({date.getMonth() + 1}월 {date.getDate()}일)
     </MenuItem>
   ));
