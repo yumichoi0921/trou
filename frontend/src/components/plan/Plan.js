@@ -20,6 +20,13 @@ export default function Plan() {
     setEndDate: setEndDate,
   };
 
+  const tag = {
+    tags: tags,
+    setTags: setTags,
+    selectedTags: selectedTags,
+    setSelectedTags: setSelectedTags
+  }
+
   // const plan = {
   // planId:"",
   //   startDate: "",
@@ -44,21 +51,6 @@ export default function Plan() {
       mapY: "",
     },
   ];
-
-  const step2route = (
-    <Route
-      path="step2"
-      element={
-        <PlanStep2
-          plan={plan}
-          setPlan={setPlan}
-          selectedTags={selectedTags}
-          selectedRestaurants={selectedRestaurants}
-          setSelectedRestaurants={setSelectedRestaurants}
-        ></PlanStep2>
-      }
-    ></Route>
-  );
 
   return (
     <Fragment>
@@ -86,7 +78,6 @@ export default function Plan() {
               plan={plan}
               setPlan={setPlan}
               date={date}
-              step2route={step2route}
             ></PlanStep1>
           }
         ></Route>

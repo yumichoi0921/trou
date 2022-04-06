@@ -19,7 +19,6 @@ const PlanStep1 = (props) => {
           plan={props.plan}
           setPlan={props.setPlan}
           date={props.date}
-          route={props.step2route}
         ></DateTagSelection>
       </Grid>
 
