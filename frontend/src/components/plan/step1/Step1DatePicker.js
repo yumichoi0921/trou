@@ -6,12 +6,17 @@ import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export default function LocalizedDatePicker(props) {
+  const [date, setDate] = React.useState(new Date(props.date));
+  React.useEffect(() => {
+    props.setDate(date);
+  }, [date]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={krLocale}>
       <div>
         <DatePicker
-          value={props.date}
-          onChange={(newValue) => props.setDate(newValue)}
+          value={date}
+          onChange={setDate}
           renderInput={(params) => <TextField {...params} />}
         />
       </div>
