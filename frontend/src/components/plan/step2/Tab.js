@@ -68,4 +68,5 @@ export const TabsList = styled(TabsListUnstyled)`
   justify-content: center;
   align-content: space-between;
 `;
+
 // export default { Tab, TabPanel, TabsList };
