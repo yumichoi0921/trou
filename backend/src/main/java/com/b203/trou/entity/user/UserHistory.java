@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -30,6 +31,8 @@ public class UserHistory extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "placeId")
     private Place history;
+
+
 
     public UserHistory(User user, Place history) {
         this.user = user;

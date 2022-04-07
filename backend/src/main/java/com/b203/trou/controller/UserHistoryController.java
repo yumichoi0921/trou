@@ -2,6 +2,7 @@ package com.b203.trou.controller;
 
 
 import com.b203.trou.model.place.PlaceDto;
+import com.b203.trou.model.user.UserDto;
 import com.b203.trou.service.tag.TagService;
 import com.b203.trou.service.user.UserHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,16 @@ public class UserHistoryController {
         }
 
 
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<?> checkPlace(@RequestBody UserDto userDto){
+        // true이면 이미 사용자가 장소를 선택했음!
+        if(userHistoryService.checkUserPlace(userDto.getUserId())){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok().build();
+        }
     }
 
 
