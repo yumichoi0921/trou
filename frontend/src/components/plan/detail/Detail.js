@@ -38,18 +38,17 @@ const Detail = () => {
     const navigate = useNavigate();
     /*  로그인 정보 확인 하는 변수  */
 
-    useEffect(() => {
-        if (Object.keys(sendData).length !== 0 && sendData.constructor === Object) {
-            console.log(sendData);
-        }
-    }, [sendData]);
+    // useEffect(() => {
+    //     if (Object.keys(sendData).length !== 0 && sendData.constructor === Object) {
+    //         console.log(sendData);
+    //     }
+    // }, [sendData]);
 
     useEffect(() => {
         if (!localStoragetokenCheck) {
             alert('로그인 후 이용하세요.');
             document.location.href = '/login';
         }
-        console.log('룰루',userId);
         dispatch(loginCheck(userId));
         let routeList = null;
         let rId = null;
@@ -64,7 +63,6 @@ const Detail = () => {
                 for (let i = 0; i < res.data.length; i++) {
                     if (userId == res.data[i].userId) {
                         check = true;
-                        console.log('일치함');
                         break;
                     }
                 }
@@ -75,7 +73,7 @@ const Detail = () => {
                 }
                 await initRoute();
             } catch (e) {
-                console.log('initOrder 오류');
+                console.log(e);
             }
         };
 
@@ -89,27 +87,21 @@ const Detail = () => {
                 setRouteId(response.data[0].routeId);
                 await initOrder();
                 await initSendData();
-                console.log('tmpSend :  ', tmpSend);
                 setSendData(tmpSend);
-                // console.log('sendData : ', sendData);
             } catch (e) {
-                console.log('initRoute 오류');
+                console.log(e);
             }
         };
         const initOrder = async () => {
             try {
-                console.log(rId);
                 const res = await axios.get(`/order/${rId}`);
-                console.log('routeList : ', routeList);
-                console.log('orderList : ', res.data);
                 setOrderList(res.data);
             } catch (e) {
-                console.log('initOrder 오류');
+                console.log(e);
             }
         };
         const initSendData = async () => {
             try {
-                console.log("initSendData !!!", routeList);
                 routeLen = routeList.length;
                 for (let idx = 0; idx < routeLen; idx++) {
                     let id = routeList[idx].routeId;
@@ -142,7 +134,7 @@ const Detail = () => {
                     routes: tmpRoute
                 };
             } catch (e) {
-                console.log('initSenData 오류');
+                console.log(e);
             }
         };
         checkMember();
@@ -150,17 +142,15 @@ const Detail = () => {
 
     const ChangeOrderList = async () => {
         try {
-            // console.log(routeId);
             const res = await axios({
                 method: "get",
                 url: `/order/${routeId}`,
                 baseURL: "http://localhost:8080",
                 timeout: 2000,
             });
-            console.log('orderList : ', res.data);
             setOrderList(res.data);
-        } catch {
-            console.log('에러발생');
+        } catch(e) {
+            console.log(e);
         }
     };
 

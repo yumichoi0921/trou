@@ -16,8 +16,6 @@ function TagList({ tag }) {
     newTags[index].isSelected = !newTags[index].isSelected;
     newTags[index].color = newTags[index].isSelected ? "#64b5f6" : "#e3f2fd";
     tag.setTags(newTags);
-    console.log(newTags[index].tagName + " " + newTags[index].isSelected);
-    console.log(newTags[index].tagName + " " + newTags[index].color);
     const setTag = tag.selectedTags;
     if (newTags[index].isSelected) {
       setTag.push(newTags[index]);

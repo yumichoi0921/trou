@@ -19,10 +19,9 @@ const KakaoMap = ({ plan }) => {
       var container = document.getElementById("map");
       var options = {
         center: new kakao.maps.LatLng(
-          plan.routes[0].order[0].place.mapY,
-          plan.routes[0].order[0].place.mapX
+          33.400701, 126.570667
         ),
-        level: 10,
+        level: 9,
       };
       var map = new kakao.maps.Map(container, options);
       for (const [index, route] of plan.routes.entries()) {

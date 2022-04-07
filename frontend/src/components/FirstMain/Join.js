@@ -16,7 +16,7 @@ export default function Join() {
   const emailList = [
     { label: "naver.com" },
     { label: "hanmail.net" },
-    { label: "gamil.com" },
+    { label: "gmail.com" },
     { label: "ssafy.com" },
   ];
 
@@ -42,7 +42,6 @@ export default function Join() {
 
   
     axios.get("/users/check/" + email).then((res) => {
-      console.log(email);
       if (res.status == 200) { 
         alert("사용 가능한 아이디 입니다.");
         setCheckEmail(true);
@@ -71,10 +70,8 @@ export default function Join() {
         password: password,
         name: userName
       }
-      // console.log(body);
       axios.post("/users/signup", body ).then((res) => {
         // localStorage.setItem('userId', res.data.user.userId);
-        console.log(res);
         alert("회원 가입 완료!");
         document.location.href = '/login'
       }).catch(error => {

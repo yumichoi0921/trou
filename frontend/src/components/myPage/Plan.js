@@ -6,7 +6,6 @@ import { Fragment } from "react";
 import styles from "./MyPage.module.css";
 
 const TripPlan = ({ plan, image, region }) => {
-  console.log(region);
   let index = Math.floor(Math.random() * (5 - 1) + 1);
   function handleClick(planId) {
     window.location.replace("/tripdetail/" + planId.planId);

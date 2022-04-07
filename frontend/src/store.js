@@ -3,7 +3,6 @@ import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 export const saveSendData = (data) => {
-    console.log('data 도착 :', data);
     return {
         type: 'setSendData',
         payload: data,
@@ -11,7 +10,6 @@ export const saveSendData = (data) => {
 };
 
 export const loginCheck = (uId,uName) => {
-    console.log('로그인한 아이디 : ', uId);
     return {
         type: '로그인 성공',
         payload: {
@@ -23,7 +21,6 @@ export const loginCheck = (uId,uName) => {
 };
 
 export const logOutCheck = () => {
-    console.log('로그아웃!');
     return {
         type: '로그인 실패',
     }
@@ -53,17 +50,11 @@ const info = {
 
 function reducer(state = info, action) {
     const newInfo = { ...state };
-    console.log('reducer 들어옴 뉴인포!!! ', newInfo);
     if (action.type === '로그인 성공') {
-        console.log('로그인 성공 ', action.payload);
         return {
             ...state,
             userInfo: action.payload,
         };
-        // newInfo.userInfo.isLogin = true;
-        // console.log('로그인 성공 ', action.payload.userId);
-        // newInfo.userInfo.userId = action.payload.userId;
-        // return newInfo;
     } else if (action.type === '로그인 실패') {
         newInfo.userInfo.isLogin = false;
         newInfo.userInfo.userId = '';

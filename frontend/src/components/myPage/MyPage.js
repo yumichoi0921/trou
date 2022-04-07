@@ -10,12 +10,6 @@ function Users() {
   const userId = useSelector((state) => state.userInfo.userId);
 
   useEffect(() => {
-    if (plans.length > 0) {
-      console.log(plans);
-    }
-  }, [plans]);
-
-  useEffect(() => {
     let newPlans = [];
     const getOrders = async () => {
       try {

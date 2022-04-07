@@ -11,9 +11,6 @@ const Nav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log("isLogin ? ? ", isLogin);
-  console.log("userId ? ? ", userId);
-
   return (
     <Tabs>
       <Tab value="mypage"

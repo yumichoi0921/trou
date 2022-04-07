@@ -51,7 +51,6 @@ export default function Main() {
   const handleClose = () => setShow(false);
 
   const placeInfoShow = (place) => {
-    console.log(place);
     setPlaceInfo(place);
     handleShow();
   };
@@ -79,7 +78,6 @@ export default function Main() {
 
   const searchPlace = async (e) => {
     let keyword = e;
-    console.log(keyword);
     try {
       const response = await axios.get("/place/" + keyword);
       let array = getPlaces(response);
@@ -90,7 +88,6 @@ export default function Main() {
   const getPlaces = (response) => {
     let array = [];
     let index = 0;
-    console.log(response.data);
     array = response.data.map((place) => {
       if (!place.image) {
         index = Math.floor(Math.random() * (11 - 1) + 1);
