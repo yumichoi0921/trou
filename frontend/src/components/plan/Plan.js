@@ -102,6 +102,7 @@ export default function Plan() {
               plan={plan}
               setPlan={setPlan}
               date={date}
+              selected={selected}
             ></PlanStep1>
           }
         ></Route>
