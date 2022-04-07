@@ -9,6 +9,7 @@ export default function LocalizedDatePicker(props) {
   const [date, setDate] = React.useState(new Date(props.date));
   React.useEffect(() => {
     props.setDate(date);
+    console.log(date);
   }, [date]);
 
   return (
