@@ -83,7 +83,11 @@ export default function PlanStep2(props) {
               {/* 처음에 선택하고 들어온 장소 이름으로 변경 */}
               <RecommendCourse
                 selected={props.selected}
-                placeName={props.selected.selectedPlace[0][0].placeName}
+                placeName={
+                  props.selected.selectedPlace[0][0]
+                    ? props.selected.selectedPlace[0][0].placeName
+                    : ""
+                }
                 setPlaceList={setPlaceList}
               ></RecommendCourse>
             </Grid>

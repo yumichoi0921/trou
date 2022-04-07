@@ -9,19 +9,22 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import DateDestinationPicker from "./DateDestinationPicker";
 import SelectedPlace from "./SelectedPlace";
 
 function DateDetails(props) {
+  const navigate = useNavigate();
   console.log(props);
 
   function confirmPlan() {
-    props.selected.selectedPlace.forEach((p, index) =>
-      console.log(index + 1, "일차 : ", p)
-    );
+    props.setPlan(
+    props.selected.selectedPlace.map((p, index) => {
+      
+    }));
+    navigate("step3");
   }
 
   const [placeList, setPlaceList] = useState();

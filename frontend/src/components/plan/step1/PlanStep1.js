@@ -27,6 +27,7 @@ const PlanStep1 = (props) => {
             selected={props.selected}
             map={props.map}
             setMap={props.setMap}
+            point={props.point}
           ></KakaoMap>
         </Area>
       </Grid>
