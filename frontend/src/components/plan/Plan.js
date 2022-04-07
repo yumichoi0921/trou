@@ -86,6 +86,7 @@ export default function Plan(props) {
               plan={plan}
               setPlan={setPlan}
               date={date}
+              selected={selected}
             ></PlanStep1>
           }
         ></Route>

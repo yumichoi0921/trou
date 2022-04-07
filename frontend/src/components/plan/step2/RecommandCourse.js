@@ -6,7 +6,7 @@ import ShowCourse from "./ShowCourse";
 import Item from "../child/Item";
 import { Tab, TabPanel, TabsList } from "./Tab";
 function RecommendCourse(props) {
-  const [courese, setCourses] = useState([]);
+  const [courses, setCourses] = useState([[]]);
 
   const findRecommandCourse = async () => {
     console.log(props.placeName);
@@ -48,7 +48,7 @@ function RecommendCourse(props) {
               overflow: "scroll",
             }}
           >
-            {courese.map((course, index) => (
+            {courses.map((course, index) => (
               <ListItem
                 key={index}
                 sx={{ width: "100%", height: "50%", overflowX: "auto" }}
