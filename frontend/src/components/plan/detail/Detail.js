@@ -154,11 +154,11 @@ const Detail = () => {
     }
   };
 
-    const clickModifyBtn = () => {
-        // dispatch(ChangeFlag());
-        // dispatch(saveSendData(sendData));
-        navigate("/");
-    };
+  const clickModifyBtn = () => {
+    // dispatch(ChangeFlag());
+    // dispatch(saveSendData(sendData));
+    navigate("/");
+  };
 
   const handleChange = (event) => {
     let idx = event.target.value;
