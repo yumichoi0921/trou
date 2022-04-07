@@ -5,15 +5,13 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import Item from '../child/Item';
 
-export const ContactUs = ({ setOpen,friends,setFriends }) => {
+export const ContactUs = ({ planId,setOpen,friends,setFriends }) => {
     init("Zaq8JxcEXp4jBv4uF");
     const form = useRef();
     const [userEmail, setUserEmail] = useState();
     const [userList, setUserList] = useState([]);
     const [userId, setUserId] = useState();
     const { register, handleSubmit } = useForm();
-    const planId = 19;
-
 
     // share 테이블에 planid, userid 저장
     const saveShare = async (uId,userName) => {
@@ -79,7 +77,7 @@ export const ContactUs = ({ setOpen,friends,setFriends }) => {
       };
 
     const url = 'http://localhost:3000/planDetail/' + planId;
-    const loginUser = "김중재";
+    const loginUser = "김중재"; /************************이 부분 고쳐라***************************** */
 
     /*
         초대 누르면 회원인지 먼저 파악
