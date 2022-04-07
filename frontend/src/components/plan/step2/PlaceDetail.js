@@ -60,7 +60,6 @@ const Review = ({ review }) => {
 };
 function PlaceInfo({ show, handleClose, place }) {
   if (!place) return;
-  console.log(place);
 
   return (
     <Modal

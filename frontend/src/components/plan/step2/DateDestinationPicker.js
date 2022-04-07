@@ -11,10 +11,11 @@ import Item from "../child/Item";
 
 function DateDestinationPicker(props) {
   const dates = [];
-  const i = new Date(props.date.startDate);
-  while (i.getDate() <= props.date.endDate.getDate()) {
-    dates.push(new Date(i));
-    i.setDate(i.getDate() + 1);
+  const startDate = new Date(props.date.startDate);
+  while (startDate.getTime() <= props.date.endDate.getTime()) {
+    console.log(startDate.getTime(), " ~ ", props.date.endDate.getTime());
+    dates.push(new Date(startDate));
+    startDate.setTime(startDate.getTime() + 1000 * 3600 * 24);
   }
 
   const handleChange = (event) => {

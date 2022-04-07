@@ -26,6 +26,7 @@ export default function Plan(props) {
   };
 
   const date = {
+    dates: [],
     startDate: startDate,
     setStartDate: setStartDate,
     endDate: endDate,

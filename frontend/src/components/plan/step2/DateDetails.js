@@ -15,12 +15,71 @@ import Item from "../child/Item";
 import DateDestinationPicker from "./DateDestinationPicker";
 import SelectedPlace from "./SelectedPlace";
 
-function DateDetails(props) {
-  const navigate = useNavigate();
+// https://jsikim1.tistory.com/185
+function convertDateFormat(date) {
+  const m =
+    date.getMonth() + 1 < 10
+      ? "0" + (date.getMonth() + 1)
+      : date.getMonth() + 1;
+  const d = date.getDate() + 1 < 10 ? "0" + date.getDate() : date.getDate();
+  return `${date.getFullYear()}-${m}-${d}`;
+}
 
+function DateDetails(props) {
   function confirmPlan() {
-    props.setPlan(props.selected.selectedPlace.map((p, index) => {}));
-    navigate("step3");
+    const routes = props.selected.selectedPlace.map((r, routeIndex) => {
+      const route = {};
+      const places = r.map((p, placeIndex) => {
+        const place = p.placeId
+          ? {
+              tripOrder: placeIndex + 1,
+              place: {
+                placeId: p.placeId,
+                placeName: p.placeName,
+                mapX: p.mapX,
+                mapY: p.mapY,
+              },
+            }
+          : {
+              tripOrder: placeIndex + 1,
+              place: {
+                placeName: p.placeName,
+                mapX: p.mapX,
+                mapY: p.mapY,
+              },
+            };
+        return place;
+      });
+
+      const date = new Date(props.date.startDate);
+      date.setTime(date.getTime() + routeIndex * 1000 * 3600 * 24);
+      route.routeId = "";
+      route.routeDate = convertDateFormat(date);
+      route.startPlace = props.point.startPlace[routeIndex];
+      route.endPlace = props.point.endPlace[routeIndex];
+      route.day = routeIndex + 1;
+      route.order = places; //배열
+      if (props.point.startPlace[routeIndex]) {
+        route.order.unshift({
+          tripOrder: 0,
+          place: props.point.startPlace[routeIndex],
+        });
+      }
+      if (props.point.endPlace[routeIndex]) {
+        route.order.push({
+          tripOrder: 0,
+          place: props.point.endPlace[routeIndex],
+        });
+      }
+      return route;
+    });
+    const plan = {
+      startDate: convertDateFormat(props.date.startDate),
+      endDate: convertDateFormat(props.date.endDate),
+      routes: routes,
+    };
+    props.setPlan(plan);
+    console.log(plan);
   }
 
   const [placeList, setPlaceList] = useState();

@@ -30,6 +30,7 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
         setPlaceList(
           selectedPlace.map((place, index) => (
             <SelectedPlace
+              key={index}
               place={place.placeName}
               selected={selected}
               setPlaceList={setPlaceList}
@@ -48,8 +49,8 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
       sx={{ width: "100%", height: "100%", overflowX: "scroll" }}
       spacing={1}
     >
-      {course.map((item) => (
-        <Box sx={{ width: "50%", height: "100%" }}>
+      {course.map((item, index) => (
+        <Box key={index} sx={{ width: "50%", height: "100%" }}>
           <ImageListItem
             key={item.place.image}
             sx={{ width: "100%", height: "100%" }}
