@@ -68,6 +68,10 @@ export default function Plan(props) {
     async function getStartingPoint() {
       if (location.state.startingPoint) {
         setStartingPoint(location.state.startingPoint);
+        const newSelectedPlace = [...selectedPlace];
+        newSelectedPlace[0].push(location.state.startingPoint);
+        setSelectedPlace(newSelectedPlace);
+        console.log(newSelectedPlace);
       }
     }
     getStartingPoint();

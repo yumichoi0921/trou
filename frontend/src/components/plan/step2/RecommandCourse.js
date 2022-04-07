@@ -14,12 +14,10 @@ function RecommendCourse(props) {
     await axios
       .get("/order/placeId/" + props.placeName)
       .then((res) => {
-        console.log("data:" + res.data);
         const tmp = [];
         res.data.map((p, index) => {
           tmp.push(p);
         });
-        console.log("코스", tmp);
         setCourses(tmp);
       })
       .catch((e) => {
