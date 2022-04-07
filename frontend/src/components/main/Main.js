@@ -1,8 +1,9 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
 import react, { useState, useEffect } from "react";
 import backImg from "../../imgs/back.png";
 import { Search } from "@mui/icons-material";
+import title from "../img/Main_1.png";
+import title_1 from "../img/Main_2.png";
 import {
   Grid,
   styled,
@@ -62,18 +63,9 @@ export default function Main() {
   };
 
   useEffect(() => {
-    console.log('location :' , location);
-  },[location]);
-
-  useEffect(() => {
-    // if(!localStoragetokenCheck){
-    //   alert('로그인 후 이용하세요.');
-    //   document.location.href = '/login';
-    // }
-    // dispatch(loginCheck(uId));
-    // setUserId(uId);
-
     async function getRecommandPlace() {
+      const userId = localStorage.getItem("userId");
+      // const userId = 28;
       try {
         const response = await axios.get("/place/recommand/" + userId);
         let array = getPlaces(response);
@@ -101,7 +93,7 @@ export default function Main() {
     console.log(response.data);
     array = response.data.map((place) => {
       if (!place.image) {
-        index = Math.floor(Math.random() * (5 - 1) + 1);
+        index = Math.floor(Math.random() * (11 - 1) + 1);
         place.image = `/imgs/img${index}.jpg`;
       }
       return {
@@ -148,10 +140,11 @@ export default function Main() {
         <SearchDiv sx={{ textAlign: "center", width: "100%" }}>
           <Stack spacing={2} alignItems="center">
             <Box>
-              <h2>어디로 여행을 떠나시나요?</h2>
+              <img src={title_1} alt="title"></img>
+              {/* <h2>어디로 여행을 떠나시나요?</h2> */}
             </Box>
             <Box>
-              <Item>
+              <Item sx={{ width: 500 }}>
                 <Search
                   sx={{ color: "action.active", mr: 1, my: 1, fontSize: 40 }}
                 />
@@ -169,7 +162,8 @@ export default function Main() {
       </Grid>
       <Grid container item md={12}>
         <Box sx={{ marginX: 5, marginY: 2, width: "100%" }}>
-          <h1>이 여행은 어떠신가요?</h1>
+          <img src={title} alt="title"></img>
+          {/* <h1>이 여행은 어떠신가요?</h1> */}
         </Box>
       </Grid>
       <Grid container item md={12}>

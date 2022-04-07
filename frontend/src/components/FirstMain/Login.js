@@ -17,57 +17,6 @@ export default function Login() {
   const [userEmail, setUserEmaill] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  const tmpPlan = {
-    startDate: "2022-04-04",
-    endDate: "2022-04-06",
-    routes: [
-      {
-        routeId: 0,
-        routeDate: "2022-04-04",
-        startPlace: {},
-        endPlace: {},
-        day: 1,
-        order: [
-          {
-            tripOrder: 1,
-            place: {
-              placeId: 126438,
-              placeName: "start",
-              mapX: 126.5594730066,
-              mapY: 33.2445341254,
-            },
-          },
-          {
-            tripOrder: 2,
-            place: {
-              placeId: 126445,
-              placeName: "A",
-              mapX: 126.908342042,
-              mapY: 33.520231492,
-            },
-          },
-          {
-            tripOrder: 3,
-            place: {
-              placeId: 126452,
-              placeName: "B",
-              mapX: 126.7706788052,
-              mapY: 33.5280478463,
-            },
-          },
-          {
-            tripOrder: 4,
-            place: {
-              placeId: 126456,
-              placeName: "end",
-              mapX: 126.5581440803,
-              mapY: 33.4237615317,
-            },
-          },
-        ],
-      },
-    ],
-  };
 
   const Login = () => {
     const em = userEmail;
@@ -80,18 +29,23 @@ export default function Login() {
         password: userPassword
       }
       axios.post("/users/signin", body).then((res) => {
-        alert('로그인 성공!');
-        console.log('회원 정보 : ', res.data);
+        const userId = res.data.user.userId;
         localStorage.setItem('token',res.data.tocken);
-        localStorage.setItem('userId', res.data.user.userId);
-        console.log(res.data.user.userId);
-        console.log('전 ! ',tmp);
+        localStorage.setItem('userId', userId);
         dispatch(loginCheck(res.data.user.userId));
         dispatch(saveSendData(tmpPlan));
-        console.log('후 ! ',tmp);
-        // => history.push로 변경하기?
-        navigate('/main')
-        // document.location.href = '/main';
+        let body1 = {
+          userId: userId
+        }
+
+        axios.post("/history/check", body1).then((res) => {
+          console.log(res);
+          document.location.href = '/select'
+
+        }).catch(error => {
+
+          document.location.href = '/main'
+        })
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
         setUserEmaill("");
@@ -134,7 +88,7 @@ export default function Login() {
                 autoComplete="current-password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-
+                
               />
               <div className={styles.form_link}>
                 <span className={styles.join_btn}>

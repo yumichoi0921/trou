@@ -22,7 +22,7 @@ const PlanStep1 = (props) => {
           <Item>여행지</Item>
         </Grid>
         <Grid item md={7}>
-          <Item>부산</Item>
+          <Item>제주도</Item>
         </Grid>
         <Grid item md={5}>
           <Item>가는 날</Item>

@@ -1,5 +1,4 @@
-import React, { Link } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Grid, Modal, Rating, Typography, Box, ListItem } from "@mui/material";
 import {
   Button,
@@ -25,7 +24,11 @@ const style = {
   pb: 2,
 };
 
+function randoms() {
+  return Math.floor(Math.random() * (5 - 1) + 1);
+}
 const Review = ({ review }) => {
+  console.log(review);
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
@@ -57,8 +60,9 @@ const Review = ({ review }) => {
   );
 };
 function PlaceInfo({ show, handleClose, place }) {
-  const navigate = useNavigate();
   if (!place) return;
+  console.log(place);
+
   return (
     <Modal
       open={show}
@@ -77,33 +81,33 @@ function PlaceInfo({ show, handleClose, place }) {
         </Grid>
         <Grid container item md={12} sx={{ height: "70%" }}>
           <Grid item md={6} sx={{ height: "100%" }}>
-            <img
-              src={place.image}
-              alt=""
-              style={{ width: "100%", height: "100%" }}
-            ></img>
+            {!place.image && (
+              <img
+                src={`/imgs/img${randoms()}.jpg`}
+                alt=""
+                style={{ width: "100%", height: "100%" }}
+              ></img>
+            )}
+            {place.image && (
+              <img
+                src={place.image}
+                alt=""
+                style={{ width: "100%", height: "100%" }}
+              ></img>
+            )}
           </Grid>
           <Grid container item md={6} sx={{ height: "100%" }}>
             <Grid item sx={{ height: "100%", overflow: "scroll" }}>
               <List>
                 {place.reviews &&
-                  place.reviews.map((review, i) => (
-                    <Review review={review} key={i}></Review>
+                  place.reviews.map((review) => (
+                    <Review review={review}></Review>
                   ))}
               </List>
             </Grid>
           </Grid>
         </Grid>
         <Grid container item md={12} sx={{ justifyContent: "space-around" }}>
-          <Button
-            variant="contained"
-            onClick={() =>
-              navigate("/plan", { state: { startingPoint: place } })
-            }
-          >
-            일정담기
-            {/* <Link to="/plan" startingPoint={{place}}>일정담기</Link> */}
-          </Button>
           <Button variant="outlined" onClick={handleClose}>
             닫기
           </Button>

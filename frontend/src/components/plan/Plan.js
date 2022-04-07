@@ -1,21 +1,22 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import PlanStep1 from "./step1/PlanStep1";
 import PlanStep2 from "./step2/PlanStep2";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
 import axios from "axios";
-import Detail from "./detail/Detail";
 
-export default function Plan() {
+export default function Plan(props) {
   const [tags, setTags] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
   const [plan, setPlan] = useState({});
-  const [sendData, setSendData] = useState({});
+  const [startingPoint, setStartingPoint] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
+  const [startPlace, setStartPlace] = useState({});
+  const [endPlace, setEndPlace] = useState({});
+  const [map, setMap] = useState();
 
   const selected = {
     selectedPlace: selectedPlace,
@@ -39,6 +40,14 @@ export default function Plan() {
     setSelectedTags: setSelectedTags,
   };
 
+  const location = useLocation();
+  const point = {
+    startPlace: startPlace,
+    setStartPlace: setStartPlace,
+    endPlace: endPlace,
+    setEndPlace: setEndPlace,
+  };
+
   if (tags.length === 0) {
     axios.get("http://localhost:8080/tag").then((res) => {
       const resTags = res.data;
@@ -55,31 +64,18 @@ export default function Plan() {
       );
     });
   }
-
-  // const plan = {
-  // planId:"",
-  //   startDate: "",
-  //   endDate: "",
-  //   routes: [],
-  // };
-
-  const route = [
-    {
-      routeId: "",
-      routeDate: "",
-      day: "",
-      order: [],
-    },
-  ];
-  const order = [
-    {
-      tripOrder: 0,
-      placeId: 128345,
-      placeName: "여행지1",
-      mapX: "",
-      mapY: "",
-    },
-  ];
+  useEffect(() => {
+    async function getStartingPoint() {
+      if (location.state.startingPoint) {
+        setStartingPoint(location.state.startingPoint);
+        const newSelectedPlace = [...selectedPlace];
+        newSelectedPlace[0].push(location.state.startingPoint);
+        setSelectedPlace(newSelectedPlace);
+        console.log(newSelectedPlace);
+      }
+    }
+    getStartingPoint();
+  }, []);
 
   return (
     <Fragment>
@@ -104,6 +100,9 @@ export default function Plan() {
               plan={plan}
               setPlan={setPlan}
               date={date}
+              selected={selected}
+              map={map}
+              setMap={setMap}
             ></PlanStep1>
           }
         ></Route>
@@ -116,6 +115,9 @@ export default function Plan() {
               date={date}
               selectedTags={selectedTags}
               selected={selected}
+              point={point}
+              map={map}
+              setMap={setMap}
             ></PlanStep2>
           }
         ></Route>
@@ -123,7 +125,6 @@ export default function Plan() {
           path="step3"
           element={<PlanStep3 plan={plan} setPlan={setPlan} />}
         ></Route>
-        <Route path="detail/:planId" element={<Detail sendData={plan} setSendData={setPlan} />} />
       </Routes>
     </Fragment>
   );

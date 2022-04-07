@@ -23,8 +23,8 @@ function SelectedPlace(props) {
     }
   }
   return (
-    <Item mb={1}>
-      <Button onClick={remove}>{props.place.placeName}</Button>
+    <Item mb={1} onClick={remove}>
+      <Button>{props.place.placeName}</Button>
     </Item>
   );
 }

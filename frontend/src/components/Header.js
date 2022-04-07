@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Stack, Box } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux';
 import { logOutCheck } from "../store";
+import { useNavigate } from "react-router-dom";
+import { Tab, Stack, Box } from "@mui/material";
+import title from "./img/MainTitle.png";
 
 const Nav = () => {
   const isLogin = useSelector((state) => state.userInfo.isLogin);
@@ -40,7 +43,8 @@ const Header = () => {
     <header>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box>
-          <h1 onClick={() => navigate("/main")}>TROU</h1>
+        <img onClick={() => navigate("/main")} src={title} alt="title" ></img>
+          {/* <h1 onClick={() => navigate("/main")}>TROU</h1> */}
         </Box>
         <Box>
           <Nav></Nav>

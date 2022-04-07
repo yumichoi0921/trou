@@ -4,7 +4,7 @@
 /* global kakao */
 import React, { Fragment, useEffect, useState } from "react";
 import { Grid, Box, Button, Stack, Divider, MenuItem } from "@mui/material";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes } from "react-router-dom";
 import SelectDay from "./SelectDay";
 import axios from "axios";
 import OrderListBar from "./OrderListBar";
@@ -190,7 +190,7 @@ const Detail = () => {
     }
 
     return (
-        <Grid container spacing={1} sx={{ height: "100%" }}>
+        <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
             {/* 왼쪽 시작 */}
             <Grid item md={4} sx={{ textAlign: "center", height: "100%" }}>
                 <Area sx={{ padding: 2 }}>
