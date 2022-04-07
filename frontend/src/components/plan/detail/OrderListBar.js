@@ -10,8 +10,8 @@ const OrderListBar = ({orderList}) => {
                         <Item>
                         <StepLabel>
                             <p><b>{label.place.placeName}</b></p> <br/>
-                            시작 시간 : {label.startTime} <br/>
-                            종료 시간 : {label.endTime} 
+                            {/* 시작 시간 : {label.startTime} <br/>
+                            종료 시간 : {label.endTime}  */}
                         </StepLabel>
                         </Item>
                     </Step>

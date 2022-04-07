@@ -3,19 +3,25 @@ import styles from "../FirstMain/FirstMain.module.css";
 import * as React from "react";
 import { useState } from "react";
 import { Button, Card, CardContent, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginCheck,saveSendData } from "../../store";
+// import { useHistory } from "react-router";
 
 export default function Login() {
+  const tmp = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userEmail, setUserEmaill] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
 
-  const Login = () => { 
+  const Login = () => {
     const em = userEmail;
     const pa = userPassword;
-    if (em == "" && pa == "") {
+    if (em === "" && pa === "") {
       alert("아이디 또는 비밀번호를 입력해주세요.");
     } else {
       let body = {
@@ -23,21 +29,23 @@ export default function Login() {
         password: userPassword
       }
       axios.post("/users/signin", body).then((res) => {
-        console.log(res);      
         const userId = res.data.user.userId;
+        const userName = res.data.user.name;
+        console.log('회원정보 : ',res.data);
+        localStorage.setItem('token',res.data.tocken);
         localStorage.setItem('userId', userId);
-
+        localStorage.setItem('userName', userName);
+        dispatch(loginCheck(userId,userName));
+        
         let body1 = {
           userId: userId
         }
 
-        axios.post("/history/check", body1).then((res) => { 
+        axios.post("/history/check", body1).then((res) => {
           console.log(res);
-          document.location.href = '/select'
-         
+          navigate('/select');
         }).catch(error => {
-       
-          document.location.href = '/main'
+          navigate('/main');
         })
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
@@ -69,7 +77,7 @@ export default function Login() {
                 label="이메일를 입력하세요."
                 type="text"
                 value={userEmail}
-        
+
                 onChange={ (e)=>setUserEmaill(e.target.value)}
               />
               <p className={styles.input_title}>PW</p>
