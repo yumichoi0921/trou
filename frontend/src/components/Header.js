@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Tab, Stack, Box } from "@mui/material";
-
+import title from "./img/MainTitle.png";
 const Header = () => {
   const navigate = useNavigate();
   return (
     <header>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box>
-          <h1 onClick={() => navigate("/main")}>TROU</h1>
+        <img onClick={() => navigate("/main")} src={title} alt="title" ></img>
+          {/* <h1 onClick={() => navigate("/main")}>TROU</h1> */}
         </Box>
         <Box>
           <Tab
