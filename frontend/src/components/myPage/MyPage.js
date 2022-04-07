@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
 import Plan from "./Plan";
+import { useSelector } from "react-redux";
 
 function Users() {
   const [plans, setPlans] = useState([]);
 
-  const userId = 1;
+  const userId = useSelector((state) => state.userInfo.userId);
+
   useEffect(() => {
     if (plans.length > 0) {
       console.log(plans);

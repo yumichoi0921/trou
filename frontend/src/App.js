@@ -37,13 +37,17 @@ const App = () => {
         <Header />
       ) : (<></>)}
       <Routes>
-        <Route path="/" element={<FirstMain />} />
+        {!isLogin ? (
+          <Route path="/" element={<FirstMain />} />)
+        : (
+          <Route path="/" element={<Main />} />)
+        }
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/select" element={<SelectPlace />} />
 
         <Route path="/main" element={<Main />} />
-        <Route path="/mypage/" element={<MyPage />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/tripDetail/:planId" element={<TripDetail />} />
         <Route path="/check" element={<PlanStep3 />} />
         <Route path="/plan/*" element={<Plan />} />
