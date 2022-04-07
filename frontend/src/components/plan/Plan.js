@@ -14,6 +14,9 @@ export default function Plan() {
   const [plan, setPlan] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
+  const [startPlace, setStartPlace] = useState({});
+  const [endPlace, setEndPlace] = useState({});
+  const [map, setMap] = useState();
 
   const selected = {
     selectedPlace: selectedPlace,
@@ -35,6 +38,13 @@ export default function Plan() {
     setTags: setTags,
     selectedTags: selectedTags,
     setSelectedTags: setSelectedTags,
+  };
+
+  const point = {
+    startPlace: startPlace,
+    setStartPlace: setStartPlace,
+    endPlace: endPlace,
+    setEndPlace: setEndPlace,
   };
 
   if (tags.length === 0) {
@@ -103,6 +113,8 @@ export default function Plan() {
               setPlan={setPlan}
               date={date}
               selected={selected}
+              map={map}
+              setMap={setMap}
             ></PlanStep1>
           }
         ></Route>
@@ -115,6 +127,9 @@ export default function Plan() {
               date={date}
               selectedTags={selectedTags}
               selected={selected}
+              point={point}
+              map={map}
+              setMap={setMap}
             ></PlanStep2>
           }
         ></Route>

@@ -22,7 +22,12 @@ const PlanStep1 = (props) => {
       {/* Grid 지도 */}
       <Grid item md={9}>
         <Area sx={{ overflow: "auto" }}>
-          <KakaoMap plan={props.plan} selected={props.selected}></KakaoMap>
+          <KakaoMap
+            plan={props.plan}
+            selected={props.selected}
+            map={props.map}
+            setMap={props.setMap}
+          ></KakaoMap>
         </Area>
       </Grid>
     </Grid>
