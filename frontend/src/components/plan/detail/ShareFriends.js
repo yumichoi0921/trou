@@ -13,7 +13,7 @@ const ShareFriends = (props) => {
             console.log(res.data);
             const tmp = [];
             res.data.map((user,index) => {
-                let newTmp = user.userName;
+                let newTmp = user.name;
                 tmp.push(newTmp);
             });
             setFriends(tmp);
@@ -47,7 +47,7 @@ const ShareFriends = (props) => {
                     <Avatar {...stringAvatar('Tim Neutkens')} />
                 </Grid> */}
             </Grid>
-            <ShareModal friends={friends} setFriends={setFriends}></ShareModal>
+            <ShareModal planId={props.planId} friends={friends} setFriends={setFriends}></ShareModal>
             {/* <Button variant="outlined">공유</Button> */}
 
         </Stack>
