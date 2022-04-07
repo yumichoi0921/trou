@@ -1,18 +1,9 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
+
 import Date from "../step1/Step1DatePicker";
 import TagToggleButton from "../step1/TagToggleButton";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-} from "@mui/material";
+import { Paper, Grid, Stack } from "@mui/material";
 import Area from "../child/Area";
 import KakaoMap from "../step1/Step1KakaoMap";
 import PlaceRecommendation from "./PlaceRecommendation";
@@ -33,9 +24,9 @@ export default function PlanStep2(props) {
   const [placeList, setPlaceList] = useState();
 
   return (
-    <Grid container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
-      <Grid item md={3} sx={{ textAlign: "center" }}>
+      <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateDetails
           plan={props.plan}
           date={props.date}
@@ -61,18 +52,42 @@ export default function PlanStep2(props) {
       </Grid>
 
       {/* 오른쪽 추천 장소 */}
-      <Grid item md={3}>
-        <Area sx={{ overflow: "auto" }}>
-          <PlaceRecommendation
-            selected={props.selected}
-            placeList={placeList}
-            setPlaceList={setPlaceList}
-          ></PlaceRecommendation>
-          <RecommendCourse
-            selected={props.selected}
-            placeName={"정방폭포"}
-            setPlaceList={setPlaceList}
-          ></RecommendCourse>
+      <Grid item md={3} sx={{ height: "100%" }}>
+        <Area sx={{ padding: 1, width: "100%", justifyContent: "center" }}>
+          <Stack sx={{ width: "100%", height: "100%", margin: 0 }} spacing={1}>
+            <Grid
+              item
+              sx={{
+                width: "100%",
+                height: "50%",
+                textAlign: "center",
+                overflow: "hidden",
+              }}
+            >
+              <PlaceRecommendation
+                selected={props.selected}
+                placeList={placeList}
+                setPlaceList={setPlaceList}
+              ></PlaceRecommendation>
+            </Grid>
+            <Grid
+              item
+              sx={{
+                width: "100%",
+                height: "50%",
+                textAlign: "center",
+                alignItems: "center",
+                overflow: "hidden",
+              }}
+            >
+              {/* 처음에 선택하고 들어온 장소 이름으로 변경 */}
+              <RecommendCourse
+                selected={props.selected}
+                placeName={props.selected.selectedPlace[0][0].placeName}
+                setPlaceList={setPlaceList}
+              ></RecommendCourse>
+            </Grid>
+          </Stack>
         </Area>
       </Grid>
     </Grid>

@@ -1,14 +1,21 @@
-import { Grid, Stack, Box } from "@mui/material";
+import {
+  Grid,
+  Stack,
+  Box,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+} from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 import react, { useState, useEffect } from "react";
+import Item from "../child/Item";
 import SelectedPlace from "./SelectedPlace";
-
 const ShowCourse = ({ selected, course, setPlaceList }) => {
   const [imgs, setImgs] = useState([]);
   const [count, setCount] = useState([]);
 
   function randoms() {
-    return Math.floor(Math.random() * (5 - 1) + 1);
+    return Math.floor(Math.random() * (11 - 1) + 1);
   }
 
   function addCourse() {
@@ -35,41 +42,43 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
       console.log(selectedPlace);
     }
   }
-  function Course(props) {
-    return (
-      <Box container style={{ float: "left" }}>
-        <Box style={{ marginLeft: 15 }}>
-          {props.place.placeName}
 
-          {props.place.image && (
-            <img src={props.place.image} alt=" " style={{ width: 100 }}></img>
-          )}
-          {!props.place.image && (
-            <img
-              src={`/imgs/img${randoms()}.jpg`}
-              alt=""
-              style={{ width: 100 }}
-            ></img>
-          )}
-        </Box>
-        <Box>{props.index !== course.length - 1 && <ArrowForward />}</Box>
-      </Box>
-    );
-  }
   return (
-    <div stlye={{ margin: "10" }}>
-      <Stack direction="row" onClick={addCourse}>
-        {course.map((order, index) => (
-          <Course
-            orderId={order.orderId}
-            place={order.place}
-            index={index}
-            key={order.orderId}
-            order={order.tripOrder}
-          ></Course>
-        ))}{" "}
-      </Stack>
-    </div>
+    <Stack
+      direction="row"
+      onClick={addCourse}
+      sx={{ width: "100%", height: "100%", overflowX: "scroll" }}
+      spacing={1}
+    >
+      {course.map((item) => (
+        <Box sx={{ width: "50%", height: "100%" }}>
+          <ImageListItem
+            key={item.place.image}
+            sx={{ width: "100%", height: "100%" }}
+          >
+            {item.place.image && (
+              <img
+                src={item.place.image}
+                alt=" "
+                style={{ width: "100px", height: "100px" }}
+              ></img>
+            )}
+            {!item.place.image && (
+              <img
+                src={`/imgs/img${randoms()}.jpg`}
+                alt=""
+                style={{ width: "100px", height: "100px" }}
+              ></img>
+            )}
+            <ImageListItemBar
+              title={item.place.placeName}
+              position="below"
+              sx={{ width: "100%" }}
+            />
+          </ImageListItem>
+        </Box>
+      ))}
+    </Stack>
   );
 };
 

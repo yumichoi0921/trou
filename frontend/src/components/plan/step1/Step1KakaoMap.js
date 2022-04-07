@@ -17,13 +17,6 @@ const KakaoMap = (props) => {
   infowindows[0].setContent("출발지");
   infowindows[1].setContent("도착지");
 
-  var geocoder = new kakao.maps.services.Geocoder();
-
-  function searchDetailAddrFromCoords(coords, callback) {
-    // 좌표로 법정동 상세 주소 정보를 요청합니다
-    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-  }
-
   useEffect(() => {
     async function getMap() {
       var container = document.getElementById("map");
@@ -62,19 +55,6 @@ const KakaoMap = (props) => {
         infowindows[index % 2].setPosition(latlng);
         infowindows[index % 2].open(map, markers[index % 2]);
         index++;
-
-        searchDetailAddrFromCoords(
-          mouseEvent.latLng,
-          function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-              var address = !!result[0].road_address
-                ? result[0].road_address.address_name
-                : "";
-
-              console.log(address);
-            }
-          }
-        );
       });
     }
 
