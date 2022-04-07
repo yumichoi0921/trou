@@ -45,7 +45,7 @@ export default function Main() {
 
   useEffect(() => {
     async function getRecommandPlace() {
-      const userId = 1;
+      const userId = localStorage.getItem("userId");
       try {
         const response = await axios.get("/place/recommand/" + userId);
         let array = getPlaces(response);
@@ -73,7 +73,7 @@ export default function Main() {
     console.log(response.data);
     array = response.data.map((place) => {
       if (!place.image) {
-        index = Math.floor(Math.random() * (5 - 1) + 1);
+        index = Math.floor(Math.random() * (11 - 1) + 1);
         place.image = `/imgs/img${index}.jpg`;
       }
       return {
