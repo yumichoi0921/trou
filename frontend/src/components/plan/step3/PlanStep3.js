@@ -173,7 +173,7 @@ const PlanStep3 = (/*plan, setPlan*/) => {
   };
 
   return (
-    <Grid container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <Area>

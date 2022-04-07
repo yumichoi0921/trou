@@ -1,6 +1,6 @@
 import axios from "axios";
 import { React, useEffect, useState } from "react";
-import { Stack, Box, List, ListItem } from "@mui/material";
+import { Stack, Box, List, ListItem, ImageList, Grid } from "@mui/material";
 import TabsUnstyled from "@mui/base/TabsUnstyled";
 import ShowCourse from "./ShowCourse";
 import Item from "../child/Item";
@@ -18,8 +18,8 @@ function RecommendCourse(props) {
         const tmp = [];
         res.data.map((p, index) => {
           tmp.push(p);
-          console.log(p);
         });
+        console.log("코스", tmp);
         setCourses(tmp);
       })
       .catch((e) => {
@@ -32,45 +32,61 @@ function RecommendCourse(props) {
   }, []);
 
   return (
-    <Stack sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      <TabsUnstyled defaultValue={0}>
-        <TabsList>
-          <Tab>비슷한 유저의 여행코스</Tab>
-        </TabsList>
+    <Grid
+      container
+      sx={{ width: "100%", height: "100%", justifyContent: "center" }}
+    >
+      <Grid Item sx={{ width: "100%", height: "15%" }}>
+        <Item sx={{ width: "100%", borderRadius: 2 }}>
+          비슷한 유저의 여행코스
+        </Item>
+      </Grid>
+      <Grid Item sx={{ width: "100%", height: "85%", overflow: "auto" }}>
+        {courses.map((course, index) => (
+          <Item key={index} sx={{ width: "100%" }}>
+            <ShowCourse
+              key={index}
+              selected={props.selected}
+              course={course}
+              setPlaceList={props.setPlaceList}
+            ></ShowCourse>
+          </Item>
+        ))}
+      </Grid>
+    </Grid>
+    // <TabsUnstyled sx={{ width: "100%", height: "100%", overflow: "scroll" }}>
+    //   <TabsList>
+    //     <Tab>비슷한 유저의 여행코스</Tab>
+    //   </TabsList>
 
-        <TabPanel value={0} sx={{ width: "100%", height: "50%" }}>
-          <List
-            sx={{
-              width: "100%",
-              height: "100%",
-              bgcolor: "#e1f5fe",
-              position: "relative",
-              overflow: "scroll",
-            }}
-          >
-            {courses.map((course, index) => (
-              <ListItem
-                key={index}
-                sx={{ width: "100%", height: "50%", overflowX: "auto" }}
-              >
-                <ShowCourse
-                  key={index}
-                  selected={props.selected}
-                  course={course}
-                  setPlaceList={props.setPlaceList}
-                ></ShowCourse>
-              </ListItem>
-            ))}
-          </List>
-          );
-          {/* <Item sx={{ width: "100%", height: "100%", overflow: "auto" }}>
-            {courese.map((course, index) => (
-              <ShowCourse key={index} course={course}></ShowCourse>
-            ))}
-          </Item> */}
-        </TabPanel>
-      </TabsUnstyled>
-    </Stack>
+    //   <TabPanel value={0} sx={{ width: "100%", height: "100%" }}>
+    //     <Stack
+    //       sx={{
+    //         width: "100%",
+    //         height: "50%",
+    //         bgcolor: "#e1f5fe",
+    //         overflow: "auto",
+    //       }}
+    //     >
+    //       {courses.map((course, index) => (
+    //         <Item key={index} sx={{ width: "100%", height: "50%" }}>
+    //           <ShowCourse
+    //             key={index}
+    //             selected={props.selected}
+    //             course={course}
+    //             setPlaceList={props.setPlaceList}
+    //           ></ShowCourse>
+    //         </Item>
+    //       ))}
+    //     </Stack>
+    //     );
+    //     {/* <Item sx={{ width: "100%", height: "100%", overflow: "auto" }}>
+    //         {courese.map((course, index) => (
+    //           <ShowCourse key={index} course={course}></ShowCourse>
+    //         ))}
+    //       </Item> */}
+    //   </TabPanel>
+    // </TabsUnstyled>
   );
 }
 

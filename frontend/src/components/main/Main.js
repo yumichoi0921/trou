@@ -44,7 +44,7 @@ export default function Main() {
 
   useEffect(() => {
     async function getRecommandPlace() {
-      const userId = 1;
+      const userId = 28;
       try {
         const response = await axios.get("/place/recommand/" + userId);
         let array = getPlaces(response);
