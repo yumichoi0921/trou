@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box>
-        <img src={title} alt="title" ></img>
+        <img onClick={() => navigate("/main")} src={title} alt="title" ></img>
           {/* <h1 onClick={() => navigate("/main")}>TROU</h1> */}
         </Box>
         <Box>
