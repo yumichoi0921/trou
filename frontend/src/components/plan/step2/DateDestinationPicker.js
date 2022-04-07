@@ -10,10 +10,15 @@ import React, { Fragment, useEffect, useState } from "react";
 import Item from "../child/Item";
 
 function DateDestinationPicker(props) {
-  const dates = [];
   const startDate = new Date(props.date.startDate);
-  while (startDate.getTime() <= props.date.endDate.getTime()) {
-    console.log(startDate.getTime(), " ~ ", props.date.endDate.getTime());
+  startDate.setHours(0);
+  props.date.endDate.setHours(0);
+  const dates = [];
+  // const startDate = new Date(props.date.startDate);
+  while (
+    startDate.getTime() <
+    props.date.endDate.getTime() + 1000 * 3600 * 24
+  ) {
     dates.push(new Date(startDate));
     startDate.setTime(startDate.getTime() + 1000 * 3600 * 24);
   }
