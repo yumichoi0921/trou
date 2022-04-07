@@ -27,7 +27,6 @@ export default function RestaurantSearch(props) {
       const res = await axios.get(
         "http://localhost:8080/restaurant/" + keyword
       );
-      console.log(res.data);
       props.setRestaurants(
         res.data.map((r) => {
           return {

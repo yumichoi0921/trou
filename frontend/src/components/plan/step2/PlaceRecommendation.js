@@ -16,17 +16,15 @@ export default function PlaceRecommendation(props) {
   const [places, setPlaces] = React.useState([]);
   const [relatedPlaces, setRelatedPlaces] = React.useState([]);
 
-  console.log(props);
-
   React.useEffect(() => {
     const tags = props.selected.selectedTags.map((t, index) => t.tagName);
-    console.log(tags);
+
     async function getRelatedPlace() {
       const res = await axios.post(
         "http://localhost:8080/place/related/tag",
         props.selected.selectedTags
       );
-      console.log(res.data);
+
       setRelatedPlaces(res.data);
     }
     getRelatedPlace();

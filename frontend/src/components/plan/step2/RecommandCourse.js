@@ -9,8 +9,6 @@ function RecommendCourse(props) {
   const [courses, setCourses] = useState([[]]);
 
   const findRecommandCourse = async () => {
-    console.log(props.placeName);
-
     await axios
       .get("/order/placeId/" + props.placeName)
       .then((res) => {
@@ -34,12 +32,12 @@ function RecommendCourse(props) {
       container
       sx={{ width: "100%", height: "100%", justifyContent: "center" }}
     >
-      <Grid Item sx={{ width: "100%", height: "15%" }}>
+      <Grid sx={{ width: "100%", height: "15%" }}>
         <Item sx={{ width: "100%", borderRadius: 2 }}>
           비슷한 유저의 여행코스
         </Item>
       </Grid>
-      <Grid Item sx={{ width: "100%", height: "85%", overflow: "auto" }}>
+      <Grid sx={{ width: "100%", height: "85%", overflow: "auto" }}>
         {courses.map((course, index) => (
           <Item key={index} sx={{ width: "100%" }}>
             <ShowCourse

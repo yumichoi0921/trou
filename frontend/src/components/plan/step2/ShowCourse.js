@@ -22,7 +22,6 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
     if (course.length === 0) {
       course = [];
     }
-    console.log(course[0].place);
     for (let c of course) {
       if (!selected.selectedPlace[selected.selectedDate])
         selected.selectedPlace[selected.selectedDate] = [];
@@ -39,7 +38,6 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
         );
         selectedPlace.push(c.place);
       }
-      console.log(selectedPlace);
     }
   }
 

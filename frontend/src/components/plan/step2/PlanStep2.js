@@ -19,8 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function PlanStep2(props) {
-  console.log(props);
-
   const [placeList, setPlaceList] = useState();
 
   return (

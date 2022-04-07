@@ -17,13 +17,9 @@ import SelectedPlace from "./SelectedPlace";
 
 function DateDetails(props) {
   const navigate = useNavigate();
-  console.log(props);
 
   function confirmPlan() {
-    props.setPlan(
-    props.selected.selectedPlace.map((p, index) => {
-      
-    }));
+    props.setPlan(props.selected.selectedPlace.map((p, index) => {}));
     navigate("step3");
   }
 
@@ -50,7 +46,7 @@ function DateDetails(props) {
     );
   }, [
     props.selected.selectedDate,
-    props.selected.selecctedPlace,
+    props.selected.selectedPlace,
     props.placeList,
   ]);
 

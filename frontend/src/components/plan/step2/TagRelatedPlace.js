@@ -26,7 +26,6 @@ function TagRelatedPlace(props) {
       );
       selectedPlace.push(props.place);
     }
-    console.log(selectedPlace);
     // const selectedPlace = props.selected.selectedPlace;
     // if (!selectedPlace.includes(props.restaurant))
     //   selectedPlace.push(props.restaurant);
@@ -34,9 +33,7 @@ function TagRelatedPlace(props) {
     // console.log(selectedPlace);
   }
   function showDetail() {
-    console.log(props.place);
     handleShow();
-    console.log("show:" + show);
   }
   return (
     <div>

@@ -13,8 +13,8 @@ export default function Plan(props) {
   const [plan, setPlan] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
-  const [startPlace, setStartPlace] = useState({});
-  const [endPlace, setEndPlace] = useState({});
+  const [startPlace, setStartPlace] = useState([]);
+  const [endPlace, setEndPlace] = useState([]);
   const [map, setMap] = useState();
 
   const selected = {

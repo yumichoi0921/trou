@@ -7,8 +7,6 @@ import React, { useState, useEffect } from "react";
 import { Link, Routes } from "react-router-dom";
 
 const PlanStep1 = (props) => {
-  console.log(props);
-
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
       <Grid

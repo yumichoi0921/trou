@@ -9,9 +9,7 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import Item from "../child/Item";
 
-/* global kakao */
 function DateDestinationPicker(props) {
-  console.log(props);
   const dates = [];
   const i = new Date(props.date.startDate);
   while (i.getDate() <= props.date.endDate.getDate()) {
