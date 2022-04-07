@@ -74,7 +74,11 @@ export default function PlanStep2(props) {
               }}
             >
               {/* 처음에 선택하고 들어온 장소 이름으로 변경 */}
-              <RecommendCourse placeName={"정방폭포"}></RecommendCourse>
+              <RecommendCourse
+                selected={props.selected}
+                placeName={"정방폭포"}
+                setPlaceList={setPlaceList}
+              ></RecommendCourse>
             </Grid>
           </Stack>
         </Area>
