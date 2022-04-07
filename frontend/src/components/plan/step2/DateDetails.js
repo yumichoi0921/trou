@@ -58,6 +58,7 @@ function DateDetails(props) {
           date={props.date}
           selectedDate={props.selected.selectedDate}
           setSelectedDate={props.selected.setSelectedDate}
+          point={props.point}
         ></DateDestinationPicker>
       </Grid>
       <Grid>{placeList}</Grid>

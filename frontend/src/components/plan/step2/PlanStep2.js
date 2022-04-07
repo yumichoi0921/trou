@@ -43,13 +43,20 @@ export default function PlanStep2(props) {
           selected={props.selected}
           placeList={placeList}
           setPlaceList={setPlaceList}
+          point={props.point}
+          map={props.map}
         ></DateDetails>
       </Grid>
 
       {/* Grid 지도 */}
       <Grid item md={6}>
         <Area sx={{ overflow: "auto" }}>
-          <KakaoMap></KakaoMap>
+          <KakaoMap
+            point={props.point}
+            map={props.map}
+            setMap={props.setMap}
+            selected={props.selected}
+          ></KakaoMap>
         </Area>
       </Grid>
 
