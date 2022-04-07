@@ -6,6 +6,7 @@ import Area from "../child/Area";
 import Step3KakaoMap from "./Step3KakaoMap";
 import Dijkstra from "./Dijkstra";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const PlanStep3 = (/*plan, setPlan*/) => {
   // const tmpRoutes = [
@@ -45,61 +46,64 @@ const PlanStep3 = (/*plan, setPlan*/) => {
   //     ],
   //   },
   // ];
-  const tmpPlan = {
-    startDate: "2022-04-04",
-    endDate: "2022-04-06",
-    routes: [
-      {
-        routeId: 0,
-        routeDate: "2022-04-04",
-        startPlace: {},
-        endPlace: {},
-        day: 1,
-        order: [
-          {
-            tripOrder: 1,
-            place: {
-              placeId: 126438,
-              placeName: "start",
-              mapX: 126.5594730066,
-              mapY: 33.2445341254,
-            },
-          },
-          {
-            tripOrder: 2,
-            place: {
-              placeId: 126445,
-              placeName: "A",
-              mapX: 126.908342042,
-              mapY: 33.520231492,
-            },
-          },
-          {
-            tripOrder: 3,
-            place: {
-              placeId: 126452,
-              placeName: "B",
-              mapX: 126.7706788052,
-              mapY: 33.5280478463,
-            },
-          },
-          {
-            tripOrder: 4,
-            place: {
-              placeId: 126456,
-              placeName: "end",
-              mapX: 126.5581440803,
-              mapY: 33.4237615317,
-            },
-          },
-        ],
-      },
-    ],
-  };
+  // const tmpPlan = {
+  //   startDate: "2022-04-04",
+  //   endDate: "2022-04-06",
+  //   routes: [
+  //     {
+  //       routeId: 0,
+  //       routeDate: "2022-04-04",
+  //       startPlace: {},
+  //       endPlace: {},
+  //       day: 1,
+  //       order: [
+  //         {
+  //           tripOrder: 1,
+  //           place: {
+  //             placeId: 126438,
+  //             placeName: "start",
+  //             mapX: 126.5594730066,
+  //             mapY: 33.2445341254,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 2,
+  //           place: {
+  //             placeId: 126445,
+  //             placeName: "A",
+  //             mapX: 126.908342042,
+  //             mapY: 33.520231492,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 3,
+  //           place: {
+  //             placeId: 126452,
+  //             placeName: "B",
+  //             mapX: 126.7706788052,
+  //             mapY: 33.5280478463,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 4,
+  //           place: {
+  //             placeId: 126456,
+  //             placeName: "end",
+  //             mapX: 126.5581440803,
+  //             mapY: 33.4237615317,
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // };
   const navigate = useNavigate();
 
+  const tmpPlan = useSelector((state) => state.sendData);
+  console.log('step3 들어옴 : ', tmpPlan);
   const [plan, setPlan] = useState(tmpPlan);
   const [routes, setRoutes] = useState(plan.routes);
+
 
   useEffect(() => {
     let newPlan = { ...plan };

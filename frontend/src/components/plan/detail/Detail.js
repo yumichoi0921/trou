@@ -17,11 +17,11 @@ import Area from "../child/Area";
 import Local from "../child/Local";
 import App from "../../../App";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { loginCheck } from "../../../store";
+import { loginCheck, saveSendData } from "../../../store";
 
-const Detail = ({ sendData }) => {
+const Detail = () => {
     const { planId } = useParams();
     const [day, setDay] = React.useState(0);
     const [memoState, setMemoState] = useState(true);
@@ -29,13 +29,14 @@ const Detail = ({ sendData }) => {
     const [dList, setDList] = useState([]);    // props로 받은거 넣기?
     const [routeId, setRouteId] = useState(0);
     const [orderList, setOrderList] = useState([]);
-    // const [sendData, setSendData] = useState({});
+    const [sendData, setSendData] = useState({});
 
     /*  로그인 정보 확인 하는 변수  */
-  const localStoragetokenCheck = localStorage.getItem('token');
-  const dispatch = useDispatch();
-  const uId = useSelector((state) => state.userId);
-  /*  로그인 정보 확인 하는 변수  */
+    const localStoragetokenCheck = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    /*  로그인 정보 확인 하는 변수  */
 
     useEffect(() => {
         if (Object.keys(sendData).length !== 0 && sendData.constructor === Object) {
@@ -44,41 +45,40 @@ const Detail = ({ sendData }) => {
     }, [sendData]);
 
     useEffect(() => {
-        if(!localStoragetokenCheck){
+        if (!localStoragetokenCheck) {
             alert('로그인 후 이용하세요.');
             document.location.href = '/login';
-          }
-        dispatch(loginCheck());
+        }
+        console.log('룰루',userId);
+        dispatch(loginCheck(userId));
         let routeList = null;
         let rId = null;
         let tmpRoute = [];
         let routeLen = null;
         let tmpSend = null;
-        
+
         const checkMember = async () => {
             try {
                 let check = false;
                 const res = await axios.get(`/share/${planId}`);
-                console.log(res.data);
-                for(let i=0;i<res.data.length;i++){
-                    if(uId === res.data[i].userId){
+                for (let i = 0; i < res.data.length; i++) {
+                    if (userId == res.data[i].userId) {
                         check = true;
+                        console.log('일치함');
                         break;
                     }
                 }
-                if(!check){
+                if (!check) {
                     alert('권한이 없습니다.');
-                    document.location.href = '/';
+                    navigate('/');
+                    // document.location.href = '/';
                 }
                 await initRoute();
-                console.log('routeList : ', routeList);
-                console.log('orderList : ', res.data);
-                setOrderList(res.data);
             } catch (e) {
                 console.log('initOrder 오류');
             }
         };
-        
+
         const initRoute = async () => {
             try {
                 const response = await axios.get(`/route/${planId}`);
@@ -121,10 +121,12 @@ const Detail = ({ sendData }) => {
                     for (let j = 0; j < orders.length; j++) {
                         tmpOrder.push({
                             tripOrder: orders[j].tripOrder,
-                            placeId: orders[j].place.placeId,
-                            placeName: orders[j].place.placeName,
-                            mapX: orders[j].place.mapX,
-                            mapY: orders[j].place.mapY,
+                            place:{
+                                placeId: orders[j].place.placeId,
+                                placeName: orders[j].place.placeName,
+                                mapX: orders[j].place.mapX,
+                                mapY: orders[j].place.mapY,
+                            }
                         });
                     }
                     tmpRoute.push({
@@ -162,6 +164,11 @@ const Detail = ({ sendData }) => {
         }
     };
 
+    const clickModifyBtn = () => {
+        dispatch(saveSendData(sendData));
+        navigate("/plan/step3");
+    };
+
     const handleChange = (event) => {
         let idx = event.target.value;
         setDay(idx);
@@ -194,7 +201,7 @@ const Detail = ({ sendData }) => {
                     >
                         <Local sx={{ height: "50%" }}>{memoContent}</Local>
                         <Local sx={{ height: "50%" }}>
-                            <ShareFriends planId={19}></ShareFriends>
+                            <ShareFriends planId={planId}></ShareFriends>
                         </Local>
                     </Stack>
                 </Area>
@@ -205,9 +212,8 @@ const Detail = ({ sendData }) => {
                     <Grid container spacing={2}>
                         <Grid item md={3}>
                             <Button
-                                component={Link}
-                                to={"step3"} //**************** 수정하는 페이지로 변경하기 ***************/
                                 variant="contained"
+                                onClick={clickModifyBtn}
                             >
                                 수정하기
                             </Button>
