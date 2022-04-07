@@ -66,7 +66,11 @@ public class PlaceController {
         PlaceResponseDto[] res=restTemplate.postForObject(baseUrl,places, PlaceResponseDto[].class);
         List<PlaceDto> recommandPlace = new ArrayList<>();
         for(int i=0;i<res.length;i++){
-            recommandPlace.add(placeService.getPlace(res[i].getPlace_id()));
+            PlaceDto place = placeService.getPlace(res[i].getPlace_id());
+            if(place.getImage()==null  ) continue;
+            if(place.getImage().isEmpty()  ) continue;
+
+            recommandPlace.add(place);
            // System.out.println(placeService.getPlace(res[i].getPlace_id()).getPlaceName());
         }
 

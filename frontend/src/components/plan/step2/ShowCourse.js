@@ -8,7 +8,7 @@ const ShowCourse = ({ selected, course, setPlaceList }) => {
   const [count, setCount] = useState([]);
 
   function randoms() {
-    return Math.floor(Math.random() * (5 - 1) + 1);
+    return Math.floor(Math.random() * (11 - 1) + 1);
   }
 
   function addCourse() {
