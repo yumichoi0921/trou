@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Grid, Button, Stack } from "@mui/material";
 import Route from "./child/Route";
 import Area from "../child/Area";
@@ -8,7 +8,95 @@ import Dijkstra from "./Dijkstra";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const PlanStep3 = (/*plan, setPlan*/) => {
+const PlanStep3 = ({ plan, setPlan }) => {
+  // const tmpRoutes = [
+  //   {
+  //     routeId: 0,
+  //     routeDate: "2022-04-04",
+  //     day: 1,
+  //     order: [
+  //       {
+  //         tripOrder: 0,
+  //         placeId: 128345,
+  //         placeName: "start",
+  //         mapX: 37.497625593121384,
+  //         mapY: 127.02935713582038,
+  //       },
+  //       {
+  //         tripOrder: 0,
+  //         placeId: 125406,
+  //         placeName: "A",
+  //         mapX: 37.499427948430814,
+  //         mapY: 127.02794423197847,
+  //       },
+  //       {
+  //         tripOrder: 0,
+  //         placeId: 125405,
+  //         placeName: "B",
+  //         mapX: 37.498553760499505,
+  //         mapY: 127.02882598822454,
+  //       },
+  //       {
+  //         tripOrder: 0,
+  //         placeId: 126460,
+  //         placeName: "end",
+  //         mapX: 37.499590490909185,
+  //         mapY: 127.0263723554437,
+  //       },
+  //     ],
+  //   },
+  // ];
+  // const tmpPlan = {
+  //   startDate: "2022-04-04",
+  //   endDate: "2022-04-06",
+  //   routes: [
+  //     {
+  //       routeId: 0,
+  //       routeDate: "2022-04-04",
+  //       startPlace: {},
+  //       endPlace: {},
+  //       day: 1,
+  //       order: [
+  //         {
+  //           tripOrder: 1,
+  //           place: {
+  //             placeId: 126438,
+  //             placeName: "start",
+  //             mapX: 126.5594730066,
+  //             mapY: 33.2445341254,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 2,
+  //           place: {
+  //             placeId: 126445,
+  //             placeName: "A",
+  //             mapX: 126.908342042,
+  //             mapY: 33.520231492,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 3,
+  //           place: {
+  //             placeId: 126452,
+  //             placeName: "B",
+  //             mapX: 126.7706788052,
+  //             mapY: 33.5280478463,
+  //           },
+  //         },
+  //         {
+  //           tripOrder: 4,
+  //           place: {
+  //             placeId: 126456,
+  //             placeName: "end",
+  //             mapX: 126.5581440803,
+  //             mapY: 33.4237615317,
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // };
   const navigate = useNavigate();
 
   const tmpPlan = useSelector((state) => state.sendData);
@@ -53,7 +141,7 @@ const PlanStep3 = (/*plan, setPlan*/) => {
 
   const save = async () => {
     // const url = "http://localhost:8080";
-    
+
     var data = {};
     console.log(plan);
     let newPlan = plan;
@@ -102,7 +190,9 @@ const PlanStep3 = (/*plan, setPlan*/) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Button variant="outlined">더 담으러 가기</Button>
+              <Link to="step2">
+                <Button variant="outlined">더 담으러 가기</Button>
+              </Link>
               <Button variant="contained" onClick={save}>
                 저장하기
               </Button>

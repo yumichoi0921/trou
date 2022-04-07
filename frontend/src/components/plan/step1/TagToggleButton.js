@@ -24,7 +24,6 @@ function TagList({ tag }) {
     } else {
       tag.setSelectedTags(tag.selectedTags.filter((t) => t !== newTags[index]));
     }
-    console.log(tag.selectedTags);
   }
 
   const tagList = tag.tags.map((tag, index) => (

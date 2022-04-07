@@ -28,7 +28,6 @@ function randoms() {
   return Math.floor(Math.random() * (5 - 1) + 1);
 }
 const Review = ({ review }) => {
-  console.log(review);
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
@@ -61,7 +60,6 @@ const Review = ({ review }) => {
 };
 function PlaceInfo({ show, handleClose, place }) {
   if (!place) return;
-  console.log(place);
 
   return (
     <Modal
