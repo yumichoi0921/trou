@@ -23,11 +23,12 @@ const App = () => {
   console.log('[App] isLogin ', isLogin);
   const localStoragetokenCheck = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
+  const userName = localStorage.getItem('userName');
 
   useEffect(() => {
     if (localStoragetokenCheck) {
       // 로그인유지를 위해서 isLogin을 true로 userId를 현재 로그인한 id로 변경
-      dispatch(loginCheck(userId));
+      dispatch(loginCheck(userId,userName));
     }
   }, []);
   return (

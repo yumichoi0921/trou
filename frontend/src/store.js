@@ -10,13 +10,14 @@ export const saveSendData = (data) => {
     }
 };
 
-export const loginCheck = (uId) => {
+export const loginCheck = (uId,uName) => {
     console.log('로그인한 아이디 : ', uId);
     return {
         type: '로그인 성공',
         payload: {
                 isLogin: true,
-                userId: uId
+                userId: uId,
+                userName : uName,
         }
     }
 };
@@ -28,25 +29,11 @@ export const logOutCheck = () => {
     }
 };
 
-// let tmp = {};
-
-// function reducer1(state = tmp,action){
-//     const newState = {...state};
-//     console.log('newState 들어가기전:',newState);
-//     if(action.type === 'setSendData'){
-//         console.log('!!!!!!!!!!!!!! : ',action.payload.sendData);
-//         newState = {...action.payload.sendData};
-//         console.log('newState 들어간 후:',newState);
-//         return newState;
-//     } else{
-//         return newState;
-//     }
-// }
-
 const info = {
     userInfo: {
         isLogin: false,
-        userId: ''
+        userId: '',
+        userName: '', 
     },
     sendData: {
         startDate: "2022-04-04",

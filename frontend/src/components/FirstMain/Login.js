@@ -30,21 +30,22 @@ export default function Login() {
       }
       axios.post("/users/signin", body).then((res) => {
         const userId = res.data.user.userId;
+        const userName = res.data.user.name;
+        console.log('회원정보 : ',res.data);
         localStorage.setItem('token',res.data.tocken);
         localStorage.setItem('userId', userId);
-        dispatch(loginCheck(res.data.user.userId));
-        dispatch(saveSendData(tmpPlan));
+        localStorage.setItem('userName', userName);
+        dispatch(loginCheck(userId,userName));
+        
         let body1 = {
           userId: userId
         }
 
         axios.post("/history/check", body1).then((res) => {
           console.log(res);
-          document.location.href = '/select'
-
+          navigate('/select');
         }).catch(error => {
-
-          document.location.href = '/main'
+          navigate('/main');
         })
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");

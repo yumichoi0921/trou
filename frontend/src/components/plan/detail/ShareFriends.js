@@ -47,7 +47,7 @@ const ShareFriends = (props) => {
                     <Avatar {...stringAvatar('Tim Neutkens')} />
                 </Grid> */}
             </Grid>
-            <ShareModal friends={friends} setFriends={setFriends}></ShareModal>
+            <ShareModal planId={props.planId} friends={friends} setFriends={setFriends}></ShareModal>
             {/* <Button variant="outlined">공유</Button> */}
 
         </Stack>

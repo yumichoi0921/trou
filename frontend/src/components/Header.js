@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Stack, Box } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux';
 import { logOutCheck } from "../store";
-import { useNavigate } from "react-router-dom";
-import { Tab, Stack, Box } from "@mui/material";
 import title from "./img/MainTitle.png";
 
 const Nav = () => {
@@ -26,6 +24,7 @@ const Nav = () => {
         (<Tab value="logout" label="LogOut" onClick={() => {
           localStorage.removeItem('token');
           localStorage.removeItem('userId');
+          localStorage.removeItem('userName');
           dispatch(logOutCheck())
           navigate('/')
         }} />)

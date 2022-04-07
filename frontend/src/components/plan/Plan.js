@@ -66,7 +66,7 @@ export default function Plan(props) {
   }
   useEffect(() => {
     async function getStartingPoint() {
-      if (location.state.startingPoint) {
+      if (location.state && location.state.startingPoint) {
         setStartingPoint(location.state.startingPoint);
         const newSelectedPlace = [...selectedPlace];
         newSelectedPlace[0].push(location.state.startingPoint);
