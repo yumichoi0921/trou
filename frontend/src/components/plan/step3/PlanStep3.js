@@ -166,7 +166,7 @@ const PlanStep3 = (/*plan, setPlan*/) => {
         await axios.post("/order/" + route.routeId, orderList);
       }
 
-      // navigate("/planDetail/${}");
+      navigate(`/plandetail/${newPlan.planId}`);
     } catch (err) {
       console.log("Error >>", err);
     }

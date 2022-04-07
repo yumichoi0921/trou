@@ -14,12 +14,10 @@ function RecommendCourse(props) {
     await axios
       .get("/order/placeId/" + props.placeName)
       .then((res) => {
-        console.log("data:" + res.data);
         const tmp = [];
         res.data.map((p, index) => {
           tmp.push(p);
         });
-        console.log("코스", tmp);
         setCourses(tmp);
       })
       .catch((e) => {
@@ -54,39 +52,6 @@ function RecommendCourse(props) {
         ))}
       </Grid>
     </Grid>
-    // <TabsUnstyled sx={{ width: "100%", height: "100%", overflow: "scroll" }}>
-    //   <TabsList>
-    //     <Tab>비슷한 유저의 여행코스</Tab>
-    //   </TabsList>
-
-    //   <TabPanel value={0} sx={{ width: "100%", height: "100%" }}>
-    //     <Stack
-    //       sx={{
-    //         width: "100%",
-    //         height: "50%",
-    //         bgcolor: "#e1f5fe",
-    //         overflow: "auto",
-    //       }}
-    //     >
-    //       {courses.map((course, index) => (
-    //         <Item key={index} sx={{ width: "100%", height: "50%" }}>
-    //           <ShowCourse
-    //             key={index}
-    //             selected={props.selected}
-    //             course={course}
-    //             setPlaceList={props.setPlaceList}
-    //           ></ShowCourse>
-    //         </Item>
-    //       ))}
-    //     </Stack>
-    //     );
-    //     {/* <Item sx={{ width: "100%", height: "100%", overflow: "auto" }}>
-    //         {courese.map((course, index) => (
-    //           <ShowCourse key={index} course={course}></ShowCourse>
-    //         ))}
-    //       </Item> */}
-    //   </TabPanel>
-    // </TabsUnstyled>
   );
 }
 

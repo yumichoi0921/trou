@@ -10,7 +10,6 @@ import { ArrowForward } from "@mui/icons-material";
 import react, { useState, useEffect } from "react";
 import Item from "../child/Item";
 import SelectedPlace from "./SelectedPlace";
-import Slider from "react-slick";
 const ShowCourse = ({ selected, course, setPlaceList }) => {
   const [imgs, setImgs] = useState([]);
   const [count, setCount] = useState([]);
