@@ -29,62 +29,58 @@ export default function Join() {
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
 
-
-  const onCheckPassword = (e) => { 
+  const onCheckPassword = (e) => {
     setPassword(e.target.value);
-    if (e.target.value.length >= 6 && e.target.value.length <= 15) { 
+    if (e.target.value.length >= 6 && e.target.value.length <= 15) {
       setCheckPassword(true);
-    } 
-  }
+    }
+  };
   // 이메일 중복 확인
-  const email = email1 + '@'+ email2;
+  const email = email1 + "@" + email2;
   const checkUserEmail = () => {
-
-  
-    axios.get("/users/check/" + email).then((res) => {
-      if (res.status == 200) { 
-        alert("사용 가능한 아이디 입니다.");
-        setCheckEmail(true);
-      } 
-    }).catch(error => {
-      alert("이미 사용중인 아이디 입니다.");
-    setEmail1("")
-    setEmail2 ("") })
+    axios
+      .get("/users/check/" + email)
+      .then((res) => {
+        if (res.status == 200) {
+          alert("사용 가능한 아이디 입니다.");
+          setCheckEmail(true);
+        }
+      })
+      .catch((error) => {
+        alert("이미 사용중인 아이디 입니다.");
+        setEmail1("");
+        setEmail2("");
+      });
   };
 
-// 가입 하기
-  const SignUp = () => { 
-    
+  // 가입 하기
+  const SignUp = () => {
     if (!checkEmail) {
-      alert("이메일 중복 확인을 해주세요.")
+      alert("이메일 중복 확인을 해주세요.");
     } else if (!checkPassword) {
       alert("비밀번호를 확인해주세요");
       setPassword("");
-    } else if (password!=passwordCheck) { 
+    } else if (password != passwordCheck) {
       alert("비밀번호가 맞지 않습니다.");
       setPasswordCheck("");
-    } else { 
-
+    } else {
       let body = {
         email: email,
         password: password,
-        name: userName
-      }
-      axios.post("/users/signup", body ).then((res) => {
-        // localStorage.setItem('userId', res.data.user.userId);
-        alert("회원 가입 완료!");
-        document.location.href = '/login'
-      }).catch(error => {
-        alert("가입 실패!");
+        name: userName,
+      };
+      axios
+        .post("/users/signup", body)
+        .then((res) => {
+          // localStorage.setItem('userId', res.data.user.userId);
+          alert("회원 가입 완료!");
+          document.location.href = "/login";
         })
-
-      
+        .catch((error) => {
+          alert("가입 실패!");
+        });
     }
-   
-  
-  }
-
-
+  };
 
   // const onChangeEmail = (e) => {
   //   setEmail1(e.target.value);
@@ -115,7 +111,7 @@ export default function Join() {
                   sx={{ width: 300 }}
                   value={email1}
                 />
-               <h3 className={styles.email_text_h}>@</h3>
+                <h3 className={styles.email_text_h}>@</h3>
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
@@ -128,11 +124,7 @@ export default function Join() {
                   value={email2}
                 />
 
-                <Button
-               
-                  variant="contained"
-                  onClick={checkUserEmail}
-                >
+                <Button variant="contained" onClick={checkUserEmail}>
                   중복확인
                 </Button>
               </Stack>
@@ -173,7 +165,6 @@ export default function Join() {
                 >
                   가입하기
                 </Button>
-                
               </div>
             </form>
           </CardContent>

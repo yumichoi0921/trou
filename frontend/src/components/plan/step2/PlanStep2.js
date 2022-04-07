@@ -22,7 +22,7 @@ export default function PlanStep2(props) {
   const [placeList, setPlaceList] = useState();
 
   return (
-    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "90%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateDetails
