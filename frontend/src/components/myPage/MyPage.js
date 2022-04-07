@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Plan from "./Plan";
 
 function Users() {
@@ -8,11 +8,8 @@ function Users() {
 
   const userId = 1;
   useEffect(() => {
-    // console.log(plans);
     if (plans.length > 0) {
       console.log(plans);
-      console.log(plans[15].routes[0].order[3].place);
-      console.log(plans[15].routes[0].order[3].place.image);
     }
   }, [plans]);
 
@@ -58,15 +55,21 @@ function Users() {
   }, []);
 
   return (
-    <ul>
-      {plans.map((plan) => (
-        <Plan key={plan.planId} plan={plan}>
-          {" "}
-        </Plan>
-      ))}
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
+      {plans.map((plan) =>
+        plan.routes.length > 0 && plan.routes[0].order.length > 0 ? (
+          <Plan
+            key={plan.planId}
+            plan={plan}
+            image={plan.routes[0].order[3].place.image}
+            region={plan.routes[0].order[0].region}
+          ></Plan>
+        ) : (
+          <Plan key={plan.planId} plan={plan} image={null}></Plan>
+        )
+      )}
       <Button></Button>
-    </ul>
+    </Grid>
   );
 }
-
 export default Users;

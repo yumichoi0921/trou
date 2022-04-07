@@ -8,7 +8,7 @@ import KakaoMap from "./Step1KakaoMap";
 
 const PlanStep1 = (props) => {
   return (
-    <Grid container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateTagSelection
@@ -22,7 +22,12 @@ const PlanStep1 = (props) => {
       {/* Grid 지도 */}
       <Grid item md={9}>
         <Area sx={{ overflow: "auto" }}>
-          <KakaoMap></KakaoMap>
+          <KakaoMap
+            plan={props.plan}
+            selected={props.selected}
+            map={props.map}
+            setMap={props.setMap}
+          ></KakaoMap>
         </Area>
       </Grid>
     </Grid>

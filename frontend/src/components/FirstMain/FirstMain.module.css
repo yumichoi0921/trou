@@ -100,3 +100,34 @@
   margin-top: 5%;
   padding-left: 4%;
 }
+
+/* selectPlace */
+.chip{
+  text-align: center;
+  padding: 5%;
+}
+
+.select_title{
+  text-align: center;
+  padding-top: 5%;
+}
+.Card_chip{
+  padding-top: 15%;
+  
+  position: absolute;
+  width: 70%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ToggleButton_Group{
+  text-align: center;
+}
+
+
+.place_button{
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 3%;
+}

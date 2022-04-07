@@ -16,7 +16,7 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     public List<RestaurantDto> searchRestaurant(String keyword) {
-        List<Restaurant> restaurants = restaurantRepository.findFirst100ByAddressContainingOrderByLatitude(keyword);
+        List<Restaurant> restaurants = restaurantRepository.findFirst100ByNameContainingOrderByLatitude(keyword);
         return restaurants.stream().map(RestaurantDto::new).collect(Collectors.toList());
     }
 }

@@ -14,11 +14,12 @@ export default function FirstMain() {
       <div className={styles.log}>
         <img src={title} alt="title"></img>
         <div className={styles.button}>
-          <Button
+          <Button sx={{ width: 150 }}
             component={Link}
             to={"/login"}
             variant="contained"
             size="large"
+            color="info"
           >
             시작하기
           </Button>

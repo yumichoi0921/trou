@@ -13,26 +13,55 @@ import { Link } from "react-router-dom";
 import Area from "../child/Area";
 import Item from "../child/Item";
 import DateDestinationPicker from "./DateDestinationPicker";
-import SelectedPlan from "./SelectedPlace";
+import SelectedPlace from "./SelectedPlace";
 
 function DateDetails(props) {
-  const [date, setDate] = React.useState("");
   console.log(props);
 
-  function confirmPlan() {}
+  function confirmPlan() {
+    props.selected.selectedPlace.forEach((p, index) =>
+      console.log(index + 1, "일차 : ", p)
+    );
+  }
+
+  const [placeList, setPlaceList] = useState();
+  //   const placeList = places.map((place, index) => (
+  //     <SelectedPlace place={place} selected={props.selected}></SelectedPlace>
+  //   ));
+
+  React.useEffect(() => {
+    const selectedPlace = props.selected.selectedPlace[
+      props.selected.selectedDate
+    ]
+      ? props.selected.selectedPlace[props.selected.selectedDate]
+      : [];
+    setPlaceList(
+      selectedPlace.map((place, index) => (
+        <SelectedPlace
+          key={index}
+          place={place}
+          selected={props.selected}
+          setPlaceList={props.setPlaceList}
+        ></SelectedPlace>
+      ))
+    );
+  }, [
+    props.selected.selectedDate,
+    props.selected.selecctedPlace,
+    props.placeList,
+  ]);
 
   return (
     <Area sx={{ overflow: "auto" }} spacing={3}>
       <Grid>
         <DateDestinationPicker
           date={props.date}
-          selectedDate={date}
-          setSelectedDate={setDate}
+          selectedDate={props.selected.selectedDate}
+          setSelectedDate={props.selected.setSelectedDate}
+          point={props.point}
         ></DateDestinationPicker>
       </Grid>
-      <Grid>
-        <SelectedPlan place={"장소"} selected={props.selected}></SelectedPlan>
-      </Grid>
+      <Grid>{placeList}</Grid>
 
       <Grid item>
         <Stack
@@ -48,7 +77,7 @@ function DateDetails(props) {
             <Link to="/plan/step1">뒤로가기</Link>
           </Button>
           <Button variant="contained" onClick={confirmPlan}>
-            일정생성
+            <Link to="/plan/step3">일정생성</Link>
           </Button>
         </Stack>
       </Grid>

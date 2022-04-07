@@ -24,7 +24,21 @@ export default function Login() {
       }
       axios.post("/users/signin", body).then((res) => {
         console.log(res);      
-        document.location.href = '/main'
+        const userId = res.data.user.userId;
+        localStorage.setItem('userId', userId);
+
+        let body1 = {
+          userId: userId
+        }
+
+        axios.post("/history/check", body1).then((res) => { 
+          console.log(res);
+          document.location.href = '/select'
+         
+        }).catch(error => {
+       
+          document.location.href = '/main'
+        })
       }).catch(error => {
         alert("아이디 또는 비밀번호를 확인해주세요.");
         setUserEmaill("");
