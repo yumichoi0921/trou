@@ -33,10 +33,11 @@ public class TripPlanController {
     @PostMapping(value = "/{userId}")
     public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("userId") long userId) {
         try {
+            System.out.println(tripPlanDto.getPlanId());
             TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
-            ShareDto share = shareService.createShare(ShareDto.builder()
+            shareService.createShare(ShareDto.builder()
                     .userId(userId)
-                    .planId(tripPlanDto.getPlanId())
+                    .planId(result.getPlanId())
                     .build());
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
