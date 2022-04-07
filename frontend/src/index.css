@@ -24,12 +24,14 @@ body {
 }
 
 .body {
-  max-width: 95%;
+  width: 95%;
+  height: 90%;
   margin: auto;
+  justify-content: center;
 }
 
 .container {
-  max-width: 95%;
+  width: 95%;
   height: 90%;
   margin: auto;
   overflow: auto;

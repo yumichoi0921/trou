@@ -33,8 +33,8 @@ export default function RestaurantSearch(props) {
           return {
             address: r.address,
             area: r.area,
-            latitude: r.latitude,
-            longitude: r.longitude,
+            mapY: r.latitude,
+            mapX: r.longitude,
             placeName: r.name,
           };
         })
@@ -44,7 +44,7 @@ export default function RestaurantSearch(props) {
   }, [keyword]);
 
   return (
-    <Item sx={{ "& > :not(style)": { m: 1 } }}>
+    <Item sx={{ height: "10%" }}>
       <FormControl variant="standard">
         <InputLabel htmlFor="input-with-icon-adornment">맛집 검색</InputLabel>
         <Input

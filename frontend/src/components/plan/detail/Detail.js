@@ -162,7 +162,7 @@ const Detail = () => {
   const kmap = <KakaoMap order={orderList}></KakaoMap>;
 
   return (
-    <Grid container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
       <Grid item md={4} sx={{ textAlign: "center", height: "100%" }}>
         <Area sx={{ padding: 2 }}>
           <Stack
