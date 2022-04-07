@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +44,14 @@ public class UserHistoryService {
 
 
 
+    }
+
+
+    public boolean checkUserPlace(long userId){
+       if(userHistoryRepository.existsByUserId(userId)){
+           return true;
+       }else{
+           return false;
+       }
     }
 }

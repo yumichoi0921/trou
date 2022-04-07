@@ -112,7 +112,8 @@
   padding-top: 5%;
 }
 .Card_chip{
-  padding-top: 20%;
+  padding-top: 15%;
+  
   position: absolute;
   width: 70%;
   top: 40%;
@@ -127,6 +128,6 @@
 
 .place_button{
   text-align: center;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  padding-top: 1%;
+  padding-bottom: 3%;
 }

@@ -14,6 +14,9 @@ export default function Plan(props) {
   const [startingPoint, setStartingPoint] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
+  const [startPlace, setStartPlace] = useState({});
+  const [endPlace, setEndPlace] = useState({});
+  const [map, setMap] = useState();
 
   const selected = {
     selectedPlace: selectedPlace,
@@ -38,6 +41,13 @@ export default function Plan(props) {
   };
 
   const location = useLocation();
+  const point = {
+    startPlace: startPlace,
+    setStartPlace: setStartPlace,
+    endPlace: endPlace,
+    setEndPlace: setEndPlace,
+  };
+
   if (tags.length === 0) {
     axios.get("http://localhost:8080/tag").then((res) => {
       const resTags = res.data;
@@ -87,6 +97,8 @@ export default function Plan(props) {
               setPlan={setPlan}
               date={date}
               selected={selected}
+              map={map}
+              setMap={setMap}
             ></PlanStep1>
           }
         ></Route>
@@ -99,6 +111,9 @@ export default function Plan(props) {
               date={date}
               selectedTags={selectedTags}
               selected={selected}
+              point={point}
+              map={map}
+              setMap={setMap}
             ></PlanStep2>
           }
         ></Route>

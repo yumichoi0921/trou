@@ -18,7 +18,9 @@ import Plan from "./components/plan/Plan";
 const App = () => {
   if (
     window.location.pathname === "/" ||
-    window.location.pathname === "/select"
+    window.location.pathname === "/select"||
+    window.location.pathname === "/login"||
+    window.location.pathname === "/join"
   ) {
     return (
       <Router>
