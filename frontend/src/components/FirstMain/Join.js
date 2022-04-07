@@ -71,11 +71,12 @@ export default function Join() {
         password: password,
         name: userName
       }
-      console.log(body);
+      // console.log(body);
       axios.post("/users/signup", body ).then((res) => {
-        
+        // localStorage.setItem('userId', res.data.user.userId);
+        console.log(res);
         alert("회원 가입 완료!");
-        document.location.href = '/select'
+        document.location.href = '/login'
       }).catch(error => {
         alert("가입 실패!");
         })
