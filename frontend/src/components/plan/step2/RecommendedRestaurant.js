@@ -29,7 +29,7 @@ function RecommendedRestaurant(props) {
   }
   return (
     <div>
-      {props.place.name} <Button onClick={addPlace}>추가</Button>
+      {props.place.placeName} <Button onClick={addPlace}>추가</Button>
     </div>
   );
 }

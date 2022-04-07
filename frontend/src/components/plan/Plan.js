@@ -1,17 +1,17 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import PlanStep1 from "./step1/PlanStep1";
 import PlanStep2 from "./step2/PlanStep2";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PlanStep3 from "./step3/PlanStep3";
 import axios from "axios";
 
-export default function Plan() {
+export default function Plan(props) {
   const [tags, setTags] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
   const [plan, setPlan] = useState({});
+  const [startingPoint, setStartingPoint] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
   const [startPlace, setStartPlace] = useState({});
@@ -40,6 +40,7 @@ export default function Plan() {
     setSelectedTags: setSelectedTags,
   };
 
+  const location = useLocation();
   const point = {
     startPlace: startPlace,
     setStartPlace: setStartPlace,
@@ -63,31 +64,18 @@ export default function Plan() {
       );
     });
   }
-
-  // const plan = {
-  // planId:"",
-  //   startDate: "",
-  //   endDate: "",
-  //   routes: [],
-  // };
-
-  const route = [
-    {
-      routeId: "",
-      routeDate: "",
-      day: "",
-      order: [],
-    },
-  ];
-  const order = [
-    {
-      tripOrder: 0,
-      placeId: 128345,
-      placeName: "여행지1",
-      mapX: "",
-      mapY: "",
-    },
-  ];
+  useEffect(() => {
+    async function getStartingPoint() {
+      if (location.state.startingPoint) {
+        setStartingPoint(location.state.startingPoint);
+        const newSelectedPlace = [...selectedPlace];
+        newSelectedPlace[0].push(location.state.startingPoint);
+        setSelectedPlace(newSelectedPlace);
+        console.log(newSelectedPlace);
+      }
+    }
+    getStartingPoint();
+  }, []);
 
   return (
     <Fragment>

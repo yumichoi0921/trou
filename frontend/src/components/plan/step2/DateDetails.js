@@ -77,7 +77,7 @@ function DateDetails(props) {
             <Link to="/plan/step1">뒤로가기</Link>
           </Button>
           <Button variant="contained" onClick={confirmPlan}>
-            일정생성
+            <Link to="/plan/step3">일정생성</Link>
           </Button>
         </Stack>
       </Grid>

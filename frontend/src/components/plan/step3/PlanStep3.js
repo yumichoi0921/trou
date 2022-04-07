@@ -166,14 +166,14 @@ const PlanStep3 = (/*plan, setPlan*/) => {
         await axios.post("/order/" + route.routeId, orderList);
       }
 
-      // navigate("/planDetail/${}");
+      navigate(`/plandetail/${newPlan.planId}`);
     } catch (err) {
       console.log("Error >>", err);
     }
   };
 
   return (
-    <Grid container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <Area>
