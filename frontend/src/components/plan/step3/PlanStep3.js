@@ -158,11 +158,9 @@ const PlanStep3 = ({ plan, setPlan }) => {
 
       // order 저장
       for (const route of newPlan.routes) {
-        const orderList = [];
-        for (const p of route.order) {
-          data = { tripOrder: p.tripOrder, place: p.place };
-          orderList.push(data);
-        }
+        const orderList = route.order.map((p, index) => {
+          return { tripOrder: index + 1, place: p.place };
+        });
         await axios.post("/order/" + route.routeId, orderList);
       }
 
@@ -185,7 +183,7 @@ const PlanStep3 = ({ plan, setPlan }) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Link to="step2">
+              <Link to="/plan/step2">
                 <Button variant="outlined">더 담으러 가기</Button>
               </Link>
               <Button variant="contained" onClick={save}>
