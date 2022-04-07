@@ -68,14 +68,10 @@ function DateDestinationPicker(props) {
         sx={{ mb: 3 }}
       >
         <Grid item md={5}>
-          <Item>출발지</Item>
+          <Item>출발</Item>
         </Grid>
         <Grid item md={7}>
-          {props.point.startPlace ? (
-            <Item>출발지 선택</Item>
-          ) : (
             <Item>출발지</Item>
-          )}
         </Grid>
       </Grid>
       <Grid
@@ -86,14 +82,10 @@ function DateDestinationPicker(props) {
         sx={{ mb: 3 }}
       >
         <Grid item md={5}>
-          <Item>도착지</Item>
+          <Item>도착</Item>
         </Grid>
         <Grid item md={7}>
-          {props.point.endPlace ? (
-            <Item>도착지 선택</Item>
-          ) : (
             <Item>도착지</Item>
-          )}
         </Grid>
       </Grid>
     </Fragment>

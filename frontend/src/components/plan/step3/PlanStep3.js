@@ -13,7 +13,6 @@ const PlanStep3 = ({ plan, setPlan }) => {
 
   const tmpPlan = useSelector((state) => state.sendData);
   const userId = useSelector((state) => state.userInfo.userId);
-  console.log('step3 들어옴 : ', tmpPlan);
   // const [plan, setPlan] = useState(tmpPlan);
   const [routes, setRoutes] = useState(plan.routes);
 
@@ -55,22 +54,18 @@ const PlanStep3 = ({ plan, setPlan }) => {
     // const url = "http://localhost:8080";
 
     var data = {};
-    console.log(plan);
     let newPlan = plan;
     try {
-      // console.log(plan);
       // plan 저장
       data = { startDate: newPlan.startDate, endDate: newPlan.endDate };
       let response = await axios.post("/plan/" + userId, data);
       newPlan.planId = response.data.planId;
 
-      console.log(newPlan.planId);
       // route 저장
       for (const route of newPlan.routes) {
         data = { routeDate: route.routeDate, day: route.day };
         const response = await axios.post("/route/" + newPlan.planId, data);
         route.routeId = response.data.routeId;
-        console.log(route.routeId);
       }
 
       // order 저장

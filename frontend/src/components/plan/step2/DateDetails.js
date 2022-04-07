@@ -79,7 +79,6 @@ function DateDetails(props) {
       routes: routes,
     };
     props.setPlan(plan);
-    console.log(plan);
   }
 
   const [placeList, setPlaceList] = useState();

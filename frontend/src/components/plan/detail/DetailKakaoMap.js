@@ -19,8 +19,8 @@ const KakaoMap = ({ order }) => {
       if (order.length == 0) return;
       var container = document.getElementById("map");
       var options = {
-        center: new kakao.maps.LatLng(order[0].place.mapY, order[0].place.mapX),
-        level: 11,
+        center: new kakao.maps.LatLng(33.400701, 126.570667),
+        level: 9,
       };
       var map = new kakao.maps.Map(container, options);
       // 마커를 표시할 위치 배열입니다

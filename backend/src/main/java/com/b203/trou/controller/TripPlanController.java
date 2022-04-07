@@ -1,7 +1,9 @@
 package com.b203.trou.controller;
 
 import com.b203.trou.model.trip.TripPlanDto;
+import com.b203.trou.model.user.ShareDto;
 import com.b203.trou.service.trip.TripPlanService;
+import com.b203.trou.service.user.ShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.List;
 public class TripPlanController {
 
     private final TripPlanService tripPlanService;
+    private final ShareService shareService;
 
     @GetMapping(value = "/{userId}")
     public ResponseEntity<?> getAllTripPlans(@PathVariable("userId") long userId) {
@@ -31,6 +34,10 @@ public class TripPlanController {
     public ResponseEntity<?> createTripPlan(@RequestBody TripPlanDto tripPlanDto, @PathVariable("userId") long userId) {
         try {
             TripPlanDto result = tripPlanService.createTripPlan(tripPlanDto, userId);
+            ShareDto share = shareService.createShare(ShareDto.builder()
+                    .userId(userId)
+                    .planId(tripPlanDto.getPlanId())
+                    .build());
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

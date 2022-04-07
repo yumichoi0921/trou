@@ -10,7 +10,6 @@ const ShareFriends = (props) => {
 
     const initShareFriends = async () => {
         await axios.get("/share/" + props.planId).then((res) => {
-            console.log(res.data);
             const tmp = [];
             res.data.map((user,index) => {
                 let newTmp = user.name;

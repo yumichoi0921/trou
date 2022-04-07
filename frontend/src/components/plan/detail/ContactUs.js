@@ -15,18 +15,14 @@ export const ContactUs = ({ planId,setOpen,friends,setFriends }) => {
 
     // share 테이블에 planid, userid 저장
     const saveShare = async (uId,userName) => {
-        console.log('db 저장중');
         let req = {};
         try {
             req = { shareId:0, planId: planId, userId: uId}
             await axios.post("/share", req);
-            console.log('DB 저장 완료!!');
             // friends 추가
             const tmp = [...friends];
-            console.log(userName);
             tmp.push(userName);
             setFriends(tmp);
-            console.log('setFriends : ',friends);
         } catch (err) {
             console.log(err);
         }
@@ -35,8 +31,6 @@ export const ContactUs = ({ planId,setOpen,friends,setFriends }) => {
     const sendEmail = (userId,userName) => {
         emailjs.sendForm('service_nr57om8', 'template_bjrvuzb', form.current, 'Zaq8JxcEXp4jBv4uF')
             .then((result) => {
-                console.log(result.text);
-                console.log('메일 보내기 완료');
                 alert('메일 보내기 완료');
                 setOpen(false);
                 saveShare(userId,userName);
@@ -63,11 +57,9 @@ export const ContactUs = ({ planId,setOpen,friends,setFriends }) => {
         const keyword = e.target.value;
         setUserEmail(keyword);
         await axios.get(`/users/list/${keyword}`).then((res) => {
-            console.log(res.data);
             let uList = [];
             res.data.map((user,index) => {
                 let user1 = {name:user.userName, email:user.email};
-                console.log(user1);
                 uList.push(user1);
             })
             setUserList(uList);

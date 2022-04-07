@@ -41,8 +41,6 @@ const TripDetail = () => {
         newRoutes = response.data;
         await getOrders();
         setRoutes(newRoutes);
-        //console.log("루트 출력");
-        //console.log(routes)
       } catch (e) {
         console.log(e);
       }
@@ -58,14 +56,9 @@ const TripDetail = () => {
   };
 
   const changeOrderList = (idx) => {
-    console.log("change orderList");
-    console.log(idx);
-    console.log(routes[idx]);
     setRoute(routes[idx]);
   };
 
-  console.log("여기");
-  console.log(routes);
   const lis = routes.map((route, index) => (
     <MenuItem value={index} key={index}>
       {route.day}일차 ({route.routeDate})

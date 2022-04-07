@@ -25,7 +25,6 @@ const ShowFriends = ({friend}) => {
     }
     
     function stringAvatar(name) {
-        console.log(name);
         return {
             sx: {
                 bgcolor: stringToColor(name),

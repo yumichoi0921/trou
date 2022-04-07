@@ -20,7 +20,6 @@ import Plan from "./components/plan/Plan";
 const App = () => {
   const isLogin = useSelector((state) => state.userInfo.isLogin);
   const dispatch = useDispatch();
-  console.log('[App] isLogin ', isLogin);
   const localStoragetokenCheck = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
   const userName = localStorage.getItem('userName');

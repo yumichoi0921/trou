@@ -11,25 +11,16 @@ export default function SelectPlace() {
 
   const handleFormat = (event, newFormats) => {
 
-    // const dd = newFormats[0];
-    // placeList(dd);
-    console.log(newFormats);
-    console.log(newFormats.length);
     if (newFormats.length > 3) {
       alert("3가지 이하로 선택해 주세요");
-
     }
     else { setFormats(newFormats); }
-
-   
   };
 
   const selected = () => { 
 
     const userId = localStorage.getItem('userId');
     const placeId = formats;
-    console.log(userId);
-    console.log(placeId);
    
     axios.post("/history/" + userId,  placeId.map(p => { 
       return {
@@ -37,9 +28,8 @@ export default function SelectPlace() {
       }
     }) ).then((res) => { 
       document.location.href = '/main';
-      console.log(res.data);
     }).catch(error => { 
-      console.log("오류!");
+      console.log(error);
     })
 
   }
