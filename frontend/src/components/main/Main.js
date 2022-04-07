@@ -20,6 +20,12 @@ import axios from "axios";
 import PlaceInfo from "./PlaceInfo";
 import Item from "./child/Item";
 
+import { useSelector, useDispatch } from 'react-redux';
+import { loginCheck } from "../../store";
+import { useLocation, useNavigate } from "react-router-dom";
+// import { useHistory } from "react-router";
+
+
 const SearchDiv = styled(Box)({
   paddingTop: 80,
   paddingBottom: 100,
@@ -30,7 +36,18 @@ export default function Main() {
   const [places, setPlaces] = useState([]);
   const [placeInfo, setPlaceInfo] = useState({});
   const [show, setShow] = useState(false);
+  const [userId, setUserId] = useState();
   const handleShow = () => setShow(true);
+
+  /*  로그인 정보 확인 하는 변수  */
+  const localStoragetokenCheck = localStorage.getItem('token');
+  const uId = localStorage.getItem('userId');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  /*  로그인 정보 확인 하는 변수  */
+
   const handleClose = () => setShow(false);
 
   const placeInfoShow = (place) => {

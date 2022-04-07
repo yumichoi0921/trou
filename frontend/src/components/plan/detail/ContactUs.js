@@ -5,15 +5,13 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import Item from '../child/Item';
 
-export const ContactUs = ({ setOpen,friends,setFriends }) => {
+export const ContactUs = ({ planId,setOpen,friends,setFriends }) => {
     init("Zaq8JxcEXp4jBv4uF");
     const form = useRef();
     const [userEmail, setUserEmail] = useState();
     const [userList, setUserList] = useState([]);
     const [userId, setUserId] = useState();
     const { register, handleSubmit } = useForm();
-    const planId = 19;
-
 
     // share 테이블에 planid, userid 저장
     const saveShare = async (uId,userName) => {
@@ -25,8 +23,10 @@ export const ContactUs = ({ setOpen,friends,setFriends }) => {
             console.log('DB 저장 완료!!');
             // friends 추가
             const tmp = [...friends];
+            console.log(userName);
             tmp.push(userName);
             setFriends(tmp);
+            console.log('setFriends : ',friends);
         } catch (err) {
             console.log(err);
         }
@@ -50,9 +50,8 @@ export const ContactUs = ({ setOpen,friends,setFriends }) => {
 
         await axios.get("/users/info/" + data.user_email).then((res) => {
             let info = res.data;
-            console.log(info.userId);
             setUserId(info.userId);
-            sendEmail(info.userId,info.userName);
+            sendEmail(info.userId,info.name);
         }).catch(err => {
             console.log(err);
             alert('회원이 아닙니다. 다시 작성해주세요.');
@@ -78,8 +77,10 @@ export const ContactUs = ({ setOpen,friends,setFriends }) => {
         });
       };
 
+      /*****************배포하면 url 변경하기.******************* */
     const url = 'http://localhost:3000/planDetail/' + planId;
-    const loginUser = "김중재";
+    // const url = 'http://j6b203.p.ssafy.io//planDetail/' + planId;
+    const loginUser = localStorage.getItem("userName");
 
     /*
         초대 누르면 회원인지 먼저 파악
