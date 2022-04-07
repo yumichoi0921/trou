@@ -4,16 +4,12 @@ import { FaStar } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 
 const Review = ({review}) => {
-    console.log("리뷰")
-    console.log(review)
     const [clicked, setClicked] = useState([false, false, false, false, false]);
     
 
   //별을 클릭해서 별이 채워진다 (리뷰 쓰기)
   const handleStarClick = (e, index) => {
     e.preventDefault();
-    //let clickStates = [...clicked];
-    //console.log(clickStates);
     for (let i = 0; i < 5; i++) {
       if (i <= index) clickStates[i] = true;
       else clickStates[i] = false;
@@ -25,8 +21,6 @@ const Review = ({review}) => {
   //별점수를 가져오기 위함 (리뷰 조회)
   let clickStates = [...clicked];
   useEffect(()=> {
-    //console.log('헬로')
-    //console.log(score)
     for (let i = 0; i < 5; i++) {
         if (i <= review) clickStates[i] = true;
         else clickStates[i] = false;

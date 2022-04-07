@@ -10,13 +10,7 @@ import { Box } from '@mui/material';
 
 
 const Place = ({route}) => {
-    console.log("place")
-    console.log(route)
     let index = Math.floor(Math.random() * (5 - 1) + 1)
-
-    function handleChange(){
-        console.log("clicked")
-    }
 
     return(
         <div>

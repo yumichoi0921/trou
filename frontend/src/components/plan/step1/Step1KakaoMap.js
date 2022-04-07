@@ -41,7 +41,6 @@ const KakaoMap = (props) => {
         const startPlace = [...props.point.startPlace];
         const endPlace = [...props.point.endPlace];
         const date = props.selected.selectedDate;
-        console.log(props);
         if (index % 2 === 0) {
           startPlace[date] = {
             mapX: latlng.getLng(),
@@ -57,22 +56,7 @@ const KakaoMap = (props) => {
           };
           props.point.setEndPlace(endPlace);
         }
-        console.log(date, "일차 : start : ", startPlace[date]);
-        console.log(date, "일차 : end : ", endPlace[date]);
 
-        // if (index % 2 === 0) {
-        //   props.point.setStartPlace({
-        //     mapX: latlng.getLng(),
-        //     mapY: latlng.getLat(),
-        //     placeName: "출발지",
-        //   });
-        // } else {
-        //   props.point.setEndPlace({
-        //     mapX: latlng.getLng(),
-        //     mapY: latlng.getLat(),
-        //     placeName: "도착지",
-        //   });
-        // }
         infowindows[index % 2].setPosition(latlng);
         infowindows[index % 2].open(map, markers[index % 2]);
         index++;

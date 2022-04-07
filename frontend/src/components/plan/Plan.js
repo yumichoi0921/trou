@@ -70,7 +70,6 @@ export default function Plan(props) {
         const newSelectedPlace = [...selectedPlace];
         newSelectedPlace[0].push(location.state.startingPoint);
         setSelectedPlace(newSelectedPlace);
-        console.log(newSelectedPlace);
       }
     }
     getStartingPoint();

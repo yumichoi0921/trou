@@ -26,11 +26,6 @@ function TagRelatedPlace(props) {
       );
       selectedPlace.push(props.place);
     }
-    // const selectedPlace = props.selected.selectedPlace;
-    // if (!selectedPlace.includes(props.restaurant))
-    //   selectedPlace.push(props.restaurant);
-    // props.selected.setSelectedPlace(selectedPlace);
-    // console.log(selectedPlace);
   }
   function showDetail() {
     handleShow();

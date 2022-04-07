@@ -2,10 +2,6 @@ import {Box, Stepper, StepLabel, Step } from '@mui/material';
 import Item from '../plan/child/Item';
 
 const OrderListBar = ({route}) => {
-    console.log('루트')
-    console.log(route)
-    console.log(route.order);
-    //console.log(route.order[1]);
     return (
         <Box sx={{ width: '100%' }}>
             <Stepper activeStep={-1} alternativeLabel>

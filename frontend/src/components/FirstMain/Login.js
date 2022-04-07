@@ -31,7 +31,6 @@ export default function Login() {
       axios.post("/users/signin", body).then((res) => {
         const userId = res.data.user.userId;
         const userName = res.data.user.name;
-        console.log('회원정보 : ',res.data);
         localStorage.setItem('token',res.data.tocken);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userName', userName);
@@ -42,7 +41,6 @@ export default function Login() {
         }
 
         axios.post("/history/check", body1).then((res) => {
-          console.log(res);
           navigate('/select');
         }).catch(error => {
           navigate('/main');
