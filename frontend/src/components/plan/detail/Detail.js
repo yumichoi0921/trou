@@ -155,8 +155,9 @@ const Detail = () => {
     };
 
     const clickModifyBtn = () => {
-        dispatch(saveSendData(sendData));
-        navigate("/plan/step3");
+        // dispatch(ChangeFlag());
+        // dispatch(saveSendData(sendData));
+        navigate("/");
     };
 
     const handleChange = (event) => {
@@ -201,12 +202,12 @@ const Detail = () => {
                 <Grid item>
                     <Grid container spacing={2}>
                         <Grid item md={3}>
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 onClick={clickModifyBtn}
                             >
                                 수정하기
-                            </Button>
+                            </Button> */}
                         </Grid>
                         <Grid item md={6}>
                             <SelectDay
@@ -217,7 +218,7 @@ const Detail = () => {
                             </SelectDay>
                         </Grid>
                         <Grid item md={3}>
-                            <Weather></Weather>
+                            {/* <Weather></Weather> */}
                         </Grid>
                     </Grid>
                 </Grid>
