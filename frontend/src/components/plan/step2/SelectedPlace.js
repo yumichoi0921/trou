@@ -9,7 +9,6 @@ function SelectedPlace(props) {
     for (let i = 0; i < selectedPlace.length; i++) {
       if (selectedPlace[i] === props.place) {
         selectedPlace.splice(i, 1);
-        console.log(props.place);
         props.setPlaceList(
           selectedPlace.map((place, index) => (
             <SelectedPlace

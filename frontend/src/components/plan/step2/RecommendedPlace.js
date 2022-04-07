@@ -20,7 +20,6 @@ function RecommendedPlace(props) {
       );
       selectedPlace.push(props.place);
     }
-    console.log(selectedPlace);
     // const selectedPlace = props.selected.selectedPlace;
     // if (!selectedPlace.includes(props.restaurant))
     //   selectedPlace.push(props.restaurant);

@@ -11,11 +11,10 @@ export default function Plan(props) {
   const [endDate, setEndDate] = useState(new Date());
   const [selectedTags, setSelectedTags] = useState([]);
   const [plan, setPlan] = useState({});
-  const [startingPoint, setStartingPoint] = useState({});
   const [selectedPlace, setSelectedPlace] = useState([[]]);
   const [selectedDate, setSelectedDate] = useState(0);
-  const [startPlace, setStartPlace] = useState({});
-  const [endPlace, setEndPlace] = useState({});
+  const [startPlace, setStartPlace] = useState([]);
+  const [endPlace, setEndPlace] = useState([]);
   const [map, setMap] = useState();
 
   const selected = {
@@ -27,6 +26,7 @@ export default function Plan(props) {
   };
 
   const date = {
+    dates: [],
     startDate: startDate,
     setStartDate: setStartDate,
     endDate: endDate,
@@ -66,8 +66,7 @@ export default function Plan(props) {
   }
   useEffect(() => {
     async function getStartingPoint() {
-      if (location.state.startingPoint) {
-        setStartingPoint(location.state.startingPoint);
+      if (location.state) {
         const newSelectedPlace = [...selectedPlace];
         newSelectedPlace[0].push(location.state.startingPoint);
         setSelectedPlace(newSelectedPlace);
@@ -103,6 +102,7 @@ export default function Plan(props) {
               selected={selected}
               map={map}
               setMap={setMap}
+              point={point}
             ></PlanStep1>
           }
         ></Route>
