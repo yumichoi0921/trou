@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 
 import Date from "../step1/Step1DatePicker";
 import TagToggleButton from "../step1/TagToggleButton";
-import { Paper, Grid } from "@mui/material";
+import { Paper, Grid, Stack } from "@mui/material";
 import Area from "../child/Area";
 import KakaoMap from "../step1/Step1KakaoMap";
 import PlaceRecommendation from "./PlaceRecommendation";
@@ -46,28 +46,37 @@ export default function PlanStep2(props) {
 
       {/* 오른쪽 추천 장소 */}
       <Grid item md={3} sx={{ height: "100%" }}>
-        <Area sx={{ padding: 2, width: "100%" }}>
-          {/* <Grid container sx={{ height: "100%" }}> */}
-          <Grid
-            item
-            sx={{
-              width: "100%",
-              height: "50%",
-              textAlign: "center",
-              justifyContent: "center",
-              overflow: "hidden",
-            }}
-          >
-            <PlaceRecommendation
-              selected={props.selected}
-              placeList={placeList}
-              setPlaceList={setPlaceList}
-            ></PlaceRecommendation>
-          </Grid>
-          {/* <Grid item sx={{ textAlign: "center", height: "70%" }}>
-            <RecommendCourse placeName={"정방폭포"}></RecommendCourse>
-          </Grid> */}
-          {/* </Grid> */}
+        <Area sx={{ padding: 1, width: "100%", justifyContent: "center" }}>
+          <Stack sx={{ width: "100%", height: "100%", margin: 0 }} spacing={1}>
+            <Grid
+              item
+              sx={{
+                width: "100%",
+                height: "50%",
+                textAlign: "center",
+                overflow: "hidden",
+              }}
+            >
+              <PlaceRecommendation
+                selected={props.selected}
+                placeList={placeList}
+                setPlaceList={setPlaceList}
+              ></PlaceRecommendation>
+            </Grid>
+            <Grid
+              item
+              sx={{
+                width: "100%",
+                height: "50%",
+                textAlign: "center",
+                alignItems: "center",
+                overflow: "hidden",
+              }}
+            >
+              {/* 처음에 선택하고 들어온 장소 이름으로 변경 */}
+              <RecommendCourse placeName={"정방폭포"}></RecommendCourse>
+            </Grid>
+          </Stack>
         </Area>
       </Grid>
     </Grid>

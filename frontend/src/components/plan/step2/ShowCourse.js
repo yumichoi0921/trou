@@ -1,6 +1,7 @@
 import { Grid, Stack, Box } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 import react, { useState, useEffect } from "react";
+import Item from "../child/Item";
 
 const ShowCourse = ({ course }) => {
   const [imgs, setImgs] = useState([]);

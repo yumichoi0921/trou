@@ -2,10 +2,6 @@ import * as React from "react";
 import { styled } from "@mui/system";
 import { Stack, Box } from "@mui/material";
 import TabsUnstyled from "@mui/base/TabsUnstyled";
-import TabsListUnstyled from "@mui/base/TabsListUnstyled";
-import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
-import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
-import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
 import RestaurantSearch from "./RestaurantSearch";
 import PlaceSearch from "./PlaceSearch";
 import RecommendedPlace from "./RecommendedPlace";
@@ -13,71 +9,7 @@ import Item from "../child/Item";
 import RecommendedRestaurant from "./RecommendedRestaurant";
 import axios from "axios";
 import TagRelatedPlace from "./TagRelatedPlace";
-
-const blue = {
-  50: "#F0F7FF",
-  100: "#C2E0FF",
-  200: "#80BFFF",
-  300: "#66B2FF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-  700: "#0059B2",
-  800: "#004C99",
-  900: "#003A75",
-};
-
-const Tab = styled(TabUnstyled)`
-  font-family: IBM Plex Sans, sans-serif;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: bold;
-  background-color: #e1f5fe;
-  width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-
-  &:hover {
-    background-color: ${blue[400]};
-  }
-
-  &:focus {
-    color: #fff;
-    border-radius: 3px;
-    outline: 2px solid ${blue[200]};
-    outline-offset: 2px;
-  }
-
-  &.${tabUnstyledClasses.selected} {
-    background-color: #d3d3d3;
-    color: #000000;
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const TabPanel = styled(TabPanelUnstyled)`
-  width: 100%;
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
-`;
-
-const TabsList = styled(TabsListUnstyled)`
-  width: "100%";
-  background-color: #e1f5fe;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: space-between;
-`;
+import { Tab, TabPanel, TabsList } from "./Tab";
 
 export default function PlaceRecommendation(props) {
   const [restaurants, setRestaurants] = React.useState([]);
@@ -110,7 +42,7 @@ export default function PlaceRecommendation(props) {
       variant="contained"
       sx={{ margin: "auto" }}
     >
-      {place.name}
+      {place.placeName}
     </TagRelatedPlace>
   ));
 
@@ -124,7 +56,7 @@ export default function PlaceRecommendation(props) {
       variant="contained"
       sx={{ margin: "auto" }}
     >
-      {place.name}
+      {place.placeName}
     </RecommendedPlace>
   ));
 
@@ -138,7 +70,7 @@ export default function PlaceRecommendation(props) {
       variant="contained"
       sx={{ overflow: "auto" }}
     >
-      {place.name}
+      {place.placeName}
     </RecommendedRestaurant>
   ));
 
@@ -152,7 +84,7 @@ export default function PlaceRecommendation(props) {
         </TabsList>
 
         <TabPanel value={0} sx={{ width: "100%", height: "50%" }}>
-          <Item sx={{ height: "100%", overflow: "auto", mt: 1 }}>
+          <Item sx={{ height: "100%", overflow: "auto" }}>
             {relatedPlaceList.length === 0 ? null : (
               <Box mb={2}>{relatedPlaceList}</Box>
             )}

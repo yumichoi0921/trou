@@ -33,9 +33,9 @@ export default function RestaurantSearch(props) {
           return {
             address: r.address,
             area: r.area,
-            latitude: r.latitude,
-            longitude: r.longitude,
-            name: r.name,
+            mapY: r.latitude,
+            mapX: r.longitude,
+            placeName: r.name,
           };
         })
       );
