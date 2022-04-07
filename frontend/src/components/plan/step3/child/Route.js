@@ -28,10 +28,10 @@ const Route = ({ index, route, routes, setRoutes }) => {
   let placeList = route.order.map((item, index) => (
     <Place
       index={index}
-      id={item.place.placeId}
+      id={item.place.placeId ? item.place.placeId : index}
       name={item.place.placeName}
       movePlace={movePlace}
-      key={item.place.placeId}
+      key={index}
     />
   ));
 
