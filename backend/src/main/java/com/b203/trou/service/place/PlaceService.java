@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -91,7 +92,9 @@ public class PlaceService {
             places.addAll(placeTags.stream().filter(p -> p.getPlace().getAreaCode().equals("39")).limit(50).map(p -> new PlaceDto(p.getPlace())).collect(Collectors.toList()));
             if (places.size() > 50) break;
         }
-        return places.stream().distinct().collect(Collectors.toList());
+        return places.stream()
+                .sorted((o1, o2) -> o2.getReadCount() - o1.getReadCount())
+                .distinct().collect(Collectors.toList());
     }
 }
 
