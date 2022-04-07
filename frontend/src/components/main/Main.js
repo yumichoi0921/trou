@@ -34,6 +34,7 @@ export default function Main() {
   const handleClose = () => setShow(false);
 
   const placeInfoShow = (place) => {
+    console.log(place);
     setPlaceInfo(place);
     handleShow();
   };
@@ -46,7 +47,8 @@ export default function Main() {
 
   useEffect(() => {
     async function getRecommandPlace() {
-      const userId = 28;
+      const userId = localStorage.getItem("userId");
+      // const userId = 28;
       try {
         const response = await axios.get("/place/recommand/" + userId);
         let array = getPlaces(response);
@@ -71,10 +73,10 @@ export default function Main() {
   const getPlaces = (response) => {
     let array = [];
     let index = 0;
-
+    console.log(response.data);
     array = response.data.map((place) => {
       if (!place.image) {
-        index = Math.floor(Math.random() * (5 - 1) + 1);
+        index = Math.floor(Math.random() * (11 - 1) + 1);
         place.image = `/imgs/img${index}.jpg`;
       }
       return {
@@ -121,11 +123,11 @@ export default function Main() {
         <SearchDiv sx={{ textAlign: "center", width: "100%" }}>
           <Stack spacing={2} alignItems="center">
             <Box>
-            <img src={title_1} alt="title"></img>
+              <img src={title_1} alt="title"></img>
               {/* <h2>어디로 여행을 떠나시나요?</h2> */}
             </Box>
             <Box>
-              <Item  sx={{ width: 500}}>
+              <Item sx={{ width: 500 }}>
                 <Search
                   sx={{ color: "action.active", mr: 1, my: 1, fontSize: 40 }}
                 />
@@ -143,7 +145,7 @@ export default function Main() {
       </Grid>
       <Grid container item md={12}>
         <Box sx={{ marginX: 5, marginY: 2, width: "100%" }}>
-        <img src={title} alt="title"></img>
+          <img src={title} alt="title"></img>
           {/* <h1>이 여행은 어떠신가요?</h1> */}
         </Box>
       </Grid>
