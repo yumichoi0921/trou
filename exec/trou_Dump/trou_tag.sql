@@ -1,0 +1,53 @@
+-- MySQL dump 10.13  Distrib 8.0.27, for macos11 (x86_64)
+--
+-- Host: j6b203.p.ssafy.io    Database: trou
+-- ------------------------------------------------------
+-- Server version	8.0.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tag` (
+  `tag_id` bigint NOT NULL AUTO_INCREMENT,
+  `created_date` date DEFAULT NULL,
+  `modified_date` date DEFAULT NULL,
+  `tag_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tag_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tag`
+--
+
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES (1,'2022-03-28','2022-03-28','가족'),(2,'2022-03-28','2022-03-28','효도'),(3,'2022-03-28','2022-03-28','아이'),(4,'2022-03-28','2022-03-28','친구'),(5,'2022-03-28','2022-03-28','연인'),(6,'2022-03-28','2022-03-28','문화'),(7,'2022-03-28','2022-03-28','액티비티'),(8,'2022-03-28','2022-03-28','자연'),(9,'2022-03-28','2022-03-28','역사'),(10,'2022-03-28','2022-03-28','공연/행사'),(11,'2022-03-28','2022-03-28','휴양지'),(12,'2022-03-28','2022-03-28','체험'),(13,'2022-03-28','2022-03-28','축제'),(14,'2022-03-28','2022-03-28','경치'),(15,'2022-03-28','2022-03-28','계절여행'),(16,'2022-03-28','2022-03-28','힐링'),(17,'2022-03-28','2022-03-28','캠핑'),(18,'2022-03-28','2022-03-28','실내'),(19,'2022-03-28','2022-03-28','감성'),(20,'2022-03-28','2022-03-28','반려동물'),(21,'2022-03-28','2022-03-28','드라이브'),(22,'2022-03-28','2022-03-28','관광지');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-04-08 10:42:20
