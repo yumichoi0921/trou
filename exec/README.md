@@ -87,6 +87,31 @@ nohup java -jar 파일명.jar
 *>* Nginx의 리버스 프록시 기능을 사용해 프론트와 백엔드 요청을 처리했습니다.
 
 **#### /etc/nginx/sites-available/default**
+```
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /home/trou-web/build;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name j6b203.p.ssafy.io;
+
+	location / {
+ 		try_files $uri /index.html;
+	}
+
+	location /api/ {
+		proxy_pass  http://j6b203.p.ssafy.io:8080/;
+	}
+	location /recommand {
+		proxy_pass  http://j6b203.p.ssafy.io:8000;
+	}
+	
+
+}
+```
 
 ## **3) 시연 시나리오**
 #### 회원가입시 선호 여행지 서택
