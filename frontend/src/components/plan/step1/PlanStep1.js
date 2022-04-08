@@ -8,7 +8,7 @@ import KakaoMap from "./Step1KakaoMap";
 
 const PlanStep1 = (props) => {
   return (
-    <Grid className="container" container spacing={1} sx={{ height: "100%" }}>
+    <Grid className="container" container spacing={1} sx={{ height: "90%" }}>
       {/* Grid 왼쪽 부분 */}
       <Grid item md={3} sx={{ textAlign: "center", height: "100%" }}>
         <DateTagSelection
