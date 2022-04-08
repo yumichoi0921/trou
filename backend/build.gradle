@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.b203'
-version = '0.0.1-SNAPSHOT'
+version = 'latest'
 sourceCompatibility = '11'
 
 configurations {
@@ -21,15 +21,23 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
+
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// jwt
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+	// JSON parser
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
 }
 
 tasks.named('test') {
