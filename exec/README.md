@@ -40,7 +40,7 @@
 - IntelliJ
 - Visual Studio Code
 
-## 2) 빌드 과정
+## 2) 빌드 / 배포 / 데이터베이스 관련 
 
 ---
 
@@ -87,3 +87,21 @@ nohup java -jar 파일명.jar
 *>* Nginx의 리버스 프록시 기능을 사용해 프론트와 백엔드 요청을 처리했습니다.
 
 **#### /etc/nginx/sites-available/default**
+
+## **3) 시연 시나리오**
+#### 회원가입시 선호 여행지 서택
+![image](/uploads/ed16febf6e07486ee8a80f9b8bcaa9d8/image.png)
+
+#### 메인페이지 추천 여행지 화면
+![image](/uploads/63bacaad5ed142b06e496b013eda06c3/image.png)
+
+#### 여행 계획 세우기 - 우측 추천 여행지, 추천 코스, 좌측 장바구니
+![image](/uploads/bbb4344cf19a149792a1763991c0836b/image.png)
+
+#### 최단루트 생성 - 장바구니에 있는 여행지 최단 루트 생성
+![image](/uploads/57e2f1a5fea6e36ba0ce20ee44c9439e/image.png)
+
+#### 여행계획 공유 - 이메일로 공유
+![image](/uploads/d5bb96830cd3bbb82cef881516715676/image.png)
+![image](/uploads/d57b040effd5f4ab9bcdae7326af8947/image.png)
+
