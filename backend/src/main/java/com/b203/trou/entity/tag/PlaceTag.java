@@ -2,16 +2,18 @@ package com.b203.trou.entity.tag;
 
 import com.b203.trou.entity.BaseEntity;
 import com.b203.trou.entity.place.Place;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
 public class PlaceTag extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "placeTagId")
     private Long id;
 

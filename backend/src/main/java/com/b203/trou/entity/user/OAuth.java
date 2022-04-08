@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class OAuth extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oauthId")
     private Long id;
 
@@ -19,4 +19,9 @@ public class OAuth extends BaseEntity {
     private User user;
 
     private String authCode;
+
+
+    public OAuth(String authCode) {
+        this.authCode = authCode;
+    }
 }
